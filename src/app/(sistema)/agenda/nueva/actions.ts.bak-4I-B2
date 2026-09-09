@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type ServicioCitaEntrada = {
@@ -150,7 +147,6 @@ async function validarDisponibilidad({
 }
 
 export async function crearCita(datos: DatosNuevaCita): Promise<ResultadoCita> {
-        await exigirPermisoAccion(PERMISOS.AGENDA_CREAR);
     try {
         if (!datos.clienteId || !datos.sucursalId || !datos.fecha || !datos.horaInicio) {
             return { exito: false, mensaje: "Completa cliente, sucursal, fecha y hora." };

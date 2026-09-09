@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type EstadoCita =
@@ -340,7 +337,6 @@ export async function cambiarEstadoCita(
     nuevoEstado: EstadoCita,
     motivo?: string,
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.AGENDA_EDITAR);
     try {
         const contexto = await obtenerContextoUsuario();
 
@@ -499,7 +495,6 @@ export async function reprogramarCita(
     citaId: string,
     datos: DatosReprogramacion,
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.AGENDA_REPROGRAMAR);
     try {
         if (!datos.fecha || !datos.horaInicio) {
             return {

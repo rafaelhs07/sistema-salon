@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -15,7 +12,6 @@ export type ResultadoConfirmarCompra = {
 export async function confirmarCompra(
     compraId: string,
 ): Promise<ResultadoConfirmarCompra> {
-        await exigirPermisoAccion(PERMISOS.COMPRAS_CREAR);
     try {
         if (!compraId) {
             return {
@@ -111,7 +107,6 @@ export async function anularCompra(
     compraId: string,
     motivo: string,
 ): Promise<ResultadoConfirmarCompra> {
-        await exigirPermisoAccion(PERMISOS.COMPRAS_ANULAR);
     try {
         if (!compraId) {
             return {

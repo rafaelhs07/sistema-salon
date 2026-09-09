@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import {
+import {
     revalidatePath,
 } from "next/cache";
 
@@ -25,7 +22,6 @@ export async function guardarConfiguracionNotificaciones(
         cuenta_pagar_vencida: boolean;
     },
 ) {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_CONFIGURAR);
     const supabase =
         await createClient();
 

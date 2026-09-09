@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import {
@@ -1445,7 +1445,7 @@ function LeyendaEstados() {
                             backgroundColor: obtenerColorCita({
                                 estado,
                                 cita_servicios: [],
-                            } as unknown as CitaAgenda),
+                            } as CitaAgenda),
                         }}
                     />
                     {texto}

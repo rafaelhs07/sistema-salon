@@ -1,6 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+
+
+import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
+import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type ItemVentaDirecta = {
@@ -44,6 +47,7 @@ export type ResultadoVentaDirecta = {
 export async function registrarVentaDirecta(
     datos: DatosVentaDirecta,
 ): Promise<ResultadoVentaDirecta> {
+        await exigirPermisoAccion(PERMISOS.CAJA_VENTA_DIRECTA);
     try {
         if (!datos.cajaSesionId) {
             return {

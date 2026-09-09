@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import {
+import {
     revalidatePath,
 } from "next/cache";
 
@@ -76,7 +73,6 @@ function refrescar() {
 export async function marcarNotificacionLeida(
     id: string,
 ) {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_GESTIONAR);
     const {
         supabase,
         user,
@@ -141,7 +137,6 @@ export async function marcarNotificacionLeida(
 export async function marcarNotificacionNoLeida(
     id: string,
 ) {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_GESTIONAR);
     const {
         supabase,
         user,
@@ -203,7 +198,6 @@ export async function marcarNotificacionNoLeida(
 }
 
 export async function marcarTodasLeidas() {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_GESTIONAR);
     const {
         supabase,
         user,
@@ -271,7 +265,6 @@ export async function marcarTodasLeidas() {
 export async function archivarNotificacion(
     id: string,
 ) {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_GESTIONAR);
     const {
         supabase,
         user,
@@ -344,7 +337,6 @@ export async function archivarNotificacion(
 export async function restaurarNotificacion(
     id: string,
 ) {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_GESTIONAR);
     const {
         supabase,
         user,
@@ -407,7 +399,6 @@ export async function restaurarNotificacion(
 }
 
 export async function archivarTodasLeidas() {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_GESTIONAR);
     const {
         supabase,
         user,
@@ -485,7 +476,6 @@ export async function archivarTodasLeidas() {
 export async function eliminarNotificacion(
     id: string,
 ) {
-        await exigirPermisoAccion(PERMISOS.NOTIFICACIONES_VER);
     return archivarNotificacion(
         id,
     );

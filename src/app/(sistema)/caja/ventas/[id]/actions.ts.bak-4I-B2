@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -16,7 +13,6 @@ export async function anularVenta(
     ventaId: string,
     motivo: string,
 ): Promise<ResultadoAnulacionVenta> {
-        await exigirPermisoAccion(PERMISOS.CAJA_ANULAR_VENTA);
     try {
         if (!ventaId) {
             return {

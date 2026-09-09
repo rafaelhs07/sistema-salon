@@ -1,0 +1,258 @@
+============================================================
+4I-B2 - REPORTE DE PROTECCION DE SERVER ACTIONS
+Fecha: 2026-09-09T01:41:28.707Z
+============================================================
+
+ARCHIVO: src/app/(sistema)/agenda/actions.ts
+ESTADO: ACTUALIZADO
+  - cargarAgenda
+    tipo: LECTURA
+    permiso: AGENDA_VER
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/agenda/nueva/actions.ts
+ESTADO: ACTUALIZADO
+  - crearCita
+    tipo: MUTACION
+    permiso: AGENDA_CREAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/agenda/[id]/actions.ts
+ESTADO: ACTUALIZADO
+  - cambiarEstadoCita
+    tipo: MUTACION
+    permiso: AGENDA_EDITAR
+    ya_protegida: NO
+  - reprogramarCita
+    tipo: MUTACION
+    permiso: AGENDA_REPROGRAMAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/actions.ts
+ESTADO: ACTUALIZADO
+  - abrirCaja
+    tipo: MUTACION
+    permiso: CAJA_ABRIR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/cierre/[id]/actions.ts
+ESTADO: ACTUALIZADO
+  - cerrarCaja
+    tipo: MUTACION
+    permiso: CAJA_CERRAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/cobrar/actions.ts
+ESTADO: ACTUALIZADO
+  - cobrarCita
+    tipo: MUTACION
+    permiso: CAJA_COBRAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/movimientos/[id]/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarMovimientoManual
+    tipo: MUTACION
+    permiso: CAJA_INGRESO_MANUAL O CAJA_EGRESO_MANUAL
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/venta-directa/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarVentaDirecta
+    tipo: MUTACION
+    permiso: CAJA_VENTA_DIRECTA
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/venta-productos/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarVentaProductos
+    tipo: MUTACION
+    permiso: CAJA_VENTA_DIRECTA
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/caja/ventas/[id]/actions.ts
+ESTADO: ACTUALIZADO
+  - anularVenta
+    tipo: MUTACION
+    permiso: CAJA_ANULAR_VENTA
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/cuentas-cobrar/[clienteId]/actions.ts
+ESTADO: ACTUALIZADO
+  - cambiarVencimiento
+    tipo: MUTACION
+    permiso: CUENTAS_COBRAR_EDITAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/cuentas-cobrar/[clienteId]/abonar/[cuentaId]/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarAbono
+    tipo: MUTACION
+    permiso: CUENTAS_COBRAR_ABONAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/inventario/catalogo/actions.ts
+ESTADO: ACTUALIZADO
+  - crearCategoria
+    tipo: MUTACION
+    permiso: INVENTARIO_PRODUCTOS_CREAR
+    ya_protegida: NO
+  - editarCategoria
+    tipo: MUTACION
+    permiso: INVENTARIO_PRODUCTOS_EDITAR
+    ya_protegida: NO
+  - cambiarEstadoCategoria
+    tipo: MUTACION
+    permiso: INVENTARIO_PRODUCTOS_EDITAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/inventario/catalogo/product-actions.ts
+ESTADO: ACTUALIZADO
+  - crearProducto
+    tipo: MUTACION
+    permiso: INVENTARIO_PRODUCTOS_CREAR
+    ya_protegida: NO
+  - editarProducto
+    tipo: MUTACION
+    permiso: INVENTARIO_PRODUCTOS_EDITAR
+    ya_protegida: NO
+  - cambiarEstadoProducto
+    tipo: MUTACION
+    permiso: INVENTARIO_PRODUCTOS_EDITAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/inventario/movimientos/nuevo/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarAjusteInventario
+    tipo: MUTACION
+    permiso: INVENTARIO_AJUSTAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/inventario/traslados/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarTraslado
+    tipo: MUTACION
+    permiso: INVENTARIO_TRASLADAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/compras/nueva/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarCompraBorrador
+    tipo: MUTACION
+    permiso: COMPRAS_CREAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/compras/[compraId]/actions.ts
+ESTADO: ACTUALIZADO
+  - confirmarCompra
+    tipo: MUTACION
+    permiso: COMPRAS_CREAR
+    ya_protegida: NO
+  - anularCompra
+    tipo: MUTACION
+    permiso: COMPRAS_ANULAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/compras/cuentas-pagar/[cuentaId]/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarAbonoProveedor
+    tipo: MUTACION
+    permiso: COMPRAS_PAGAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/compras/proveedores/actions.ts
+ESTADO: ACTUALIZADO
+  - crearProveedor
+    tipo: MUTACION
+    permiso: PROVEEDORES_CREAR
+    ya_protegida: NO
+  - actualizarProveedor
+    tipo: MUTACION
+    permiso: PROVEEDORES_EDITAR
+    ya_protegida: NO
+  - cambiarEstadoProveedor
+    tipo: MUTACION
+    permiso: PROVEEDORES_EDITAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/finanzas/categorias/actions.ts
+ESTADO: ACTUALIZADO
+  - crearCategoriaFinanciera
+    tipo: MUTACION
+    permiso: FINANZAS_CATEGORIAS
+    ya_protegida: NO
+  - cambiarEstadoCategoriaFinanciera
+    tipo: MUTACION
+    permiso: FINANZAS_CATEGORIAS
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/finanzas/gastos/nuevo/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarGastoManual
+    tipo: MUTACION
+    permiso: FINANZAS_GASTO
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/finanzas/ingresos/nuevo/actions.ts
+ESTADO: ACTUALIZADO
+  - registrarIngresoManual
+    tipo: MUTACION
+    permiso: FINANZAS_INGRESO
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/configuracion/actions.ts
+ESTADO: ACTUALIZADO
+  - guardarConfiguracion
+    tipo: MUTACION
+    permiso: CONFIGURACION_EDITAR
+    ya_protegida: NO
+  - guardarTerminalPos
+    tipo: MUTACION
+    permiso: CONFIGURACION_POS
+    ya_protegida: NO
+  - cambiarEstadoTerminalPos
+    tipo: MUTACION
+    permiso: CONFIGURACION_POS
+    ya_protegida: NO
+  - eliminarTerminalPos
+    tipo: MUTACION
+    permiso: CONFIGURACION_POS
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/configuracion/notificaciones/actions.ts
+ESTADO: ACTUALIZADO
+  - guardarConfiguracionNotificaciones
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_CONFIGURAR
+    ya_protegida: NO
+
+ARCHIVO: src/app/(sistema)/notificaciones/actions.ts
+ESTADO: ACTUALIZADO
+  - marcarNotificacionLeida
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_GESTIONAR
+    ya_protegida: NO
+  - marcarNotificacionNoLeida
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_GESTIONAR
+    ya_protegida: NO
+  - marcarTodasLeidas
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_GESTIONAR
+    ya_protegida: NO
+  - archivarNotificacion
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_GESTIONAR
+    ya_protegida: NO
+  - restaurarNotificacion
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_GESTIONAR
+    ya_protegida: NO
+  - archivarTodasLeidas
+    tipo: MUTACION
+    permiso: NOTIFICACIONES_GESTIONAR
+    ya_protegida: NO
+  - eliminarNotificacion
+    tipo: LECTURA
+    permiso: NOTIFICACIONES_VER
+    ya_protegida: NO

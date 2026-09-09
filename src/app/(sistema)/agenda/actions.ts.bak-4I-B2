@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
 export type FiltrosAgenda = {
     fechaDesde: string;
@@ -123,7 +120,6 @@ async function obtenerContexto() {
 export async function cargarAgenda(
     filtros: FiltrosAgenda,
 ): Promise<ResultadoAgenda> {
-        await exigirPermisoAccion(PERMISOS.AGENDA_VER);
     try {
         const contexto = await obtenerContexto();
 

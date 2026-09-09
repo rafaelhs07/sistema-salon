@@ -1,6 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+
+
+import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
+import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -16,6 +19,7 @@ export type DatosTraslado = {
 export async function registrarTraslado(
     datos: DatosTraslado,
 ) {
+        await exigirPermisoAccion(PERMISOS.INVENTARIO_TRASLADAR);
     try {
         if (
             !datos.sucursalOrigenId ||

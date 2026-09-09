@@ -43,21 +43,7 @@ export type ContextoAccionSegura = {
     };
 };
 
-/**
- * Guardia central para Server Actions.
- *
- * Valida:
- * 1. sesión;
- * 2. perfil existente;
- * 3. estado ACTIVO;
- * 4. permiso efectivo real.
- *
- * Si cualquiera falla, lanza una excepción y NO debe continuar
- * ninguna mutación.
- */
-export async function exigirPermisoAccion(
-    permiso: CodigoPermiso | string,
-): Promise<ContextoAccionSegura> {
+async function obtenerContextoActivo(): Promise<ContextoAccionSegura> {
     const supabase =
         await createClient();
 
@@ -74,7 +60,7 @@ export async function exigirPermisoAccion(
         !user
     ) {
         throw new ErrorPermisoAccion(
-            permiso,
+            "SESION",
             "La sesión no es válida.",
         );
     }
@@ -103,30 +89,8 @@ export async function exigirPermisoAccion(
         "ACTIVO"
     ) {
         throw new ErrorPermisoAccion(
-            permiso,
+            "USUARIO_ACTIVO",
             "Tu cuenta no está activa.",
-        );
-    }
-
-    const {
-        data: permitido,
-        error: permisoError,
-    } =
-        await supabase.rpc(
-            "usuario_actual_tiene_permiso",
-            {
-                p_permiso:
-                    permiso,
-            },
-        );
-
-    if (
-        permisoError ||
-        permitido !==
-        true
-    ) {
-        throw new ErrorPermisoAccion(
-            permiso,
         );
     }
 
@@ -150,9 +114,107 @@ export async function exigirPermisoAccion(
 }
 
 /**
- * Igual que exigirPermisoAccion, pero devuelve false
- * en vez de lanzar error.
+ * Exige un permiso efectivo concreto antes de continuar
+ * una Server Action.
  */
+export async function exigirPermisoAccion(
+    permiso: CodigoPermiso | string,
+): Promise<ContextoAccionSegura> {
+    const contexto =
+        await obtenerContextoActivo();
+
+    const {
+        data: permitido,
+        error: permisoError,
+    } =
+        await contexto.supabase.rpc(
+            "usuario_actual_tiene_permiso",
+            {
+                p_permiso:
+                    permiso,
+            },
+        );
+
+    if (
+        permisoError ||
+        permitido !==
+        true
+    ) {
+        throw new ErrorPermisoAccion(
+            permiso,
+        );
+    }
+
+    return contexto;
+}
+
+/**
+ * Permite ejecutar una acción cuando el usuario tiene
+ * AL MENOS UNO de los permisos indicados.
+ *
+ * Útil para acciones compartidas, por ejemplo movimientos
+ * manuales de Caja que pueden ser ingreso o egreso.
+ */
+export async function exigirCualquieraPermisosAccion(
+    permisos: Array<
+        CodigoPermiso | string
+    >,
+): Promise<ContextoAccionSegura> {
+    const unicos =
+        [
+            ...new Set(
+                permisos.filter(
+                    Boolean,
+                ),
+            ),
+        ];
+
+    if (
+        unicos.length ===
+        0
+    ) {
+        throw new ErrorPermisoAccion(
+            "SIN_PERMISOS_CONFIGURADOS",
+            "La acción no tiene permisos configurados.",
+        );
+    }
+
+    const contexto =
+        await obtenerContextoActivo();
+
+    for (
+        const permiso
+        of unicos
+    ) {
+        const {
+            data: permitido,
+            error,
+        } =
+            await contexto.supabase.rpc(
+                "usuario_actual_tiene_permiso",
+                {
+                    p_permiso:
+                        permiso,
+                },
+            );
+
+        if (
+            !error &&
+            permitido ===
+            true
+        ) {
+            return contexto;
+        }
+    }
+
+    throw new ErrorPermisoAccion(
+        unicos.join(
+            " | ",
+        ),
+        "No tienes permiso para realizar esta acción.",
+    );
+}
+
 export async function puedeEjecutarAccion(
     permiso: CodigoPermiso | string,
 ) {

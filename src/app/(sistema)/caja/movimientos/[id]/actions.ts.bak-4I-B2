@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type DatosMovimientoManual = {
@@ -18,7 +15,6 @@ export type DatosMovimientoManual = {
 export async function registrarMovimientoManual(
     datos: DatosMovimientoManual,
 ) {
-        await exigirCualquieraPermisosAccion([PERMISOS.CAJA_INGRESO_MANUAL, PERMISOS.CAJA_EGRESO_MANUAL]);
     try {
         if (!datos.cajaSesionId) {
             return { exito: false, mensaje: "No se recibió la caja." };

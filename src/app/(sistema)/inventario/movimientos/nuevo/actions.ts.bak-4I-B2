@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -24,7 +21,6 @@ export type DatosAjusteInventario = {
 export async function registrarAjusteInventario(
     datos: DatosAjusteInventario,
 ) {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_AJUSTAR);
     try {
         if (!datos.sucursalId) {
             return {

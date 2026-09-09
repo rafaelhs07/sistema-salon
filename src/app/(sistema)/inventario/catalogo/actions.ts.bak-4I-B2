@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -79,7 +76,6 @@ export async function crearCategoria(
         descripcion: string;
     },
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_PRODUCTOS_CREAR);
     try {
         const nombre =
             datos.nombre.trim();
@@ -175,7 +171,6 @@ export async function editarCategoria(
         descripcion: string;
     },
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_PRODUCTOS_EDITAR);
     try {
         const nombre =
             datos.nombre.trim();
@@ -281,7 +276,6 @@ export async function cambiarEstadoCategoria(
         | "ACTIVA"
         | "INACTIVA",
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_PRODUCTOS_EDITAR);
     try {
         const contexto =
             await obtenerContextoAdmin();

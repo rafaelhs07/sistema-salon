@@ -1,9 +1,6 @@
 "use server";
 
-
-
-import { exigirPermisoAccion, exigirCualquieraPermisosAccion } from "@/lib/permisos/acciones";
-import { PERMISOS } from "@/lib/permisos/codigos";import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
@@ -147,7 +144,6 @@ function validarProducto(
 export async function crearProducto(
     datos: DatosProducto,
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_PRODUCTOS_CREAR);
     const errorValidacion =
         validarProducto(datos);
 
@@ -254,7 +250,6 @@ export async function editarProducto(
     productoId: string,
     datos: DatosProducto,
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_PRODUCTOS_EDITAR);
     if (!productoId) {
         return {
             exito: false,
@@ -391,7 +386,6 @@ export async function cambiarEstadoProducto(
         | "ACTIVO"
         | "INACTIVO",
 ): Promise<ResultadoAccion> {
-        await exigirPermisoAccion(PERMISOS.INVENTARIO_PRODUCTOS_EDITAR);
     const contexto =
         await obtenerContextoAdmin();
 
