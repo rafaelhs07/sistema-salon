@@ -334,20 +334,20 @@ export default function InicioDashboardClient({
 
     return (
         <div className="mx-auto max-w-[1750px] space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_20px_55px_rgba(36,48,44,0.18)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-[#C79AA1]/10 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-secondary/10 blur-3xl" />
 
                 <div className="relative grid gap-7 xl:grid-cols-[1.35fr_0.65fr] xl:items-end">
                     <div>
-                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-[#DCE7E2]">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-primary-soft">
                             <Sparkles className="h-3.5 w-3.5" />
                             Centro de control
                         </div>
 
-                        <h1 className="mt-5 max-w-4xl text-3xl font-bold tracking-tight sm:text-4xl xl:text-5xl">
+                        <h1 className="mt-5 max-w-4xl text-3xl font-black tracking-tight sm:text-4xl">
                             {saludoActual()},{" "}
-                            <span className="text-[#DCE7E2]">
+                            <span className="text-primary-soft">
                                 {datos.salonNombre}
                             </span>
                         </h1>
@@ -403,7 +403,7 @@ export default function InicioDashboardClient({
 
                         <div className="mt-5 h-2.5 overflow-hidden rounded-full bg-white/10">
                             <div
-                                className="h-full rounded-full bg-[#DCE7E2]"
+                                className="h-full rounded-full bg-primary-soft"
                                 style={{
                                     width: `${pulso.puntaje}%`,
                                 }}
@@ -471,14 +471,14 @@ export default function InicioDashboardClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex items-start justify-between gap-4">
                         <div>
                             <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#789087]">
                                 Hoy
                             </p>
 
-                            <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                            <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                 Agenda de hoy
                             </h2>
 
@@ -497,7 +497,7 @@ export default function InicioDashboardClient({
 
                         <Link
                             href="/agenda"
-                            className="inline-flex items-center gap-2 text-sm font-bold text-[#587064] transition hover:text-[#26332F]"
+                            className="inline-flex items-center gap-2 text-sm font-bold text-[#587064] transition hover:text-sidebar"
                         >
                             Ver agenda
                             <ArrowRight className="h-4 w-4" />
@@ -510,7 +510,7 @@ export default function InicioDashboardClient({
                             <div className="rounded-2xl bg-[#F7FAF8] px-5 py-10 text-center">
                                 <CalendarDays className="mx-auto h-7 w-7 text-[#8A9992]" />
 
-                                <p className="mt-3 font-bold text-[#43524B]">
+                                <p className="mt-3 font-bold text-text-secondary">
                                     No hay citas activas hoy
                                 </p>
 
@@ -528,16 +528,16 @@ export default function InicioDashboardClient({
                                         key={
                                             cita.id
                                         }
-                                        className="group flex items-center gap-4 rounded-2xl border border-transparent bg-[#F8FAF8] px-4 py-3 transition hover:border-[#DCE5E0] hover:bg-white"
+                                        className="group flex items-center gap-4 rounded-2xl border border-transparent bg-[#F8FAF8] px-4 py-3 transition hover:border-border hover:bg-white"
                                     >
                                         <div className="min-w-[76px]">
-                                            <p className="text-sm font-bold text-[#26332F]">
+                                            <p className="text-sm font-bold text-sidebar">
                                                 {hora12(
                                                     cita.hora_inicio,
                                                 )}
                                             </p>
 
-                                            <p className="mt-0.5 text-[10px] font-semibold uppercase text-[#87938D]">
+                                            <p className="mt-0.5 text-xs font-semibold uppercase text-[#87938D]">
                                                 {duracionCita(
                                                     cita.hora_inicio,
                                                     cita.hora_fin,
@@ -545,7 +545,7 @@ export default function InicioDashboardClient({
                                             </p>
                                         </div>
 
-                                        <div className="h-9 w-1 rounded-full bg-[#6F8F83]" />
+                                        <div className="h-9 w-1 rounded-full bg-primary" />
 
                                         <div className="min-w-0 flex-1">
                                             <p className="truncate text-sm font-bold text-[#33413B]">
@@ -581,12 +581,12 @@ export default function InicioDashboardClient({
                     </div>
                 </article>
 
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#789087]">
                         Atención
                     </p>
 
-                    <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                    <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                         Lo que necesita acción
                     </h2>
 
@@ -636,14 +636,14 @@ export default function InicioDashboardClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <div>
                             <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#789087]">
                                 Tendencia
                             </p>
 
-                            <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                            <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                 Ingresos vs gastos
                             </h2>
 
@@ -654,12 +654,12 @@ export default function InicioDashboardClient({
 
                         <div className="flex gap-4 text-xs font-semibold text-[#6E7C75]">
                             <span className="inline-flex items-center gap-2">
-                                <span className="h-2.5 w-2.5 rounded-full bg-[#6F8F83]" />
+                                <span className="h-2.5 w-2.5 rounded-full bg-primary" />
                                 Ingresos
                             </span>
 
                             <span className="inline-flex items-center gap-2">
-                                <span className="h-2.5 w-2.5 rounded-full bg-[#C79AA1]" />
+                                <span className="h-2.5 w-2.5 rounded-full bg-secondary" />
                                 Gastos
                             </span>
                         </div>
@@ -683,7 +683,7 @@ export default function InicioDashboardClient({
                                                     item.ingresos,
                                                     datos.simboloMoneda,
                                                 )}`}
-                                                className="w-5 rounded-t-md bg-[#6F8F83]"
+                                                className="w-5 rounded-t-md bg-primary"
                                                 style={{
                                                     height: `${Math.max(
                                                         (
@@ -704,7 +704,7 @@ export default function InicioDashboardClient({
                                                     item.gastos,
                                                     datos.simboloMoneda,
                                                 )}`}
-                                                className="w-5 rounded-t-md bg-[#C79AA1]"
+                                                className="w-5 rounded-t-md bg-secondary"
                                                 style={{
                                                     height: `${Math.max(
                                                         (
@@ -721,7 +721,7 @@ export default function InicioDashboardClient({
                                             />
                                         </div>
 
-                                        <p className="mt-2 text-center text-[10px] font-bold uppercase text-[#71817A]">
+                                        <p className="mt-2 text-center text-xs font-bold uppercase text-[#71817A]">
                                             {
                                                 item.etiqueta
                                             }
@@ -733,12 +733,12 @@ export default function InicioDashboardClient({
                     </div>
                 </article>
 
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#789087]">
                         Operación
                     </p>
 
-                    <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                    <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                         Rendimiento del mes
                     </h2>
 
@@ -868,14 +868,14 @@ export default function InicioDashboardClient({
 
             {datos.productosAlerta.length >
                 0 && (
-                    <section className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                    <section className="salon-panel border border-border bg-white p-5 sm:p-6">
                         <div className="flex items-start justify-between gap-4">
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#789087]">
                                     Inventario
                                 </p>
 
-                                <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                                <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                     Productos que conviene reponer
                                 </h2>
                             </div>
@@ -943,7 +943,7 @@ export default function InicioDashboardClient({
                                                     Stock
                                                 </p>
 
-                                                <p className="mt-1 text-2xl font-bold text-[#26332F]">
+                                                <p className="mt-1 text-2xl font-bold text-sidebar">
                                                     {
                                                         producto.stock
                                                     }
@@ -983,14 +983,14 @@ function Kpi({
     positivo?: boolean;
 }) {
     return (
-        <article className="group rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(36,48,44,0.10)]">
+        <article className="salon-panel group border border-border bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(36,48,44,0.10)]">
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <p className="text-sm font-semibold text-[#71817A]">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold tracking-tight text-[#26332F]">
+                    <p className="mt-3 text-2xl font-bold tracking-tight text-sidebar">
                         {valor}
                     </p>
 
@@ -1004,7 +1004,7 @@ function Kpi({
                         "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl",
                         positivo
                             ? "bg-[#E3EEE8] text-[#4F7564]"
-                            : "bg-[#EEF4F0] text-[#587064]",
+                            : "bg-surface-soft text-[#587064]",
                     ].join(
                         " ",
                     )}
@@ -1035,7 +1035,7 @@ function AccesoRapido({
             className={[
                 "inline-flex h-11 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-bold transition",
                 claro
-                    ? "bg-[#DCE7E2] text-[#26332F] hover:bg-white"
+                    ? "bg-primary-soft text-sidebar hover:bg-white"
                     : "border border-white/10 bg-white/5 text-white hover:bg-white/10",
             ].join(
                 " ",
@@ -1092,7 +1092,7 @@ function Alerta({
                 </p>
             </div>
 
-            <p className="text-sm font-bold text-[#26332F]">
+            <p className="text-sm font-bold text-sidebar">
                 {valor}
             </p>
         </Link>
@@ -1144,7 +1144,7 @@ function Progreso({
                     </p>
                 </div>
 
-                <p className="text-sm font-bold text-[#26332F]">
+                <p className="text-sm font-bold text-sidebar">
                     {porcentaje.toFixed(
                         1,
                     )}
@@ -1154,7 +1154,7 @@ function Progreso({
 
             <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-[#EDF2EF]">
                 <div
-                    className="h-full rounded-full bg-[#6F8F83]"
+                    className="h-full rounded-full bg-primary"
                     style={{
                         width: `${seguro}%`,
                     }}
@@ -1182,14 +1182,14 @@ function ResumenMini({
     return (
         <Link
             href={href}
-            className="group flex items-center justify-between gap-4 rounded-[26px] border border-[#DCE5E0] bg-[#FBFCFA] px-5 py-4 transition hover:bg-white hover:shadow-[0_12px_30px_rgba(36,48,44,0.08)]"
+            className="group flex items-center justify-between gap-4 rounded-[26px] border border-border bg-[#FBFCFA] px-5 py-4 transition hover:bg-white hover:shadow-[0_12px_30px_rgba(36,48,44,0.08)]"
         >
             <div>
                 <p className="text-xs font-semibold text-[#7B8982]">
                     {titulo}
                 </p>
 
-                <p className="mt-1 text-xl font-bold text-[#26332F]">
+                <p className="mt-1 text-xl font-bold text-sidebar">
                     {valor}
                 </p>
 

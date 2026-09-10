@@ -448,9 +448,9 @@ export default function ResumenFinancieroClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -464,7 +464,7 @@ export default function ResumenFinancieroClient({
                     <div className="mt-5 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="max-w-3xl">
                             <div className="flex items-start gap-4">
-                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                     <BarChart3 className="h-7 w-7" />
                                 </div>
 
@@ -473,7 +473,7 @@ export default function ResumenFinancieroClient({
                                         Análisis financiero
                                     </p>
 
-                                    <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                    <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                         Resumen mensual y utilidad
                                     </h1>
 
@@ -520,7 +520,7 @@ export default function ResumenFinancieroClient({
                                                     value={
                                                         indice
                                                     }
-                                                    className="text-[#26332F]"
+                                                    className="text-sidebar"
                                                 >
                                                     {
                                                         mes
@@ -563,7 +563,7 @@ export default function ResumenFinancieroClient({
                                                     value={
                                                         anio
                                                     }
-                                                    className="text-[#26332F]"
+                                                    className="text-sidebar"
                                                 >
                                                     {
                                                         anio
@@ -595,7 +595,7 @@ export default function ResumenFinancieroClient({
                                     >
                                         <option
                                             value="TODAS"
-                                            className="text-[#26332F]"
+                                            className="text-sidebar"
                                         >
                                             Todas
                                         </option>
@@ -611,7 +611,7 @@ export default function ResumenFinancieroClient({
                                                     value={
                                                         sucursal.id
                                                     }
-                                                    className="text-[#26332F]"
+                                                    className="text-sidebar"
                                                 >
                                                     {
                                                         sucursal.nombre
@@ -627,7 +627,7 @@ export default function ResumenFinancieroClient({
                                 type="button"
                                 onClick={exportarExcel}
                                 disabled={exportando}
-                                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#DCE7E2] px-5 text-sm font-bold text-[#26332F] shadow-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+                                className="salon-action inline-flex w-full items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar shadow-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
                             >
                                 {exportando ? (
                                     <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -710,10 +710,10 @@ export default function ResumenFinancieroClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.55fr_0.85fr]">
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <div>
-                            <h2 className="text-xl font-bold text-[#26332F]">
+                            <h2 className="text-xl font-bold text-sidebar tracking-tight">
                                 Evolución de 12 meses
                             </h2>
 
@@ -728,7 +728,7 @@ export default function ResumenFinancieroClient({
                             </p>
                         </div>
 
-                        <div className="flex flex-wrap gap-3 text-xs font-semibold text-[#6B756F]">
+                        <div className="flex flex-wrap gap-3 text-xs font-semibold text-text-secondary">
                             <Leyenda
                                 clase="bg-[#6F8F83]"
                                 texto="Ingresos"
@@ -752,10 +752,10 @@ export default function ResumenFinancieroClient({
                     </div>
                 </article>
 
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex items-start justify-between gap-4">
                         <div>
-                            <h2 className="text-xl font-bold text-[#26332F]">
+                            <h2 className="text-xl font-bold text-sidebar tracking-tight">
                                 Resultado del mes
                             </h2>
 
@@ -784,7 +784,7 @@ export default function ResumenFinancieroClient({
                         </div>
                     </div>
 
-                    <div className="mt-7 rounded-[24px] bg-[#26332F] p-5 text-white">
+                    <div className="mt-7 rounded-[24px] bg-sidebar p-5 text-white">
                         <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#B9C8C1]">
                             Utilidad neta registrada
                         </p>
@@ -798,7 +798,7 @@ export default function ResumenFinancieroClient({
 
                         <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
                             <div
-                                className="h-full rounded-full bg-[#DCE7E2]"
+                                className="h-full rounded-full bg-primary-soft"
                                 style={{
                                     width: `${Math.min(
                                         Math.max(
@@ -855,9 +855,9 @@ export default function ResumenFinancieroClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div>
-                        <h2 className="text-xl font-bold text-[#26332F]">
+                        <h2 className="text-xl font-bold text-sidebar tracking-tight">
                             Flujo diario del mes
                         </h2>
 
@@ -873,8 +873,8 @@ export default function ResumenFinancieroClient({
                     </div>
                 </article>
 
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
-                    <h2 className="text-xl font-bold text-[#26332F]">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-sidebar tracking-tight">
                         Principales gastos
                     </h2>
 
@@ -897,8 +897,8 @@ export default function ResumenFinancieroClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-2">
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
-                    <h2 className="text-xl font-bold text-[#26332F]">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-sidebar tracking-tight">
                         Fuentes de ingreso
                     </h2>
 
@@ -919,8 +919,8 @@ export default function ResumenFinancieroClient({
                     </div>
                 </article>
 
-                <article className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
-                    <h2 className="text-xl font-bold text-[#26332F]">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-sidebar tracking-tight">
                         Origen de los movimientos
                     </h2>
 
@@ -962,7 +962,7 @@ export default function ResumenFinancieroClient({
                                             </p>
                                         </div>
 
-                                        <p className="text-sm font-bold text-[#26332F]">
+                                        <p className="text-sm font-bold text-sidebar">
                                             {moneda(
                                                 origen.total,
                                                 simboloMoneda,
@@ -1012,14 +1012,14 @@ function KpiCard({
             : variacionPositiva;
 
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <p className="text-sm font-semibold text-[#71817A]">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold tracking-tight text-[#26332F]">
+                    <p className="mt-3 text-2xl font-bold tracking-tight text-sidebar">
                         {valor}
                     </p>
                 </div>
@@ -1101,7 +1101,7 @@ function SelectorHero({
 }) {
     return (
         <label className="rounded-2xl border border-white/10 bg-white/[0.08] p-3 backdrop-blur-sm">
-            <span className="mb-1.5 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-[#B9C8C1]">
+            <span className="mb-1.5 flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.15em] text-[#B9C8C1]">
                 <Icono className="h-3.5 w-3.5" />
                 {etiqueta}
             </span>
@@ -1173,7 +1173,7 @@ function Grafico12Meses({
                                             item.ingresos,
                                             simboloMoneda,
                                         )}`}
-                                        className="w-3 rounded-t-lg bg-[#6F8F83]"
+                                        className="w-3 rounded-t-lg bg-primary"
                                         style={{
                                             height: `${alturaIngreso}px`,
                                         }}
@@ -1184,14 +1184,14 @@ function Grafico12Meses({
                                             item.gastos,
                                             simboloMoneda,
                                         )}`}
-                                        className="w-3 rounded-t-lg bg-[#C79AA1]"
+                                        className="w-3 rounded-t-lg bg-secondary"
                                         style={{
                                             height: `${alturaGasto}px`,
                                         }}
                                     />
                                 </div>
 
-                                <p className="mt-2 truncate text-center text-[10px] font-bold uppercase text-[#6F7E77]">
+                                <p className="mt-2 truncate text-center text-xs font-bold uppercase text-[#6F7E77]">
                                     {
                                         item.etiqueta
                                     }
@@ -1290,7 +1290,7 @@ function GraficoDiario({
                                         title={`Día ${item.dia} · Ingresos ${item.ingresos.toFixed(
                                             2,
                                         )}`}
-                                        className="w-2 rounded-t bg-[#6F8F83]"
+                                        className="w-2 rounded-t bg-primary"
                                         style={{
                                             height: `${intensidadIngreso}px`,
                                         }}
@@ -1300,14 +1300,14 @@ function GraficoDiario({
                                         title={`Día ${item.dia} · Gastos ${item.gastos.toFixed(
                                             2,
                                         )}`}
-                                        className="w-2 rounded-t bg-[#C79AA1]"
+                                        className="w-2 rounded-t bg-secondary"
                                         style={{
                                             height: `${intensidadGasto}px`,
                                         }}
                                     />
                                 </div>
 
-                                <span className="mt-2 text-[9px] font-semibold text-[#7B8982]">
+                                <span className="mt-2 text-xs font-semibold text-[#7B8982]">
                                     {
                                         item.dia
                                     }
@@ -1371,7 +1371,7 @@ function RankingCategorias({
                                     </p>
                                 </div>
 
-                                <p className="shrink-0 text-sm font-bold text-[#26332F]">
+                                <p className="shrink-0 text-sm font-bold text-sidebar">
                                     {moneda(
                                         categoria.total,
                                         simboloMoneda,
@@ -1379,14 +1379,14 @@ function RankingCategorias({
                                 </p>
                             </div>
 
-                            <div className="mt-2.5 h-2.5 overflow-hidden rounded-full bg-[#EEF2EF]">
+                            <div className="mt-2.5 h-2.5 overflow-hidden rounded-full bg-surface-soft">
                                 <div
                                     className={[
                                         "h-full rounded-full",
                                         tipo ===
                                             "INGRESO"
-                                            ? "bg-[#6F8F83]"
-                                            : "bg-[#C79AA1]",
+                                            ? "bg-primary"
+                                            : "bg-secondary",
                                     ].join(
                                         " ",
                                     )}
@@ -1418,7 +1418,7 @@ function FilaResumen({
                 {etiqueta}
             </span>
 
-            <span className="text-right text-sm font-bold text-[#26332F]">
+            <span className="text-right text-sm font-bold text-sidebar">
                 {valor}
             </span>
         </div>

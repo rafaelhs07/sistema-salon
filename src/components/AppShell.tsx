@@ -656,14 +656,17 @@ export default function AppShell({
     return (
         <div
             data-tema={temaColor}
-            className="min-h-screen bg-[#F6F7F4] text-[#24302C]"
+            className="salon-app min-h-screen bg-background text-foreground"
         >
+            <a href="#contenido-principal" className="salon-skip-link">
+                Saltar al contenido
+            </a>
             {menuAbierto && (
                 <button
                     type="button"
                     aria-label="Cerrar menú"
                     onClick={cerrarMenuMovil}
-                    className="fixed inset-0 z-40 bg-[#26332F]/45 backdrop-blur-sm lg:hidden"
+                    className="fixed inset-0 z-40 bg-sidebar/45 backdrop-blur-sm lg:hidden"
                 />
             )}
 
@@ -671,7 +674,7 @@ export default function AppShell({
                 className={[
                     "fixed inset-y-0 left-0 z-50 flex flex-col",
                     menuCompacto ? "w-[92px]" : "w-[286px]",
-                    "border-r border-white/5 bg-[#26332F] text-white",
+                    "border-r border-white/5 bg-sidebar text-white",
                     "shadow-[14px_0_45px_rgba(36,48,44,0.08)]",
                     "transition-[width,transform] duration-300 lg:translate-x-0",
                     menuAbierto ? "translate-x-0" : "-translate-x-full",
@@ -694,7 +697,7 @@ export default function AppShell({
                             menuCompacto ? "justify-center" : "gap-3",
                         ].join(" ")}
                     >
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F] shadow-lg shadow-black/10">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar shadow-lg shadow-black/10">
                             <Sparkles className="h-5 w-5" strokeWidth={2.1} />
                         </div>
 
@@ -748,7 +751,7 @@ export default function AppShell({
                             return (
                                 <section key={grupo.nombre}>
                                     {!menuCompacto && (
-                                        <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#82968D]">
+                                        <p className="mb-2 px-3 text-xs font-bold uppercase tracking-[0.2em] text-[#82968D]">
                                             {grupo.nombre}
                                         </p>
                                     )}
@@ -799,7 +802,7 @@ export default function AppShell({
                         >
                             <div
                                 title={menuCompacto ? perfil.nombreCompleto : undefined}
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-sm font-bold text-[#26332F]"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-sm font-bold text-sidebar"
                             >
                                 {iniciales}
                             </div>
@@ -839,13 +842,13 @@ export default function AppShell({
                         : "lg:pl-[286px]",
                 ].join(" ")}
             >
-                <header className="sticky top-0 z-30 flex min-h-20 items-center justify-between border-b border-[#E3E7E4] bg-white/90 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-8">
+                <header className="salon-topbar sticky top-0 z-30 flex min-h-20 items-center justify-between border-b border-border bg-white/90 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-8">
                     <div className="flex min-w-0 items-center gap-3">
                         <button
                             type="button"
                             aria-label="Abrir menú"
                             onClick={() => setMenuAbierto(true)}
-                            className="rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#52605A] transition hover:border-[#C9D5D0] hover:bg-[#EEF2EF] lg:hidden"
+                            className="rounded-xl border border-border bg-white p-2.5 text-[#52605A] transition hover:border-[#C9D5D0] hover:bg-surface-soft lg:hidden"
                         >
                             <Menu className="h-5 w-5" />
                         </button>
@@ -863,7 +866,7 @@ export default function AppShell({
                                     : "Ocultar menú lateral"
                             }
                             onClick={alternarMenuCompacto}
-                            className="hidden rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#52605A] transition hover:border-[#C9D5D0] hover:bg-[#EEF2EF] lg:inline-flex"
+                            className="hidden rounded-xl border border-border bg-white p-2.5 text-[#52605A] transition hover:border-[#C9D5D0] hover:bg-surface-soft lg:inline-flex"
                         >
                             {menuCompacto ? (
                                 <PanelLeftOpen className="h-5 w-5" />
@@ -873,11 +876,11 @@ export default function AppShell({
                         </button>
 
                         <div className="min-w-0">
-                            <h1 className="truncate text-base font-bold tracking-tight text-[#24302C]">
+                            <p className="truncate text-base font-bold tracking-tight text-foreground">
                                 {informacionRuta.titulo}
-                            </h1>
+                            </p>
 
-                            <p className="hidden truncate text-xs text-[#6B756F] sm:block">
+                            <p className="hidden truncate text-xs text-text-secondary sm:block">
                                 {informacionRuta.descripcion}
                             </p>
                         </div>
@@ -888,7 +891,7 @@ export default function AppShell({
                             type="button"
                             title="Buscar"
                             aria-label="Buscar"
-                            className="hidden rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#6B756F] transition hover:border-[#C9D5D0] hover:bg-[#EEF2EF] md:block"
+                            className="hidden rounded-xl border border-border bg-white p-2.5 text-text-secondary transition hover:border-[#C9D5D0] hover:bg-surface-soft md:block"
                         >
                             <Search className="h-5 w-5" />
                         </button>
@@ -912,14 +915,14 @@ export default function AppShell({
                                 className={[
                                     "relative rounded-xl border bg-white p-2.5 transition",
                                     panelNotificacionesAbierto
-                                        ? "border-[#9FB7AC] bg-[#EEF2EF] text-[#527064]"
-                                        : "border-[#E3E7E4] text-[#6B756F] hover:border-[#C9D5D0] hover:bg-[#EEF2EF]",
+                                        ? "border-[#9FB7AC] bg-surface-soft text-primary-strong"
+                                        : "border-border text-text-secondary hover:border-[#C9D5D0] hover:bg-surface-soft",
                                 ].join(" ")}
                             >
                                 <Bell className="h-5 w-5" />
 
                                 {cantidadNoLeidas > 0 && (
-                                    <span className="absolute -right-2 -top-2 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-[#C79AA1] px-1.5 text-[10px] font-bold text-white ring-2 ring-white">
+                                    <span className="absolute -right-2 -top-2 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-secondary px-1.5 text-xs font-bold text-white ring-2 ring-white">
                                         {cantidadNoLeidas > 99
                                             ? "99+"
                                             : cantidadNoLeidas}
@@ -959,27 +962,27 @@ export default function AppShell({
                             )}
                         </div>
 
-                        <div className="hidden items-center gap-3 border-l border-[#E3E7E4] pl-3 sm:flex">
+                        <div className="hidden items-center gap-3 border-l border-border pl-3 sm:flex">
                             <div className="text-right">
-                                <p className="max-w-44 truncate text-sm font-semibold text-[#24302C]">
+                                <p className="max-w-44 truncate text-sm font-semibold text-foreground">
                                     {perfil.nombreCompleto}
                                 </p>
 
-                                <p className="text-xs text-[#6B756F]">
+                                <p className="text-xs text-text-secondary">
                                     {formatearRol(perfil.rol)}
                                 </p>
                             </div>
 
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-sm font-bold text-[#26332F]">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-sm font-bold text-sidebar">
                                 {iniciales}
                             </div>
                         </div>
                     </div>
                 </header>
 
-                <main className="p-4 sm:p-6 lg:p-8">{children}</main>
+                <main id="contenido-principal" tabIndex={-1} className="salon-workspace">{children}</main>
 
-                <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-[#E3E7E4] bg-white/95 px-3 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(36,48,44,0.08)] backdrop-blur-xl lg:hidden">
+                <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-white/95 px-3 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(36,48,44,0.08)] backdrop-blur-xl lg:hidden">
                     <div className="mx-auto grid h-16 max-w-lg grid-cols-4">
                         {permisosUsuario?.has(
                             "INICIO_VER",
@@ -1023,10 +1026,10 @@ export default function AppShell({
                         <button
                             type="button"
                             onClick={() => setMenuAbierto(true)}
-                            className="flex flex-col items-center justify-center gap-1 text-[#6B756F]"
+                            className="flex flex-col items-center justify-center gap-1 text-text-secondary"
                         >
                             <Menu className="h-5 w-5" />
-                            <span className="text-[10px] font-semibold">Más</span>
+                            <span className="text-xs font-semibold">Más</span>
                         </button>
                     </div>
                 </nav>
@@ -1057,10 +1060,10 @@ function PanelCampana({
     verTodas: () => void;
 }) {
     return (
-        <section className="fixed left-4 right-4 top-[74px] z-[80] overflow-hidden rounded-2xl border border-[#DCE3DF] bg-white shadow-[0_22px_65px_rgba(36,48,44,0.22)] sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+12px)] sm:w-[390px]">
+        <section className="fixed left-4 right-4 top-[74px] z-[80] overflow-hidden rounded-2xl border border-border-strong bg-white shadow-[0_22px_65px_rgba(36,48,44,0.22)] sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+12px)] sm:w-[390px]">
             <header className="flex items-center justify-between gap-4 border-b border-[#E8ECE9] bg-[#FBFCFA] px-4 py-3.5">
                 <div>
-                    <h2 className="font-bold text-[#24302C]">
+                    <h2 className="font-bold text-foreground tracking-tight">
                         Notificaciones
                     </h2>
                     <p className="mt-0.5 text-xs text-[#76817B]">
@@ -1077,7 +1080,7 @@ function PanelCampana({
                         disabled={
                             actualizando !== null
                         }
-                        className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-[#DCE7E2] px-3 text-[11px] font-bold text-[#43524B] disabled:opacity-50"
+                        className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-primary-soft px-3 text-xs font-bold text-text-secondary disabled:opacity-50"
                     >
                         {actualizando === "TODAS" ? (
                             <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
@@ -1091,8 +1094,8 @@ function PanelCampana({
 
             <div className="max-h-[420px] overflow-y-auto">
                 {cargando ? (
-                    <div className="flex items-center justify-center gap-2 p-10 text-sm text-[#6B756F]">
-                        <LoaderCircle className="h-5 w-5 animate-spin text-[#6F8F83]" />
+                    <div className="flex items-center justify-center gap-2 p-10 text-sm text-text-secondary">
+                        <LoaderCircle className="h-5 w-5 animate-spin text-primary" />
                         Cargando avisos...
                     </div>
                 ) : notificaciones.length === 0 ? (
@@ -1127,7 +1130,7 @@ function PanelCampana({
                                         "flex w-full items-start gap-3 p-4 text-left transition hover:bg-[#F4F7F5] disabled:opacity-60",
                                         notificacion.leida
                                             ? "bg-white"
-                                            : "bg-[#F0F5F2]",
+                                            : "bg-surface-soft",
                                     ].join(" ")}
                                 >
                                     <div
@@ -1139,7 +1142,7 @@ function PanelCampana({
                                                 : notificacion.prioridad ===
                                                     "ALTA"
                                                     ? "bg-[#FAF0DC] text-[#9A742D]"
-                                                    : "bg-[#DCE7E2] text-[#527064]",
+                                                    : "bg-primary-soft text-primary-strong",
                                         ].join(" ")}
                                     >
                                         {actualizando ===
@@ -1152,24 +1155,24 @@ function PanelCampana({
 
                                     <div className="min-w-0 flex-1">
                                         <div className="flex items-start justify-between gap-2">
-                                            <p className="line-clamp-1 text-sm font-bold text-[#24302C]">
+                                            <p className="line-clamp-1 text-sm font-bold text-foreground">
                                                 {
                                                     notificacion.titulo
                                                 }
                                             </p>
 
                                             {!notificacion.leida && (
-                                                <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#C79AA1]" />
+                                                <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-secondary" />
                                             )}
                                         </div>
 
-                                        <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#6B756F]">
+                                        <p className="mt-1 line-clamp-2 text-xs leading-5 text-text-secondary">
                                             {
                                                 notificacion.mensaje
                                             }
                                         </p>
 
-                                        <p className="mt-2 text-[10px] font-medium text-[#8A948F]">
+                                        <p className="mt-2 text-xs font-medium text-[#8A948F]">
                                             {formatearTiempoNotificacion(
                                                 notificacion.fecha_registro,
                                             )}
@@ -1186,7 +1189,7 @@ function PanelCampana({
                 <button
                     type="button"
                     onClick={verTodas}
-                    className="inline-flex h-10 w-full items-center justify-center rounded-xl bg-[#26332F] px-4 text-sm font-bold text-white transition hover:bg-[#33433D]"
+                    className="salon-action inline-flex w-full items-center justify-center bg-sidebar px-4 text-white transition hover:bg-sidebar-hover"
                 >
                     Ver todas las notificaciones
                 </button>
@@ -1266,7 +1269,7 @@ function ElementoNavegacion({
                             </p>
                         </div>
 
-                        <span className="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[8px] font-bold uppercase tracking-wide text-[#8FA39A]">
+                        <span className="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-[#8FA39A]">
                             Pronto
                         </span>
                     </>
@@ -1278,28 +1281,29 @@ function ElementoNavegacion({
     return (
         <Link
             href={elemento.href}
+            aria-current={activo ? "page" : undefined}
             onClick={alNavegar}
             title={compacto ? elemento.nombre : undefined}
             className={[
-                "group relative flex items-center rounded-xl transition-all duration-200",
+                "salon-nav-link group relative flex items-center rounded-xl transition-all duration-200",
                 compacto
                     ? "justify-center px-2 py-3"
                     : "gap-3 px-3 py-2.5",
                 activo
-                    ? "bg-[#DCE7E2] text-[#26332F] shadow-sm"
+                    ? "bg-primary-soft text-sidebar shadow-sm"
                     : "text-[#C6D2CC] hover:bg-white/[0.07] hover:text-white",
             ].join(" ")}
         >
             {activo && (
-                <span className="absolute bottom-2 left-0 top-2 w-1 rounded-r-full bg-[#6F8F83]" />
+                <span className="absolute bottom-2 left-0 top-2 w-1 rounded-r-full bg-primary" />
             )}
 
             <Icono
                 className={[
                     "h-5 w-5 shrink-0 transition-colors",
                     activo
-                        ? "text-[#527064]"
-                        : "text-[#82968D] group-hover:text-[#DCE7E2]",
+                        ? "text-primary-strong"
+                        : "text-[#82968D] group-hover:text-primary-soft",
                 ].join(" ")}
             />
 
@@ -1312,7 +1316,7 @@ function ElementoNavegacion({
             )}
 
             {!compacto && activo && (
-                <ChevronRight className="h-4 w-4 text-[#6F8F83]" />
+                <ChevronRight className="h-4 w-4 text-primary" />
             )}
         </Link>
     );
@@ -1337,7 +1341,7 @@ function AccesoMovil({
                 className="flex cursor-not-allowed flex-col items-center justify-center gap-1 text-[#A6AEA9]"
             >
                 <Icono className="h-5 w-5" />
-                <span className="text-[10px] font-semibold">{nombre}</span>
+                <span className="text-xs font-semibold">{nombre}</span>
             </button>
         );
     }
@@ -1345,17 +1349,18 @@ function AccesoMovil({
     return (
         <Link
             href={href}
+            aria-current={activo ? "page" : undefined}
             className={[
                 "relative flex flex-col items-center justify-center gap-1",
-                activo ? "text-[#527064]" : "text-[#6B756F]",
+                activo ? "text-primary-strong" : "text-text-secondary",
             ].join(" ")}
         >
             {activo && (
-                <span className="absolute top-0 h-1 w-8 rounded-b-full bg-[#6F8F83]" />
+                <span className="absolute top-0 h-1 w-8 rounded-b-full bg-primary" />
             )}
 
             <Icono className="h-5 w-5" />
-            <span className="text-[10px] font-semibold">{nombre}</span>
+            <span className="text-xs font-semibold">{nombre}</span>
         </Link>
     );
 }

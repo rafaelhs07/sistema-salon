@@ -180,18 +180,18 @@ export default function NuevaCitaClient({
 
     return (
         <div className="space-y-6">
-            <section className="rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
+            <section className="salon-hero bg-sidebar p-6 text-white sm:p-8">
                 <Link href="/agenda" className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white">
                     <ArrowLeft className="h-4 w-4" /> Volver a la agenda
                 </Link>
 
                 <div className="mt-6 flex items-start gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                         <CalendarDays className="h-7 w-7" />
                     </div>
                     <div>
                         <p className="text-sm font-semibold text-[#B9C8C1]">Reservación</p>
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Nueva cita</h1>
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">Nueva cita</h1>
                         <p className="mt-3 text-[#CFD9D4]">Agrega servicios en el orden en que serán realizados.</p>
                     </div>
                 </div>
@@ -216,14 +216,14 @@ export default function NuevaCitaClient({
                                             setMostrarClientes(true);
                                         }}
                                         placeholder="Nombre, teléfono o código..."
-                                        className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-4 outline-none focus:border-[#6F8F83]"
+                                        className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 outline-none focus:border-primary"
                                     />
                                 </div>
 
                                 {mostrarClientes && (
-                                    <div className="absolute left-0 right-0 top-full z-[100] mt-2 max-h-72 overflow-y-auto rounded-2xl border border-[#DCE3DF] bg-white p-2 shadow-[0_18px_45px_rgba(36,48,44,0.20)]">
+                                    <div className="absolute left-0 right-0 top-full z-[100] mt-2 max-h-72 overflow-y-auto rounded-2xl border border-border-strong bg-white p-2 shadow-[0_18px_45px_rgba(36,48,44,0.20)]">
                                         {clientesFiltrados.length === 0 ? (
-                                            <p className="p-4 text-sm text-[#6B756F]">
+                                            <p className="p-4 text-sm text-text-secondary">
                                                 No encontramos clientes.
                                             </p>
                                         ) : clientesFiltrados.map((cliente) => (
@@ -235,9 +235,9 @@ export default function NuevaCitaClient({
                                                     setBusquedaCliente(cliente.nombre_completo);
                                                     setMostrarClientes(false);
                                                 }}
-                                                className="flex w-full items-center gap-3 rounded-xl p-3 text-left transition hover:bg-[#EEF2EF]"
+                                                className="flex w-full items-center gap-3 rounded-xl p-3 text-left transition hover:bg-surface-soft"
                                             >
-                                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-sm font-bold text-[#43524B]">
+                                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-sm font-bold text-text-secondary">
                                                     {obtenerIniciales(cliente.nombre_completo)}
                                                 </div>
 
@@ -256,8 +256,8 @@ export default function NuevaCitaClient({
                             </div>
 
                             {clienteSeleccionado && (
-                                <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[#C8D9D1] bg-[#F0F5F2] p-4">
-                                    <CheckCircle2 className="h-5 w-5 text-[#5E7D71]" />
+                                <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[#C8D9D1] bg-surface-soft p-4">
+                                    <CheckCircle2 className="h-5 w-5 text-primary-hover" />
                                     <p className="font-semibold text-[#33413B]">{clienteSeleccionado.nombre_completo}</p>
                                 </div>
                             )}
@@ -297,14 +297,14 @@ export default function NuevaCitaClient({
 
                         <Seccion titulo="Servicios" icono={Scissors}>
                             <div className="flex justify-end">
-                                <button type="button" onClick={agregarServicio} className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]">
+                                <button type="button" onClick={agregarServicio} className="salon-action inline-flex items-center gap-2 bg-primary-soft px-4 text-text-secondary">
                                     <Plus className="h-4 w-4" /> Agregar servicio
                                 </button>
                             </div>
 
                             <div className="mt-4 space-y-4">
                                 {formulario.servicios.length === 0 && (
-                                    <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-8 text-center text-sm text-[#6B756F]">
+                                    <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-8 text-center text-sm text-text-secondary">
                                         Todavía no hay servicios agregados.
                                     </div>
                                 )}
@@ -313,11 +313,11 @@ export default function NuevaCitaClient({
                                     const inicio = calcularHoraInicioServicio(formulario.horaInicio, formulario.servicios, indice);
                                     const fin = minutosAHora(horaAMinutos(inicio) + entrada.duracionMinutos);
                                     return (
-                                        <article key={indice} className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-5">
+                                        <article key={indice} className="rounded-2xl border border-border bg-[#FBFCFA] p-5">
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="font-bold text-[#24302C]">Servicio {indice + 1}</p>
-                                                    <p className="mt-1 text-xs font-semibold text-[#6F8F83]">{formatearHora(inicio)} – {formatearHora(fin)}</p>
+                                                    <p className="font-bold text-foreground">Servicio {indice + 1}</p>
+                                                    <p className="mt-1 text-xs font-semibold text-primary">{formatearHora(inicio)} – {formatearHora(fin)}</p>
                                                 </div>
                                                 <button
                                                     type="button"
@@ -375,8 +375,8 @@ export default function NuevaCitaClient({
                     </div>
 
                     <aside className="xl:sticky xl:top-6 xl:self-start">
-                        <div className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
-                            <h2 className="text-xl font-bold text-[#24302C]">Resumen</h2>
+                        <div className="salon-panel border border-border bg-white p-6">
+                            <h2 className="text-xl font-bold text-foreground tracking-tight">Resumen</h2>
                             <div className="mt-5 space-y-4">
                                 <ResumenDato titulo="Fecha" valor={formulario.fecha ? formatearFecha(formulario.fecha) : "Sin fecha"} />
                                 <ResumenDato titulo="Horario" valor={`${formatearHora(formulario.horaInicio)} – ${formatearHora(resumen.horaFin)}`} />
@@ -384,7 +384,7 @@ export default function NuevaCitaClient({
                                 <ResumenDato titulo="Servicios" valor={String(formulario.servicios.length)} />
                             </div>
 
-                            <div className="my-5 border-t border-[#E3E7E4]" />
+                            <div className="my-5 border-t border-border" />
                             <FilaDinero titulo="Subtotal" valor={resumen.subtotal} simbolo={simboloMoneda} />
                             <FilaDinero titulo="Descuento" valor={resumen.descuento} simbolo={simboloMoneda} />
                             <FilaDinero titulo="Total" valor={resumen.total} simbolo={simboloMoneda} destacado />
@@ -392,7 +392,7 @@ export default function NuevaCitaClient({
                             <button
                                 type="submit"
                                 disabled={guardando}
-                                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 font-bold text-white disabled:bg-[#AAB9B3]"
+                                className="salon-action mt-6 inline-flex w-full items-center justify-center gap-2 bg-primary px-5 text-white disabled:bg-[#AAB9B3]"
                             >
                                 {guardando ? <LoaderCircle className="h-5 w-5 animate-spin" /> : <CheckCircle2 className="h-5 w-5" />}
                                 {guardando ? "Validando..." : "Crear cita"}
@@ -407,10 +407,10 @@ export default function NuevaCitaClient({
 
 function Seccion({ titulo, icono: Icono, children }: { titulo: string; icono: React.ComponentType<{ className?: string }>; children: React.ReactNode }) {
     return (
-        <section className="relative overflow-visible rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel relative overflow-visible border border-border bg-white">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]"><Icono className="h-5 w-5" /></div>
-                <h2 className="font-bold text-[#24302C]">{titulo}</h2>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong"><Icono className="h-5 w-5" /></div>
+                <h2 className="font-bold text-foreground tracking-tight">{titulo}</h2>
             </header>
             <div className="p-5 sm:p-6">{children}</div>
         </section>
@@ -418,11 +418,11 @@ function Seccion({ titulo, icono: Icono, children }: { titulo: string; icono: Re
 }
 
 function CampoSelect({ etiqueta, valor, opciones, cambiar }: { etiqueta: string; valor: string; opciones: { valor: string; texto: string }[]; cambiar: (valor: string) => void }) {
-    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><select value={valor} required onChange={(e) => cambiar(e.target.value)} className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 outline-none focus:border-[#6F8F83]">{opciones.map((opcion) => <option key={`${opcion.valor}-${opcion.texto}`} value={opcion.valor}>{opcion.texto}</option>)}</select></label>;
+    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><select value={valor} required onChange={(e) => cambiar(e.target.value)} className="salon-control w-full border border-border-strong bg-white px-4 outline-none focus:border-primary">{opciones.map((opcion) => <option key={`${opcion.valor}-${opcion.texto}`} value={opcion.valor}>{opcion.texto}</option>)}</select></label>;
 }
 
 function CampoFecha({ etiqueta, valor, cambiar }: { etiqueta: string; valor: string; cambiar: (valor: string) => void }) {
-    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><input type="date" value={valor} required onChange={(e) => cambiar(e.target.value)} className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4" /></label>;
+    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><input type="date" value={valor} required onChange={(e) => cambiar(e.target.value)} className="salon-control w-full border border-border-strong bg-white px-4" /></label>;
 }
 
 function CampoHora({
@@ -479,7 +479,7 @@ function CampoHora({
                     onChange={(event) =>
                         actualizarHora({ hora: Number(event.target.value) })
                     }
-                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 outline-none focus:border-[#6F8F83]"
+                    className="salon-control w-full border border-border-strong bg-white px-3 outline-none focus:border-primary"
                     aria-label="Hora"
                 >
                     {horasPermitidas.map((hora) => (
@@ -494,7 +494,7 @@ function CampoHora({
                     onChange={(event) =>
                         actualizarHora({ minuto: event.target.value })
                     }
-                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 outline-none focus:border-[#6F8F83]"
+                    className="salon-control w-full border border-border-strong bg-white px-3 outline-none focus:border-primary"
                     aria-label="Minutos"
                 >
                     {minutosPermitidos.map((minuto) => (
@@ -511,7 +511,7 @@ function CampoHora({
                             periodo: event.target.value as "AM" | "PM",
                         })
                     }
-                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 font-semibold outline-none focus:border-[#6F8F83]"
+                    className="salon-control w-full border border-border-strong bg-white px-3 font-semibold outline-none focus:border-primary"
                     aria-label="AM o PM"
                 >
                     <option value="AM">AM</option>
@@ -527,23 +527,23 @@ function CampoHora({
 }
 
 function CampoNumero({ etiqueta, valor, simbolo, minimo, maximo, paso, cambiar }: { etiqueta: string; valor: number; simbolo: string; minimo: number; maximo?: number; paso: number; cambiar: (valor: number) => void }) {
-    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><div className="relative"><input type="number" value={valor} min={minimo} max={maximo} step={paso} onChange={(e) => cambiar(Number(e.target.value))} className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 pr-16" /><span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[#76817B]">{simbolo}</span></div></label>;
+    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><div className="relative"><input type="number" value={valor} min={minimo} max={maximo} step={paso} onChange={(e) => cambiar(Number(e.target.value))} className="salon-control w-full border border-border-strong bg-white px-4 pr-16" /><span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[#76817B]">{simbolo}</span></div></label>;
 }
 
 function CampoTexto({ etiqueta, valor, cambiar }: { etiqueta: string; valor: string; cambiar: (valor: string) => void }) {
-    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><input value={valor} onChange={(e) => cambiar(e.target.value)} className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4" /></label>;
+    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><input value={valor} onChange={(e) => cambiar(e.target.value)} className="salon-control w-full border border-border-strong bg-white px-4" /></label>;
 }
 
 function CampoArea({ etiqueta, valor, cambiar }: { etiqueta: string; valor: string; cambiar: (valor: string) => void }) {
-    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><textarea rows={4} value={valor} onChange={(e) => cambiar(e.target.value)} className="w-full rounded-xl border border-[#D4DAD6] bg-white px-4 py-3" /></label>;
+    return <label className="block"><span className="mb-2 block text-sm font-semibold text-[#3D4A45]">{etiqueta}</span><textarea rows={4} value={valor} onChange={(e) => cambiar(e.target.value)} className="salon-control w-full border border-border-strong bg-white px-4 py-3" /></label>;
 }
 
 function ResumenDato({ titulo, valor }: { titulo: string; valor: string }) {
-    return <div className="flex items-center justify-between gap-4"><span className="text-sm text-[#6B756F]">{titulo}</span><strong className="text-right text-sm text-[#33413B]">{valor}</strong></div>;
+    return <div className="flex items-center justify-between gap-4"><span className="text-sm text-text-secondary">{titulo}</span><strong className="text-right text-sm text-[#33413B]">{valor}</strong></div>;
 }
 
 function FilaDinero({ titulo, valor, simbolo, destacado = false }: { titulo: string; valor: number; simbolo: string; destacado?: boolean }) {
-    return <div className="mt-3 flex items-center justify-between"><span className={destacado ? "font-bold text-[#24302C]" : "text-sm text-[#6B756F]"}>{titulo}</span><strong className={destacado ? "text-xl text-[#24302C]" : "text-sm text-[#33413B]"}>{simbolo} {valor.toLocaleString("es-NI", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>;
+    return <div className="mt-3 flex items-center justify-between"><span className={destacado ? "font-bold text-foreground" : "text-sm text-text-secondary"}>{titulo}</span><strong className={destacado ? "text-xl text-foreground" : "text-sm text-[#33413B]"}>{simbolo} {valor.toLocaleString("es-NI", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>;
 }
 
 function MensajeEstado({ mensaje, cerrar }: { mensaje: Exclude<Mensaje, null>; cerrar: () => void }) {

@@ -245,8 +245,8 @@ export default function CompraDetalleClient({
                 />
             )}
 
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <Link
                     href="/compras"
@@ -258,13 +258,13 @@ export default function CompraDetalleClient({
 
                 <div className="relative mt-5 flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <ReceiptText className="h-7 w-7" />
                         </div>
 
                         <div>
                             <div className="flex flex-wrap items-center gap-2">
-                                <h1 className="text-3xl font-bold sm:text-4xl">
+                                <h1 className="text-3xl font-black sm:text-4xl tracking-tight">
                                     {compra.codigoCompra}
                                 </h1>
 
@@ -291,7 +291,7 @@ export default function CompraDetalleClient({
                                     setMotivoAnulacion("");
                                     setAnularAbierto(true);
                                 }}
-                                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 font-bold text-white transition hover:bg-white/15"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 text-white transition hover:bg-white/15"
                             >
                                 <Trash2 className="h-5 w-5" />
                                 Anular
@@ -306,7 +306,7 @@ export default function CompraDetalleClient({
                                         true,
                                     )
                                 }
-                                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-5 font-bold text-[#26332F] transition hover:bg-white"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                             >
                                 <PackageCheck className="h-5 w-5" />
                                 Confirmar compra
@@ -411,13 +411,13 @@ export default function CompraDetalleClient({
             )}
 
             <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-                <div className="rounded-[28px] border border-[#E3E7E4] bg-white p-5 sm:p-6">
+                <div className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div>
-                        <h2 className="text-lg font-bold text-[#24302C]">
+                        <h2 className="text-lg font-bold text-foreground tracking-tight">
                             Productos de la compra
                         </h2>
 
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             {compra.items.length} producto
                             {compra.items.length ===
                                 1
@@ -440,11 +440,11 @@ export default function CompraDetalleClient({
                                     key={
                                         item.id
                                     }
-                                    className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4"
+                                    className="rounded-2xl border border-border bg-[#FBFCFA] p-4"
                                 >
                                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                                         <div className="min-w-0">
-                                            <p className="font-bold text-[#24302C]">
+                                            <p className="font-bold text-foreground">
                                                 {
                                                     item.nombre
                                                 }
@@ -462,7 +462,7 @@ export default function CompraDetalleClient({
 
                                             {(item.lote ||
                                                 item.fechaVencimiento) && (
-                                                    <p className="mt-2 text-xs text-[#6B756F]">
+                                                    <p className="mt-2 text-xs text-text-secondary">
                                                         {item.lote
                                                             ? `Lote ${item.lote}`
                                                             : ""}
@@ -506,7 +506,7 @@ export default function CompraDetalleClient({
                                         null &&
                                         item.stockNuevo !==
                                         null && (
-                                            <div className="mt-4 flex items-center gap-2 rounded-xl bg-[#EAF2EE] px-3 py-2 text-xs font-semibold text-[#527064]">
+                                            <div className="mt-4 flex items-center gap-2 rounded-xl bg-surface-soft px-3 py-2 text-xs font-semibold text-primary-strong">
                                                 <Boxes className="h-4 w-4" />
 
                                                 Stock:
@@ -531,8 +531,8 @@ export default function CompraDetalleClient({
                 </div>
 
                 <aside className="space-y-5">
-                    <div className="rounded-[28px] border border-[#E3E7E4] bg-white p-5">
-                        <h2 className="font-bold text-[#24302C]">
+                    <div className="salon-panel border border-border bg-white p-5">
+                        <h2 className="font-bold text-foreground tracking-tight">
                             Resumen financiero
                         </h2>
 
@@ -558,7 +558,7 @@ export default function CompraDetalleClient({
                                 }
                             />
 
-                            <div className="border-t border-[#E3E7E4] pt-3">
+                            <div className="border-t border-border pt-3">
                                 <Linea
                                     titulo="TOTAL"
                                     valor={
@@ -570,8 +570,8 @@ export default function CompraDetalleClient({
                         </div>
                     </div>
 
-                    <div className="rounded-[28px] border border-[#E3E7E4] bg-white p-5">
-                        <h2 className="font-bold text-[#24302C]">
+                    <div className="salon-panel border border-border bg-white p-5">
+                        <h2 className="font-bold text-foreground tracking-tight">
                             Pago
                         </h2>
 
@@ -602,16 +602,16 @@ export default function CompraDetalleClient({
                     </div>
 
                     {compra.notas && (
-                        <div className="rounded-[28px] border border-[#E3E7E4] bg-white p-5">
+                        <div className="salon-panel border border-border bg-white p-5">
                             <div className="flex items-center gap-2">
-                                <FileText className="h-4 w-4 text-[#6F8F83]" />
+                                <FileText className="h-4 w-4 text-primary" />
 
-                                <h2 className="font-bold text-[#24302C]">
+                                <h2 className="font-bold text-foreground tracking-tight">
                                     Notas
                                 </h2>
                             </div>
 
-                            <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#6B756F]">
+                            <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-text-secondary">
                                 {
                                     compra.notas
                                 }
@@ -622,7 +622,7 @@ export default function CompraDetalleClient({
             </section>
 
             {anularAbierto && (
-                <div className="fixed inset-0 z-[90] flex items-center justify-center bg-[#26332F]/50 p-4 backdrop-blur-sm">
+                <div className="fixed inset-0 z-[90] flex items-center justify-center bg-sidebar/50 p-4 backdrop-blur-sm">
                     <button
                         type="button"
                         aria-label="Cerrar"
@@ -634,16 +634,16 @@ export default function CompraDetalleClient({
                         }}
                     />
 
-                    <div className="relative z-10 w-full max-w-lg rounded-[28px] bg-white p-6 shadow-2xl">
+                    <div className="salon-panel relative z-10 w-full max-w-lg bg-white p-6 shadow-2xl">
                         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F8E5E5] text-[#A25E5E]">
                             <Trash2 className="h-6 w-6" />
                         </div>
 
-                        <h2 className="mt-5 text-xl font-bold text-[#24302C]">
+                        <h2 className="mt-5 text-xl font-bold text-foreground tracking-tight">
                             Anular compra
                         </h2>
 
-                        <p className="mt-2 text-sm leading-6 text-[#6B756F]">
+                        <p className="mt-2 text-sm leading-6 text-text-secondary">
                             {confirmada
                                 ? "Se intentarán retirar del inventario exactamente las cantidades que entraron con esta compra."
                                 : "La compra todavía no ha sido confirmada, por lo que no ha modificado el inventario."}
@@ -655,7 +655,7 @@ export default function CompraDetalleClient({
                             </div>
                         )}
 
-                        <label className="mt-5 block text-sm font-bold text-[#43524B]">
+                        <label className="mt-5 block text-sm font-bold text-text-secondary">
                             Motivo de anulación
                         </label>
 
@@ -668,7 +668,7 @@ export default function CompraDetalleClient({
                                 )
                             }
                             placeholder="Ej. Factura registrada por error..."
-                            className="mt-2 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 py-3 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control mt-2 w-full border border-border-strong bg-white px-4 py-3 outline-none focus:border-primary"
                         />
 
                         <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
@@ -678,7 +678,7 @@ export default function CompraDetalleClient({
                                 onClick={() =>
                                     setAnularAbierto(false)
                                 }
-                                className="h-11 rounded-xl border border-[#DCE3DF] bg-[#EEF2EF] px-5 text-sm font-bold text-[#43524B]"
+                                className="salon-action border border-border-strong bg-surface-soft px-5 text-text-secondary"
                             >
                                 Cancelar
                             </button>
@@ -690,7 +690,7 @@ export default function CompraDetalleClient({
                                     motivoAnulacion.trim().length < 3
                                 }
                                 onClick={ejecutarAnulacion}
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#A25E5E] px-5 text-sm font-bold text-white disabled:opacity-50"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-[#A25E5E] px-5 text-white disabled:opacity-50"
                             >
                                 {procesando ? (
                                     <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -708,7 +708,7 @@ export default function CompraDetalleClient({
             )}
 
             {confirmarAbierto && (
-                <div className="fixed inset-0 z-[90] flex items-center justify-center bg-[#26332F]/50 p-4 backdrop-blur-sm">
+                <div className="fixed inset-0 z-[90] flex items-center justify-center bg-sidebar/50 p-4 backdrop-blur-sm">
                     <button
                         type="button"
                         aria-label="Cerrar"
@@ -724,9 +724,9 @@ export default function CompraDetalleClient({
                         }}
                     />
 
-                    <div className="relative z-10 w-full max-w-lg rounded-[28px] bg-white p-6 shadow-2xl">
+                    <div className="salon-panel relative z-10 w-full max-w-lg bg-white p-6 shadow-2xl">
                         <div className="flex items-start justify-between gap-4">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                                 <PackageCheck className="h-6 w-6" />
                             </div>
 
@@ -740,17 +740,17 @@ export default function CompraDetalleClient({
                                         false,
                                     )
                                 }
-                                className="rounded-xl p-2 text-[#6B756F] hover:bg-[#EEF2EF]"
+                                className="rounded-xl p-2 text-text-secondary hover:bg-surface-soft"
                             >
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
-                        <h2 className="mt-5 text-xl font-bold text-[#24302C]">
+                        <h2 className="mt-5 text-xl font-bold text-foreground tracking-tight">
                             ¿Confirmar esta compra?
                         </h2>
 
-                        <p className="mt-2 text-sm leading-6 text-[#6B756F]">
+                        <p className="mt-2 text-sm leading-6 text-text-secondary">
                             Se agregarán las cantidades de los productos al inventario de{" "}
                             <strong>
                                 {
@@ -760,12 +760,12 @@ export default function CompraDetalleClient({
                             . Esta acción no debe repetirse.
                         </p>
 
-                        <div className="mt-5 rounded-2xl bg-[#F0F5F2] p-4">
+                        <div className="mt-5 rounded-2xl bg-surface-soft p-4">
                             <p className="text-xs font-bold uppercase text-[#7A8680]">
                                 Total de compra
                             </p>
 
-                            <p className="mt-1 text-2xl font-bold text-[#24302C]">
+                            <p className="mt-1 text-2xl font-bold text-foreground">
                                 {formatearDinero(
                                     compra.total,
                                 )}
@@ -783,7 +783,7 @@ export default function CompraDetalleClient({
                                         false,
                                     )
                                 }
-                                className="h-11 rounded-xl border border-[#DCE3DF] bg-[#EEF2EF] px-5 text-sm font-bold text-[#43524B]"
+                                className="salon-action border border-border-strong bg-surface-soft px-5 text-text-secondary"
                             >
                                 Cancelar
                             </button>
@@ -796,7 +796,7 @@ export default function CompraDetalleClient({
                                 onClick={
                                     ejecutarConfirmacion
                                 }
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white disabled:opacity-50"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-primary px-5 text-white disabled:opacity-50"
                             >
                                 {procesando ? (
                                     <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -828,9 +828,9 @@ function DatoSuperior({
     valor: string;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
 
@@ -839,7 +839,7 @@ function DatoSuperior({
                         {titulo}
                     </p>
 
-                    <p className="mt-1 truncate font-bold text-[#24302C]">
+                    <p className="mt-1 truncate font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
@@ -857,7 +857,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-xl bg-white p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-[#839089]">
+            <p className="text-xs font-bold uppercase tracking-wide text-[#839089]">
                 {titulo}
             </p>
 
@@ -949,8 +949,8 @@ function Linea({
             <span
                 className={
                     fuerte
-                        ? "font-bold text-[#24302C]"
-                        : "text-[#6B756F]"
+                        ? "font-bold text-foreground"
+                        : "text-text-secondary"
                 }
             >
                 {titulo}
@@ -959,7 +959,7 @@ function Linea({
             <strong
                 className={
                     fuerte
-                        ? "text-lg text-[#24302C]"
+                        ? "text-lg text-foreground"
                         : "text-[#33413B]"
                 }
             >

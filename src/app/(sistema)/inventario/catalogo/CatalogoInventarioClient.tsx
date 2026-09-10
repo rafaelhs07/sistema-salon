@@ -222,9 +222,9 @@ export default function CatalogoInventarioClient({
 
     return (
         <div className="space-y-6">
-            <section className="overflow-hidden rounded-[32px] border border-[#DCE4DF] bg-white shadow-[0_18px_55px_rgba(36,48,44,0.08)]">
-                <div className="relative bg-[#26332F] p-7 text-white sm:p-9">
-                    <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#6F8F83]/20 blur-3xl" />
+            <section className="salon-panel overflow-hidden border border-[#DCE4DF] bg-white">
+                <div className="salon-hero relative bg-sidebar p-7 text-white sm:p-9">
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
 
                     <div className="relative">
                         <Link
@@ -238,7 +238,7 @@ export default function CatalogoInventarioClient({
                         <div className="mt-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                             <div className="flex items-start gap-4">
                                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/10">
-                                    <Layers3 className="h-7 w-7 text-[#DCE7E2]" />
+                                    <Layers3 className="h-7 w-7 text-primary-soft" />
                                 </div>
 
                                 <div>
@@ -246,7 +246,7 @@ export default function CatalogoInventarioClient({
                                         Inventario
                                     </p>
 
-                                    <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                    <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                         Catálogo
                                     </h1>
 
@@ -264,7 +264,7 @@ export default function CatalogoInventarioClient({
                                 <div className="flex flex-wrap gap-2">
                                     <Link
                                         href="/inventario/catalogo/nuevo"
-                                        className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-[#26332F] transition hover:bg-[#F3F6F4]"
+                                        className="salon-action inline-flex items-center justify-center gap-2 bg-white px-4 text-sidebar transition hover:bg-[#F3F6F4]"
                                     >
                                         <Package className="h-4 w-4" />
                                         Nuevo producto
@@ -275,7 +275,7 @@ export default function CatalogoInventarioClient({
                                         onClick={
                                             abrirNuevaCategoria
                                         }
-                                        className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#26332F] transition hover:bg-white"
+                                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-4 text-sidebar transition hover:bg-white"
                                     >
                                         <Plus className="h-4 w-4" />
                                         Nueva categoría
@@ -314,9 +314,9 @@ export default function CatalogoInventarioClient({
                 </div>
             </section>
 
-            <section className="rounded-[28px] border border-[#E0E6E2] bg-white p-5 shadow-sm sm:p-6">
+            <section className="salon-panel border border-border bg-white p-5 shadow-sm sm:p-6">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="inline-flex w-fit rounded-2xl bg-[#EEF2EF] p-1">
+                    <div className="inline-flex w-fit rounded-2xl bg-surface-soft p-1">
                         <button
                             type="button"
                             onClick={() =>
@@ -364,7 +364,7 @@ export default function CatalogoInventarioClient({
                                     ? "Buscar producto, código, barra o marca..."
                                     : "Buscar categoría..."
                             }
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-[#FBFCFB] pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-[#FBFCFB] pl-11 pr-4 outline-none focus:border-primary"
                         />
                     </div>
                 </div>
@@ -377,7 +377,7 @@ export default function CatalogoInventarioClient({
                             <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#849189]">
                                 Productos
                             </p>
-                            <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                            <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                 Catálogo de productos
                             </h2>
                         </div>
@@ -452,7 +452,7 @@ export default function CatalogoInventarioClient({
                             <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#849189]">
                                 Organización
                             </p>
-                            <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                            <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                 Categorías
                             </h2>
                         </div>
@@ -552,7 +552,7 @@ function TarjetaProducto({
     ) => void;
 }) {
     return (
-        <article className="overflow-hidden rounded-[26px] border border-[#E0E6E2] bg-white shadow-[0_8px_25px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel overflow-hidden border border-border bg-white">
             <div className="p-5">
                 <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
@@ -572,7 +572,7 @@ function TarjetaProducto({
                             </span>
 
                             {producto.categorias_productos && (
-                                <span className="rounded-lg bg-[#F1F4F2] px-2 py-1 text-[10px] font-bold text-[#718078]">
+                                <span className="rounded-lg bg-[#F1F4F2] px-2 py-1 text-xs font-bold text-[#718078]">
                                     {
                                         producto
                                             .categorias_productos
@@ -582,7 +582,7 @@ function TarjetaProducto({
                             )}
                         </div>
 
-                        <h3 className="mt-3 truncate text-base font-bold text-[#26332F]">
+                        <h3 className="mt-3 truncate text-base font-bold text-sidebar tracking-tight">
                             {producto.nombre}
                         </h3>
 
@@ -596,7 +596,7 @@ function TarjetaProducto({
                         </p>
                     </div>
 
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#527064]">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                         <Package className="h-5 w-5" />
                     </div>
                 </div>
@@ -684,7 +684,7 @@ function TarjetaProducto({
                 <div className="grid grid-cols-2 gap-2 border-t border-[#EDF1EE] p-3">
                     <Link
                         href={`/inventario/catalogo/${producto.id}/editar`}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#EEF2EF] text-xs font-bold text-[#52605A]"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-surface-soft text-[#52605A]"
                     >
                         <Edit3 className="h-4 w-4" />
                         Editar
@@ -745,9 +745,9 @@ function TarjetaCategoria({
         categoria.estado === "ACTIVA";
 
     return (
-        <article className="rounded-[26px] border border-[#E0E6E2] bg-white p-5 shadow-[0_8px_25px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#527064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                     <Tag className="h-5 w-5" />
                 </div>
 
@@ -763,7 +763,7 @@ function TarjetaCategoria({
                 </span>
             </div>
 
-            <h3 className="mt-4 text-lg font-bold text-[#26332F]">
+            <h3 className="mt-4 text-lg font-bold text-sidebar tracking-tight">
                 {categoria.nombre}
             </h3>
 
@@ -776,7 +776,7 @@ function TarjetaCategoria({
                 <span className="text-xs font-semibold text-[#718078]">
                     Productos
                 </span>
-                <strong className="text-sm text-[#26332F]">
+                <strong className="text-sm text-sidebar">
                     {productos}
                 </strong>
             </div>
@@ -789,7 +789,7 @@ function TarjetaCategoria({
                         disabled={
                             procesando
                         }
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#EEF2EF] text-xs font-bold text-[#52605A] transition hover:bg-[#E5EAE7] disabled:opacity-50"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-surface-soft text-[#52605A] transition hover:bg-[#E5EAE7] disabled:opacity-50"
                     >
                         <Edit3 className="h-4 w-4" />
                         Editar
@@ -877,13 +877,13 @@ function ModalCategoria({
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/35 p-4 backdrop-blur-[2px]">
-            <div className="w-full max-w-lg rounded-[28px] bg-white shadow-2xl">
+            <div className="salon-panel w-full max-w-lg bg-white shadow-2xl">
                 <header className="flex items-center justify-between border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div>
                         <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#849189]">
                             Catálogo
                         </p>
-                        <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                        <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                             {categoria
                                 ? "Editar categoría"
                                 : "Nueva categoría"}
@@ -893,7 +893,7 @@ function ModalCategoria({
                     <button
                         type="button"
                         onClick={cerrar}
-                        className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EEF2EF] text-[#52605A]"
+                        className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-soft text-[#52605A]"
                     >
                         <X className="h-4 w-4" />
                     </button>
@@ -913,7 +913,7 @@ function ModalCategoria({
                                 )
                             }
                             placeholder="Ej. Shampoo, Tintes, Cuidado facial..."
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong px-4 outline-none focus:border-primary"
                         />
                     </label>
 
@@ -931,7 +931,7 @@ function ModalCategoria({
                             }
                             rows={4}
                             placeholder="Descripción opcional..."
-                            className="w-full resize-none rounded-xl border border-[#D4DAD6] px-4 py-3 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full resize-none border border-border-strong px-4 py-3 outline-none focus:border-primary"
                         />
                     </label>
 
@@ -942,7 +942,7 @@ function ModalCategoria({
                             disabled={
                                 procesando
                             }
-                            className="h-10 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#52605A]"
+                            className="salon-action bg-surface-soft px-4 text-[#52605A]"
                         >
                             Cancelar
                         </button>
@@ -953,7 +953,7 @@ function ModalCategoria({
                             disabled={
                                 procesando
                             }
-                            className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#26332F] px-4 text-sm font-bold text-white disabled:opacity-50"
+                            className="salon-action inline-flex items-center gap-2 bg-sidebar px-4 text-white disabled:opacity-50"
                         >
                             <Check className="h-4 w-4" />
                             {procesando
@@ -976,10 +976,10 @@ function DatoCabecera({
 }) {
     return (
         <div className="p-4 text-center sm:p-5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#87938D]">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#87938D]">
                 {titulo}
             </p>
-            <p className="mt-2 text-xl font-bold text-[#26332F]">
+            <p className="mt-2 text-xl font-bold text-sidebar">
                 {valor}
             </p>
         </div>
@@ -995,7 +995,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-xl bg-[#F8FAF8] p-3">
-            <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#929C97]">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#929C97]">
                 {titulo}
             </p>
             <p className="mt-1 truncate text-xs font-bold text-[#405049]">
@@ -1013,12 +1013,12 @@ function Caracteristica({
     texto: string;
 }) {
     return (
-        <div className="flex items-center justify-center gap-1.5 px-2 py-3 text-[10px] font-bold uppercase text-[#718078]">
+        <div className="flex items-center justify-center gap-1.5 px-2 py-3 text-xs font-bold uppercase text-[#718078]">
             <span
                 className={[
                     "h-2 w-2 rounded-full",
                     activa
-                        ? "bg-[#6F8F83]"
+                        ? "bg-primary"
                         : "bg-[#CBD2CE]",
                 ].join(" ")}
             />
@@ -1039,12 +1039,12 @@ function EstadoVacio({
     descripcion: string;
 }) {
     return (
-        <div className="rounded-[28px] border border-dashed border-[#CCD6D0] bg-white p-12 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#6F8F83]">
+        <div className="salon-panel border border-dashed border-[#CCD6D0] bg-white p-12 text-center">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                 <Icono className="h-7 w-7" />
             </div>
 
-            <h3 className="mt-4 font-bold text-[#26332F]">
+            <h3 className="mt-4 font-bold text-sidebar tracking-tight">
                 {titulo}
             </h3>
 

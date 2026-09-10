@@ -239,8 +239,8 @@ export default function VentasClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div>
@@ -253,7 +253,7 @@ export default function VentasClient({
                         </Link>
 
                         <div className="mt-5 flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <ReceiptText className="h-7 w-7" />
                             </div>
 
@@ -262,7 +262,7 @@ export default function VentasClient({
                                     Caja y ventas
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
                                     Historial de ventas
                                 </h1>
 
@@ -319,14 +319,14 @@ export default function VentasClient({
                 />
             </section>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <h2 className="font-bold text-[#24302C]">
+                            <h2 className="font-bold text-foreground tracking-tight">
                                 Filtros
                             </h2>
-                            <p className="mt-1 text-sm text-[#6B756F]">
+                            <p className="mt-1 text-sm text-text-secondary">
                                 Encuentra ventas por cliente,
                                 fecha, sucursal o estado.
                             </p>
@@ -336,7 +336,7 @@ export default function VentasClient({
                             <button
                                 type="button"
                                 onClick={limpiarFiltros}
-                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-3 text-xs font-bold text-[#52605A]"
+                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-surface-soft px-3 text-xs font-bold text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar
@@ -357,7 +357,7 @@ export default function VentasClient({
                                 )
                             }
                             placeholder="Cliente, código o teléfono..."
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                         />
                     </div>
 
@@ -443,7 +443,7 @@ export default function VentasClient({
 
                     <div className="grid grid-cols-2 gap-2">
                         <label>
-                            <span className="mb-1 block text-[10px] font-bold uppercase text-[#829089]">
+                            <span className="mb-1 block text-xs font-bold uppercase text-[#829089]">
                                 Desde
                             </span>
                             <input
@@ -455,12 +455,12 @@ export default function VentasClient({
                                             .value,
                                     )
                                 }
-                                className="h-9 w-full rounded-lg border border-[#D4DAD6] px-2 text-xs"
+                                className="salon-control h-9 w-full rounded-lg border border-border-strong px-2"
                             />
                         </label>
 
                         <label>
-                            <span className="mb-1 block text-[10px] font-bold uppercase text-[#829089]">
+                            <span className="mb-1 block text-xs font-bold uppercase text-[#829089]">
                                 Hasta
                             </span>
                             <input
@@ -472,21 +472,21 @@ export default function VentasClient({
                                             .value,
                                     )
                                 }
-                                className="h-9 w-full rounded-lg border border-[#D4DAD6] px-2 text-xs"
+                                className="salon-control h-9 w-full rounded-lg border border-border-strong px-2"
                             />
                         </label>
                     </div>
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="flex items-center justify-between gap-4 border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div>
-                        <h2 className="font-bold text-[#24302C]">
+                        <h2 className="font-bold text-foreground tracking-tight">
                             Ventas registradas
                         </h2>
 
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             {ventasFiltradas.length} resultado
                             {ventasFiltradas.length === 1
                                 ? ""
@@ -500,7 +500,7 @@ export default function VentasClient({
                 ) : (
                     <>
                         <div className="hidden overflow-x-auto lg:block">
-                            <table className="w-full min-w-[1100px]">
+                            <table className="salon-table w-full min-w-[1100px]">
                                 <thead className="bg-[#FBFCFA] text-left text-xs uppercase text-[#76817B]">
                                     <tr>
                                         <Th>
@@ -629,7 +629,7 @@ function FilaVenta({
                         (metodo) => (
                             <span
                                 key={metodo}
-                                className="rounded-full bg-[#EEF2EF] px-2 py-1 text-[10px] font-bold text-[#52605A]"
+                                className="rounded-full bg-surface-soft px-2 py-1 text-xs font-bold text-[#52605A]"
                             >
                                 {metodo}
                             </span>
@@ -680,7 +680,7 @@ function FilaVenta({
                 <div className="flex flex-wrap gap-2">
                     <Link
                         href={`/caja/ventas/${venta.id}`}
-                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#26332F] px-3 text-xs font-bold text-white transition hover:bg-[#33413B]"
+                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-sidebar px-3 text-xs font-bold text-white transition hover:bg-[#33413B]"
                     >
                         <Eye className="h-4 w-4" />
                         Detalle
@@ -689,7 +689,7 @@ function FilaVenta({
                     {venta.estado !== "ANULADA" && (
                         <Link
                             href={`/caja/recibos/${venta.id}`}
-                            className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#DCE7E2] px-3 text-xs font-bold text-[#43524B] transition hover:bg-[#CFE0D8]"
+                            className="inline-flex h-9 items-center gap-2 rounded-xl bg-primary-soft px-3 text-xs font-bold text-text-secondary transition hover:bg-[#CFE0D8]"
                         >
                             <ReceiptText className="h-4 w-4" />
                             Recibo
@@ -711,10 +711,10 @@ function TarjetaVenta({
     const metodos = obtenerMetodos(venta);
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] p-4">
+        <article className="rounded-2xl border border-border p-4">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="font-bold text-[#24302C]">
+                    <p className="font-bold text-foreground">
                         {venta.codigo_venta ??
                             "Sin código"}
                     </p>
@@ -753,7 +753,7 @@ function TarjetaVenta({
                 {metodos.map((metodo) => (
                     <span
                         key={metodo}
-                        className="rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-bold text-[#52605A]"
+                        className="rounded-full bg-surface-soft px-2.5 py-1 text-xs font-bold text-[#52605A]"
                     >
                         {metodo}
                     </span>
@@ -784,7 +784,7 @@ function TarjetaVenta({
             <div className="mt-4 grid grid-cols-2 gap-2">
                 <Link
                     href={`/caja/ventas/${venta.id}`}
-                    className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#26332F] text-sm font-bold text-white"
+                    className="salon-action inline-flex items-center justify-center gap-2 bg-sidebar text-white"
                 >
                     <Eye className="h-4 w-4" />
                     Detalle
@@ -793,7 +793,7 @@ function TarjetaVenta({
                 {venta.estado !== "ANULADA" ? (
                     <Link
                         href={`/caja/recibos/${venta.id}`}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] text-sm font-bold text-[#43524B]"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft text-text-secondary"
                     >
                         <ReceiptText className="h-4 w-4" />
                         Recibo
@@ -854,7 +854,7 @@ function EstadoPago({
             className={[
                 "inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase",
                 estilos[estado] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
+                "bg-surface-soft text-text-secondary",
             ].join(" ")}
         >
             {formatearTexto(estado)}
@@ -868,7 +868,7 @@ function EtiquetaTipo({
     tipo: string;
 }) {
     return (
-        <span className="inline-flex rounded-full bg-[#E8EDF4] px-2.5 py-1 text-[10px] font-bold text-[#5C6F88]">
+        <span className="inline-flex rounded-full bg-[#E8EDF4] px-2.5 py-1 text-xs font-bold text-[#5C6F88]">
             {tipo === "CITA"
                 ? "Cita"
                 : tipo === "DIRECTA"
@@ -905,7 +905,7 @@ function CampoSelect({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
             >
                 {opciones.map(
                     (opcion) => (
@@ -939,19 +939,19 @@ function TarjetaResumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-sm text-[#6B756F]">
+                    <p className="text-sm text-text-secondary">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -968,7 +968,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-xl bg-[#FBFCFA] p-3">
-            <p className="text-[10px] font-bold uppercase text-[#829089]">
+            <p className="text-xs font-bold uppercase text-[#829089]">
                 {titulo}
             </p>
             <p className="mt-1 text-xs font-bold text-[#33413B]">
@@ -1006,10 +1006,10 @@ function EstadoVacio() {
     return (
         <div className="p-12 text-center">
             <ReceiptText className="mx-auto h-9 w-9 text-[#829089]" />
-            <h3 className="mt-4 font-bold text-[#24302C]">
+            <h3 className="mt-4 font-bold text-foreground tracking-tight">
                 No hay ventas para mostrar
             </h3>
-            <p className="mt-2 text-sm text-[#6B756F]">
+            <p className="mt-2 text-sm text-text-secondary">
                 Ajusta los filtros o registra
                 una nueva venta.
             </p>

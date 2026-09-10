@@ -213,9 +213,9 @@ export default function UsuariosClient({
 
     return (
         <div className="space-y-7 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.20)] sm:p-8 lg:p-10">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden border border-white/10 bg-sidebar p-6 text-white sm:p-8 lg:p-10">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
                 <div className="pointer-events-none absolute right-[22%] top-[18%] h-32 w-32 rounded-full border border-white/10" />
                 <div className="pointer-events-none absolute right-[18%] top-[10%] h-44 w-44 rounded-full border border-white/5" />
 
@@ -227,12 +227,12 @@ export default function UsuariosClient({
                         </div>
 
                         <div className="mt-5 flex items-start gap-4">
-                            <div className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-[#DCE7E2] text-[#26332F] shadow-lg shadow-black/10 sm:flex">
+                            <div className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-primary-soft text-sidebar shadow-lg shadow-black/10 sm:flex">
                                 <UserRoundCog className="h-8 w-8" />
                             </div>
 
                             <div>
-                                <h1 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+                                <h1 className="text-3xl font-black tracking-tight sm:text-4xl">
                                     Usuarios
                                     <span className="text-[#AFC6BB]">
                                         {" "}
@@ -251,7 +251,7 @@ export default function UsuariosClient({
                             {puedeCrear && (
                                 <Link
                                     href="/usuarios/nuevo"
-                                    className="inline-flex h-12 items-center gap-2 rounded-2xl bg-[#DCE7E2] px-5 text-sm font-extrabold text-[#26332F] shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-white"
+                                    className="salon-action inline-flex items-center gap-2 bg-primary-soft px-5 font-extrabold text-sidebar shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-white"
                                 >
                                     <Plus className="h-5 w-5" />
                                     Crear usuario
@@ -344,7 +344,7 @@ export default function UsuariosClient({
                 />
             </section>
 
-            <section className="rounded-[30px] border border-[#DDE5E1] bg-white p-4 shadow-[0_12px_34px_rgba(36,48,44,0.06)] sm:p-5">
+            <section className="salon-panel border border-[#DDE5E1] bg-white p-4 sm:p-5">
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                     <div className="relative flex-1">
                         <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#7F8E86]" />
@@ -361,7 +361,7 @@ export default function UsuariosClient({
                                 )
                             }
                             placeholder="Buscar usuario por nombre o correo..."
-                            className="h-13 w-full rounded-2xl border border-[#D9E1DD] bg-[#F8FAF8] pl-12 pr-4 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)]"
+                            className="salon-control h-13 w-full border border-[#D9E1DD] bg-[#F8FAF8] pl-12 pr-4 outline-none transition focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)]"
                         />
                     </div>
 
@@ -379,7 +379,7 @@ export default function UsuariosClient({
                             className={[
                                 "inline-flex h-12 items-center gap-2 rounded-2xl border px-4 text-sm font-extrabold transition",
                                 mostrarFiltros
-                                    ? "border-[#9FB6AB] bg-[#EEF3F0] text-[#425C51]"
+                                    ? "border-[#9FB6AB] bg-surface-soft text-[#425C51]"
                                     : "border-[#D7DFDA] bg-white text-[#53635B] hover:bg-[#F4F7F5]",
                             ].join(
                                 " ",
@@ -395,7 +395,7 @@ export default function UsuariosClient({
                                 onClick={
                                     limpiarFiltros
                                 }
-                                className="inline-flex h-12 items-center gap-2 rounded-2xl px-4 text-sm font-bold text-[#7D8A83] transition hover:bg-[#F3F6F4]"
+                                className="salon-action inline-flex items-center gap-2 px-4 text-[#7D8A83] transition hover:bg-[#F3F6F4]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar
@@ -502,7 +502,7 @@ export default function UsuariosClient({
             <section>
                 <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <h2 className="text-xl font-black tracking-tight text-[#26332F]">
+                        <h2 className="text-xl font-black tracking-tight text-sidebar">
                             Equipo con acceso
                         </h2>
 
@@ -519,12 +519,12 @@ export default function UsuariosClient({
 
                 {usuarios.length ===
                     0 ? (
-                    <div className="rounded-[30px] border border-dashed border-[#CBD7D1] bg-white px-6 py-16 text-center">
-                        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#EEF3F0] text-[#6F8F83]">
+                    <div className="salon-panel border border-dashed border-[#CBD7D1] bg-white px-6 py-16 text-center">
+                        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[22px] bg-surface-soft text-primary">
                             <CircleUserRound className="h-8 w-8" />
                         </div>
 
-                        <h3 className="mt-5 text-lg font-black text-[#33413B]">
+                        <h3 className="mt-5 text-lg font-black text-[#33413B] tracking-tight">
                             No encontramos usuarios
                         </h3>
 
@@ -590,13 +590,13 @@ function UsuarioCard({
         "ACTIVO";
 
     return (
-        <article className="group relative overflow-hidden rounded-[28px] border border-[#DDE4E0] bg-white p-5 shadow-[0_10px_28px_rgba(36,48,44,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#BFCFC7] hover:shadow-[0_18px_45px_rgba(36,48,44,0.10)]">
+        <article className="salon-panel group relative overflow-hidden border border-[#DDE4E0] bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-[#BFCFC7] hover:shadow-[0_18px_45px_rgba(36,48,44,0.10)]">
             <div
                 className={[
                     "absolute inset-x-0 top-0 h-1",
                     activo
-                        ? "bg-[#6F8F83]"
-                        : "bg-[#C79AA1]",
+                        ? "bg-primary"
+                        : "bg-secondary",
                 ].join(
                     " ",
                 )}
@@ -614,8 +614,8 @@ function UsuarioCard({
                         className={[
                             "absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-white",
                             activo
-                                ? "bg-[#6F8F83]"
-                                : "bg-[#C79AA1]",
+                                ? "bg-primary"
+                                : "bg-secondary",
                         ].join(
                             " ",
                         )}
@@ -631,7 +631,7 @@ function UsuarioCard({
                         </p>
 
                         {usuario.esUsuarioActual && (
-                            <span className="rounded-full bg-[#26332F] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-white">
+                            <span className="rounded-full bg-sidebar px-2.5 py-1 text-xs font-black uppercase tracking-[0.12em] text-white">
                                 Tú
                             </span>
                         )}
@@ -678,7 +678,7 @@ function UsuarioCard({
             <div className="mt-4 rounded-2xl bg-[#F7F9F7] px-4 py-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-xs text-[#74817B]">
-                        <CalendarClock className="h-4 w-4 text-[#6F8F83]" />
+                        <CalendarClock className="h-4 w-4 text-primary" />
                         <span>
                             {usuario.ultimoAcceso
                                 ? `Último acceso ${formatearFecha(
@@ -689,7 +689,7 @@ function UsuarioCard({
                     </div>
 
                     {activo && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.10em] text-[#5E7F70]">
+                        <span className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-[0.10em] text-[#5E7F70]">
                             <CheckCircle2 className="h-3.5 w-3.5" />
                             Disponible
                         </span>
@@ -701,7 +701,7 @@ function UsuarioCard({
                 {puedeEditar && (
                     <Link
                         href={`/usuarios/${usuario.id}/editar`}
-                        className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl border border-[#D7DFDA] bg-white text-xs font-black text-[#526159] transition hover:bg-[#F3F6F4]"
+                        className="salon-action inline-flex flex-1 items-center justify-center gap-2 border border-[#D7DFDA] bg-white text-[#526159] transition hover:bg-[#F3F6F4]"
                     >
                         <Pencil className="h-4 w-4" />
                         Editar
@@ -711,7 +711,7 @@ function UsuarioCard({
                 {puedePermisos && (
                     <Link
                         href={`/usuarios/${usuario.id}/permisos`}
-                        className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-[#26332F] text-xs font-black text-white transition hover:bg-[#34463F]"
+                        className="salon-action inline-flex flex-1 items-center justify-center gap-2 bg-sidebar text-white transition hover:bg-sidebar-hover"
                     >
                         <KeyRound className="h-4 w-4" />
                         Permisos
@@ -740,7 +740,7 @@ function HeroMetric({
         <div className="rounded-[22px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#AFC1B8]">
+                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#AFC1B8]">
                         {
                             label
                         }
@@ -752,14 +752,14 @@ function HeroMetric({
                         }
                     </p>
 
-                    <p className="mt-1 text-[11px] text-[#B9C8C1]">
+                    <p className="mt-1 text-xs text-[#B9C8C1]">
                         {
                             helper
                         }
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-[#DCE7E2]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-primary-soft">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -781,9 +781,9 @@ function InsightCard({
     }>;
 }) {
     return (
-        <article className="rounded-[24px] border border-[#DCE5E0] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#6F8F83]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                     <Icono className="h-5 w-5" />
                 </div>
 
@@ -794,7 +794,7 @@ function InsightCard({
                         }
                     </p>
 
-                    <p className="mt-1 text-2xl font-black text-[#26332F]">
+                    <p className="mt-1 text-2xl font-black text-sidebar">
                         {
                             valor
                         }
@@ -824,9 +824,9 @@ function InfoMini({
 }) {
     return (
         <div className="rounded-2xl border border-[#E3E8E5] bg-[#FBFCFA] p-3">
-            <div className="flex items-center gap-2 text-[#6F8F83]">
+            <div className="flex items-center gap-2 text-primary">
                 <Icono className="h-4 w-4" />
-                <span className="text-[10px] font-black uppercase tracking-[0.12em]">
+                <span className="text-xs font-black uppercase tracking-[0.12em]">
                     {
                         etiqueta
                     }
@@ -860,7 +860,7 @@ function FiltroSelect({
 }) {
     return (
         <label>
-            <span className="mb-2 block text-[11px] font-black uppercase tracking-[0.12em] text-[#87958D]">
+            <span className="mb-2 block text-xs font-black uppercase tracking-[0.12em] text-[#87958D]">
                 {
                     etiqueta
                 }
@@ -877,7 +877,7 @@ function FiltroSelect({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D9E1DD] bg-[#FAFCFB] px-3 text-sm font-bold text-[#4A5A52] outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-[#D9E1DD] bg-[#FAFCFB] px-3 text-[#4A5A52] outline-none focus:border-primary"
             >
                 {opciones.map(
                     (

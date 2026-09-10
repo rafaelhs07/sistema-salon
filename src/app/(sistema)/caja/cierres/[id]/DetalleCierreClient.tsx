@@ -74,8 +74,8 @@ export default function DetalleCierreClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -87,7 +87,7 @@ export default function DetalleCierreClient({
                     </Link>
 
                     <div className="mt-5 flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <History className="h-7 w-7" />
                         </div>
 
@@ -96,7 +96,7 @@ export default function DetalleCierreClient({
                                 Cierre histórico
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 {caja.sucursales?.nombre ??
                                     "Caja cerrada"}
                             </h1>
@@ -194,7 +194,7 @@ export default function DetalleCierreClient({
                     <Seccion titulo="Movimientos de la sesión">
                         {movimientos.length ===
                             0 ? (
-                            <p className="text-sm text-[#6B756F]">
+                            <p className="text-sm text-text-secondary">
                                 No hay movimientos
                                 registrados.
                             </p>
@@ -231,7 +231,7 @@ export default function DetalleCierreClient({
                                                 </p>
 
                                                 {movimiento.observaciones && (
-                                                    <p className="mt-1 text-xs text-[#6B756F]">
+                                                    <p className="mt-1 text-xs text-text-secondary">
                                                         {
                                                             movimiento.observaciones
                                                         }
@@ -297,8 +297,8 @@ export default function DetalleCierreClient({
                 </div>
 
                 <aside className="xl:sticky xl:top-24 xl:self-start">
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
-                        <h2 className="text-lg font-bold text-[#24302C]">
+                    <section className="salon-panel border border-border bg-white p-6">
+                        <h2 className="text-lg font-bold text-foreground tracking-tight">
                             Resumen de caja
                         </h2>
 
@@ -403,18 +403,18 @@ function Resumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-sm text-[#6B756F]">
+                    <p className="text-sm text-text-secondary">
                         {titulo}
                     </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -430,9 +430,9 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                <h2 className="font-bold text-[#24302C]">
+                <h2 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -457,7 +457,7 @@ function Dato({
     return (
         <div className="rounded-2xl bg-[#FBFCFA] p-4">
             <div className="flex items-start gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-4 w-4" />
                 </div>
                 <div>
@@ -487,8 +487,8 @@ function Fila({
             <span
                 className={
                     destacado
-                        ? "font-bold text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
+                        ? "font-bold text-foreground"
+                        : "text-sm text-text-secondary"
                 }
             >
                 {titulo}
@@ -496,7 +496,7 @@ function Fila({
             <strong
                 className={
                     destacado
-                        ? "text-lg text-[#24302C]"
+                        ? "text-lg text-foreground"
                         : "text-sm text-[#33413B]"
                 }
             >

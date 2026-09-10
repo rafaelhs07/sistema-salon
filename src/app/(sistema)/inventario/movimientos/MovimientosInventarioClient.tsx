@@ -229,7 +229,7 @@ export default function MovimientosInventarioClient({
 
     return (
         <div className="space-y-6">
-            <section className="overflow-hidden rounded-[32px] bg-[#26332F] p-7 text-white shadow-[0_18px_55px_rgba(36,48,44,0.12)] sm:p-9">
+            <section className="salon-hero overflow-hidden bg-sidebar p-7 text-white sm:p-9">
                 <Link
                     href="/inventario"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
@@ -241,7 +241,7 @@ export default function MovimientosInventarioClient({
                 <div className="mt-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                     <div className="flex items-start gap-4">
                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/10">
-                            <History className="h-7 w-7 text-[#DCE7E2]" />
+                            <History className="h-7 w-7 text-primary-soft" />
                         </div>
 
                         <div>
@@ -249,7 +249,7 @@ export default function MovimientosInventarioClient({
                                 Auditoría de stock
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 Historial de movimientos
                             </h1>
 
@@ -265,7 +265,7 @@ export default function MovimientosInventarioClient({
 
                     <Link
                         href="/inventario/movimientos/nuevo"
-                        className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#26332F] transition hover:bg-white"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-4 text-sidebar transition hover:bg-white"
                     >
                         <ArrowDownToLine className="h-4 w-4" />
                         Nuevo ajuste
@@ -321,11 +321,11 @@ export default function MovimientosInventarioClient({
                 />
             </section>
 
-            <section className="rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+            <section className="salon-panel border border-border bg-white shadow-sm">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="flex items-center justify-between gap-4">
                         <div>
-                            <h2 className="font-bold text-[#26332F]">
+                            <h2 className="font-bold text-sidebar tracking-tight">
                                 Filtros
                             </h2>
                             <p className="mt-1 text-sm text-[#718078]">
@@ -341,7 +341,7 @@ export default function MovimientosInventarioClient({
                                 onClick={
                                     limpiarFiltros
                                 }
-                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-3 text-xs font-bold text-[#52605A]"
+                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-surface-soft px-3 text-xs font-bold text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar
@@ -362,7 +362,7 @@ export default function MovimientosInventarioClient({
                                 )
                             }
                             placeholder="Producto, código, referencia..."
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-[#FBFCFB] pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-[#FBFCFB] pl-11 pr-4 outline-none focus:border-primary"
                         />
                     </div>
 
@@ -512,9 +512,9 @@ export default function MovimientosInventarioClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+            <section className="salon-panel overflow-hidden border border-border bg-white shadow-sm">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                    <h2 className="font-bold text-[#26332F]">
+                    <h2 className="font-bold text-sidebar tracking-tight">
                         Movimientos registrados
                     </h2>
 
@@ -536,7 +536,7 @@ export default function MovimientosInventarioClient({
                 ) : (
                     <>
                         <div className="hidden overflow-x-auto lg:block">
-                            <table className="w-full min-w-[1350px]">
+                            <table className="salon-table w-full min-w-[1350px]">
                                 <thead className="bg-[#FBFCFA] text-left text-xs uppercase text-[#76817B]">
                                     <tr>
                                         <Th>
@@ -636,7 +636,7 @@ function FilaMovimiento({
             </Td>
 
             <Td>
-                <p className="font-bold text-[#26332F]">
+                <p className="font-bold text-sidebar">
                     {producto?.nombre ??
                         "Producto"}
                 </p>
@@ -651,7 +651,7 @@ function FilaMovimiento({
 
             <Td>
                 <span className="inline-flex items-center gap-2">
-                    <Store className="h-4 w-4 text-[#6F8F83]" />
+                    <Store className="h-4 w-4 text-primary" />
                     {movimiento.sucursales
                         ?.nombre ??
                         "Sucursal"}
@@ -755,10 +755,10 @@ function TarjetaMovimiento({
         movimiento.productos;
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] p-4">
+        <article className="rounded-2xl border border-border p-4">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="font-bold text-[#26332F]">
+                    <p className="font-bold text-sidebar">
                         {producto?.nombre ??
                             "Producto"}
                     </p>
@@ -877,18 +877,18 @@ function Resumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-sm">
+        <article className="salon-panel border border-border bg-white p-5 shadow-sm">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-sm text-[#6B756F]">
+                    <p className="text-sm text-text-secondary">
                         {titulo}
                     </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -923,7 +923,7 @@ function Select({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
             >
                 {opciones.map(
                     (opcion) => (
@@ -956,7 +956,7 @@ function Fecha({
 }) {
     return (
         <label>
-            <span className="mb-1 block text-[10px] font-bold uppercase text-[#829089]">
+            <span className="mb-1 block text-xs font-bold uppercase text-[#829089]">
                 {titulo}
             </span>
 
@@ -968,7 +968,7 @@ function Fecha({
                         event.target.value,
                     )
                 }
-                className="h-9 w-full rounded-lg border border-[#D4DAD6] px-2 text-xs"
+                className="salon-control h-9 w-full rounded-lg border border-border-strong px-2"
             />
         </label>
     );
@@ -983,7 +983,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-xl bg-[#FBFCFA] p-3">
-            <p className="text-[10px] font-bold uppercase text-[#829089]">
+            <p className="text-xs font-bold uppercase text-[#829089]">
                 {titulo}
             </p>
 
@@ -1023,7 +1023,7 @@ function EstadoVacio() {
         <div className="p-12 text-center">
             <History className="mx-auto h-9 w-9 text-[#829089]" />
 
-            <h3 className="mt-4 font-bold text-[#26332F]">
+            <h3 className="mt-4 font-bold text-sidebar tracking-tight">
                 No hay movimientos
             </h3>
 

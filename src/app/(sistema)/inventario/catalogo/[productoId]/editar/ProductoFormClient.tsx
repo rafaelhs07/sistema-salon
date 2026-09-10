@@ -201,7 +201,7 @@ export default function ProductoFormClient({
 
     return (
         <div className="space-y-6">
-            <section className="overflow-hidden rounded-[32px] bg-[#26332F] p-7 text-white shadow-[0_18px_55px_rgba(36,48,44,0.12)] sm:p-9">
+            <section className="salon-hero overflow-hidden bg-sidebar p-7 text-white sm:p-9">
                 <Link
                     href="/inventario/catalogo"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
@@ -212,7 +212,7 @@ export default function ProductoFormClient({
 
                 <div className="mt-6 flex items-start gap-4">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/10">
-                        <Package className="h-7 w-7 text-[#DCE7E2]" />
+                        <Package className="h-7 w-7 text-primary-soft" />
                     </div>
 
                     <div>
@@ -220,7 +220,7 @@ export default function ProductoFormClient({
                             Inventario
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             {producto
                                 ? "Editar producto"
                                 : "Nuevo producto"}
@@ -373,7 +373,7 @@ export default function ProductoFormClient({
                                 }
                                 rows={4}
                                 placeholder="Descripción opcional..."
-                                className="w-full resize-none rounded-xl border border-[#D4DAD6] bg-white px-4 py-3 text-sm outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full resize-none border border-border-strong bg-white px-4 py-3 outline-none focus:border-primary"
                             />
                         </label>
                     </Seccion>
@@ -499,16 +499,16 @@ export default function ProductoFormClient({
 
                 <aside>
                     <div className="sticky top-5 space-y-4">
-                        <section className="rounded-[26px] border border-[#E0E6E2] bg-white p-5 shadow-sm">
+                        <section className="salon-panel border border-border bg-white p-5 shadow-sm">
                             <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#849189]">
                                 Vista previa
                             </p>
 
-                            <div className="mt-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#527064]">
+                            <div className="mt-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                                 <Package className="h-7 w-7" />
                             </div>
 
-                            <h3 className="mt-4 text-lg font-bold text-[#26332F]">
+                            <h3 className="mt-4 text-lg font-bold text-sidebar tracking-tight">
                                 {nombre ||
                                     "Nuevo producto"}
                             </h3>
@@ -578,7 +578,7 @@ export default function ProductoFormClient({
                             disabled={
                                 procesando
                             }
-                            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] text-sm font-bold text-white shadow-sm transition hover:bg-[#34443F] disabled:opacity-50"
+                            className="salon-action inline-flex w-full items-center justify-center gap-2 bg-sidebar text-white shadow-sm transition hover:bg-[#34443F] disabled:opacity-50"
                         >
                             <Save className="h-4 w-4" />
                             {procesando
@@ -590,7 +590,7 @@ export default function ProductoFormClient({
 
                         <Link
                             href="/inventario/catalogo"
-                            className="inline-flex h-11 w-full items-center justify-center rounded-2xl bg-[#EEF2EF] text-sm font-bold text-[#52605A]"
+                            className="salon-action inline-flex w-full items-center justify-center bg-surface-soft text-[#52605A]"
                         >
                             Cancelar
                         </Link>
@@ -615,14 +615,14 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+        <section className="salon-panel border border-border bg-white shadow-sm">
             <header className="flex items-start gap-3 border-b border-[#E8ECE9] p-5 sm:p-6">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#527064]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
 
                 <div>
-                    <h2 className="font-bold text-[#26332F]">
+                    <h2 className="font-bold text-sidebar tracking-tight">
                         {titulo}
                     </h2>
                     <p className="mt-1 text-sm text-[#718078]">
@@ -676,7 +676,7 @@ function CampoTexto({
                     }
                     placeholder={placeholder}
                     className={[
-                        "h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pr-4 text-sm outline-none focus:border-[#6F8F83]",
+                        "h-11 w-full rounded-xl border border-border-strong bg-white pr-4 text-sm outline-none focus:border-primary",
                         Icono
                             ? "pl-10"
                             : "pl-4",
@@ -714,7 +714,7 @@ function CampoNumero({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-4 outline-none focus:border-primary"
             />
         </label>
     );
@@ -747,7 +747,7 @@ function CampoSelect({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-4 outline-none focus:border-primary"
             >
                 {opciones.map((opcion) => (
                     <option
@@ -798,15 +798,15 @@ function Opcion({
                     className={[
                         "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                         activa
-                            ? "bg-[#DCE7E2] text-[#527064]"
-                            : "bg-[#EEF2EF] text-[#849189]",
+                            ? "bg-primary-soft text-primary-strong"
+                            : "bg-surface-soft text-[#849189]",
                     ].join(" ")}
                 >
                     <Icono className="h-5 w-5" />
                 </div>
 
                 <div>
-                    <p className="text-sm font-bold text-[#26332F]">
+                    <p className="text-sm font-bold text-sidebar">
                         {titulo}
                     </p>
                     <p className="mt-1 text-xs leading-5 text-[#718078]">
@@ -819,7 +819,7 @@ function Opcion({
                 className={[
                     "flex h-6 w-11 shrink-0 items-center rounded-full p-1 transition",
                     activa
-                        ? "justify-end bg-[#6F8F83]"
+                        ? "justify-end bg-primary"
                         : "justify-start bg-[#CDD5D0]",
                 ].join(" ")}
             >
@@ -838,7 +838,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-xl bg-[#F8FAF8] p-3">
-            <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#929C97]">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#929C97]">
                 {titulo}
             </p>
             <p className="mt-1 text-xs font-bold text-[#405049]">

@@ -443,9 +443,9 @@ export default function PermisosUsuarioClient({
 
     return (
         <div className="space-y-7 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.20)] sm:p-8 lg:p-10">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden border border-white/10 bg-sidebar p-6 text-white sm:p-8 lg:p-10">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
                 <div className="pointer-events-none absolute right-[18%] top-[12%] h-40 w-40 rounded-full border border-white/10" />
 
                 <div className="relative">
@@ -459,7 +459,7 @@ export default function PermisosUsuarioClient({
 
                     <div className="mt-6 grid gap-7 xl:grid-cols-[1.25fr_0.75fr] xl:items-end">
                         <div className="flex items-start gap-4">
-                            <div className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-[#DCE7E2] text-[#26332F] shadow-lg shadow-black/10 sm:flex">
+                            <div className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-primary-soft text-sidebar shadow-lg shadow-black/10 sm:flex">
                                 <KeyRound className="h-8 w-8" />
                             </div>
 
@@ -471,13 +471,13 @@ export default function PermisosUsuarioClient({
                                     </span>
 
                                     {usuario.esUsuarioActual && (
-                                        <span className="rounded-full bg-[#DCE7E2] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] text-[#26332F]">
+                                        <span className="rounded-full bg-primary-soft px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-sidebar">
                                             Tu cuenta
                                         </span>
                                     )}
                                 </div>
 
-                                <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+                                <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
                                     Permisos de
                                     <span className="text-[#AFC6BB]">
                                         {" "}
@@ -587,8 +587,8 @@ export default function PermisosUsuarioClient({
 
             <section className="grid gap-5 xl:grid-cols-[0.72fr_1.28fr]">
                 <aside className="space-y-5">
-                    <article className="rounded-[28px] border border-[#DDE5E1] bg-white p-5 shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
-                        <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <article className="salon-panel border border-[#DDE5E1] bg-white p-5">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Usuario
                         </p>
 
@@ -619,7 +619,7 @@ export default function PermisosUsuarioClient({
 
                         <div className="mt-5 rounded-2xl bg-[#F6F9F7] p-4">
                             <div className="flex items-center gap-2 text-xs font-black text-[#4B6157]">
-                                <ShieldCheck className="h-4 w-4 text-[#6F8F83]" />
+                                <ShieldCheck className="h-4 w-4 text-primary" />
                                 {
                                     usuario.rolNombre
                                 }
@@ -632,8 +632,8 @@ export default function PermisosUsuarioClient({
                         </div>
                     </article>
 
-                    <article className="rounded-[28px] border border-[#DDE5E1] bg-white p-5 shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
-                        <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <article className="salon-panel border border-[#DDE5E1] bg-white p-5">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Cómo funciona
                         </p>
 
@@ -667,7 +667,7 @@ export default function PermisosUsuarioClient({
                             onClick={
                                 restablecerTodo
                             }
-                            className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl border border-[#D7DFDA] bg-[#FBFCFA] text-xs font-black text-[#56655D] transition hover:bg-[#F2F6F3] disabled:cursor-not-allowed disabled:opacity-45"
+                            className="salon-action mt-5 inline-flex w-full items-center justify-center gap-2 border border-[#D7DFDA] bg-[#FBFCFA] text-[#56655D] transition hover:bg-[#F2F6F3] disabled:cursor-not-allowed disabled:opacity-45"
                         >
                             {restableciendo ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -681,7 +681,7 @@ export default function PermisosUsuarioClient({
                 </aside>
 
                 <section className="space-y-5">
-                    <article className="rounded-[28px] border border-[#DDE5E1] bg-white p-4 shadow-[0_12px_34px_rgba(36,48,44,0.06)] sm:p-5">
+                    <article className="salon-panel border border-[#DDE5E1] bg-white p-4 sm:p-5">
                         <div className="flex flex-col gap-3 lg:flex-row">
                             <div className="relative flex-1">
                                 <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#819087]" />
@@ -698,7 +698,7 @@ export default function PermisosUsuarioClient({
                                         )
                                     }
                                     placeholder="Buscar permiso..."
-                                    className="h-12 w-full rounded-2xl border border-[#D9E1DD] bg-[#F8FAF8] pl-11 pr-4 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                    className="salon-control w-full border border-[#D9E1DD] bg-[#F8FAF8] pl-11 pr-4 outline-none transition focus:border-primary focus:bg-white"
                                 />
                             </div>
 
@@ -713,7 +713,7 @@ export default function PermisosUsuarioClient({
                                         event.target.value,
                                     )
                                 }
-                                className="h-12 rounded-2xl border border-[#D9E1DD] bg-[#F8FAF8] px-4 text-sm font-bold text-[#4A5A52] outline-none focus:border-[#6F8F83]"
+                                className="salon-control border border-[#D9E1DD] bg-[#F8FAF8] px-4 text-[#4A5A52] outline-none focus:border-primary"
                             >
                                 <option value="TODOS">
                                     Todos los módulos
@@ -752,7 +752,7 @@ export default function PermisosUsuarioClient({
                                                 "TODOS",
                                             );
                                         }}
-                                        className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-bold text-[#7C8882] hover:bg-[#F4F7F5]"
+                                        className="salon-action inline-flex items-center justify-center gap-2 px-4 text-[#7C8882] hover:bg-[#F4F7F5]"
                                     >
                                         <X className="h-4 w-4" />
                                         Limpiar
@@ -763,7 +763,7 @@ export default function PermisosUsuarioClient({
 
                     {grupos.length ===
                         0 ? (
-                        <div className="rounded-[28px] border border-dashed border-[#CBD7D1] bg-white p-12 text-center">
+                        <div className="salon-panel border border-dashed border-[#CBD7D1] bg-white p-12 text-center">
                             <Search className="mx-auto h-7 w-7 text-[#8E9A94]" />
                             <p className="mt-3 font-black text-[#34423C]">
                                 No encontramos permisos
@@ -828,21 +828,21 @@ function ModuloPermisos({
         ).length;
 
     return (
-        <article className="overflow-hidden rounded-[28px] border border-[#DDE5E1] bg-white shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
+        <article className="salon-panel overflow-hidden border border-[#DDE5E1] bg-white">
             <header className="flex flex-col gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#8A978F]">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#8A978F]">
                         Módulo
                     </p>
 
-                    <h2 className="mt-1 text-lg font-black text-[#26332F]">
+                    <h2 className="mt-1 text-lg font-black text-sidebar tracking-tight">
                         {formatearModulo(
                             modulo,
                         )}
                     </h2>
                 </div>
 
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#EEF3F0] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.10em] text-[#5B7468]">
+                <div className="inline-flex items-center gap-2 rounded-full bg-surface-soft px-3 py-1.5 text-xs font-black uppercase tracking-[0.10em] text-[#5B7468]">
                     <Check className="h-3.5 w-3.5" />
                     {permitidos}/{permisos.length} permitidos
                 </div>
@@ -932,7 +932,7 @@ function PermisoFila({
                     }
                 </p>
 
-                <p className="mt-1 text-[11px] text-[#9AA49F]">
+                <p className="mt-1 text-xs text-[#9AA49F]">
                     {permiso.estadoVisual ===
                         "HEREDAR"
                         ? permiso.origen ===
@@ -1107,7 +1107,7 @@ function Leyenda({
 
     return (
         <div className="flex items-start gap-3 rounded-2xl bg-[#F7F9F7] p-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-[#6F8F83] shadow-sm">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-primary shadow-sm">
                 <Icono className="h-4 w-4" />
             </div>
 
@@ -1118,7 +1118,7 @@ function Leyenda({
                     }
                 </p>
 
-                <p className="mt-1 text-[11px] leading-5 text-[#7E8B84]">
+                <p className="mt-1 text-xs leading-5 text-[#7E8B84]">
                     {
                         descripcion
                     }
@@ -1143,7 +1143,7 @@ function HeroInfo({
         <div className="rounded-[22px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#AEC0B7]">
+                    <p className="text-xs font-black uppercase tracking-[0.13em] text-[#AEC0B7]">
                         {
                             etiqueta
                         }
@@ -1156,7 +1156,7 @@ function HeroInfo({
                     </p>
                 </div>
 
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-[#DCE7E2]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-primary-soft">
                     <Icono className="h-4 w-4" />
                 </div>
             </div>
@@ -1178,16 +1178,16 @@ function ResumenCard({
     }>;
 }) {
     return (
-        <article className="rounded-[24px] border border-[#DCE5E0] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#87958D]">
                         {
                             etiqueta
                         }
                     </p>
 
-                    <p className="mt-2 text-3xl font-black text-[#26332F]">
+                    <p className="mt-2 text-3xl font-black text-sidebar">
                         {
                             valor
                         }
@@ -1200,7 +1200,7 @@ function ResumenCard({
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#6F8F83]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>

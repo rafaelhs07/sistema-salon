@@ -161,8 +161,8 @@ export default function HistorialMovimientosClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -174,7 +174,7 @@ export default function HistorialMovimientosClient({
                     </Link>
 
                     <div className="mt-5 flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <ListFilter className="h-7 w-7" />
                         </div>
 
@@ -183,7 +183,7 @@ export default function HistorialMovimientosClient({
                                 Trazabilidad
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 Movimientos de caja
                             </h1>
 
@@ -220,14 +220,14 @@ export default function HistorialMovimientosClient({
                 />
             </section>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
+            <section className="salon-panel border border-border bg-white shadow-sm">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <h2 className="font-bold text-[#24302C]">
+                            <h2 className="font-bold text-foreground tracking-tight">
                                 Filtros
                             </h2>
-                            <p className="mt-1 text-sm text-[#6B756F]">
+                            <p className="mt-1 text-sm text-text-secondary">
                                 Busca por concepto, referencia,
                                 venta, sucursal o fecha.
                             </p>
@@ -237,7 +237,7 @@ export default function HistorialMovimientosClient({
                             <button
                                 type="button"
                                 onClick={limpiar}
-                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-3 text-xs font-bold text-[#52605A]"
+                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-surface-soft px-3 text-xs font-bold text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar
@@ -255,7 +255,7 @@ export default function HistorialMovimientosClient({
                                 setBusqueda(event.target.value)
                             }
                             placeholder="Concepto, referencia o venta..."
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] pl-11 pr-4 text-sm"
+                            className="salon-control w-full border border-border-strong pl-11 pr-4"
                         />
                     </div>
 
@@ -332,24 +332,24 @@ export default function HistorialMovimientosClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
+            <section className="salon-panel overflow-hidden border border-border bg-white shadow-sm">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                    <h2 className="font-bold text-[#24302C]">
+                    <h2 className="font-bold text-foreground tracking-tight">
                         Historial
                     </h2>
-                    <p className="mt-1 text-sm text-[#6B756F]">
+                    <p className="mt-1 text-sm text-text-secondary">
                         {movimientosFiltrados.length} resultado
                         {movimientosFiltrados.length === 1 ? "" : "s"}
                     </p>
                 </header>
 
                 {movimientosFiltrados.length === 0 ? (
-                    <div className="p-12 text-center text-sm text-[#6B756F]">
+                    <div className="p-12 text-center text-sm text-text-secondary">
                         No hay movimientos para mostrar.
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full min-w-[1150px]">
+                        <table className="salon-table w-full min-w-[1150px]">
                             <thead className="bg-[#FBFCFA] text-left text-xs uppercase text-[#76817B]">
                                 <tr>
                                     <Th>Fecha</Th>
@@ -410,7 +410,7 @@ export default function HistorialMovimientosClient({
                                             {movimiento.venta_id ? (
                                                 <Link
                                                     href={`/caja/ventas/${movimiento.venta_id}`}
-                                                    className="font-bold text-[#527064] hover:underline"
+                                                    className="font-bold text-primary-strong hover:underline"
                                                 >
                                                     {movimiento.ventas
                                                         ?.codigo_venta ??
@@ -449,7 +449,7 @@ export default function HistorialMovimientosClient({
                                         <Td>
                                             <Link
                                                 href={`/caja/historial-movimientos/${movimiento.id}`}
-                                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#26332F] px-3 text-xs font-bold text-white"
+                                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-sidebar px-3 text-xs font-bold text-white"
                                             >
                                                 <Eye className="h-4 w-4" />
                                                 Detalle
@@ -483,7 +483,7 @@ function Select({
             <select
                 value={valor}
                 onChange={(event) => cambiar(event.target.value)}
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
             >
                 {opciones.map((opcion) => (
                     <option
@@ -509,14 +509,14 @@ function Fecha({
 }) {
     return (
         <label>
-            <span className="mb-1 block text-[10px] font-bold uppercase text-[#829089]">
+            <span className="mb-1 block text-xs font-bold uppercase text-[#829089]">
                 {titulo}
             </span>
             <input
                 type="date"
                 value={valor}
                 onChange={(event) => cambiar(event.target.value)}
-                className="h-9 w-full rounded-lg border border-[#D4DAD6] px-2 text-xs"
+                className="salon-control h-9 w-full rounded-lg border border-border-strong px-2"
             />
         </label>
     );
@@ -524,7 +524,7 @@ function Fecha({
 
 function EtiquetaTipo({ tipo }: { tipo: string }) {
     return (
-        <span className="inline-flex rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-bold uppercase text-[#52605A]">
+        <span className="inline-flex rounded-full bg-surface-soft px-2.5 py-1 text-xs font-bold uppercase text-[#52605A]">
             {formatearTexto(tipo)}
         </span>
     );
@@ -555,16 +555,16 @@ function Resumen({
     icono: React.ComponentType<{ className?: string }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-sm">
+        <article className="salon-panel border border-border bg-white p-5 shadow-sm">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm text-[#6B756F]">{titulo}</p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="text-sm text-text-secondary">{titulo}</p>
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>

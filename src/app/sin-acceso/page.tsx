@@ -22,14 +22,14 @@ export default async function SinAccesoPage({
         "ACCESO_RESTRINGIDO";
 
     return (
-        <main className="min-h-screen bg-[#F6F7F4] px-4 py-10 sm:px-6">
+        <main className="salon-app min-h-screen bg-background px-4 py-10 sm:px-6">
             <div className="mx-auto max-w-3xl">
-                <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-7 text-white shadow-[0_24px_70px_rgba(36,48,44,0.20)] sm:p-10">
-                    <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                    <div className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+                <section className="salon-hero relative overflow-hidden bg-sidebar p-7 text-white sm:p-10">
+                    <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
+                    <div className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-secondary/15 blur-3xl" />
 
                     <div className="relative">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-primary-soft text-sidebar">
                             <ShieldAlert className="h-8 w-8" />
                         </div>
 
@@ -48,9 +48,9 @@ export default async function SinAccesoPage({
                     </div>
                 </section>
 
-                <section className="mt-6 rounded-[28px] border border-[#DCE5E0] bg-white p-6 shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
+                <section className="salon-panel mt-6 border border-border bg-white p-6">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#6F8F83]">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                             <LockKeyhole className="h-5 w-5" />
                         </div>
 
@@ -74,7 +74,7 @@ export default async function SinAccesoPage({
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         <Link
                             href="/inicio"
-                            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white transition hover:bg-[#34463F]"
+                            className="salon-action inline-flex items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:bg-sidebar-hover"
                         >
                             <Home className="h-4 w-4" />
                             Ir al inicio
@@ -82,7 +82,7 @@ export default async function SinAccesoPage({
 
                         <Link
                             href="/usuarios"
-                            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl border border-[#D7DFDA] px-5 text-sm font-black text-[#53635B] transition hover:bg-[#F4F7F5]"
+                            className="salon-action inline-flex items-center justify-center gap-2 border border-[#D7DFDA] px-5 text-[#53635B] transition hover:bg-[#F4F7F5]"
                         >
                             <ArrowLeft className="h-4 w-4" />
                             Usuarios y accesos

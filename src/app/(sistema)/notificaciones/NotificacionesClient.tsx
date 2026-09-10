@@ -310,23 +310,23 @@ export default function NotificacionesClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-52 w-52 rounded-full bg-[#C79AA1]/10 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-52 w-52 rounded-full bg-secondary/10 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <BellRing className="h-7 w-7" />
                         </div>
 
                         <div>
-                            <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-bold text-[#DCE7E2]">
+                            <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-bold text-primary-soft">
                                 <Sparkles className="h-3.5 w-3.5" />
                                 Centro de avisos
                             </div>
 
-                            <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+                            <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
                                 Notificaciones
                             </h1>
 
@@ -342,7 +342,7 @@ export default function NotificacionesClient({
                                 type="button"
                                 disabled={procesando}
                                 onClick={() => ejecutar(marcarTodasLeidas)}
-                                className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#DCE7E2] px-5 text-sm font-bold text-[#26332F] transition hover:bg-white disabled:opacity-60"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white disabled:opacity-60"
                             >
                                 {procesando ? (
                                     <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -357,7 +357,7 @@ export default function NotificacionesClient({
                             type="button"
                             disabled={procesando}
                             onClick={() => ejecutar(archivarTodasLeidas)}
-                            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 text-sm font-bold text-white transition hover:bg-white/10 disabled:opacity-60"
+                            className="salon-action inline-flex items-center justify-center gap-2 border border-white/10 bg-white/5 px-5 text-white transition hover:bg-white/10 disabled:opacity-60"
                         >
                             <Archive className="h-5 w-5" />
                             Archivar leídas
@@ -404,7 +404,7 @@ export default function NotificacionesClient({
                             <AlertTriangle className="h-5 w-5" />
                         </div>
                         <div className="min-w-0 flex-1">
-                            <h2 className="text-lg font-bold text-[#26332F]">Requiere tu atención</h2>
+                            <h2 className="text-lg font-bold text-sidebar tracking-tight">Requiere tu atención</h2>
                             <p className="mt-1 text-sm text-[#7B6B6F]">
                                 Priorizamos aquí los avisos más importantes que aún no has revisado.
                             </p>
@@ -444,11 +444,11 @@ export default function NotificacionesClient({
                 </section>
             )}
 
-            <section className="overflow-hidden rounded-[30px] border border-[#E3E7E4] bg-white shadow-[0_10px_30px_rgba(36,48,44,0.06)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-                            <div className="flex w-fit rounded-2xl bg-[#EEF2EF] p-1">
+                            <div className="flex w-fit rounded-2xl bg-surface-soft p-1">
                                 <BotonPestana
                                     texto="Notificaciones"
                                     activa={pestana === "NOTIFICACIONES"}
@@ -486,7 +486,7 @@ export default function NotificacionesClient({
                                         value={busqueda}
                                         onChange={(event) => setBusqueda(event.target.value)}
                                         placeholder="Buscar por título, mensaje o tipo..."
-                                        className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-[#FAFCFB] pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83] focus:bg-white"
+                                        className="salon-control w-full border border-border-strong bg-[#FAFCFB] pl-11 pr-4 outline-none focus:border-primary focus:bg-white"
                                     />
                                 </div>
 
@@ -495,7 +495,7 @@ export default function NotificacionesClient({
                                         <select
                                             value={filtroLectura}
                                             onChange={(event) => setFiltroLectura(event.target.value as FiltroLectura)}
-                                            className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm font-medium text-[#43524B]"
+                                            className="salon-control border border-border-strong bg-white px-3 font-medium text-text-secondary"
                                         >
                                             <option value="TODAS">Todas</option>
                                             <option value="NO_LEIDAS">No leídas</option>
@@ -505,7 +505,7 @@ export default function NotificacionesClient({
                                         <select
                                             value={filtroPrioridad}
                                             onChange={(event) => setFiltroPrioridad(event.target.value)}
-                                            className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm font-medium text-[#43524B]"
+                                            className="salon-control border border-border-strong bg-white px-3 font-medium text-text-secondary"
                                         >
                                             <option value="TODAS">Toda prioridad</option>
                                             <option value="BAJA">Baja</option>
@@ -517,7 +517,7 @@ export default function NotificacionesClient({
                                         <button
                                             type="button"
                                             onClick={limpiarFiltros}
-                                            className="inline-flex h-11 items-center gap-2 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm font-bold text-[#66756E] transition hover:bg-[#F4F7F5]"
+                                            className="salon-action inline-flex items-center gap-2 border border-border-strong bg-white px-4 text-[#66756E] transition hover:bg-[#F4F7F5]"
                                         >
                                             <SlidersHorizontal className="h-4 w-4" />
                                             Limpiar
@@ -529,7 +529,7 @@ export default function NotificacionesClient({
                                     <button
                                         type="button"
                                         onClick={limpiarFiltros}
-                                        className="inline-flex h-11 items-center gap-2 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm font-bold text-[#66756E] transition hover:bg-[#F4F7F5]"
+                                        className="salon-action inline-flex items-center gap-2 border border-border-strong bg-white px-4 text-[#66756E] transition hover:bg-[#F4F7F5]"
                                     >
                                         <SlidersHorizontal className="h-4 w-4" />
                                         Limpiar
@@ -548,7 +548,7 @@ export default function NotificacionesClient({
                                         className={[
                                             "inline-flex h-9 shrink-0 items-center gap-2 rounded-xl px-3 text-xs font-bold transition",
                                             categoria === item.valor
-                                                ? "bg-[#26332F] text-white"
+                                                ? "bg-sidebar text-white"
                                                 : "bg-[#F2F5F3] text-[#64736C] hover:bg-[#E7EDE9]",
                                         ].join(" ")}
                                     >
@@ -668,14 +668,14 @@ function PanelArchivadas({
 }) {
     if (items.length === 0) {
         return (
-            <div className="rounded-[26px] border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
+            <div className="rounded-[26px] border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
                 <Archive className="mx-auto h-9 w-9 text-[#829089]" />
 
-                <h3 className="mt-4 font-bold text-[#24302C]">
+                <h3 className="mt-4 font-bold text-foreground tracking-tight">
                     No hay notificaciones archivadas
                 </h3>
 
-                <p className="mt-2 text-sm text-[#6B756F]">
+                <p className="mt-2 text-sm text-text-secondary">
                     Los avisos archivados manualmente o por mantenimiento aparecerán aquí.
                 </p>
             </div>
@@ -687,7 +687,7 @@ function PanelArchivadas({
             {items.map((notificacion) => (
                 <article
                     key={notificacion.id}
-                    className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4 sm:p-5"
+                    className="rounded-2xl border border-border bg-[#FBFCFA] p-4 sm:p-5"
                 >
                     <div className="flex items-start gap-4">
                         <IconoNotificacion
@@ -697,11 +697,11 @@ function PanelArchivadas({
 
                         <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
-                                <h3 className="font-bold text-[#33413B]">
+                                <h3 className="font-bold text-[#33413B] tracking-tight">
                                     {notificacion.titulo}
                                 </h3>
 
-                                <span className="rounded-full bg-[#E8ECE9] px-2 py-0.5 text-[10px] font-bold uppercase text-[#6F7D76]">
+                                <span className="rounded-full bg-[#E8ECE9] px-2 py-0.5 text-xs font-bold uppercase text-[#6F7D76]">
                                     Archivada
                                 </span>
 
@@ -710,7 +710,7 @@ function PanelArchivadas({
                                 />
                             </div>
 
-                            <p className="mt-2 text-sm leading-6 text-[#6B756F]">
+                            <p className="mt-2 text-sm leading-6 text-text-secondary">
                                 {notificacion.mensaje}
                             </p>
 
@@ -730,7 +730,7 @@ function PanelArchivadas({
                                 {notificacion.enlace && (
                                     <Link
                                         href={notificacion.enlace}
-                                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-xs font-bold text-[#43524B]"
+                                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-primary-soft px-4 text-xs font-bold text-text-secondary"
                                     >
                                         Abrir
                                         <ChevronRight className="h-3.5 w-3.5" />
@@ -747,7 +747,7 @@ function PanelArchivadas({
                                             ),
                                         )
                                     }
-                                    className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-4 text-xs font-bold text-[#52605A] transition hover:bg-[#E4EAE6] disabled:opacity-50"
+                                    className="inline-flex h-9 items-center gap-2 rounded-xl bg-surface-soft px-4 text-xs font-bold text-[#52605A] transition hover:bg-[#E4EAE6] disabled:opacity-50"
                                 >
                                     <ArchiveRestore className="h-4 w-4" />
                                     Restaurar
@@ -786,7 +786,7 @@ function PanelRequiereAccion({
                     <CheckCheck className="h-7 w-7" />
                 </div>
 
-                <h3 className="mt-4 text-lg font-bold text-[#26332F]">
+                <h3 className="mt-4 text-lg font-bold text-sidebar tracking-tight">
                     Todo bajo control
                 </h3>
 
@@ -896,33 +896,33 @@ function TarjetaNotificacion({
             className={[
                 "group relative overflow-hidden rounded-2xl border p-4 transition sm:p-5",
                 notificacion.leida
-                    ? "border-[#E3E7E4] bg-[#FBFCFA]"
+                    ? "border-border bg-[#FBFCFA]"
                     : "border-[#C8D9D1] bg-[#F3F7F5] shadow-sm",
             ].join(" ")}
         >
-            {!notificacion.leida && <div className="absolute inset-y-0 left-0 w-1 bg-[#6F8F83]" />}
+            {!notificacion.leida && <div className="absolute inset-y-0 left-0 w-1 bg-primary" />}
 
             <div className="flex items-start gap-4">
                 <IconoNotificacion prioridad={notificacion.prioridad} tipo={notificacion.tipo} />
 
                 <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="font-bold text-[#24302C]">{notificacion.titulo}</h3>
+                        <h3 className="font-bold text-foreground tracking-tight">{notificacion.titulo}</h3>
 
                         {!notificacion.leida && (
-                            <span className="rounded-full bg-[#6F8F83] px-2 py-0.5 text-[10px] font-bold uppercase text-white">
+                            <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-bold uppercase text-white">
                                 Nueva
                             </span>
                         )}
 
-                        <span className="rounded-full bg-[#EEF2EF] px-2 py-0.5 text-[10px] font-bold uppercase text-[#66756E]">
+                        <span className="rounded-full bg-surface-soft px-2 py-0.5 text-xs font-bold uppercase text-[#66756E]">
                             {formatearCategoria(categoria)}
                         </span>
 
                         <PrioridadBadge prioridad={notificacion.prioridad} />
                     </div>
 
-                    <p className="mt-2 text-sm leading-6 text-[#6B756F]">{notificacion.mensaje}</p>
+                    <p className="mt-2 text-sm leading-6 text-text-secondary">{notificacion.mensaje}</p>
 
                     <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#8A948F]">
                         <span>{tiempoRelativo(notificacion.fecha_registro)}</span>
@@ -933,7 +933,7 @@ function TarjetaNotificacion({
                         {(notificacion.enlace || notificacion.cita_id) && (
                             <Link
                                 href={notificacion.enlace || `/agenda/${notificacion.cita_id}`}
-                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-xs font-bold text-[#43524B] transition hover:bg-[#CFDED7]"
+                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-primary-soft px-4 text-xs font-bold text-text-secondary transition hover:bg-[#CFDED7]"
                             >
                                 Abrir
                                 <ChevronRight className="h-3.5 w-3.5" />
@@ -944,7 +944,7 @@ function TarjetaNotificacion({
                             type="button"
                             disabled={procesando}
                             onClick={marcar}
-                            className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-4 text-xs font-bold text-[#52605A] transition hover:bg-[#E5EBE7] disabled:opacity-50"
+                            className="inline-flex h-9 items-center gap-2 rounded-xl bg-surface-soft px-4 text-xs font-bold text-[#52605A] transition hover:bg-[#E5EBE7] disabled:opacity-50"
                         >
                             {notificacion.leida ? <Bell className="h-4 w-4" /> : <Check className="h-4 w-4" />}
                             {notificacion.leida ? "Marcar pendiente" : "Marcar leída"}
@@ -976,14 +976,14 @@ function TarjetaRecordatorio({
     const vencido = recordatorio.fecha_programada <= fechaServidor;
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4 sm:p-5">
+        <article className="rounded-2xl border border-border bg-[#FBFCFA] p-4 sm:p-5">
             <div className="flex items-start gap-4">
                 <div
                     className={[
                         "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl",
                         vencido
                             ? "bg-[#FAF0DC] text-[#9A742D]"
-                            : "bg-[#DCE7E2] text-[#527064]",
+                            : "bg-primary-soft text-primary-strong",
                     ].join(" ")}
                 >
                     {recordatorio.canal === "WHATSAPP" ? <MessageCircle className="h-5 w-5" /> : <Clock3 className="h-5 w-5" />}
@@ -991,7 +991,7 @@ function TarjetaRecordatorio({
 
                 <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="font-bold text-[#24302C]">{recordatorio.titulo}</h3>
+                        <h3 className="font-bold text-foreground tracking-tight">{recordatorio.titulo}</h3>
 
                         <span
                             className={[
@@ -1005,13 +1005,13 @@ function TarjetaRecordatorio({
                         </span>
 
                         {recordatorio.estado === "FALLIDO" && (
-                            <span className="rounded-full bg-[#F8E5E5] px-2 py-0.5 text-[10px] font-bold uppercase text-[#A25E5E]">
+                            <span className="rounded-full bg-[#F8E5E5] px-2 py-0.5 text-xs font-bold uppercase text-[#A25E5E]">
                                 Fallido
                             </span>
                         )}
                     </div>
 
-                    <p className="mt-2 text-sm leading-6 text-[#6B756F]">{recordatorio.mensaje}</p>
+                    <p className="mt-2 text-sm leading-6 text-text-secondary">{recordatorio.mensaje}</p>
 
                     <div className="mt-3 grid gap-2 text-xs text-[#76817B] sm:grid-cols-2">
                         <DatoRecordatorio etiqueta="Cliente" valor={recordatorio.clientes?.nombre_completo ?? "Sin cliente"} />
@@ -1034,7 +1034,7 @@ function TarjetaRecordatorio({
                     <div className="mt-4">
                         <Link
                             href={`/agenda/${recordatorio.cita_id}`}
-                            className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-xs font-bold text-[#43524B]"
+                            className="inline-flex h-9 items-center gap-2 rounded-xl bg-primary-soft px-4 text-xs font-bold text-text-secondary"
                         >
                             Ver cita
                             <ChevronRight className="h-3.5 w-3.5" />
@@ -1073,7 +1073,7 @@ function TarjetaResumen({
     const contenido = (
         <article
             className={[
-                "rounded-[26px] border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]",
+                "rounded-[26px] border border-border bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]",
                 onClick
                     ? "cursor-pointer transition hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(36,48,44,0.09)]"
                     : "",
@@ -1081,8 +1081,8 @@ function TarjetaResumen({
         >
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm font-medium text-[#6B756F]">{titulo}</p>
-                    <p className="mt-3 text-3xl font-bold text-[#24302C]">{valor}</p>
+                    <p className="text-sm font-medium text-text-secondary">{titulo}</p>
+                    <p className="mt-3 text-3xl font-bold text-foreground">{valor}</p>
                     <p className="mt-1 text-xs text-[#8A958F]">{detalle}</p>
                 </div>
 
@@ -1091,7 +1091,7 @@ function TarjetaResumen({
                         "flex h-11 w-11 items-center justify-center rounded-2xl",
                         alerta
                             ? "bg-[#F5E8EB] text-[#9A6470]"
-                            : "bg-[#DCE7E2] text-[#527064]",
+                            : "bg-primary-soft text-primary-strong",
                     ].join(" ")}
                 >
                     <Icono className="h-5 w-5" />
@@ -1125,13 +1125,13 @@ function BotonPestana({
     alerta?: boolean;
 }) {
     return (
-        <button type="button" onClick={cambiar} className={["inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-bold transition", activa ? "bg-white text-[#33413B] shadow-sm" : "text-[#6B756F]"].join(" ")}>
+        <button type="button" onClick={cambiar} className={["inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-bold transition", activa ? "bg-white text-[#33413B] shadow-sm" : "text-text-secondary"].join(" ")}>
             {texto}
             {cantidad > 0 && (
                 <span
                     className={[
                         "rounded-full px-2 py-0.5 text-[10px] text-white",
-                        alerta ? "bg-[#A86572]" : "bg-[#6F8F83]",
+                        alerta ? "bg-[#A86572]" : "bg-primary",
                     ].join(" ")}
                 >
                     {cantidad > 99 ? "99+" : cantidad}
@@ -1193,10 +1193,10 @@ function MensajeEstado({ mensaje, cerrar }: { mensaje: Exclude<Mensaje, null>; c
 
 function EstadoVacio({ titulo, texto }: { titulo: string; texto: string }) {
     return (
-        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
             <Bell className="mx-auto h-9 w-9 text-[#829089]" />
-            <h3 className="mt-4 font-bold text-[#24302C]">{titulo}</h3>
-            <p className="mt-2 text-sm text-[#6B756F]">{texto}</p>
+            <h3 className="mt-4 font-bold text-foreground tracking-tight">{titulo}</h3>
+            <p className="mt-2 text-sm text-text-secondary">{texto}</p>
         </div>
     );
 }

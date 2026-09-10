@@ -304,7 +304,7 @@ export default function TrasladosInventarioClient({
 
     return (
         <div className="space-y-6">
-            <section className="overflow-hidden rounded-[32px] bg-[#26332F] p-7 text-white shadow-[0_18px_55px_rgba(36,48,44,0.12)] sm:p-9">
+            <section className="salon-hero overflow-hidden bg-sidebar p-7 text-white sm:p-9">
                 <Link
                     href="/inventario"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
@@ -315,7 +315,7 @@ export default function TrasladosInventarioClient({
 
                 <div className="mt-6 flex items-start gap-4">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/10">
-                        <Truck className="h-7 w-7 text-[#DCE7E2]" />
+                        <Truck className="h-7 w-7 text-primary-soft" />
                     </div>
 
                     <div>
@@ -323,7 +323,7 @@ export default function TrasladosInventarioClient({
                             Distribución interna
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             Traslados entre sucursales
                         </h1>
 
@@ -337,10 +337,10 @@ export default function TrasladosInventarioClient({
             </section>
 
             {sucursales.length < 2 ? (
-                <section className="rounded-[28px] border border-dashed border-[#CCD6D0] bg-white p-12 text-center shadow-sm">
+                <section className="salon-panel border border-dashed border-[#CCD6D0] bg-white p-12 text-center shadow-sm">
                     <Store className="mx-auto h-10 w-10 text-[#829089]" />
 
-                    <h2 className="mt-4 text-lg font-bold text-[#26332F]">
+                    <h2 className="mt-4 text-lg font-bold text-sidebar tracking-tight">
                         Se necesitan dos sucursales
                     </h2>
 
@@ -354,9 +354,9 @@ export default function TrasladosInventarioClient({
             ) : (
                 <div className="grid gap-6 xl:grid-cols-[1fr_390px]">
                     <div className="space-y-6">
-                        <section className="rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+                        <section className="salon-panel border border-border bg-white shadow-sm">
                             <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                                <h2 className="font-bold text-[#26332F]">
+                                <h2 className="font-bold text-sidebar tracking-tight">
                                     1. Ruta del traslado
                                 </h2>
                                 <p className="mt-1 text-sm text-[#718078]">
@@ -412,9 +412,9 @@ export default function TrasladosInventarioClient({
                             </div>
                         </section>
 
-                        <section className="rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+                        <section className="salon-panel border border-border bg-white shadow-sm">
                             <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                                <h2 className="font-bold text-[#26332F]">
+                                <h2 className="font-bold text-sidebar tracking-tight">
                                     2. Producto
                                 </h2>
 
@@ -444,7 +444,7 @@ export default function TrasladosInventarioClient({
                                             )
                                         }
                                         placeholder="Buscar producto, código o barra..."
-                                        className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-[#FBFCFB] pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                                        className="salon-control w-full border border-border-strong bg-[#FBFCFB] pl-11 pr-4 outline-none focus:border-primary"
                                     />
                                 </div>
 
@@ -485,19 +485,19 @@ export default function TrasladosInventarioClient({
                                                     className={[
                                                         "flex w-full items-center justify-between gap-4 rounded-2xl border p-3.5 text-left transition",
                                                         seleccionado
-                                                            ? "border-[#6F8F83] bg-[#F1F6F3]"
+                                                            ? "border-primary bg-[#F1F6F3]"
                                                             : "border-[#E4E9E6] bg-white hover:bg-[#F8FAF8]",
                                                     ].join(
                                                         " ",
                                                     )}
                                                 >
                                                     <div className="flex min-w-0 items-center gap-3">
-                                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EEF2EF] text-[#527064]">
+                                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-soft text-primary-strong">
                                                             <Package className="h-5 w-5" />
                                                         </div>
 
                                                         <div className="min-w-0">
-                                                            <p className="truncate text-sm font-bold text-[#26332F]">
+                                                            <p className="truncate text-sm font-bold text-sidebar">
                                                                 {
                                                                     item.nombre
                                                                 }
@@ -515,7 +515,7 @@ export default function TrasladosInventarioClient({
                                                     </div>
 
                                                     <div className="shrink-0 text-right">
-                                                        <p className="text-[10px] font-bold uppercase text-[#89948F]">
+                                                        <p className="text-xs font-bold uppercase text-[#89948F]">
                                                             Disponible
                                                         </p>
                                                         <p className="mt-1 text-sm font-bold text-[#315C4B]">
@@ -537,7 +537,7 @@ export default function TrasladosInventarioClient({
 
                                     {productosOrigen.length ===
                                         0 && (
-                                            <div className="rounded-2xl border border-dashed border-[#D4DAD6] p-8 text-center text-sm text-[#718078]">
+                                            <div className="rounded-2xl border border-dashed border-border-strong p-8 text-center text-sm text-[#718078]">
                                                 No hay
                                                 productos con
                                                 stock en esta
@@ -548,9 +548,9 @@ export default function TrasladosInventarioClient({
                             </div>
                         </section>
 
-                        <section className="rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+                        <section className="salon-panel border border-border bg-white shadow-sm">
                             <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                                <h2 className="font-bold text-[#26332F]">
+                                <h2 className="font-bold text-sidebar tracking-tight">
                                     3. Cantidad y detalle
                                 </h2>
                             </header>
@@ -579,7 +579,7 @@ export default function TrasladosInventarioClient({
                                             )
                                         }
                                         placeholder="0"
-                                        className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4 text-sm outline-none focus:border-[#6F8F83]"
+                                        className="salon-control w-full border border-border-strong px-4 outline-none focus:border-primary"
                                     />
                                 </label>
 
@@ -602,7 +602,7 @@ export default function TrasladosInventarioClient({
                                             )
                                         }
                                         placeholder="Ej. TR-001"
-                                        className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4 text-sm outline-none focus:border-[#6F8F83]"
+                                        className="salon-control w-full border border-border-strong px-4 outline-none focus:border-primary"
                                     />
                                 </label>
 
@@ -626,7 +626,7 @@ export default function TrasladosInventarioClient({
                                         }
                                         rows={4}
                                         placeholder="Motivo o detalle del traslado..."
-                                        className="w-full resize-none rounded-xl border border-[#D4DAD6] px-4 py-3 text-sm outline-none focus:border-[#6F8F83]"
+                                        className="salon-control w-full resize-none border border-border-strong px-4 py-3 outline-none focus:border-primary"
                                     />
                                 </label>
                             </div>
@@ -635,7 +635,7 @@ export default function TrasladosInventarioClient({
 
                     <aside>
                         <div className="sticky top-5 space-y-4">
-                            <section className="rounded-[26px] border border-[#E0E6E2] bg-white p-5 shadow-sm">
+                            <section className="salon-panel border border-border bg-white p-5 shadow-sm">
                                 <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#849189]">
                                     Resumen del traslado
                                 </p>
@@ -651,7 +651,7 @@ export default function TrasladosInventarioClient({
                                     </div>
                                 ) : (
                                     <>
-                                        <h3 className="mt-4 text-lg font-bold text-[#26332F]">
+                                        <h3 className="mt-4 text-lg font-bold text-sidebar tracking-tight">
                                             {
                                                 producto.nombre
                                             }
@@ -666,10 +666,10 @@ export default function TrasladosInventarioClient({
                                         <div className="mt-5 rounded-2xl bg-[#F8FAF8] p-4">
                                             <div className="flex items-center justify-between gap-3">
                                                 <div>
-                                                    <p className="text-[10px] font-bold uppercase text-[#89948F]">
+                                                    <p className="text-xs font-bold uppercase text-[#89948F]">
                                                         Origen
                                                     </p>
-                                                    <p className="mt-1 text-sm font-bold text-[#26332F]">
+                                                    <p className="mt-1 text-sm font-bold text-sidebar">
                                                         {
                                                             sucursalOrigen?.nombre
                                                         }
@@ -679,10 +679,10 @@ export default function TrasladosInventarioClient({
                                                 <ArrowRight className="h-5 w-5 text-[#829089]" />
 
                                                 <div className="text-right">
-                                                    <p className="text-[10px] font-bold uppercase text-[#89948F]">
+                                                    <p className="text-xs font-bold uppercase text-[#89948F]">
                                                         Destino
                                                     </p>
-                                                    <p className="mt-1 text-sm font-bold text-[#26332F]">
+                                                    <p className="mt-1 text-sm font-bold text-sidebar">
                                                         {
                                                             sucursalDestino?.nombre
                                                         }
@@ -737,7 +737,7 @@ export default function TrasladosInventarioClient({
                                     procesando ||
                                     !puedeTrasladar
                                 }
-                                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] text-sm font-bold text-white transition hover:bg-[#34443F] disabled:opacity-50"
+                                className="salon-action inline-flex w-full items-center justify-center gap-2 bg-sidebar text-white transition hover:bg-[#34443F] disabled:opacity-50"
                             >
                                 <Send className="h-4 w-4" />
                                 {procesando
@@ -749,14 +749,14 @@ export default function TrasladosInventarioClient({
                 </div>
             )}
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E0E6E2] bg-white shadow-sm">
+            <section className="salon-panel overflow-hidden border border-border bg-white shadow-sm">
                 <header className="flex items-center gap-3 border-b border-[#E8ECE9] p-5 sm:p-6">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#527064]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                         <History className="h-5 w-5" />
                     </div>
 
                     <div>
-                        <h2 className="font-bold text-[#26332F]">
+                        <h2 className="font-bold text-sidebar tracking-tight">
                             Traslados recientes
                         </h2>
                         <p className="mt-1 text-sm text-[#718078]">
@@ -783,7 +783,7 @@ export default function TrasladosInventarioClient({
                                     className="grid gap-3 p-4 sm:grid-cols-[1.2fr_1fr_auto] sm:items-center sm:px-6"
                                 >
                                     <div>
-                                        <p className="font-bold text-[#26332F]">
+                                        <p className="font-bold text-sidebar">
                                             {traslado
                                                 .producto
                                                 ?.nombre ??
@@ -873,7 +873,7 @@ function SucursalSelect({
                             event.target.value,
                         )
                     }
-                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                    className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                 >
                     {sucursales.map(
                         (sucursal) => (
@@ -910,7 +910,7 @@ function StockCard({
 }) {
     return (
         <div className="rounded-xl bg-[#F8FAF8] p-3">
-            <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#929C97]">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#929C97]">
                 {titulo}
             </p>
 

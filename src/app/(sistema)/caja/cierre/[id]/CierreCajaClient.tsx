@@ -145,8 +145,8 @@ export default function CierreCajaClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -158,7 +158,7 @@ export default function CierreCajaClient({
                     </Link>
 
                     <div className="mt-5 flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <LockKeyhole className="h-7 w-7" />
                         </div>
 
@@ -167,7 +167,7 @@ export default function CierreCajaClient({
                                 Fin de jornada
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 Cierre de caja
                             </h1>
 
@@ -247,12 +247,12 @@ export default function CierreCajaClient({
             </section>
 
             <div className="grid gap-6 xl:grid-cols-[1fr_390px]">
-                <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+                <section className="salon-panel border border-border bg-white">
                     <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6">
-                        <h2 className="font-bold text-[#24302C]">
+                        <h2 className="font-bold text-foreground tracking-tight">
                             Movimientos recientes
                         </h2>
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             Últimos movimientos registrados
                             durante esta sesión.
                         </p>
@@ -260,7 +260,7 @@ export default function CierreCajaClient({
 
                     <div className="p-5 sm:p-6">
                         {movimientos.length === 0 ? (
-                            <p className="text-sm text-[#6B756F]">
+                            <p className="text-sm text-text-secondary">
                                 No hay movimientos registrados.
                             </p>
                         ) : (
@@ -322,13 +322,13 @@ export default function CierreCajaClient({
                 <aside className="xl:sticky xl:top-24 xl:self-start">
                     <form
                         onSubmit={enviar}
-                        className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-[0_8px_24px_rgba(36,48,44,0.05)]"
+                        className="salon-panel border border-border bg-white p-6"
                     >
-                        <h2 className="text-lg font-bold text-[#24302C]">
+                        <h2 className="text-lg font-bold text-foreground tracking-tight">
                             Arqueo de efectivo
                         </h2>
 
-                        <div className="mt-5 rounded-2xl bg-[#26332F] p-5 text-white">
+                        <div className="mt-5 rounded-2xl bg-sidebar p-5 text-white">
                             <p className="text-sm text-[#CFD9D4]">
                                 Efectivo esperado
                             </p>
@@ -356,7 +356,7 @@ export default function CierreCajaClient({
                                         ),
                                     )
                                 }
-                                className="h-12 w-full rounded-xl border border-[#D4DAD6] px-4 text-right text-lg font-bold outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong px-4 text-right text-lg outline-none focus:border-primary"
                             />
                         </label>
 
@@ -415,7 +415,7 @@ export default function CierreCajaClient({
                                     )
                                 }
                                 placeholder="Ejemplo: diferencia revisada con administración."
-                                className="w-full rounded-xl border border-[#D4DAD6] px-4 py-3 text-sm outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong px-4 py-3 outline-none focus:border-primary"
                             />
                         </label>
 
@@ -447,7 +447,7 @@ export default function CierreCajaClient({
                                 ) ||
                                 montoContado < 0
                             }
-                            className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] font-bold text-white transition hover:bg-[#607F74] disabled:cursor-not-allowed disabled:opacity-50"
+                            className="salon-action mt-5 inline-flex w-full items-center justify-center gap-2 bg-primary text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {cerrando ? (
                                 <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -477,17 +477,17 @@ function Resumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-sm text-[#6B756F]">
+                    <p className="text-sm text-text-secondary">
                         {titulo}
                     </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>

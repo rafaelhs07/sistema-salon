@@ -450,9 +450,9 @@ export default function AjusteInventarioClient({
 
     return (
         <div className="space-y-7 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.20)] sm:p-8 lg:p-10">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden border border-white/10 bg-sidebar p-6 text-white sm:p-8 lg:p-10">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -470,7 +470,7 @@ export default function AjusteInventarioClient({
                                 Movimiento manual
                             </div>
 
-                            <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+                            <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
                                 Ajustar
                                 <span className="text-[#AFC6BB]">
                                     {" "}
@@ -542,19 +542,19 @@ export default function AjusteInventarioClient({
             )}
 
             <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-                <article className="rounded-[30px] border border-[#DDE5E1] bg-white p-5 shadow-[0_12px_34px_rgba(36,48,44,0.06)] sm:p-6">
+                <article className="salon-panel border border-[#DDE5E1] bg-white p-5 sm:p-6">
                     <div className="flex items-start justify-between gap-4">
                         <div>
-                            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Movimiento
                             </p>
 
-                            <h2 className="mt-1 text-xl font-black text-[#26332F]">
+                            <h2 className="mt-1 text-xl font-black text-sidebar tracking-tight">
                                 ¿Qué deseas registrar?
                             </h2>
                         </div>
 
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#6F8F83]">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                             <RefreshCcw className="h-5 w-5" />
                         </div>
                     </div>
@@ -585,7 +585,7 @@ export default function AjusteInventarioClient({
                                         className={[
                                             "rounded-2xl border p-4 text-left transition",
                                             activo
-                                                ? "border-[#9DB6AA] bg-[#EAF2EE] shadow-sm"
+                                                ? "border-[#9DB6AA] bg-surface-soft shadow-sm"
                                                 : "border-[#DDE4E0] bg-[#FBFCFA] hover:bg-[#F5F8F6]",
                                         ].join(
                                             " ",
@@ -630,7 +630,7 @@ export default function AjusteInventarioClient({
                                         event.target.value,
                                     )
                                 }
-                                className="h-12 w-full rounded-2xl border border-[#D7DFDA] bg-[#F9FBF9] px-4 text-sm font-bold text-[#43524B] outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-[#D7DFDA] bg-[#F9FBF9] px-4 text-text-secondary outline-none focus:border-primary"
                             >
                                 {sucursales.map(
                                     (
@@ -687,7 +687,7 @@ export default function AjusteInventarioClient({
                                             );
                                         }}
                                         placeholder="Nombre, código o barras..."
-                                        className="h-12 w-full rounded-2xl border border-[#D7DFDA] bg-[#F9FBF9] pl-11 pr-11 text-sm font-semibold outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                        className="salon-control w-full border border-[#D7DFDA] bg-[#F9FBF9] pl-11 pr-11 font-semibold outline-none transition focus:border-primary focus:bg-white"
                                     />
 
                                     <button
@@ -700,7 +700,7 @@ export default function AjusteInventarioClient({
                                                     !actual,
                                             )
                                         }
-                                        className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[#77847E] hover:bg-[#EEF2EF]"
+                                        className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[#77847E] hover:bg-surface-soft"
                                     >
                                         <ChevronDown className="h-4 w-4" />
                                     </button>
@@ -744,7 +744,7 @@ export default function AjusteInventarioClient({
                                                             </p>
                                                         </div>
 
-                                                        <span className="shrink-0 rounded-full bg-[#EEF3F0] px-2.5 py-1 text-[10px] font-black text-[#5E756A]">
+                                                        <span className="shrink-0 rounded-full bg-surface-soft px-2.5 py-1 text-xs font-black text-[#5E756A]">
                                                             {
                                                                 item.unidad_medida
                                                             }
@@ -784,7 +784,7 @@ export default function AjusteInventarioClient({
                                         event.target.value,
                                     )
                                 }
-                                className="h-12 w-full rounded-2xl border border-[#D7DFDA] bg-[#F9FBF9] px-4 text-sm font-semibold outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-[#D7DFDA] bg-[#F9FBF9] px-4 font-semibold outline-none focus:border-primary"
                             />
                         </Campo>
 
@@ -809,7 +809,7 @@ export default function AjusteInventarioClient({
                                     )
                                 }
                                 placeholder="Opcional"
-                                className="h-12 w-full rounded-2xl border border-[#D7DFDA] bg-[#F9FBF9] px-4 text-sm font-semibold outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-[#D7DFDA] bg-[#F9FBF9] px-4 font-semibold outline-none focus:border-primary"
                             />
                         </Campo>
                     </div>
@@ -833,12 +833,12 @@ export default function AjusteInventarioClient({
                                     )
                                 }
                                 placeholder="Factura, conteo, motivo, documento..."
-                                className="h-12 w-full rounded-2xl border border-[#D7DFDA] bg-[#F9FBF9] px-4 text-sm font-semibold outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-[#D7DFDA] bg-[#F9FBF9] px-4 font-semibold outline-none focus:border-primary"
                             />
                         </Campo>
 
                         <label className="block">
-                            <span className="mb-2 block text-sm font-black text-[#43524B]">
+                            <span className="mb-2 block text-sm font-black text-text-secondary">
                                 Observaciones
                             </span>
 
@@ -857,19 +857,19 @@ export default function AjusteInventarioClient({
                                     4
                                 }
                                 placeholder="Detalle adicional del movimiento..."
-                                className="w-full resize-none rounded-2xl border border-[#D7DFDA] bg-[#F9FBF9] px-4 py-3 text-sm font-semibold outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full resize-none border border-[#D7DFDA] bg-[#F9FBF9] px-4 py-3 font-semibold outline-none focus:border-primary"
                             />
                         </label>
                     </div>
                 </article>
 
                 <aside className="space-y-5">
-                    <article className="rounded-[28px] border border-[#DDE5E1] bg-white p-5 shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
-                        <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <article className="salon-panel border border-[#DDE5E1] bg-white p-5">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Resumen
                         </p>
 
-                        <h2 className="mt-1 text-xl font-black text-[#26332F]">
+                        <h2 className="mt-1 text-xl font-black text-sidebar tracking-tight">
                             Vista previa
                         </h2>
 
@@ -955,7 +955,7 @@ export default function AjusteInventarioClient({
                         )}
                     </article>
 
-                    <article className="rounded-[28px] border border-[#DDE5E1] bg-white p-5 shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
+                    <article className="salon-panel border border-[#DDE5E1] bg-white p-5">
                         <button
                             type="button"
                             onClick={
@@ -964,7 +964,7 @@ export default function AjusteInventarioClient({
                             disabled={
                                 !puedeGuardar
                             }
-                            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#34463F] disabled:cursor-not-allowed disabled:opacity-45"
+                            className="salon-action inline-flex w-full items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:-translate-y-0.5 hover:bg-sidebar-hover disabled:cursor-not-allowed disabled:opacity-45"
                         >
                             {guardando ? (
                                 <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -982,7 +982,7 @@ export default function AjusteInventarioClient({
                             onClick={
                                 limpiarFormulario
                             }
-                            className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-2xl border border-[#D7DFDA] bg-white text-xs font-black text-[#59675F] transition hover:bg-[#F4F7F5]"
+                            className="salon-action mt-3 inline-flex w-full items-center justify-center border border-[#D7DFDA] bg-white text-[#59675F] transition hover:bg-[#F4F7F5]"
                         >
                             Limpiar formulario
                         </button>
@@ -1006,8 +1006,8 @@ function Campo({
 }) {
     return (
         <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-black text-[#43524B]">
-                <Icono className="h-4 w-4 text-[#6F8F83]" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-black text-text-secondary">
+                <Icono className="h-4 w-4 text-primary" />
                 {
                     etiqueta
                 }
@@ -1035,7 +1035,7 @@ function HeroInfo({
         <div className="rounded-[22px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#AEC0B7]">
+                    <p className="text-xs font-black uppercase tracking-[0.13em] text-[#AEC0B7]">
                         {
                             etiqueta
                         }
@@ -1048,7 +1048,7 @@ function HeroInfo({
                     </p>
                 </div>
 
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-[#DCE7E2]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-primary-soft">
                     <Icono className="h-4 w-4" />
                 </div>
             </div>
@@ -1076,7 +1076,7 @@ function DatoResumen({
                 " ",
             )}
         >
-            <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#87958D]">
+            <p className="text-xs font-black uppercase tracking-[0.12em] text-[#87958D]">
                 {
                     etiqueta
                 }

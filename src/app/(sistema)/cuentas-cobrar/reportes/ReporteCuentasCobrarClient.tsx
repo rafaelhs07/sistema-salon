@@ -467,9 +467,9 @@ export default function ReporteCuentasCobrarClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -482,12 +482,12 @@ export default function ReporteCuentasCobrarClient({
 
                     <div className="mt-6 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <BarChart3 className="h-7 w-7" />
                             </div>
 
                             <div>
-                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                <p className="text-xs font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
                                     Análisis financiero
                                 </p>
 
@@ -541,15 +541,15 @@ export default function ReporteCuentasCobrarClient({
                 </div>
             </section>
 
-            <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_380px]">
-                <div className="rounded-[28px] border border-[#E1E7E3] bg-white p-5 shadow-[0_10px_28px_rgba(36,48,44,0.05)] sm:p-6">
+            <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_380px]">
+                <div className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Recuperación de cartera
                             </p>
 
-                            <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                            <h2 className="mt-1 text-xl font-black text-foreground tracking-tight">
                                 Rendimiento de cobro
                             </h2>
 
@@ -559,7 +559,7 @@ export default function ReporteCuentasCobrarClient({
                         </div>
 
                         <div className="text-right">
-                            <p className="text-3xl font-black text-[#26332F]">
+                            <p className="text-3xl font-black text-sidebar">
                                 {porcentajeRecuperado.toLocaleString(
                                     "es-NI",
                                     {
@@ -578,7 +578,7 @@ export default function ReporteCuentasCobrarClient({
 
                     <div className="mt-5 h-3 overflow-hidden rounded-full bg-[#E6ECE8]">
                         <div
-                            className="h-full rounded-full bg-[#6F8F83] transition-all"
+                            className="h-full rounded-full bg-primary transition-all"
                             style={{
                                 width: `${Math.min(
                                     100,
@@ -617,11 +617,11 @@ export default function ReporteCuentasCobrarClient({
                 </div>
 
                 <div className="rounded-[28px] border border-[#E4E9E6] bg-[#F8FAF8] p-5 shadow-[0_10px_28px_rgba(36,48,44,0.04)] sm:p-6">
-                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                         Indicadores
                     </p>
 
-                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                    <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                         Resumen del filtro
                     </h2>
 
@@ -652,15 +652,15 @@ export default function ReporteCuentasCobrarClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Filtros
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                            <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                 Personaliza el reporte
                             </h2>
                         </div>
@@ -671,7 +671,7 @@ export default function ReporteCuentasCobrarClient({
                                 onClick={
                                     limpiarFiltros
                                 }
-                                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white px-4 text-xs font-black text-[#52605A]"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-white px-4 text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar filtros
@@ -680,7 +680,7 @@ export default function ReporteCuentasCobrarClient({
                     </div>
                 </header>
 
-                <div className="grid gap-3 p-5 lg:grid-cols-[minmax(0,1.3fr)_220px_190px] sm:p-6">
+                <div className="grid gap-3 p-5 xl:grid-cols-[minmax(0,1.3fr)_220px_190px] sm:p-6">
                     <div className="relative">
                         <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
 
@@ -698,7 +698,7 @@ export default function ReporteCuentasCobrarClient({
                                 )
                             }
                             placeholder="Buscar cliente, cuenta o venta..."
-                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold outline-none transition focus:border-primary"
                         />
                     </div>
 
@@ -718,7 +718,7 @@ export default function ReporteCuentasCobrarClient({
                                         .value,
                                 )
                             }
-                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold"
                         >
                             <option value="">
                                 Todas las sucursales
@@ -761,7 +761,7 @@ export default function ReporteCuentasCobrarClient({
                                         .value,
                                 )
                             }
-                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold"
                         >
                             <option value="">
                                 Todos
@@ -811,13 +811,13 @@ export default function ReporteCuentasCobrarClient({
             </section>
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(360px,0.8fr)]">
-                <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                <section className="salon-panel overflow-hidden border border-border bg-white">
                     <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Prioridad
                         </p>
 
-                        <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                        <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                             Clientes con mayor saldo
                         </h2>
 
@@ -850,7 +850,7 @@ export default function ReporteCuentasCobrarClient({
                                                 className="group flex items-center justify-between gap-4 rounded-[20px] border border-[#E6EBE8] bg-[#FBFCFA] p-4 transition hover:border-[#C9D5CF] hover:bg-white hover:shadow-[0_7px_20px_rgba(36,48,44,0.05)]"
                                             >
                                                 <div className="flex min-w-0 items-center gap-3">
-                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-sm font-black text-[#527064]">
+                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sm font-black text-primary-strong">
                                                         {
                                                             index +
                                                             1
@@ -858,7 +858,7 @@ export default function ReporteCuentasCobrarClient({
                                                     </div>
 
                                                     <div className="min-w-0">
-                                                        <p className="truncate font-black text-[#24302C]">
+                                                        <p className="truncate font-black text-foreground">
                                                             {
                                                                 cliente.nombre
                                                             }
@@ -890,7 +890,7 @@ export default function ReporteCuentasCobrarClient({
                                                         )}
                                                     </p>
 
-                                                    <p className="mt-1 text-[10px] font-bold uppercase text-[#87958D]">
+                                                    <p className="mt-1 text-xs font-bold uppercase text-[#87958D]">
                                                         pendiente
                                                     </p>
                                                 </div>
@@ -904,11 +904,11 @@ export default function ReporteCuentasCobrarClient({
 
                 <section className="overflow-hidden rounded-[28px] border border-[#E6DADC] bg-[#FFF9FA] shadow-[0_10px_28px_rgba(36,48,44,0.04)]">
                     <header className="border-b border-[#EADFE1] px-5 py-4 sm:px-6">
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#A37A7E]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#A37A7E]">
                             Riesgo
                         </p>
 
-                        <h2 className="mt-1 text-lg font-black text-[#553C41]">
+                        <h2 className="mt-1 text-lg font-black text-[#553C41] tracking-tight">
                             Cartera vencida
                         </h2>
 
@@ -919,7 +919,7 @@ export default function ReporteCuentasCobrarClient({
 
                     <div className="p-5 sm:p-6">
                         <div className="rounded-2xl bg-white p-4 shadow-sm">
-                            <p className="text-[10px] font-black uppercase tracking-[0.1em] text-[#A37A7E]">
+                            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#A37A7E]">
                                 Saldo vencido
                             </p>
 
@@ -974,7 +974,7 @@ export default function ReporteCuentasCobrarClient({
                                                             "Cliente"}
                                                     </p>
 
-                                                    <p className="mt-1 text-[10px] font-bold text-[#9B7A7E]">
+                                                    <p className="mt-1 text-xs font-bold text-[#9B7A7E]">
                                                         {cuenta.fecha_vencimiento
                                                             ? formatearFechaSimple(
                                                                 cuenta.fecha_vencimiento,
@@ -997,13 +997,13 @@ export default function ReporteCuentasCobrarClient({
                 </section>
             </div>
 
-            <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                         Detalle
                     </p>
 
-                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                    <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                         Cuentas vencidas
                     </h2>
 
@@ -1024,8 +1024,8 @@ export default function ReporteCuentasCobrarClient({
                 ) : (
                     <>
                         <div className="hidden overflow-x-auto lg:block">
-                            <table className="w-full min-w-[950px]">
-                                <thead className="bg-[#FBFCFA] text-left text-[10px] uppercase tracking-[0.1em] text-[#76817B]">
+                            <table className="salon-table w-full min-w-[950px]">
+                                <thead className="bg-[#FBFCFA] text-left text-xs uppercase tracking-[0.1em] text-[#76817B]">
                                     <tr>
                                         <Th>
                                             Cliente
@@ -1071,7 +1071,7 @@ export default function ReporteCuentasCobrarClient({
                                                             <UserRound className="h-4 w-4" />
                                                         </div>
 
-                                                        <p className="font-black text-[#24302C]">
+                                                        <p className="font-black text-foreground">
                                                             {cuenta.clientes
                                                                 ?.nombre_completo ??
                                                                 "Cliente"}
@@ -1122,7 +1122,7 @@ export default function ReporteCuentasCobrarClient({
                                                 <Td>
                                                     <Link
                                                         href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                                                        className="inline-flex h-9 items-center rounded-xl bg-[#26332F] px-3 text-xs font-black text-white"
+                                                        className="inline-flex h-9 items-center rounded-xl bg-sidebar px-3 text-xs font-black text-white"
                                                     >
                                                         Estado de cuenta
                                                     </Link>
@@ -1168,7 +1168,7 @@ export default function ReporteCuentasCobrarClient({
                                             <AlertTriangle className="h-5 w-5 shrink-0 text-[#9A6267]" />
                                         </div>
 
-                                        <p className="mt-4 text-[10px] font-black uppercase tracking-[0.1em] text-[#A37A7E]">
+                                        <p className="mt-4 text-xs font-black uppercase tracking-[0.1em] text-[#A37A7E]">
                                             Saldo vencido
                                         </p>
 
@@ -1206,20 +1206,20 @@ function HeroDato({
             className={[
                 "rounded-2xl border p-4 backdrop-blur-sm",
                 alerta
-                    ? "border-[#D6A9AE]/20 bg-[#C79AA1]/10"
+                    ? "border-[#D6A9AE]/20 bg-secondary/10"
                     : "border-white/10 bg-white/[0.06]",
             ].join(
                 " ",
             )}
         >
             <div className="flex items-center justify-between gap-3">
-                <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                <p className="text-xs font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
                     {
                         titulo
                     }
                 </p>
 
-                <Icono className="h-4 w-4 text-[#DCE7E2]" />
+                <Icono className="h-4 w-4 text-primary-soft" />
             </div>
 
             <p className="mt-2 truncate text-lg font-black text-white">
@@ -1242,7 +1242,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-2xl bg-[#F7F9F7] p-3">
-            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#87958D]">
                 {
                     titulo
                 }
@@ -1279,7 +1279,7 @@ function Indicador({
 }) {
     return (
         <div className="flex items-center justify-between rounded-2xl border border-[#E5EAE7] bg-white p-4">
-            <span className="text-sm font-semibold text-[#6B756F]">
+            <span className="text-sm font-semibold text-text-secondary">
                 {
                     titulo
                 }
@@ -1292,7 +1292,7 @@ function Indicador({
                         ? "text-[#9A6267]"
                         : positivo
                             ? "text-[#527865]"
-                            : "text-[#24302C]",
+                            : "text-foreground",
                 ].join(
                     " ",
                 )}
@@ -1318,7 +1318,7 @@ function Fecha({
 }) {
     return (
         <label>
-            <span className="mb-2 block text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+            <span className="mb-2 block text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {
                     titulo
                 }
@@ -1338,7 +1338,7 @@ function Fecha({
                             .value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-3 text-sm font-semibold"
+                className="salon-control w-full border border-border-strong px-3 font-semibold"
             />
         </label>
     );
@@ -1350,7 +1350,7 @@ function Vacio({
     texto: string;
 }) {
     return (
-        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-8 text-center text-sm text-[#6B756F]">
+        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-8 text-center text-sm text-text-secondary">
             {
                 texto
             }

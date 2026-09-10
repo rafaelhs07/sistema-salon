@@ -153,8 +153,8 @@ export default function DetalleCitaClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -171,7 +171,7 @@ export default function DetalleCitaClient({
                                 {cita.codigo_cita ?? "Detalle de cita"}
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 {cita.clientes?.nombre_completo ??
                                     "Cliente"}
                             </h1>
@@ -195,8 +195,8 @@ export default function DetalleCitaClient({
                 />
             )}
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)] sm:p-6">
-                <h2 className="text-lg font-bold text-[#24302C]">
+            <section className="salon-panel border border-border bg-white p-5 sm:p-6">
+                <h2 className="text-lg font-bold text-foreground tracking-tight">
                     Acciones de la cita
                 </h2>
 
@@ -342,7 +342,7 @@ export default function DetalleCitaClient({
                                 (servicio) => (
                                     <article
                                         key={servicio.id}
-                                        className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4"
+                                        className="rounded-2xl border border-border bg-[#FBFCFA] p-4"
                                     >
                                         <div className="flex items-start gap-3">
                                             <span
@@ -358,12 +358,12 @@ export default function DetalleCitaClient({
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex flex-wrap items-start justify-between gap-3">
                                                     <div>
-                                                        <p className="font-bold text-[#24302C]">
+                                                        <p className="font-bold text-foreground">
                                                             {
                                                                 servicio.nombre_servicio
                                                             }
                                                         </p>
-                                                        <p className="mt-1 text-sm text-[#6B756F]">
+                                                        <p className="mt-1 text-sm text-text-secondary">
                                                             {servicio.trabajadores
                                                                 ?.nombre_completo ??
                                                                 "Sin trabajador"}
@@ -380,7 +380,7 @@ export default function DetalleCitaClient({
                                                     </p>
                                                 </div>
 
-                                                <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#6B756F]">
+                                                <div className="mt-3 flex flex-wrap gap-2 text-xs text-text-secondary">
                                                     <span className="rounded-full bg-white px-3 py-1.5">
                                                         {formatearHora(servicio.hora_inicio)}{" "}
                                                         –{" "}
@@ -395,7 +395,7 @@ export default function DetalleCitaClient({
                                                 </div>
 
                                                 {servicio.notas && (
-                                                    <p className="mt-3 text-sm text-[#6B756F]">
+                                                    <p className="mt-3 text-sm text-text-secondary">
                                                         {servicio.notas}
                                                     </p>
                                                 )}
@@ -432,11 +432,11 @@ export default function DetalleCitaClient({
 
                 <div className="space-y-6">
                     <Seccion titulo="Cliente" icono={UserRound}>
-                        <p className="font-bold text-[#24302C]">
+                        <p className="font-bold text-foreground">
                             {cita.clientes?.nombre_completo}
                         </p>
 
-                        <p className="mt-1 text-xs font-semibold text-[#6F8F83]">
+                        <p className="mt-1 text-xs font-semibold text-primary">
                             {cita.clientes?.codigo_cliente ??
                                 "Sin código"}
                         </p>
@@ -455,7 +455,7 @@ export default function DetalleCitaClient({
                         {cita.clientes?.id && (
                             <Link
                                 href={`/clientes/${cita.clientes.id}`}
-                                className="mt-5 inline-flex h-10 items-center justify-center rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
+                                className="salon-action mt-5 inline-flex items-center justify-center bg-primary-soft px-4 text-text-secondary"
                             >
                                 Abrir perfil
                             </Link>
@@ -482,7 +482,7 @@ export default function DetalleCitaClient({
 
                         {cita.requiere_anticipo && (
                             <>
-                                <div className="my-4 border-t border-[#E3E7E4]" />
+                                <div className="my-4 border-t border-border" />
                                 <FilaDinero
                                     titulo="Anticipo requerido"
                                     valor={
@@ -502,7 +502,7 @@ export default function DetalleCitaClient({
                     <Seccion titulo="Historial" icono={History}>
                         <div className="space-y-4">
                             {historial.length === 0 ? (
-                                <p className="text-sm text-[#6B756F]">
+                                <p className="text-sm text-text-secondary">
                                     No hay eventos registrados.
                                 </p>
                             ) : (
@@ -522,7 +522,7 @@ export default function DetalleCitaClient({
                                             )}
                                         </p>
                                         {evento.descripcion && (
-                                            <p className="mt-2 text-sm leading-5 text-[#6B756F]">
+                                            <p className="mt-2 text-sm leading-5 text-text-secondary">
                                                 {evento.descripcion}
                                             </p>
                                         )}
@@ -590,7 +590,7 @@ function ModalCancelar({
                     onChange={(event) =>
                         setMotivo(event.target.value)
                     }
-                    className="w-full rounded-xl border border-[#D4DAD6] px-4 py-3 outline-none focus:border-[#6F8F83]"
+                    className="salon-control w-full border border-border-strong px-4 py-3 outline-none focus:border-primary"
                 />
             </label>
 
@@ -598,7 +598,7 @@ function ModalCancelar({
                 <button
                     type="button"
                     onClick={cerrar}
-                    className="h-10 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#52605A]"
+                    className="salon-action bg-surface-soft px-4 text-[#52605A]"
                 >
                     Volver
                 </button>
@@ -608,7 +608,7 @@ function ModalCancelar({
                         procesando || motivo.trim().length < 3
                     }
                     onClick={() => confirmar(motivo)}
-                    className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#A25E5E] px-4 text-sm font-bold text-white disabled:opacity-50"
+                    className="salon-action inline-flex items-center gap-2 bg-[#A25E5E] px-4 text-white disabled:opacity-50"
                 >
                     {procesando && (
                         <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -692,7 +692,7 @@ function ModalReprogramar({
                                     fecha: event.target.value,
                                 }))
                             }
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4"
+                            className="salon-control w-full border border-border-strong px-4"
                         />
                     </label>
 
@@ -722,7 +722,7 @@ function ModalReprogramar({
                                 motivo: event.target.value,
                             }))
                         }
-                        className="w-full rounded-xl border border-[#D4DAD6] px-4 py-3"
+                        className="salon-control w-full border border-border-strong px-4 py-3"
                     />
                 </label>
 
@@ -730,14 +730,14 @@ function ModalReprogramar({
                     <button
                         type="button"
                         onClick={cerrar}
-                        className="h-10 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#52605A]"
+                        className="salon-action bg-surface-soft px-4 text-[#52605A]"
                     >
                         Cancelar
                     </button>
                     <button
                         type="submit"
                         disabled={procesando}
-                        className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#6F8F83] px-4 text-sm font-bold text-white disabled:opacity-50"
+                        className="salon-action inline-flex items-center gap-2 bg-primary px-4 text-white disabled:opacity-50"
                     >
                         {procesando ? (
                             <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -791,7 +791,7 @@ function CampoHora12({
                     onChange={(event) =>
                         actualizar({ hora: Number(event.target.value) })
                     }
-                    className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-3"
+                    className="salon-control border border-border-strong bg-white px-3"
                 >
                     {Array.from({ length: 12 }, (_, indice) => indice + 1).map((hora) => (
                         <option key={hora} value={hora}>
@@ -805,7 +805,7 @@ function CampoHora12({
                     onChange={(event) =>
                         actualizar({ minuto: event.target.value })
                     }
-                    className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-3"
+                    className="salon-control border border-border-strong bg-white px-3"
                 >
                     {minutos.map((minuto) => (
                         <option key={minuto} value={minuto}>
@@ -821,7 +821,7 @@ function CampoHora12({
                             periodo: event.target.value as "AM" | "PM",
                         })
                     }
-                    className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-3 font-semibold"
+                    className="salon-control border border-border-strong bg-white px-3 font-semibold"
                 >
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
@@ -841,22 +841,22 @@ function ModalBase({
     children: React.ReactNode;
 }) {
     return (
-        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-[#26332F]/45 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-sidebar/45 p-4 backdrop-blur-sm">
             <button
                 type="button"
                 onClick={cerrar}
                 className="absolute inset-0"
                 aria-label="Cerrar"
             />
-            <section className="relative z-10 w-full max-w-xl rounded-3xl bg-white p-6 shadow-2xl">
+            <section className="salon-panel relative z-10 w-full max-w-xl bg-white p-6 shadow-2xl">
                 <header className="flex items-center justify-between gap-4">
-                    <h2 className="text-xl font-bold text-[#24302C]">
+                    <h2 className="text-xl font-bold text-foreground tracking-tight">
                         {titulo}
                     </h2>
                     <button
                         type="button"
                         onClick={cerrar}
-                        className="rounded-xl bg-[#EEF2EF] p-2 text-[#52605A]"
+                        className="rounded-xl bg-surface-soft p-2 text-[#52605A]"
                     >
                         <X className="h-5 w-5" />
                     </button>
@@ -877,12 +877,12 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
-                <h2 className="font-bold text-[#24302C]">
+                <h2 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -952,8 +952,8 @@ function Dato({
     valor: string;
 }) {
     return (
-        <div className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4">
-            <div className="flex items-center gap-2 text-[#6F8F83]">
+        <div className="rounded-2xl border border-border bg-[#FBFCFA] p-4">
+            <div className="flex items-center gap-2 text-primary">
                 <Icono className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase">
                     {etiqueta}
@@ -974,7 +974,7 @@ function DatoSimple({
     texto: string;
 }) {
     return (
-        <div className="flex items-center gap-2 text-sm text-[#6B756F]">
+        <div className="flex items-center gap-2 text-sm text-text-secondary">
             <Icono className="h-4 w-4" />
             {texto}
         </div>
@@ -1014,8 +1014,8 @@ function FilaDinero({
             <span
                 className={
                     destacado
-                        ? "font-bold text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
+                        ? "font-bold text-foreground"
+                        : "text-sm text-text-secondary"
                 }
             >
                 {titulo}
@@ -1023,7 +1023,7 @@ function FilaDinero({
             <strong
                 className={
                     destacado
-                        ? "text-xl text-[#24302C]"
+                        ? "text-xl text-foreground"
                         : "text-sm text-[#33413B]"
                 }
             >

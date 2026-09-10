@@ -263,23 +263,23 @@ export default function InventarioClient({
     return (
         <div className="space-y-6">
             {/* CABECERA DIFERENTE AL RESTO DEL SISTEMA */}
-            <section className="overflow-hidden rounded-[32px] border border-[#DCE4DF] bg-white shadow-[0_18px_55px_rgba(36,48,44,0.08)]">
-                <div className="grid lg:grid-cols-[1fr_420px]">
-                    <div className="relative overflow-hidden bg-[#26332F] p-7 text-white sm:p-9">
+            <section className="salon-panel overflow-hidden border border-[#DCE4DF] bg-white">
+                <div className="grid xl:grid-cols-[1fr_420px]">
+                    <div className="salon-hero relative overflow-hidden bg-sidebar p-7 text-white sm:p-9">
                         <div className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full border-[35px] border-white/[0.03]" />
-                        <div className="pointer-events-none absolute -right-10 -top-20 h-64 w-64 rounded-full bg-[#6F8F83]/20 blur-3xl" />
+                        <div className="pointer-events-none absolute -right-10 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
 
                         <div className="relative">
                             <div className="flex items-center gap-3">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/10">
-                                    <Layers3 className="h-6 w-6 text-[#DCE7E2]" />
+                                    <Layers3 className="h-6 w-6 text-primary-soft" />
                                 </div>
 
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#AFC2B9]">
                                         Centro de control
                                     </p>
-                                    <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                    <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                         Inventario
                                     </h1>
                                 </div>
@@ -316,7 +316,7 @@ export default function InventarioClient({
 
                                 <Link
                                     href="/inventario/catalogo"
-                                    className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#DCE7E2] px-3.5 text-xs font-bold text-[#26332F] transition hover:bg-white"
+                                    className="inline-flex h-9 items-center gap-2 rounded-xl bg-primary-soft px-3.5 text-xs font-bold text-sidebar transition hover:bg-white"
                                 >
                                     <Layers3 className="h-4 w-4" />
                                     Catálogo
@@ -340,7 +340,7 @@ export default function InventarioClient({
 
                                 <Link
                                     href="/inventario/alertas"
-                                    className="inline-flex h-9 items-center gap-2 rounded-xl border border-[#E8C5C5]/20 bg-[#C79AA1]/15 px-3.5 text-xs font-bold text-white transition hover:bg-[#C79AA1]/25"
+                                    className="inline-flex h-9 items-center gap-2 rounded-xl border border-[#E8C5C5]/20 bg-secondary/15 px-3.5 text-xs font-bold text-white transition hover:bg-secondary/25"
                                 >
                                     <BellRing className="h-4 w-4" />
                                     Alertas
@@ -417,12 +417,12 @@ export default function InventarioClient({
                             />
                         </div>
 
-                        <div className="mt-5 rounded-2xl border border-[#E1E7E3] bg-white p-4">
+                        <div className="mt-5 rounded-2xl border border-border bg-white p-4">
                             <div className="flex items-center justify-between text-xs">
                                 <span className="font-semibold text-[#5F6C65]">
                                     Inventario saludable
                                 </span>
-                                <span className="font-bold text-[#26332F]">
+                                <span className="font-bold text-sidebar">
                                     {porcentajeSalud(
                                         inventario,
                                     )}
@@ -432,7 +432,7 @@ export default function InventarioClient({
 
                             <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#EDF1EE]">
                                 <div
-                                    className="h-full rounded-full bg-[#6F8F83] transition-all"
+                                    className="h-full rounded-full bg-primary transition-all"
                                     style={{
                                         width: `${porcentajeSalud(
                                             inventario,
@@ -446,7 +446,7 @@ export default function InventarioClient({
             </section>
 
             {/* FILTROS */}
-            <section className="rounded-[28px] border border-[#E0E6E2] bg-white p-5 shadow-sm sm:p-6">
+            <section className="salon-panel border border-border bg-white p-5 shadow-sm sm:p-6">
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-center">
                     <div className="relative flex-1">
                         <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#849189]" />
@@ -459,7 +459,7 @@ export default function InventarioClient({
                                 )
                             }
                             placeholder="Buscar producto, código, barra, marca..."
-                            className="h-12 w-full rounded-2xl border border-[#D7DED9] bg-[#FBFCFB] pl-12 pr-4 text-sm text-[#26332F] outline-none transition focus:border-[#6F8F83] focus:bg-white focus:ring-4 focus:ring-[#6F8F83]/10"
+                            className="salon-control w-full border border-[#D7DED9] bg-[#FBFCFB] pl-12 pr-4 text-sidebar outline-none transition focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10"
                         />
                     </div>
 
@@ -533,7 +533,7 @@ export default function InventarioClient({
                                 onClick={
                                     limpiarFiltros
                                 }
-                                className="inline-flex h-12 items-center gap-2 rounded-2xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#52605A] transition hover:bg-[#E4EAE6]"
+                                className="salon-action inline-flex items-center gap-2 bg-surface-soft px-4 text-[#52605A] transition hover:bg-[#E4EAE6]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar
@@ -638,7 +638,7 @@ export default function InventarioClient({
                                 Existencias
                             </p>
 
-                            <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                            <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                 Productos por sucursal
                             </h2>
                         </div>
@@ -681,14 +681,14 @@ export default function InventarioClient({
 
                 {/* PANEL LATERAL */}
                 <aside className="space-y-5">
-                    <section className="rounded-[26px] border border-[#E0E6E2] bg-white p-5 shadow-sm 2xl:sticky 2xl:top-5">
+                    <section className="salon-panel border border-border bg-white p-5 shadow-sm 2xl:sticky 2xl:top-5">
                         <div className="flex items-center gap-3">
                             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#F8E5E5] text-[#A25E5E]">
                                 <AlertTriangle className="h-5 w-5" />
                             </div>
 
                             <div>
-                                <h3 className="font-bold text-[#26332F]">
+                                <h3 className="font-bold text-sidebar tracking-tight">
                                     Atención requerida
                                 </h3>
                                 <p className="text-xs text-[#718078]">
@@ -758,7 +758,7 @@ function TarjetaProducto({
         );
 
     return (
-        <article className="group relative overflow-hidden rounded-[26px] border border-[#E0E6E2] bg-white p-5 shadow-[0_8px_25px_rgba(36,48,44,0.05)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_35px_rgba(36,48,44,0.09)]">
+        <article className="salon-panel group relative overflow-hidden border border-border bg-white p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_35px_rgba(36,48,44,0.09)]">
             <div
                 className={[
                     "absolute inset-x-0 top-0 h-1",
@@ -782,7 +782,7 @@ function TarjetaProducto({
                         />
 
                         {fila.categoria_nombre && (
-                            <span className="rounded-lg bg-[#F1F4F2] px-2 py-1 text-[10px] font-bold text-[#718078]">
+                            <span className="rounded-lg bg-[#F1F4F2] px-2 py-1 text-xs font-bold text-[#718078]">
                                 {
                                     fila.categoria_nombre
                                 }
@@ -790,7 +790,7 @@ function TarjetaProducto({
                         )}
                     </div>
 
-                    <h3 className="mt-3 truncate text-base font-bold text-[#26332F]">
+                    <h3 className="mt-3 truncate text-base font-bold text-sidebar tracking-tight">
                         {fila.producto_nombre}
                     </h3>
 
@@ -821,7 +821,7 @@ function TarjetaProducto({
             <div className="mt-5 rounded-2xl bg-[#F8FAF8] p-4">
                 <div className="flex items-end justify-between gap-4">
                     <div>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#87938D]">
+                        <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#87938D]">
                             Disponible
                         </p>
 
@@ -849,7 +849,7 @@ function TarjetaProducto({
                     </div>
 
                     <div className="text-right">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#87938D]">
+                        <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#87938D]">
                             Mínimo
                         </p>
                         <p className="mt-1 text-sm font-bold text-[#52605A]">
@@ -896,7 +896,7 @@ function TarjetaProducto({
 
             <div className="mt-4 flex items-center justify-between gap-3 border-t border-[#EDF1EE] pt-4">
                 <div className="flex min-w-0 items-center gap-2 text-xs text-[#637069]">
-                    <Store className="h-4 w-4 shrink-0 text-[#6F8F83]" />
+                    <Store className="h-4 w-4 shrink-0 text-primary" />
                     <span className="truncate font-semibold">
                         {fila.sucursal_nombre}
                     </span>
@@ -941,7 +941,7 @@ function Critico({
                         {fila.producto_nombre}
                     </p>
 
-                    <p className="mt-1 truncate text-[11px] text-[#829089]">
+                    <p className="mt-1 truncate text-xs text-[#829089]">
                         {fila.sucursal_nombre}
                     </p>
 
@@ -989,8 +989,8 @@ function FiltroEstado({
             className={[
                 "inline-flex h-10 items-center gap-2 rounded-xl border px-3 text-xs font-bold transition",
                 activo
-                    ? "border-[#26332F] bg-[#26332F] text-white"
-                    : "border-[#E0E6E2] bg-white text-[#5F6D66] hover:bg-[#F6F8F6]",
+                    ? "border-sidebar bg-sidebar text-white"
+                    : "border-border bg-white text-[#5F6D66] hover:bg-[#F6F8F6]",
             ].join(" ")}
         >
             <Icono className="h-4 w-4" />
@@ -1000,7 +1000,7 @@ function FiltroEstado({
                     "rounded-lg px-1.5 py-0.5 text-[10px]",
                     activo
                         ? "bg-white/15 text-white"
-                        : "bg-[#EEF2EF] text-[#6B756F]",
+                        : "bg-surface-soft text-text-secondary",
                 ].join(" ")}
             >
                 {cantidad}
@@ -1034,7 +1034,7 @@ function SelectCompacto({
                 onChange={(event) =>
                     cambiar(event.target.value)
                 }
-                className="h-12 max-w-[220px] rounded-2xl border border-[#D7DED9] bg-[#FBFCFB] pl-10 pr-8 text-sm font-semibold text-[#52605A] outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                className="salon-control max-w-[220px] border border-[#D7DED9] bg-[#FBFCFB] pl-10 pr-8 font-semibold text-[#52605A] outline-none transition focus:border-primary focus:bg-white"
             >
                 {opciones.map((opcion) => (
                     <option
@@ -1083,7 +1083,7 @@ function EstadoStock({
             className={[
                 "inline-flex rounded-lg px-2 py-1 text-[10px] font-bold uppercase",
                 estilos[estado] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
+                "bg-surface-soft text-text-secondary",
             ].join(" ")}
         >
             {textos[estado] ?? estado}
@@ -1118,8 +1118,8 @@ function SaludMini({
     estado: "NORMAL" | "BAJO" | "AGOTADO";
 }) {
     return (
-        <div className="rounded-2xl border border-[#E1E7E3] bg-white p-3.5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#89948F]">
+        <div className="rounded-2xl border border-border bg-white p-3.5">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#89948F]">
                 {titulo}
             </p>
 
@@ -1148,7 +1148,7 @@ function DatoProducto({
 }) {
     return (
         <div className="rounded-xl border border-[#EBEFEC] bg-white px-3 py-2.5">
-            <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#929C97]">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#929C97]">
                 {titulo}
             </p>
             <p className="mt-1 text-xs font-bold text-[#405049]">
@@ -1160,12 +1160,12 @@ function DatoProducto({
 
 function EstadoVacio() {
     return (
-        <div className="rounded-[28px] border border-dashed border-[#CCD6D0] bg-white p-12 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF2EF] text-[#6F8F83]">
+        <div className="salon-panel border border-dashed border-[#CCD6D0] bg-white p-12 text-center">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                 <PackageSearch className="h-7 w-7" />
             </div>
 
-            <h3 className="mt-4 font-bold text-[#26332F]">
+            <h3 className="mt-4 font-bold text-sidebar tracking-tight">
                 No encontramos productos
             </h3>
 

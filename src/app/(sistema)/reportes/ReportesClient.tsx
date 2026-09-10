@@ -39,13 +39,13 @@ export default function ReportesClient({
 }) {
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                     <div className="max-w-3xl">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <ClipboardList className="h-7 w-7" />
                             </div>
 
@@ -54,7 +54,7 @@ export default function ReportesClient({
                                     Análisis del negocio
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                     Centro de reportes
                                 </h1>
 
@@ -69,7 +69,7 @@ export default function ReportesClient({
 
                     <Link
                         href="/finanzas/resumen"
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#DCE7E2] px-5 text-sm font-bold text-[#26332F] transition hover:bg-white"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                     >
                         <FileSpreadsheet className="h-5 w-5" />
                         Estado financiero
@@ -120,7 +120,7 @@ export default function ReportesClient({
 
             <section>
                 <div className="mb-4">
-                    <h2 className="text-xl font-bold text-[#26332F]">
+                    <h2 className="text-xl font-bold text-sidebar tracking-tight">
                         Reportes disponibles
                     </h2>
 
@@ -240,14 +240,14 @@ function KpiCard({
     }>;
 }) {
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <p className="text-sm font-semibold text-[#71817A]">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold text-[#26332F]">
+                    <p className="mt-3 text-2xl font-bold text-sidebar">
                         {valor}
                     </p>
 
@@ -256,7 +256,7 @@ function KpiCard({
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF4F0] text-[#587064]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-[#587064]">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -280,7 +280,7 @@ function ReporteCard({
     return (
         <Link
             href={href}
-            className="group rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.07)] transition hover:-translate-y-0.5 hover:border-[#BFCFC7] hover:shadow-[0_16px_40px_rgba(36,48,44,0.10)]"
+            className="group rounded-[28px] border border-border bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.07)] transition hover:-translate-y-0.5 hover:border-[#BFCFC7] hover:shadow-[0_16px_40px_rgba(36,48,44,0.10)]"
         >
             <div className="flex items-start justify-between gap-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E7EFEA] text-[#516D60]">
@@ -290,7 +290,7 @@ function ReporteCard({
                 <ArrowRight className="h-5 w-5 text-[#94A29B] transition group-hover:translate-x-1 group-hover:text-[#52675E]" />
             </div>
 
-            <h3 className="mt-5 text-lg font-bold text-[#26332F]">
+            <h3 className="mt-5 text-lg font-bold text-sidebar tracking-tight">
                 {titulo}
             </h3>
 
@@ -313,13 +313,13 @@ function MiniDato({
     }>;
 }) {
     return (
-        <article className="flex items-center justify-between gap-4 rounded-2xl border border-[#DCE5E0] bg-[#FBFCFA] px-5 py-4">
+        <article className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-[#FBFCFA] px-5 py-4">
             <div>
                 <p className="text-xs font-semibold text-[#7B8982]">
                     {titulo}
                 </p>
 
-                <p className="mt-1 text-xl font-bold text-[#26332F]">
+                <p className="mt-1 text-xl font-bold text-sidebar">
                     {valor}
                 </p>
             </div>

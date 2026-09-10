@@ -199,8 +199,8 @@ export default function DetalleVentaClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div>
@@ -213,7 +213,7 @@ export default function DetalleVentaClient({
                         </Link>
 
                         <div className="mt-5 flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <ReceiptText className="h-7 w-7" />
                             </div>
 
@@ -222,7 +222,7 @@ export default function DetalleVentaClient({
                                     Detalle administrativo
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                     {venta.codigo_venta ??
                                         "Venta"}
                                 </h1>
@@ -258,7 +258,7 @@ export default function DetalleVentaClient({
                         {venta.estado === "ACTIVA" && (
                             <Link
                                 href={`/caja/recibos/${venta.id}`}
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-5 text-sm font-bold text-[#26332F] transition hover:bg-white"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                             >
                                 <ReceiptText className="h-4 w-4" />
                                 Ver recibo
@@ -273,7 +273,7 @@ export default function DetalleVentaClient({
                                     setErrorAnulacion(null);
                                     setMostrarAnulacion(true);
                                 }}
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-[#E7BDBD] bg-[#F8E5E5] px-5 text-sm font-bold text-[#985858] transition hover:bg-[#F3D8D8] disabled:cursor-not-allowed disabled:opacity-50"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-[#E7BDBD] bg-[#F8E5E5] px-5 text-[#985858] transition hover:bg-[#F3D8D8] disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 <XCircle className="h-4 w-4" />
                                 Anular venta
@@ -427,13 +427,13 @@ export default function DetalleVentaClient({
 
                     <Seccion titulo="Servicios / productos">
                         {detalles.length === 0 ? (
-                            <p className="text-sm text-[#6B756F]">
+                            <p className="text-sm text-text-secondary">
                                 La venta no tiene detalles
                                 registrados.
                             </p>
                         ) : (
                             <div className="overflow-x-auto">
-                                <table className="w-full min-w-[720px]">
+                                <table className="salon-table w-full min-w-[720px]">
                                     <thead className="bg-[#FBFCFA] text-left text-xs uppercase text-[#76817B]">
                                         <tr>
                                             <Th>
@@ -467,7 +467,7 @@ export default function DetalleVentaClient({
                                                     className="text-sm"
                                                 >
                                                     <Td>
-                                                        <p className="font-semibold text-[#24302C]">
+                                                        <p className="font-semibold text-foreground">
                                                             {
                                                                 detalle.descripcion
                                                             }
@@ -518,7 +518,7 @@ export default function DetalleVentaClient({
                     <Seccion titulo="Pagos registrados">
                         {pagosAplicados.length ===
                             0 ? (
-                            <p className="text-sm text-[#6B756F]">
+                            <p className="text-sm text-text-secondary">
                                 No hay pagos aplicados.
                             </p>
                         ) : (
@@ -548,8 +548,8 @@ export default function DetalleVentaClient({
                 </div>
 
                 <aside className="xl:sticky xl:top-24 xl:self-start">
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
-                        <h2 className="text-lg font-bold text-[#24302C]">
+                    <section className="salon-panel border border-border bg-white p-6">
+                        <h2 className="text-lg font-bold text-foreground tracking-tight">
                             Resumen financiero
                         </h2>
 
@@ -641,7 +641,7 @@ export default function DetalleVentaClient({
                         {venta.estado === "ACTIVA" && (
                             <Link
                                 href={`/caja/recibos/${venta.id}`}
-                                className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] text-sm font-bold text-white transition hover:bg-[#607F74]"
+                                className="salon-action mt-6 inline-flex w-full items-center justify-center gap-2 bg-primary text-white transition hover:bg-primary-hover"
                             >
                                 <ReceiptText className="h-4 w-4" />
                                 Abrir recibo
@@ -652,16 +652,16 @@ export default function DetalleVentaClient({
             </div>
             {mostrarAnulacion && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 p-4">
-                    <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl">
+                    <div className="salon-panel w-full max-w-lg bg-white p-6 shadow-2xl">
                         <div className="flex items-start justify-between gap-4">
                             <div>
                                 <p className="text-sm font-semibold text-[#A25E5E]">
                                     Acción irreversible
                                 </p>
-                                <h2 className="mt-1 text-xl font-bold text-[#24302C]">
+                                <h2 className="mt-1 text-xl font-bold text-foreground tracking-tight">
                                     Anular venta
                                 </h2>
-                                <p className="mt-2 text-sm leading-6 text-[#6B756F]">
+                                <p className="mt-2 text-sm leading-6 text-text-secondary">
                                     Se anularán los pagos y se crearán
                                     movimientos compensatorios. Los registros
                                     originales se conservarán para auditoría.
@@ -674,7 +674,7 @@ export default function DetalleVentaClient({
                                 onClick={() =>
                                     setMostrarAnulacion(false)
                                 }
-                                className="rounded-xl bg-[#EEF2EF] p-2 text-[#52605A]"
+                                className="rounded-xl bg-surface-soft p-2 text-[#52605A]"
                             >
                                 <X className="h-5 w-5" />
                             </button>
@@ -699,7 +699,7 @@ export default function DetalleVentaClient({
                                         setErrorAnulacion(null);
                                     }}
                                     placeholder="Ejemplo: cobro registrado por error."
-                                    className="w-full rounded-xl border border-[#D4DAD6] px-4 py-3 text-sm outline-none focus:border-[#A25E5E]"
+                                    className="salon-control w-full border border-border-strong px-4 py-3 outline-none focus:border-[#A25E5E]"
                                 />
                             </label>
 
@@ -716,7 +716,7 @@ export default function DetalleVentaClient({
                                     onClick={() =>
                                         setMostrarAnulacion(false)
                                     }
-                                    className="h-11 rounded-xl border border-[#DCE3DF] px-5 text-sm font-bold text-[#52605A]"
+                                    className="salon-action border border-border-strong px-5 text-[#52605A]"
                                 >
                                     Cancelar
                                 </button>
@@ -727,7 +727,7 @@ export default function DetalleVentaClient({
                                         anulando ||
                                         motivoAnulacion.trim().length < 5
                                     }
-                                    className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#A25E5E] px-5 text-sm font-bold text-white disabled:opacity-50"
+                                    className="salon-action inline-flex items-center justify-center gap-2 bg-[#A25E5E] px-5 text-white disabled:opacity-50"
                                 >
                                     {anulando ? (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -758,18 +758,18 @@ function PagoDetalle({
         pago.terminales_pos;
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4">
+        <article className="rounded-2xl border border-border bg-[#FBFCFA] p-4">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-bold text-[#24302C]">
+                        <span className="font-bold text-foreground">
                             {formatearTexto(
                                 pago.metodo_pago,
                             )}
                         </span>
 
                         {terminal && (
-                            <span className="rounded-full bg-[#DCE7E2] px-2.5 py-1 text-[10px] font-bold text-[#43524B]">
+                            <span className="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-bold text-text-secondary">
                                 {terminal.nombre}
                             </span>
                         )}
@@ -798,14 +798,14 @@ function PagoDetalle({
                         )}
 
                     {pago.observaciones && (
-                        <p className="mt-2 text-xs text-[#6B756F]">
+                        <p className="mt-2 text-xs text-text-secondary">
                             {pago.observaciones}
                         </p>
                     )}
                 </div>
 
                 <div className="text-left sm:text-right">
-                    <p className="text-lg font-bold text-[#24302C]">
+                    <p className="text-lg font-bold text-foreground">
                         {dinero(pago.monto)}
                     </p>
 
@@ -814,7 +814,7 @@ function PagoDetalle({
                         Number(
                             pago.monto_comision_pos,
                         ) > 0 && (
-                            <div className="mt-2 text-xs text-[#6B756F]">
+                            <div className="mt-2 text-xs text-text-secondary">
                                 <p>
                                     Comisión{" "}
                                     {Number(
@@ -847,7 +847,7 @@ function PagoDetalle({
                         "EFECTIVO" &&
                         Number(pago.cambio) >
                         0 && (
-                            <div className="mt-2 text-xs text-[#6B756F]">
+                            <div className="mt-2 text-xs text-text-secondary">
                                 <p>
                                     Recibido:{" "}
                                     {dinero(
@@ -879,9 +879,9 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                <h2 className="font-bold text-[#24302C]">
+                <h2 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -906,7 +906,7 @@ function Dato({
     return (
         <div className="rounded-2xl bg-[#FBFCFA] p-4">
             <div className="flex items-start gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-4 w-4" />
                 </div>
                 <div>
@@ -934,17 +934,17 @@ function TarjetaResumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-sm text-[#6B756F]">
+                    <p className="text-sm text-text-secondary">
                         {titulo}
                     </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -966,8 +966,8 @@ function Fila({
             <span
                 className={
                     destacado
-                        ? "font-bold text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
+                        ? "font-bold text-foreground"
+                        : "text-sm text-text-secondary"
                 }
             >
                 {titulo}
@@ -975,7 +975,7 @@ function Fila({
             <strong
                 className={
                     destacado
-                        ? "text-xl text-[#24302C]"
+                        ? "text-xl text-foreground"
                         : "text-sm text-[#33413B]"
                 }
             >
@@ -1004,7 +1004,7 @@ function EstadoPago({
             className={[
                 "rounded-full px-3 py-1 text-[10px] font-bold uppercase",
                 estilos[estado] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
+                "bg-surface-soft text-text-secondary",
             ].join(" ")}
         >
             {formatearTexto(estado)}

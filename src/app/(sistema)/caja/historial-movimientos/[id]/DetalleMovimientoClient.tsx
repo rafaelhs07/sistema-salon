@@ -66,7 +66,7 @@ export default function DetalleMovimientoClient({
 
     return (
         <div className="space-y-6">
-            <section className="rounded-3xl bg-[#26332F] p-6 text-white sm:p-8">
+            <section className="salon-hero bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/caja/historial-movimientos"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
@@ -79,7 +79,7 @@ export default function DetalleMovimientoClient({
                     Movimiento de caja
                 </p>
 
-                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                     {movimiento.concepto}
                 </h1>
 
@@ -171,19 +171,19 @@ export default function DetalleMovimientoClient({
                     {movimiento.venta_id &&
                         movimiento.ventas ? (
                         <div>
-                            <p className="text-sm text-[#6B756F]">
+                            <p className="text-sm text-text-secondary">
                                 Este movimiento está relacionado
                                 con una venta.
                             </p>
 
                             <div className="mt-4 rounded-2xl bg-[#FBFCFA] p-4">
-                                <p className="font-bold text-[#24302C]">
+                                <p className="font-bold text-foreground">
                                     {movimiento.ventas
                                         .codigo_venta ??
                                         "Venta"}
                                 </p>
 
-                                <p className="mt-1 text-sm text-[#6B756F]">
+                                <p className="mt-1 text-sm text-text-secondary">
                                     Total:{" "}
                                     {dinero(
                                         movimiento.ventas
@@ -193,7 +193,7 @@ export default function DetalleMovimientoClient({
 
                                 <Link
                                     href={`/caja/ventas/${movimiento.venta_id}`}
-                                    className="mt-4 inline-flex h-10 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
+                                    className="salon-action mt-4 inline-flex items-center gap-2 bg-primary-soft px-4 text-text-secondary"
                                 >
                                     <ReceiptText className="h-4 w-4" />
                                     Ver venta
@@ -201,7 +201,7 @@ export default function DetalleMovimientoClient({
                             </div>
                         </div>
                     ) : (
-                        <p className="text-sm text-[#6B756F]">
+                        <p className="text-sm text-text-secondary">
                             Movimiento independiente, sin venta
                             relacionada.
                         </p>
@@ -230,16 +230,16 @@ function Dato({
     icono: React.ComponentType<{ className?: string }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-sm">
+        <article className="salon-panel border border-border bg-white p-5 shadow-sm">
             <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
                 <div>
                     <p className="text-xs font-bold uppercase text-[#829089]">
                         {titulo}
                     </p>
-                    <p className="mt-1 font-bold text-[#24302C]">
+                    <p className="mt-1 font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
@@ -256,9 +256,9 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
+        <section className="salon-panel border border-border bg-white shadow-sm">
             <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4">
-                <h2 className="font-bold text-[#24302C]">
+                <h2 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -276,7 +276,7 @@ function Fila({
 }) {
     return (
         <div className="flex items-center justify-between gap-4">
-            <span className="text-sm text-[#6B756F]">
+            <span className="text-sm text-text-secondary">
                 {titulo}
             </span>
             <strong className="text-sm text-[#33413B]">

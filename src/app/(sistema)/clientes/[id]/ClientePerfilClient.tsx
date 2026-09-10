@@ -191,9 +191,9 @@ export default function ClientePerfilClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -206,13 +206,13 @@ export default function ClientePerfilClient({
 
                     <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-[#DCE7E2] text-xl font-bold text-[#26332F]">
+                            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-primary-soft text-xl font-bold text-sidebar">
                                 {iniciales}
                             </div>
 
                             <div>
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                                    <h1 className="text-3xl font-black tracking-tight sm:text-4xl">
                                         {cliente.nombre_completo}
                                     </h1>
 
@@ -257,7 +257,7 @@ export default function ClientePerfilClient({
                 />
             )}
 
-            <nav className="flex gap-2 overflow-x-auto rounded-2xl border border-[#E3E7E4] bg-white p-2 shadow-sm">
+            <nav className="flex gap-2 overflow-x-auto rounded-2xl border border-border bg-white p-2 shadow-sm">
                 <BotonPestana
                     texto="Resumen"
                     icono={UserRound}
@@ -607,7 +607,7 @@ function FormularioFicha({
                         <button
                             type="submit"
                             disabled={guardando}
-                            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white disabled:opacity-60"
+                            className="salon-action inline-flex items-center justify-center gap-2 bg-primary px-5 text-white disabled:opacity-60"
                         >
                             {guardando ? (
                                 <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -749,7 +749,7 @@ function SeccionFormulas({
                                 setBusqueda(event.target.value)
                             }
                             placeholder="Buscar nombre, fórmula o trabajador..."
-                            className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                         />
                     </div>
 
@@ -758,7 +758,7 @@ function SeccionFormulas({
                         onChange={(event) =>
                             setFiltroTipo(event.target.value)
                         }
-                        className="h-10 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                        className="salon-control border border-border-strong bg-white px-4"
                     >
                         <option value="TODOS">Todos los tipos</option>
                         <option value="TINTE">Tinte</option>
@@ -779,7 +779,7 @@ function SeccionFormulas({
                         onClick={() =>
                             setMostrarFormulario((valor) => !valor)
                         }
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-4 text-text-secondary"
                     >
                         <Plus className="h-4 w-4" />
                         Nueva fórmula
@@ -790,7 +790,7 @@ function SeccionFormulas({
             {mostrarFormulario && (
                 <form
                     onSubmit={enviar}
-                    className="mt-5 rounded-2xl border border-[#DCE3DF] bg-[#FBFCFA] p-5"
+                    className="mt-5 rounded-2xl border border-border-strong bg-[#FBFCFA] p-5"
                 >
                     <div className="grid gap-4 md:grid-cols-2">
                         <CampoTexto
@@ -885,7 +885,7 @@ function SeccionFormulas({
                         <button
                             type="submit"
                             disabled={guardando}
-                            className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#6F8F83] px-4 text-sm font-bold text-white"
+                            className="salon-action inline-flex items-center gap-2 bg-primary px-4 text-white"
                         >
                             {guardando ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -898,7 +898,7 @@ function SeccionFormulas({
                 </form>
             )}
 
-            <p className="mt-4 text-sm text-[#6B756F]">
+            <p className="mt-4 text-sm text-text-secondary">
                 {formulasFiltradas.length} fórmula
                 {formulasFiltradas.length === 1 ? "" : "s"} encontrada
                 {formulasFiltradas.length === 1 ? "" : "s"}.
@@ -911,14 +911,14 @@ function SeccionFormulas({
                     formulasFiltradas.map((formula) => (
                         <article
                             key={formula.id}
-                            className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-5"
+                            className="rounded-2xl border border-border bg-[#FBFCFA] p-5"
                         >
                             <div className="flex flex-wrap items-start justify-between gap-3">
                                 <div>
-                                    <p className="font-bold text-[#24302C]">
+                                    <p className="font-bold text-foreground">
                                         {formula.nombre}
                                     </p>
-                                    <p className="mt-1 text-xs font-semibold text-[#6F8F83]">
+                                    <p className="mt-1 text-xs font-semibold text-primary">
                                         {formatearTexto(formula.tipo)} ·{" "}
                                         {formula.fecha_aplicacion
                                             ? formatearFecha(
@@ -929,7 +929,7 @@ function SeccionFormulas({
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                    <span className="rounded-full bg-[#EEF2EF] px-3 py-1 text-xs font-semibold text-[#52605A]">
+                                    <span className="rounded-full bg-surface-soft px-3 py-1 text-xs font-semibold text-[#52605A]">
                                         {formula.trabajadores
                                             ?.nombre_completo ??
                                             "Sin trabajador"}
@@ -1096,7 +1096,7 @@ function SeccionNotas({
                                 setBusqueda(event.target.value)
                             }
                             placeholder="Buscar en notas..."
-                            className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                         />
                     </div>
 
@@ -1105,7 +1105,7 @@ function SeccionNotas({
                         onChange={(event) =>
                             setFiltroTipo(event.target.value)
                         }
-                        className="h-10 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                        className="salon-control border border-border-strong bg-white px-4"
                     >
                         <option value="TODOS">Todos los tipos</option>
                         <option value="GENERAL">General</option>
@@ -1117,7 +1117,7 @@ function SeccionNotas({
                         <option value="OTRO">Otro</option>
                     </select>
 
-                    <label className="flex h-10 cursor-pointer items-center justify-between rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold text-[#52605A]">
+                    <label className="flex h-10 cursor-pointer items-center justify-between rounded-xl border border-border-strong bg-white px-4 text-sm font-semibold text-[#52605A]">
                         Solo importantes
                         <input
                             type="checkbox"
@@ -1136,7 +1136,7 @@ function SeccionNotas({
                     onClick={() =>
                         setMostrarFormulario((valor) => !valor)
                     }
-                    className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
+                    className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-4 text-text-secondary"
                 >
                     <Plus className="h-4 w-4" />
                     Nueva nota
@@ -1146,7 +1146,7 @@ function SeccionNotas({
             {mostrarFormulario && (
                 <form
                     onSubmit={enviar}
-                    className="mt-5 rounded-2xl border border-[#DCE3DF] bg-[#FBFCFA] p-5"
+                    className="mt-5 rounded-2xl border border-border-strong bg-[#FBFCFA] p-5"
                 >
                     <div className="grid gap-4 md:grid-cols-2">
                         <CampoTexto
@@ -1210,7 +1210,7 @@ function SeccionNotas({
                         <button
                             type="submit"
                             disabled={guardando}
-                            className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#6F8F83] px-4 text-sm font-bold text-white"
+                            className="salon-action inline-flex items-center gap-2 bg-primary px-4 text-white"
                         >
                             {guardando ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -1223,7 +1223,7 @@ function SeccionNotas({
                 </form>
             )}
 
-            <p className="mt-4 text-sm text-[#6B756F]">
+            <p className="mt-4 text-sm text-text-secondary">
                 {notasFiltradas.length} nota
                 {notasFiltradas.length === 1 ? "" : "s"} encontrada
                 {notasFiltradas.length === 1 ? "" : "s"}.
@@ -1240,7 +1240,7 @@ function SeccionNotas({
                                 "rounded-2xl border p-5",
                                 nota.es_importante
                                     ? "border-[#E6D7B9] bg-[#FAF0DC]"
-                                    : "border-[#E3E7E4] bg-[#FBFCFA]",
+                                    : "border-border bg-[#FBFCFA]",
                             ].join(" ")}
                         >
                             <div className="flex items-start gap-3">
@@ -1251,7 +1251,7 @@ function SeccionNotas({
                                 <div className="min-w-0 flex-1">
                                     <div className="flex items-start justify-between gap-3">
                                         <div>
-                                            <p className="font-bold text-[#24302C]">
+                                            <p className="font-bold text-foreground">
                                                 {nota.titulo ||
                                                     formatearTexto(nota.tipo)}
                                             </p>
@@ -1395,7 +1395,7 @@ function SeccionArchivos({
                                 setBusqueda(event.target.value)
                             }
                             placeholder="Buscar archivo o descripción..."
-                            className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                         />
                     </div>
 
@@ -1404,7 +1404,7 @@ function SeccionArchivos({
                         onChange={(event) =>
                             setFiltroTipo(event.target.value)
                         }
-                        className="h-10 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                        className="salon-control border border-border-strong bg-white px-4"
                     >
                         <option value="TODOS">Todos los tipos</option>
                         <option value="ANTES">Antes</option>
@@ -1421,7 +1421,7 @@ function SeccionArchivos({
                         onClick={() =>
                             setMostrarFormulario((valor) => !valor)
                         }
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-4 text-text-secondary"
                     >
                         <Upload className="h-4 w-4" />
                         Subir archivo
@@ -1432,7 +1432,7 @@ function SeccionArchivos({
             {mostrarFormulario && (
                 <form
                     onSubmit={enviar}
-                    className="mt-5 rounded-2xl border border-[#DCE3DF] bg-[#FBFCFA] p-5"
+                    className="mt-5 rounded-2xl border border-border-strong bg-[#FBFCFA] p-5"
                 >
                     <div className="grid gap-4 md:grid-cols-2">
                         <CampoSelect
@@ -1465,7 +1465,7 @@ function SeccionArchivos({
                                 type="file"
                                 accept="image/jpeg,image/png,image/webp,application/pdf"
                                 required
-                                className="block w-full rounded-xl border border-[#D4DAD6] bg-white p-3 text-sm"
+                                className="block w-full rounded-xl border border-border-strong bg-white p-3 text-sm"
                             />
                             <p className="mt-2 text-xs text-[#76817B]">
                                 JPG, PNG, WEBP o PDF. Máximo 8 MB.
@@ -1478,7 +1478,7 @@ function SeccionArchivos({
                             <textarea
                                 name="descripcion"
                                 rows={3}
-                                className="w-full rounded-xl border border-[#D4DAD6] bg-white px-4 py-3"
+                                className="salon-control w-full border border-border-strong bg-white px-4 py-3"
                             />
                         </div>
                     </div>
@@ -1487,7 +1487,7 @@ function SeccionArchivos({
                         <button
                             type="submit"
                             disabled={subiendo}
-                            className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#6F8F83] px-4 text-sm font-bold text-white"
+                            className="salon-action inline-flex items-center gap-2 bg-primary px-4 text-white"
                         >
                             {subiendo ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -1500,7 +1500,7 @@ function SeccionArchivos({
                 </form>
             )}
 
-            <p className="mt-4 text-sm text-[#6B756F]">
+            <p className="mt-4 text-sm text-text-secondary">
                 {archivosFiltrados.length} archivo
                 {archivosFiltrados.length === 1 ? "" : "s"} encontrado
                 {archivosFiltrados.length === 1 ? "" : "s"}.
@@ -1513,7 +1513,7 @@ function SeccionArchivos({
                     archivosFiltrados.map((archivo) => (
                         <article
                             key={archivo.id}
-                            className="overflow-hidden rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA]"
+                            className="overflow-hidden rounded-2xl border border-border bg-[#FBFCFA]"
                         >
                             {archivo.urlFirmada &&
                                 archivo.tipo !== "DOCUMENTO" &&
@@ -1529,7 +1529,7 @@ function SeccionArchivos({
                                     className="h-48 w-full object-cover"
                                 />
                             ) : (
-                                <div className="flex h-48 items-center justify-center bg-[#EEF2EF]">
+                                <div className="flex h-48 items-center justify-center bg-surface-soft">
                                     <FileText className="h-12 w-12 text-[#829089]" />
                                 </div>
                             )}
@@ -1537,10 +1537,10 @@ function SeccionArchivos({
                             <div className="p-4">
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="min-w-0">
-                                        <p className="truncate font-bold text-[#24302C]">
+                                        <p className="truncate font-bold text-foreground">
                                             {archivo.nombre_archivo}
                                         </p>
-                                        <p className="mt-1 text-xs font-semibold text-[#6F8F83]">
+                                        <p className="mt-1 text-xs font-semibold text-primary">
                                             {formatearTexto(archivo.tipo)}
                                         </p>
                                     </div>
@@ -1557,7 +1557,7 @@ function SeccionArchivos({
                                 </div>
 
                                 <div className="mt-3 rounded-xl bg-white p-3">
-                                    <p className="text-[11px] font-bold uppercase tracking-wide text-[#829089]">
+                                    <p className="text-xs font-bold uppercase tracking-wide text-[#829089]">
                                         Fecha del servicio
                                     </p>
                                     <p className="mt-1 text-sm font-semibold text-[#33413B]">
@@ -1570,7 +1570,7 @@ function SeccionArchivos({
                                 </div>
 
                                 {archivo.descripcion && (
-                                    <p className="mt-3 text-sm leading-5 text-[#6B756F]">
+                                    <p className="mt-3 text-sm leading-5 text-text-secondary">
                                         {archivo.descripcion}
                                     </p>
                                 )}
@@ -1587,7 +1587,7 @@ function SeccionArchivos({
                                         href={archivo.urlFirmada}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#5E7D71]"
+                                        className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary-hover"
                                     >
                                         <FileImage className="h-4 w-4" />
                                         Abrir archivo
@@ -1612,12 +1612,12 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
-                <h2 className="font-bold text-[#24302C]">
+                <h2 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -1644,8 +1644,8 @@ function BotonPestana({
             className={[
                 "inline-flex h-11 shrink-0 items-center gap-2 rounded-xl px-4 text-sm font-bold transition",
                 activa
-                    ? "bg-[#DCE7E2] text-[#43524B]"
-                    : "text-[#6B756F] hover:bg-[#EEF2EF]",
+                    ? "bg-primary-soft text-text-secondary"
+                    : "text-text-secondary hover:bg-surface-soft",
             ].join(" ")}
         >
             <Icono className="h-4 w-4" />
@@ -1679,8 +1679,8 @@ function Dato({
     valor: string;
 }) {
     return (
-        <div className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4">
-            <div className="flex items-center gap-2 text-[#6F8F83]">
+        <div className="rounded-2xl border border-border bg-[#FBFCFA] p-4">
+            <div className="flex items-center gap-2 text-primary">
                 <Icono className="h-4 w-4" />
                 <p className="text-xs font-bold uppercase tracking-wide">
                     {etiqueta}
@@ -1729,7 +1729,7 @@ function CampoTexto({
             <input
                 value={valor}
                 onChange={(event) => cambiar(event.target.value)}
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-4 outline-none focus:border-primary"
             />
         </div>
     );
@@ -1753,7 +1753,7 @@ function CampoArea({
                 rows={4}
                 value={valor}
                 onChange={(event) => cambiar(event.target.value)}
-                className="w-full rounded-xl border border-[#D4DAD6] bg-white px-4 py-3 outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-4 py-3 outline-none focus:border-primary"
             />
         </div>
     );
@@ -1788,7 +1788,7 @@ function CampoSelect({
                         onChange: (event) =>
                             cambiar(event.target.value),
                     })}
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4"
+                className="salon-control w-full border border-border-strong bg-white px-4"
             >
                 {opciones.map(([opcionValor, texto]) => (
                     <option
@@ -1831,7 +1831,7 @@ function CampoFecha({
                         onChange: (event) =>
                             cambiar(event.target.value),
                     })}
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4"
+                className="salon-control w-full border border-border-strong bg-white px-4"
             />
         </div>
     );
@@ -1870,8 +1870,8 @@ function MensajeEstado({
 
 function EstadoVacio({ texto }: { texto: string }) {
     return (
-        <div className="col-span-full rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-8 text-center">
-            <p className="text-sm text-[#6B756F]">{texto}</p>
+        <div className="col-span-full rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-8 text-center">
+            <p className="text-sm text-text-secondary">{texto}</p>
         </div>
     );
 }

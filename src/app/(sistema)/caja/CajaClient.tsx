@@ -265,9 +265,9 @@ export default function CajaClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8 lg:p-10">
-                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8 lg:p-10">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative grid gap-7 xl:grid-cols-[1.1fr_0.9fr] xl:items-end">
                     <div>
@@ -277,12 +277,12 @@ export default function CajaClient({
                         </div>
 
                         <div className="mt-5 flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <WalletCards className="h-7 w-7" />
                             </div>
 
                             <div>
-                                <h1 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+                                <h1 className="text-3xl font-black tracking-tight sm:text-4xl">
                                     Caja y ventas
                                 </h1>
 
@@ -439,14 +439,14 @@ export default function CajaClient({
                 />
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.06)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="flex flex-col gap-4 border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Accesos rápidos
                         </p>
 
-                        <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                        <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                             Gestión de caja
                         </h2>
 
@@ -467,7 +467,7 @@ export default function CajaClient({
                                             !actual,
                                     )
                                 }
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white transition hover:bg-[#34463F]"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:bg-sidebar-hover"
                             >
                                 {mostrarFormulario ? (
                                     <X className="h-4 w-4" />
@@ -520,18 +520,18 @@ export default function CajaClient({
             {mostrarFormulario &&
                 sucursalesDisponibles.length >
                 0 && (
-                    <section className="overflow-hidden rounded-[28px] border border-[#DCE5E0] bg-white shadow-[0_12px_34px_rgba(36,48,44,0.07)]">
+                    <section className="salon-panel overflow-hidden border border-border bg-white">
                         <header className="flex items-center gap-3 border-b border-[#E7ECE9] bg-[#F7FAF8] px-5 py-5 sm:px-6">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                                 <Landmark className="h-5 w-5" />
                             </div>
 
                             <div>
-                                <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#87958D]">
+                                <p className="text-xs font-black uppercase tracking-[0.13em] text-[#87958D]">
                                     Inicio de jornada
                                 </p>
 
-                                <h2 className="mt-1 font-black text-[#24302C]">
+                                <h2 className="mt-1 font-black text-foreground tracking-tight">
                                     Apertura de caja
                                 </h2>
 
@@ -581,8 +581,8 @@ export default function CajaClient({
                             </div>
 
                             <label className="mt-5 block">
-                                <span className="mb-2 flex items-center gap-2 text-sm font-black text-[#43524B]">
-                                    <MessageSquareText className="h-4 w-4 text-[#6F8F83]" />
+                                <span className="mb-2 flex items-center gap-2 text-sm font-black text-text-secondary">
+                                    <MessageSquareText className="h-4 w-4 text-primary" />
                                     Observaciones
                                 </span>
 
@@ -602,17 +602,17 @@ export default function CajaClient({
                                         )
                                     }
                                     placeholder="Ejemplo: fondo inicial entregado por administración."
-                                    className="w-full resize-none rounded-2xl border border-[#D4DAD6] bg-[#F9FBF9] px-4 py-3 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                    className="salon-control w-full resize-none border border-border-strong bg-[#F9FBF9] px-4 py-3 outline-none transition focus:border-primary focus:bg-white"
                                 />
                             </label>
 
-                            <div className="mt-5 flex flex-col gap-4 rounded-2xl border border-[#C8D9D1] bg-[#F0F5F2] p-4 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="mt-5 flex flex-col gap-4 rounded-2xl border border-[#C8D9D1] bg-surface-soft p-4 sm:flex-row sm:items-center sm:justify-between">
                                 <div>
-                                    <p className="text-sm font-black text-[#43524B]">
+                                    <p className="text-sm font-black text-text-secondary">
                                         Caja lista para iniciar
                                     </p>
 
-                                    <p className="mt-1 text-xs leading-5 text-[#6B756F]">
+                                    <p className="mt-1 text-xs leading-5 text-text-secondary">
                                         El monto inicial formará parte del efectivo esperado al realizar el cierre.
                                     </p>
                                 </div>
@@ -623,7 +623,7 @@ export default function CajaClient({
                                         guardando ||
                                         !formulario.sucursalId
                                     }
-                                    className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] px-5 text-sm font-black text-white transition hover:bg-[#607F74] disabled:cursor-not-allowed disabled:bg-[#AAB9B3]"
+                                    className="salon-action inline-flex shrink-0 items-center justify-center gap-2 bg-primary px-5 text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-[#AAB9B3]"
                                 >
                                     {guardando ? (
                                         <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -644,7 +644,7 @@ export default function CajaClient({
                 0 &&
                 sucursales.length >
                 0 && (
-                    <div className="rounded-2xl border border-[#CFE0D8] bg-[#EAF2EE] p-4 text-[#3F6657]">
+                    <div className="rounded-2xl border border-[#CFE0D8] bg-surface-soft p-4 text-[#3F6657]">
                         <div className="flex items-start gap-3">
                             <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
 
@@ -661,23 +661,23 @@ export default function CajaClient({
                     </div>
                 )}
 
-            <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.06)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="flex flex-col gap-3 border-b border-[#E8ECE9] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Operación activa
                         </p>
 
-                        <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                        <h2 className="mt-1 text-xl font-black text-foreground tracking-tight">
                             Cajas abiertas
                         </h2>
 
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             Revisa el estado de cada sucursal y accede a sus operaciones.
                         </p>
                     </div>
 
-                    <span className="w-fit rounded-full bg-[#EAF1ED] px-3 py-1.5 text-xs font-black text-[#5D796C]">
+                    <span className="w-fit rounded-full bg-surface-soft px-3 py-1.5 text-xs font-black text-primary-strong">
                         {cajasIniciales.length} activa
                         {cajasIniciales.length ===
                             1
@@ -737,8 +737,8 @@ function AccionPrincipal({
             className={[
                 "group relative overflow-hidden rounded-[26px] border p-5 transition hover:-translate-y-1",
                 destacada
-                    ? "border-[#26332F] bg-[#26332F] text-white shadow-[0_16px_36px_rgba(36,48,44,0.16)]"
-                    : "border-[#DDE5E1] bg-white text-[#26332F] shadow-[0_10px_28px_rgba(36,48,44,0.05)]",
+                    ? "border-sidebar bg-sidebar text-white shadow-[0_16px_36px_rgba(36,48,44,0.16)]"
+                    : "border-[#DDE5E1] bg-white text-sidebar shadow-[0_10px_28px_rgba(36,48,44,0.05)]",
             ].join(
                 " ",
             )}
@@ -747,8 +747,8 @@ function AccionPrincipal({
                 className={[
                     "flex h-12 w-12 items-center justify-center rounded-2xl",
                     destacada
-                        ? "bg-[#DCE7E2] text-[#26332F]"
-                        : "bg-[#EEF3F0] text-[#607C6F]",
+                        ? "bg-primary-soft text-sidebar"
+                        : "bg-surface-soft text-primary-strong",
                 ].join(
                     " ",
                 )}
@@ -756,7 +756,7 @@ function AccionPrincipal({
                 <Icono className="h-6 w-6" />
             </div>
 
-            <h3 className="mt-5 text-lg font-black">
+            <h3 className="mt-5 text-lg font-black tracking-tight">
                 {
                     titulo
                 }
@@ -781,8 +781,8 @@ function AccionPrincipal({
                 className={[
                     "mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.1em]",
                     destacada
-                        ? "text-[#DCE7E2]"
-                        : "text-[#6F8F83]",
+                        ? "text-primary-soft"
+                        : "text-primary",
                 ].join(
                     " ",
                 )}
@@ -812,9 +812,9 @@ function AccesoSecundario({
             href={
                 href
             }
-            className="flex items-center gap-3 rounded-2xl border border-[#E1E7E3] bg-[#FBFCFA] p-4 transition hover:border-[#BFD0C7] hover:bg-[#F4F8F6]"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-[#FBFCFA] p-4 transition hover:border-[#BFD0C7] hover:bg-[#F4F8F6]"
         >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EAF1ED] text-[#5D796C]">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-soft text-primary-strong">
                 <Icono className="h-4 w-4" />
             </div>
 
@@ -847,16 +847,16 @@ function TarjetaCaja({
         );
 
     return (
-        <article className="overflow-hidden rounded-[26px] border border-[#DCE5E0] bg-[#FBFCFA]">
+        <article className="overflow-hidden rounded-[26px] border border-border bg-[#FBFCFA]">
             <div className="border-b border-[#E4EAE6] bg-white p-5">
                 <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                             <Building2 className="h-5 w-5" />
                         </div>
 
                         <div>
-                            <p className="text-lg font-black text-[#24302C]">
+                            <p className="text-lg font-black text-foreground">
                                 {caja
                                     .sucursales
                                     ?.nombre ??
@@ -873,12 +873,12 @@ function TarjetaCaja({
                         </div>
                     </div>
 
-                    <span className="rounded-full bg-[#E3EEE8] px-3 py-1 text-[10px] font-black uppercase text-[#527865]">
+                    <span className="rounded-full bg-[#E3EEE8] px-3 py-1 text-xs font-black uppercase text-[#527865]">
                         Operando
                     </span>
                 </div>
 
-                <div className="mt-5 rounded-2xl bg-[#26332F] p-4 text-white">
+                <div className="mt-5 rounded-2xl bg-sidebar p-4 text-white">
                     <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#AFC2B9]">
                         Efectivo esperado
                     </p>
@@ -928,7 +928,7 @@ function TarjetaCaja({
                 </div>
 
                 {caja.observaciones_apertura && (
-                    <div className="mt-4 rounded-2xl border border-[#E4EAE6] bg-white p-3 text-sm leading-6 text-[#6B756F]">
+                    <div className="mt-4 rounded-2xl border border-[#E4EAE6] bg-white p-3 text-sm leading-6 text-text-secondary">
                         {
                             caja.observaciones_apertura
                         }
@@ -936,28 +936,28 @@ function TarjetaCaja({
                 )}
 
                 <div className="mt-5">
-                    <p className="mb-3 text-[10px] font-black uppercase tracking-[0.13em] text-[#87958D]">
+                    <p className="mb-3 text-xs font-black uppercase tracking-[0.13em] text-[#87958D]">
                         Vender
                     </p>
 
                     <div className="grid gap-3 sm:grid-cols-3">
                         <Link
                             href="/caja/cobrar"
-                            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#26332F] px-4 text-center text-sm font-black text-white transition hover:bg-[#34463F]"
+                            className="salon-action inline-flex min-h-12 items-center justify-center bg-sidebar px-4 text-center text-white transition hover:bg-sidebar-hover"
                         >
                             Cobrar cita
                         </Link>
 
                         <Link
                             href="/caja/venta-directa"
-                            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#6F8F83] px-4 text-center text-sm font-black text-white transition hover:bg-[#607F74]"
+                            className="salon-action inline-flex min-h-12 items-center justify-center bg-primary px-4 text-center text-white transition hover:bg-primary-hover"
                         >
                             Venta directa
                         </Link>
 
                         <Link
                             href="/caja/venta-productos"
-                            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#C79AA1] px-4 text-center text-sm font-black text-white transition hover:bg-[#B98991]"
+                            className="salon-action inline-flex min-h-12 items-center justify-center gap-2 bg-secondary px-4 text-center text-white transition hover:bg-secondary-hover"
                         >
                             <ShoppingBasket className="h-4 w-4" />
                             Productos
@@ -966,14 +966,14 @@ function TarjetaCaja({
                 </div>
 
                 <div className="mt-5">
-                    <p className="mb-3 text-[10px] font-black uppercase tracking-[0.13em] text-[#87958D]">
+                    <p className="mb-3 text-xs font-black uppercase tracking-[0.13em] text-[#87958D]">
                         Administrar caja
                     </p>
 
                     <div className="grid gap-3 sm:grid-cols-3">
                         <Link
                             href={`/caja/movimientos/${caja.id}`}
-                            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#DCE3DF] bg-white px-3 text-center text-xs font-black text-[#52605A] transition hover:bg-[#EEF2EF]"
+                            className="salon-action inline-flex min-h-11 items-center justify-center gap-2 border border-border-strong bg-white px-3 text-center text-[#52605A] transition hover:bg-surface-soft"
                         >
                             <ArrowDownUp className="h-4 w-4" />
                             Ingreso / egreso
@@ -981,7 +981,7 @@ function TarjetaCaja({
 
                         <Link
                             href="/caja/ventas"
-                            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#DCE3DF] bg-white px-3 text-center text-xs font-black text-[#52605A] transition hover:bg-[#EEF2EF]"
+                            className="salon-action inline-flex min-h-11 items-center justify-center gap-2 border border-border-strong bg-white px-3 text-center text-[#52605A] transition hover:bg-surface-soft"
                         >
                             <History className="h-4 w-4" />
                             Historial
@@ -989,7 +989,7 @@ function TarjetaCaja({
 
                         <Link
                             href={`/caja/cierre/${caja.id}`}
-                            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#E7BDBD] bg-[#F8E5E5] px-3 text-center text-xs font-black text-[#985858] transition hover:bg-[#F3D8D8]"
+                            className="salon-action inline-flex min-h-11 items-center justify-center gap-2 border border-[#E7BDBD] bg-[#F8E5E5] px-3 text-center text-[#985858] transition hover:bg-[#F3D8D8]"
                         >
                             <LockKeyhole className="h-4 w-4" />
                             Cerrar caja
@@ -1014,8 +1014,8 @@ function CampoSucursal({
 }) {
     return (
         <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-black text-[#43524B]">
-                <Store className="h-4 w-4 text-[#6F8F83]" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-black text-text-secondary">
+                <Store className="h-4 w-4 text-primary" />
                 Sucursal
             </span>
 
@@ -1031,7 +1031,7 @@ function CampoSucursal({
                         event.target.value,
                     )
                 }
-                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#F9FBF9] px-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                className="salon-control w-full border border-border-strong bg-[#F9FBF9] px-4 font-semibold outline-none transition focus:border-primary focus:bg-white"
             >
                 <option value="">
                     Seleccionar sucursal
@@ -1074,13 +1074,13 @@ function CampoMonto({
 }) {
     return (
         <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-black text-[#43524B]">
-                <Banknote className="h-4 w-4 text-[#6F8F83]" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-black text-text-secondary">
+                <Banknote className="h-4 w-4 text-primary" />
                 Efectivo inicial
             </span>
 
             <div className="relative">
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-black text-[#6B756F]">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-black text-text-secondary">
                     C$
                 </span>
 
@@ -1105,7 +1105,7 @@ function CampoMonto({
                             ),
                         )
                     }
-                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#F9FBF9] pl-12 pr-4 text-right font-black outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                    className="salon-control w-full border border-border-strong bg-[#F9FBF9] pl-12 pr-4 text-right outline-none transition focus:border-primary focus:bg-white"
                 />
             </div>
         </label>
@@ -1126,7 +1126,7 @@ function TarjetaResumen({
     }>;
 }) {
     return (
-        <article className="rounded-[24px] border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <p className="text-xs font-black uppercase tracking-[0.12em] text-[#829089]">
@@ -1135,7 +1135,7 @@ function TarjetaResumen({
                         }
                     </p>
 
-                    <p className="mt-3 text-2xl font-black text-[#24302C]">
+                    <p className="mt-3 text-2xl font-black text-foreground">
                         {
                             valor
                         }
@@ -1148,7 +1148,7 @@ function TarjetaResumen({
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -1172,7 +1172,7 @@ function HeroDato({
             <div className="flex items-center gap-2 text-[#AEC0B7]">
                 <Icono className="h-3.5 w-3.5" />
 
-                <p className="text-[9px] font-black uppercase tracking-[0.12em]">
+                <p className="text-xs font-black uppercase tracking-[0.12em]">
                     {
                         titulo
                     }
@@ -1199,7 +1199,7 @@ function DatoCaja({
 }) {
     return (
         <div className="rounded-2xl border border-[#E6EBE8] bg-white p-3">
-            <p className="text-[10px] font-black uppercase tracking-[0.1em] text-[#829089]">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {
                     titulo
                 }
@@ -1225,14 +1225,14 @@ function DatoCaja({
 
 function EstadoVacio() {
     return (
-        <div className="rounded-[26px] border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
+        <div className="rounded-[26px] border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
             <Clock3 className="mx-auto h-9 w-9 text-[#829089]" />
 
-            <h3 className="mt-4 font-black text-[#24302C]">
+            <h3 className="mt-4 font-black text-foreground tracking-tight">
                 No hay cajas abiertas
             </h3>
 
-            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[#6B756F]">
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-text-secondary">
                 Abre una caja para comenzar a registrar cobros, ventas, ingresos y egresos.
             </p>
         </div>

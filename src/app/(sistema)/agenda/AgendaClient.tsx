@@ -407,12 +407,12 @@ export default function AgendaClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <CalendarDays className="h-7 w-7" />
                         </div>
 
@@ -420,7 +420,7 @@ export default function AgendaClient({
                             <p className="text-sm font-semibold text-[#B9C8C1]">
                                 Organización diaria
                             </p>
-                            <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
                                 Agenda
                             </h1>
                             <p className="mt-3 max-w-2xl leading-7 text-[#CFD9D4]">
@@ -432,7 +432,7 @@ export default function AgendaClient({
 
                     <Link
                         href="/agenda/nueva"
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-5 font-bold text-[#26332F] transition hover:bg-white"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                     >
                         <Plus className="h-5 w-5" />
                         Nueva cita
@@ -456,14 +456,14 @@ export default function AgendaClient({
                 </div>
             )}
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] p-4 sm:p-5">
                     <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                         <div className="flex flex-wrap items-center gap-2">
                             <button
                                 type="button"
                                 onClick={() => navegar(-1)}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#DCE3DF] bg-white text-[#52605A] hover:bg-[#EEF2EF]"
+                                className="salon-action inline-flex w-10 items-center justify-center border border-border-strong bg-white text-[#52605A] hover:bg-surface-soft"
                             >
                                 <ChevronLeft className="h-5 w-5" />
                             </button>
@@ -471,7 +471,7 @@ export default function AgendaClient({
                             <button
                                 type="button"
                                 onClick={irHoy}
-                                className="h-10 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#43524B]"
+                                className="salon-action bg-surface-soft px-4 text-text-secondary"
                             >
                                 Hoy
                             </button>
@@ -479,21 +479,21 @@ export default function AgendaClient({
                             <button
                                 type="button"
                                 onClick={() => navegar(1)}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#DCE3DF] bg-white text-[#52605A] hover:bg-[#EEF2EF]"
+                                className="salon-action inline-flex w-10 items-center justify-center border border-border-strong bg-white text-[#52605A] hover:bg-surface-soft"
                             >
                                 <ChevronRight className="h-5 w-5" />
                             </button>
 
-                            <h2 className="ml-1 text-lg font-bold text-[#24302C] sm:text-xl">
+                            <h2 className="ml-1 text-lg font-bold text-foreground sm:text-xl tracking-tight">
                                 {tituloRango(fechaActual, vista)}
                             </h2>
 
                             {cargando && (
-                                <LoaderCircle className="h-5 w-5 animate-spin text-[#6F8F83]" />
+                                <LoaderCircle className="h-5 w-5 animate-spin text-primary" />
                             )}
                         </div>
 
-                        <div className="flex rounded-xl bg-[#EEF2EF] p-1">
+                        <div className="flex rounded-xl bg-surface-soft p-1">
                             <BotonVista
                                 texto="Día"
                                 icono={List}
@@ -524,7 +524,7 @@ export default function AgendaClient({
                                     setBusqueda(event.target.value)
                                 }
                                 placeholder="Cliente, servicio o código..."
-                                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                             />
                         </div>
 
@@ -535,7 +535,7 @@ export default function AgendaClient({
                                 onChange={(event) =>
                                     cambiarSucursal(event.target.value)
                                 }
-                                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                             >
                                 <option value="">Todas las sucursales</option>
                                 {sucursales.map((sucursal) => (
@@ -556,7 +556,7 @@ export default function AgendaClient({
                                 onChange={(event) =>
                                     cambiarTrabajador(event.target.value)
                                 }
-                                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                             >
                                 <option value="">Todos los trabajadores</option>
                                 {trabajadores.map((trabajador) => (
@@ -570,7 +570,7 @@ export default function AgendaClient({
                             </select>
                         </div>
 
-                        <div className="flex items-center gap-2 rounded-xl bg-[#FBFCFA] px-4 text-sm text-[#6B756F]">
+                        <div className="flex items-center gap-2 rounded-xl bg-[#FBFCFA] px-4 text-sm text-text-secondary">
                             <Filter className="h-4 w-4" />
                             {citasVisibles.length} cita
                             {citasVisibles.length === 1 ? "" : "s"}
@@ -727,23 +727,23 @@ function VistaSemana({
                     return (
                         <section
                             key={fechaDia}
-                            className="min-h-[560px] rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA]"
+                            className="min-h-[560px] rounded-2xl border border-border bg-[#FBFCFA]"
                         >
                             <header
                                 className={[
-                                    "border-b border-[#E3E7E4] p-3 text-center",
+                                    "border-b border-border p-3 text-center",
                                     fechaDia ===
                                         new Date().toISOString().slice(0, 10)
-                                        ? "bg-[#DCE7E2]"
+                                        ? "bg-primary-soft"
                                         : "bg-white",
                                 ].join(" ")}
                             >
-                                <p className="text-xs font-bold uppercase text-[#6B756F]">
+                                <p className="text-xs font-bold uppercase text-text-secondary">
                                     {new Intl.DateTimeFormat("es-NI", {
                                         weekday: "short",
                                     }).format(dia)}
                                 </p>
-                                <p className="mt-1 text-lg font-bold text-[#24302C]">
+                                <p className="mt-1 text-lg font-bold text-foreground">
                                     {dia.getDate()}
                                 </p>
                             </header>
@@ -799,7 +799,7 @@ function VistaMes({
 
     return (
         <div className="overflow-x-auto">
-            <div className="grid min-w-[980px] grid-cols-7 gap-px overflow-hidden rounded-2xl border border-[#E3E7E4] bg-[#E3E7E4]">
+            <div className="grid min-w-[980px] grid-cols-7 gap-px overflow-hidden rounded-2xl border border-border bg-border">
                 {[
                     "Lun",
                     "Mar",
@@ -811,7 +811,7 @@ function VistaMes({
                 ].map((dia) => (
                     <div
                         key={dia}
-                        className="bg-[#EEF2EF] p-3 text-center text-xs font-bold uppercase text-[#52605A]"
+                        className="bg-surface-soft p-3 text-center text-xs font-bold uppercase text-[#52605A]"
                     >
                         {dia}
                     </div>
@@ -847,7 +847,7 @@ function VistaMes({
                                             new Date()
                                                 .toISOString()
                                                 .slice(0, 10)
-                                            ? "bg-[#6F8F83] text-white"
+                                            ? "bg-primary text-white"
                                             : "text-[#33413B]",
                                     ].join(" ")}
                                 >
@@ -856,7 +856,7 @@ function VistaMes({
 
                                 {(citasDia.length > 0 ||
                                     bloqueosDia.length > 0) && (
-                                        <span className="text-[10px] font-semibold text-[#76817B]">
+                                        <span className="text-xs font-semibold text-[#76817B]">
                                             {citasDia.length +
                                                 bloqueosDia.length}
                                         </span>
@@ -871,7 +871,7 @@ function VistaMes({
                                             abrirMenu(event, cita)
                                         }
                                         title={`${formatearEstado(cita.estado)} · ${cita.clientes?.nombre_completo ?? "Cliente"}`}
-                                        className="truncate rounded-md px-2 py-1 text-[10px] font-semibold text-white"
+                                        className="truncate rounded-md px-2 py-1 text-xs font-semibold text-white"
                                         style={{
                                             backgroundColor:
                                                 obtenerColorCita(cita),
@@ -885,7 +885,7 @@ function VistaMes({
                                 {bloqueosDia.slice(0, 1).map((bloqueo) => (
                                     <div
                                         key={bloqueo.id}
-                                        className="truncate rounded-md bg-[#929A96] px-2 py-1 text-[10px] font-semibold text-white"
+                                        className="truncate rounded-md bg-[#929A96] px-2 py-1 text-xs font-semibold text-white"
                                     >
                                         {bloqueo.titulo}
                                     </div>
@@ -893,7 +893,7 @@ function VistaMes({
 
                                 {citasDia.length + bloqueosDia.length >
                                     4 && (
-                                        <p className="px-1 text-[10px] font-semibold text-[#6B756F]">
+                                        <p className="px-1 text-xs font-semibold text-text-secondary">
                                             +
                                             {citasDia.length +
                                                 bloqueosDia.length -
@@ -926,7 +926,7 @@ function TarjetaCita({
             onContextMenu={(event) =>
                 abrirMenu(event, cita)
             }
-            className="relative block overflow-hidden rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] transition hover:-translate-y-0.5 hover:border-[#C8D9D1] hover:shadow-lg"
+            className="relative block overflow-hidden rounded-2xl border border-border bg-[#FBFCFA] transition hover:-translate-y-0.5 hover:border-[#C8D9D1] hover:shadow-lg"
         >
             <div className="flex">
                 <div
@@ -940,19 +940,19 @@ function TarjetaCita({
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div>
                             <div className="flex flex-wrap items-center gap-2">
-                                <p className="font-bold text-[#24302C]">
+                                <p className="font-bold text-foreground">
                                     {cita.clientes?.nombre_completo ??
                                         "Cliente"}
                                 </p>
                                 <EstadoCita estado={cita.estado} />
                             </div>
 
-                            <p className="mt-2 text-sm font-semibold text-[#6F8F83]">
+                            <p className="mt-2 text-sm font-semibold text-primary">
                                 {formatearHora(cita.hora_inicio)} –{" "}
                                 {formatearHora(cita.hora_fin)}
                             </p>
 
-                            <p className="mt-2 text-sm text-[#6B756F]">
+                            <p className="mt-2 text-sm text-text-secondary">
                                 {cita.cita_servicios
                                     .map(
                                         (servicio) =>
@@ -962,7 +962,7 @@ function TarjetaCita({
                             </p>
                         </div>
 
-                        <div className="text-sm text-[#6B756F]">
+                        <div className="text-sm text-text-secondary">
                             <p>
                                 {cita.sucursales?.nombre ??
                                     "Sin sucursal"}
@@ -1033,20 +1033,20 @@ function TarjetaCitaCompacta({
                 backgroundColor: obtenerColorCita(cita),
             }}
         >
-            <p className="text-[10px] font-bold">
+            <p className="text-xs font-bold">
                 {cita.hora_inicio.slice(0, 5)} –{" "}
                 {cita.hora_fin.slice(0, 5)}
             </p>
             <p className="mt-1 truncate text-xs font-bold">
                 {cita.clientes?.nombre_completo}
             </p>
-            <p className="mt-1 line-clamp-2 text-[10px] opacity-90">
+            <p className="mt-1 line-clamp-2 text-xs opacity-90">
                 {cita.cita_servicios
                     .map((servicio) => servicio.nombre_servicio)
                     .join(", ")}
             </p>
 
-            <span className="mt-2 inline-flex rounded-full bg-white/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide">
+            <span className="mt-2 inline-flex rounded-full bg-white/20 px-2 py-0.5 text-xs font-bold uppercase tracking-wide">
                 {formatearEstado(cita.estado)}
             </span>
 
@@ -1220,18 +1220,18 @@ function MenuEstadoCita({
             role="menu"
             aria-label="Acciones de la cita"
             onClick={(event) => event.stopPropagation()}
-            className="fixed z-[120] w-64 overflow-hidden rounded-2xl border border-[#DCE3DF] bg-white p-2 shadow-[0_20px_55px_rgba(36,48,44,0.24)]"
+            className="fixed z-[120] w-64 overflow-hidden rounded-2xl border border-border-strong bg-white p-2 shadow-[0_20px_55px_rgba(36,48,44,0.24)]"
             style={{
                 left: menu.x,
                 top: menu.y,
             }}
         >
             <div className="border-b border-[#E8ECE9] px-3 py-2.5">
-                <p className="truncate text-sm font-bold text-[#24302C]">
+                <p className="truncate text-sm font-bold text-foreground">
                     {menu.cita.clientes?.nombre_completo ??
                         "Cliente"}
                 </p>
-                <p className="mt-1 text-xs text-[#6B756F]">
+                <p className="mt-1 text-xs text-text-secondary">
                     {formatearHora(menu.cita.hora_inicio)} –{" "}
                     {formatearHora(menu.cita.hora_fin)} ·{" "}
                     {formatearEstado(menu.cita.estado)}
@@ -1264,7 +1264,7 @@ function MenuEstadoCita({
                                 "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50",
                                 accion.peligro
                                     ? "text-[#A25E5E] hover:bg-[#F8E5E5]"
-                                    : "text-[#43524B] hover:bg-[#EEF2EF]",
+                                    : "text-text-secondary hover:bg-surface-soft",
                             ].join(" ")}
                         >
                             {procesando ? (
@@ -1287,14 +1287,14 @@ function TarjetaBloqueo({
     bloqueo: BloqueoAgenda;
 }) {
     return (
-        <article className="rounded-2xl border border-[#D8DEDA] bg-[#EEF2EF] p-4">
+        <article className="rounded-2xl border border-[#D8DEDA] bg-surface-soft p-4">
             <div className="flex items-start gap-3">
-                <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-[#6B756F]" />
+                <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-text-secondary" />
                 <div>
                     <p className="font-bold text-[#33413B]">
                         {bloqueo.titulo}
                     </p>
-                    <p className="mt-1 text-sm text-[#6B756F]">
+                    <p className="mt-1 text-sm text-text-secondary">
                         {bloqueo.todo_el_dia
                             ? "Todo el día"
                             : `${formatearHora(bloqueo.hora_inicio ?? "00:00")} – ${formatearHora(bloqueo.hora_fin ?? "00:00")}`}
@@ -1312,7 +1312,7 @@ function TarjetaBloqueoCompacta({
 }) {
     return (
         <article className="rounded-xl bg-[#929A96] p-2.5 text-white">
-            <p className="truncate text-[10px] font-bold">
+            <p className="truncate text-xs font-bold">
                 {bloqueo.todo_el_dia
                     ? "Todo el día"
                     : `${formatearHora(bloqueo.hora_inicio ?? "00:00")} – ${formatearHora(bloqueo.hora_fin ?? "00:00")}`}
@@ -1341,7 +1341,7 @@ function EstadoCita({ estado }: { estado: string }) {
             className={[
                 "rounded-full px-2.5 py-1 text-[10px] font-bold uppercase",
                 estilos[estado] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
+                "bg-surface-soft text-text-secondary",
             ].join(" ")}
         >
             {formatearEstado(estado)}
@@ -1368,7 +1368,7 @@ function BotonVista({
                 "inline-flex h-9 items-center gap-2 rounded-lg px-3 text-xs font-bold transition",
                 activa
                     ? "bg-white text-[#33413B] shadow-sm"
-                    : "text-[#6B756F]",
+                    : "text-text-secondary",
             ].join(" ")}
         >
             <Icono className="h-4 w-4" />
@@ -1379,9 +1379,9 @@ function BotonVista({
 
 function EstadoVacio({ texto }: { texto: string }) {
     return (
-        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
             <CalendarDays className="mx-auto h-9 w-9 text-[#829089]" />
-            <p className="mt-3 text-sm text-[#6B756F]">
+            <p className="mt-3 text-sm text-text-secondary">
                 {texto}
             </p>
         </div>
