@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import {
+    AlertTriangle,
     ArrowLeft,
     Banknote,
     CheckCircle2,
+    CircleDollarSign,
     CreditCard,
     Landmark,
     LoaderCircle,
@@ -12,6 +14,7 @@ import {
     ReceiptText,
     Store,
     Trash2,
+    UserRound,
     WalletCards,
     XCircle,
 } from "lucide-react";
@@ -88,33 +91,38 @@ type Mensaje = {
     texto: string;
 } | null;
 
-const metodos = [
-    {
-        valor: "EFECTIVO",
-        texto: "Efectivo",
-        icono: Banknote,
-    },
-    {
-        valor: "TARJETA",
-        texto: "Tarjeta / POS",
-        icono: CreditCard,
-    },
-    {
-        valor: "TRANSFERENCIA",
-        texto: "Transferencia",
-        icono: Landmark,
-    },
-    {
-        valor: "DEPOSITO",
-        texto: "Depósito",
-        icono: Landmark,
-    },
-    {
-        valor: "OTRO",
-        texto: "Otro",
-        icono: WalletCards,
-    },
-] as const;
+type MetodoVisible =
+    | "EFECTIVO"
+    | "TARJETA"
+    | "TRANSFERENCIA";
+
+const metodosVisibles: Array<{
+    valor: MetodoVisible;
+    texto: string;
+    descripcion: string;
+    icono: React.ComponentType<{
+        className?: string;
+    }>;
+}> = [
+        {
+            valor: "EFECTIVO",
+            texto: "Efectivo",
+            descripcion: "Dinero recibido en caja",
+            icono: Banknote,
+        },
+        {
+            valor: "TARJETA",
+            texto: "Tarjeta",
+            descripcion: "Pago mediante terminal POS",
+            icono: CreditCard,
+        },
+        {
+            valor: "TRANSFERENCIA",
+            texto: "Transferencia",
+            descripcion: "Transferencia bancaria",
+            icono: Landmark,
+        },
+    ];
 
 export default function RegistrarAbonoClient({
     cuenta,
@@ -130,20 +138,49 @@ export default function RegistrarAbonoClient({
     permitirPagoCombinado: boolean;
 }) {
     const router = useRouter();
-    const [guardando, iniciarGuardado] =
+
+    const [
+        guardando,
+        iniciarGuardado,
+    ] =
         useTransition();
-    const [mensaje, setMensaje] =
-        useState<Mensaje>(null);
 
-    const [cajaId, setCajaId] =
-        useState(cajas[0]?.id ?? "");
-    const [referencia, setReferencia] =
-        useState("");
-    const [observaciones, setObservaciones] =
+    const [
+        mensaje,
+        setMensaje,
+    ] =
+        useState<Mensaje>(
+            null,
+        );
+
+    const [
+        cajaId,
+        setCajaId,
+    ] =
+        useState(
+            cajas[0]?.id ??
+            "",
+        );
+
+    const [
+        referencia,
+        setReferencia,
+    ] =
         useState("");
 
-    const [pagos, setPagos] =
-        useState<PagoFormulario[]>([
+    const [
+        observaciones,
+        setObservaciones,
+    ] =
+        useState("");
+
+    const [
+        pagos,
+        setPagos,
+    ] =
+        useState<
+            PagoFormulario[]
+        >([
             crearPago(
                 "EFECTIVO",
                 Number(
@@ -152,75 +189,142 @@ export default function RegistrarAbonoClient({
             ),
         ]);
 
-    const totalPagos = useMemo(
-        () =>
-            pagos.reduce(
-                (total, pago) =>
-                    total +
-                    Number(
-                        pago.monto || 0,
-                    ),
-                0,
-            ),
-        [pagos],
-    );
+    const totalPagos =
+        useMemo(
+            () =>
+                pagos.reduce(
+                    (
+                        total,
+                        pago,
+                    ) =>
+                        total +
+                        Number(
+                            pago.monto ||
+                            0,
+                        ),
+                    0,
+                ),
+            [pagos],
+        );
 
-    const saldoRestante =
+    const saldoInicial =
         Number(
             cuenta.saldo_pendiente,
-        ) - totalPagos;
+        );
+
+    const saldoRestante =
+        saldoInicial -
+        totalPagos;
+
+    const porcentajeAbono =
+        saldoInicial > 0
+            ? Math.min(
+                100,
+                Math.round(
+                    (
+                        totalPagos /
+                        saldoInicial
+                    ) *
+                    100,
+                ),
+            )
+            : 0;
 
     const terminalesDisponibles =
         terminales.filter(
-            (terminal) =>
+            (
+                terminal,
+            ) =>
                 terminal.sucursal_id ===
                 null ||
                 terminal.sucursal_id ===
                 cuenta.sucursal_id,
         );
 
-    function dinero(valor: number) {
+    function dinero(
+        valor: number,
+    ) {
         return `${simboloMoneda} ${Number(
             valor,
-        ).toLocaleString("es-NI", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        })}`;
+        ).toLocaleString(
+            "es-NI",
+            {
+                minimumFractionDigits:
+                    2,
+                maximumFractionDigits:
+                    2,
+            },
+        )}`;
     }
 
-    function agregarPago() {
-        if (!permitirPagoCombinado) {
+    function agregarPago(
+        metodoPago: MetodoVisible,
+    ) {
+        if (
+            !permitirPagoCombinado &&
+            pagos.length >=
+            1
+        ) {
+            setPagos([
+                crearPago(
+                    metodoPago,
+                    Math.max(
+                        0,
+                        saldoInicial,
+                    ),
+                ),
+            ]);
+            setMensaje(
+                null,
+            );
             return;
         }
 
-        const restante = Math.max(
-            0,
-            Number(
-                cuenta.saldo_pendiente,
-            ) - totalPagos,
+        const restante =
+            Math.max(
+                0,
+                saldoInicial -
+                totalPagos,
+            );
+
+        setPagos(
+            (
+                actuales,
+            ) => [
+                    ...actuales,
+                    crearPago(
+                        metodoPago,
+                        restante,
+                    ),
+                ],
         );
 
-        setPagos((actuales) => [
-            ...actuales,
-            crearPago(
-                "EFECTIVO",
-                restante,
-            ),
-        ]);
+        setMensaje(
+            null,
+        );
     }
 
     function eliminarPago(
         idLocal: string,
     ) {
-        if (pagos.length === 1) {
+        if (
+            pagos.length ===
+            1
+        ) {
             return;
         }
 
-        setPagos((actuales) =>
-            actuales.filter(
-                (pago) =>
-                    pago.idLocal !== idLocal,
-            ),
+        setPagos(
+            (
+                actuales,
+            ) =>
+                actuales.filter(
+                    (
+                        pago,
+                    ) =>
+                        pago.idLocal !==
+                        idLocal,
+                ),
         );
     }
 
@@ -228,17 +332,27 @@ export default function RegistrarAbonoClient({
         idLocal: string,
         cambios: Partial<PagoFormulario>,
     ) {
-        setPagos((actuales) =>
-            actuales.map((pago) =>
-                pago.idLocal === idLocal
-                    ? {
-                        ...pago,
-                        ...cambios,
-                    }
-                    : pago,
-            ),
+        setPagos(
+            (
+                actuales,
+            ) =>
+                actuales.map(
+                    (
+                        pago,
+                    ) =>
+                        pago.idLocal ===
+                            idLocal
+                            ? {
+                                ...pago,
+                                ...cambios,
+                            }
+                            : pago,
+                ),
         );
-        setMensaje(null);
+
+        setMensaje(
+            null,
+        );
     }
 
     function cambiarMetodo(
@@ -254,8 +368,10 @@ export default function RegistrarAbonoClient({
                         "EFECTIVO"
                         ? pago.monto
                         : null,
-                terminalPosId: null,
-                banco: null,
+                terminalPosId:
+                    null,
+                banco:
+                    null,
             },
         );
     }
@@ -264,20 +380,30 @@ export default function RegistrarAbonoClient({
         event: FormEvent<HTMLFormElement>,
     ) {
         event.preventDefault();
-        setMensaje(null);
 
-        if (!cajaId) {
+        setMensaje(
+            null,
+        );
+
+        if (
+            !cajaId
+        ) {
             setMensaje({
-                tipo: "ERROR",
+                tipo:
+                    "ERROR",
                 texto:
                     "No hay una caja abierta para esta sucursal.",
             });
             return;
         }
 
-        if (totalPagos <= 0) {
+        if (
+            totalPagos <=
+            0
+        ) {
             setMensaje({
-                tipo: "ERROR",
+                tipo:
+                    "ERROR",
                 texto:
                     "El abono debe ser mayor que cero.",
             });
@@ -286,25 +412,31 @@ export default function RegistrarAbonoClient({
 
         if (
             totalPagos >
-            Number(
-                cuenta.saldo_pendiente,
-            ) +
+            saldoInicial +
             0.005
         ) {
             setMensaje({
-                tipo: "ERROR",
+                tipo:
+                    "ERROR",
                 texto:
                     "El abono no puede superar el saldo pendiente.",
             });
             return;
         }
 
-        for (const pago of pagos) {
+        for (
+            const pago of
+            pagos
+        ) {
             if (
-                Number(pago.monto) <= 0
+                Number(
+                    pago.monto,
+                ) <=
+                0
             ) {
                 setMensaje({
-                    tipo: "ERROR",
+                    tipo:
+                        "ERROR",
                     texto:
                         "Todos los métodos deben tener un monto mayor que cero.",
                 });
@@ -317,7 +449,8 @@ export default function RegistrarAbonoClient({
                 !pago.terminalPosId
             ) {
                 setMensaje({
-                    tipo: "ERROR",
+                    tipo:
+                        "ERROR",
                     texto:
                         "Selecciona la terminal POS utilizada.",
                 });
@@ -336,7 +469,8 @@ export default function RegistrarAbonoClient({
                 )
             ) {
                 setMensaje({
-                    tipo: "ERROR",
+                    tipo:
+                        "ERROR",
                     texto:
                         "El efectivo recibido no puede ser menor al monto aplicado.",
                 });
@@ -344,364 +478,555 @@ export default function RegistrarAbonoClient({
             }
         }
 
-        iniciarGuardado(async () => {
-            const resultado =
-                await registrarAbono({
-                    cuentaId:
-                        cuenta.id,
-                    clienteId:
-                        cuenta.cliente_id,
-                    cajaSesionId:
-                        cajaId,
-                    pagos: pagos.map(
-                        ({
-                            idLocal,
-                            ...pago
-                        }) => pago,
-                    ),
-                    referencia,
-                    observaciones,
-                });
+        iniciarGuardado(
+            async () => {
+                const resultado =
+                    await registrarAbono(
+                        {
+                            cuentaId:
+                                cuenta.id,
+                            clienteId:
+                                cuenta.cliente_id,
+                            cajaSesionId:
+                                cajaId,
+                            pagos:
+                                pagos.map(
+                                    ({
+                                        idLocal,
+                                        ...pago
+                                    }) =>
+                                        pago,
+                                ),
+                            referencia,
+                            observaciones,
+                        },
+                    );
 
-            if (!resultado.exito) {
-                setMensaje({
-                    tipo: "ERROR",
-                    texto:
-                        resultado.mensaje,
-                });
-                return;
-            }
+                if (
+                    !resultado.exito
+                ) {
+                    setMensaje({
+                        tipo:
+                            "ERROR",
+                        texto:
+                            resultado.mensaje,
+                    });
+                    return;
+                }
 
-            router.push(
-                `/cuentas-cobrar/${cuenta.cliente_id}`,
-            );
-            router.refresh();
-        });
+                router.push(
+                    `/cuentas-cobrar/${cuenta.cliente_id}`,
+                );
+
+                router.refresh();
+            },
+        );
     }
 
     return (
-        <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+        <div className="space-y-6 pb-10">
+            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_20px_60px_rgba(36,48,44,0.16)] sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-[#C79AA1]/12 blur-3xl" />
 
                 <div className="relative">
                     <Link
                         href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-[#C7D4CE] transition hover:text-white"
                     >
                         <ArrowLeft className="h-4 w-4" />
                         Volver al estado de cuenta
                     </Link>
 
-                    <p className="mt-5 text-sm font-semibold text-[#B9C8C1]">
-                        Cuentas por cobrar
-                    </p>
+                    <div className="mt-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                        <div className="flex items-start gap-4">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                                <CircleDollarSign className="h-7 w-7" />
+                            </div>
 
-                    <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
-                        Registrar abono
-                    </h1>
+                            <div>
+                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                    Cuentas por cobrar
+                                </p>
 
-                    <p className="mt-3 text-[#CFD9D4]">
-                        {cuenta.clientes
-                            ?.nombre_completo ??
-                            "Cliente"}{" "}
-                        · {cuenta.codigo_cuenta}
-                    </p>
+                                <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
+                                    Registrar abono
+                                </h1>
+
+                                <p className="mt-2 text-sm text-[#CFD9D4]">
+                                    {cuenta.clientes
+                                        ?.nombre_completo ??
+                                        "Cliente"}{" "}
+                                    ·{" "}
+                                    {
+                                        cuenta.codigo_cuenta
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="grid min-w-[300px] grid-cols-2 gap-3">
+                            <HeroDato
+                                titulo="Saldo pendiente"
+                                valor={dinero(
+                                    saldoInicial,
+                                )}
+                            />
+
+                            <HeroDato
+                                titulo="Sucursal"
+                                valor={
+                                    cuenta.sucursales
+                                        ?.nombre ??
+                                    "Sucursal"
+                                }
+                            />
+                        </div>
+                    </div>
                 </div>
             </section>
 
             {mensaje && (
                 <div
                     className={[
-                        "flex items-start gap-3 rounded-2xl border p-4",
-                        mensaje.tipo === "EXITO"
+                        "flex items-start gap-3 rounded-2xl border p-4 shadow-sm",
+                        mensaje.tipo ===
+                            "EXITO"
                             ? "border-[#CFE0D8] bg-[#E3EEE8] text-[#3F6657]"
                             : "border-[#EBCBCB] bg-[#F8E5E5] text-[#985858]",
-                    ].join(" ")}
+                    ].join(
+                        " ",
+                    )}
                 >
-                    {mensaje.tipo === "EXITO" ? (
-                        <CheckCircle2 className="h-5 w-5 shrink-0" />
+                    {mensaje.tipo ===
+                        "EXITO" ? (
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
                     ) : (
-                        <XCircle className="h-5 w-5 shrink-0" />
+                        <XCircle className="mt-0.5 h-5 w-5 shrink-0" />
                     )}
 
-                    <p className="text-sm font-semibold">
-                        {mensaje.texto}
+                    <p className="text-sm font-bold">
+                        {
+                            mensaje.texto
+                        }
                     </p>
                 </div>
             )}
 
-            <section className="grid gap-4 sm:grid-cols-3">
-                <Resumen
-                    titulo="Deuda original"
-                    valor={dinero(
-                        cuenta.monto_original,
-                    )}
-                />
-                <Resumen
-                    titulo="Ya abonado"
-                    valor={dinero(
-                        cuenta.monto_abonado,
-                    )}
-                />
-                <Resumen
-                    titulo="Saldo pendiente"
-                    valor={dinero(
-                        cuenta.saldo_pendiente,
-                    )}
-                    destacado
-                />
-            </section>
-
             <form
-                onSubmit={enviar}
-                className="grid gap-6 xl:grid-cols-[1fr_360px]"
+                onSubmit={
+                    enviar
+                }
+                className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_390px]"
             >
                 <div className="space-y-6">
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                        <div className="flex items-center justify-between gap-4">
-                            <div>
-                                <h2 className="font-bold text-[#24302C]">
-                                    Métodos de pago
-                                </h2>
-                                <p className="mt-1 text-sm text-[#6B756F]">
-                                    Puedes distribuir el
-                                    abono entre varios métodos.
-                                </p>
+                    <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                        <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6">
+                            <div className="flex items-start gap-3">
+                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                                    <WalletCards className="h-5 w-5" />
+                                </div>
+
+                                <div>
+                                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                        Paso 1
+                                    </p>
+
+                                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                                        ¿Cómo recibiste el abono?
+                                    </h2>
+
+                                    <p className="mt-1 text-sm leading-6 text-[#74817B]">
+                                        Selecciona un método de pago. Si el pago combinado está activo puedes usar varios.
+                                    </p>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div className="p-5 sm:p-6">
+                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                Agregar método
+                            </p>
+
+                            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                                {metodosVisibles.map(
+                                    (
+                                        metodo,
+                                    ) => (
+                                        <MetodoCard
+                                            key={
+                                                metodo.valor
+                                            }
+                                            texto={
+                                                metodo.texto
+                                            }
+                                            descripcion={
+                                                metodo.descripcion
+                                            }
+                                            icono={
+                                                metodo.icono
+                                            }
+                                            onClick={() =>
+                                                agregarPago(
+                                                    metodo.valor,
+                                                )
+                                            }
+                                        />
+                                    ),
+                                )}
                             </div>
 
-                            {permitirPagoCombinado && (
-                                <button
-                                    type="button"
-                                    onClick={
-                                        agregarPago
-                                    }
-                                    className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
-                                >
-                                    <Plus className="h-4 w-4" />
-                                    Agregar método
-                                </button>
+                            {!permitirPagoCombinado && (
+                                <div className="mt-4 rounded-2xl border border-[#E2E8E4] bg-[#F8FAF8] px-4 py-3 text-xs font-semibold text-[#6B756F]">
+                                    El pago combinado está desactivado. Al elegir otro método se reemplazará el actual.
+                                </div>
                             )}
-                        </div>
 
-                        <div className="mt-5 space-y-4">
-                            {pagos.map(
-                                (
-                                    pago,
-                                    indice,
-                                ) => (
-                                    <PagoCard
-                                        key={
-                                            pago.idLocal
-                                        }
-                                        pago={
-                                            pago
-                                        }
-                                        indice={
-                                            indice
-                                        }
-                                        permitirEliminar={
-                                            pagos.length >
-                                            1
-                                        }
-                                        terminales={
-                                            terminalesDisponibles
-                                        }
-                                        simboloMoneda={
-                                            simboloMoneda
-                                        }
-                                        actualizar={
-                                            actualizarPago
-                                        }
-                                        cambiarMetodo={
-                                            cambiarMetodo
-                                        }
-                                        eliminar={
-                                            eliminarPago
-                                        }
-                                    />
-                                ),
-                            )}
+                            <div className="mt-6 space-y-4">
+                                {pagos.map(
+                                    (
+                                        pago,
+                                        indice,
+                                    ) => (
+                                        <PagoCard
+                                            key={
+                                                pago.idLocal
+                                            }
+                                            pago={
+                                                pago
+                                            }
+                                            indice={
+                                                indice
+                                            }
+                                            permitirEliminar={
+                                                pagos.length >
+                                                1
+                                            }
+                                            terminales={
+                                                terminalesDisponibles
+                                            }
+                                            simboloMoneda={
+                                                simboloMoneda
+                                            }
+                                            actualizar={
+                                                actualizarPago
+                                            }
+                                            cambiarMetodo={
+                                                cambiarMetodo
+                                            }
+                                            eliminar={
+                                                eliminarPago
+                                            }
+                                        />
+                                    ),
+                                )}
+                            </div>
                         </div>
                     </section>
 
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                        <h2 className="font-bold text-[#24302C]">
-                            Información adicional
-                        </h2>
+                    <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                        <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6">
+                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                Paso 2
+                            </p>
 
-                        <label className="mt-5 block">
-                            <span className="mb-2 block text-sm font-bold text-[#3D4A45]">
-                                Referencia general
-                            </span>
-                            <input
-                                value={
-                                    referencia
-                                }
-                                onChange={(
-                                    event,
-                                ) =>
-                                    setReferencia(
-                                        event
-                                            .target
-                                            .value,
-                                    )
-                                }
-                                placeholder="Número de recibo, comprobante..."
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4 text-sm outline-none focus:border-[#6F8F83]"
-                            />
-                        </label>
+                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                                Información adicional
+                            </h2>
 
-                        <label className="mt-4 block">
-                            <span className="mb-2 block text-sm font-bold text-[#3D4A45]">
-                                Observaciones
-                            </span>
-                            <textarea
-                                rows={3}
-                                value={
-                                    observaciones
-                                }
-                                onChange={(
-                                    event,
-                                ) =>
-                                    setObservaciones(
-                                        event
-                                            .target
-                                            .value,
-                                    )
-                                }
-                                placeholder="Información adicional del abono..."
-                                className="w-full rounded-xl border border-[#D4DAD6] p-3 text-sm outline-none focus:border-[#6F8F83]"
-                            />
-                        </label>
+                            <p className="mt-1 text-sm text-[#74817B]">
+                                Estos datos son opcionales y ayudan a identificar el abono posteriormente.
+                            </p>
+                        </header>
+
+                        <div className="grid gap-5 p-5 sm:p-6 lg:grid-cols-2">
+                            <label className="block">
+                                <span className="mb-2 block text-sm font-black text-[#3D4A45]">
+                                    Referencia general
+                                </span>
+
+                                <input
+                                    value={
+                                        referencia
+                                    }
+                                    onChange={(
+                                        event,
+                                    ) =>
+                                        setReferencia(
+                                            event
+                                                .target
+                                                .value,
+                                        )
+                                    }
+                                    placeholder="Número de recibo o comprobante"
+                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                                />
+                            </label>
+
+                            <label className="block">
+                                <span className="mb-2 block text-sm font-black text-[#3D4A45]">
+                                    Observaciones
+                                </span>
+
+                                <textarea
+                                    rows={3}
+                                    value={
+                                        observaciones
+                                    }
+                                    onChange={(
+                                        event,
+                                    ) =>
+                                        setObservaciones(
+                                            event
+                                                .target
+                                                .value,
+                                        )
+                                    }
+                                    placeholder="Información adicional del abono..."
+                                    className="w-full resize-none rounded-2xl border border-[#D4DAD6] bg-white p-3 text-sm outline-none transition focus:border-[#6F8F83]"
+                                />
+                            </label>
+                        </div>
                     </section>
                 </div>
 
                 <aside className="xl:sticky xl:top-24 xl:self-start">
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                        <h2 className="font-bold text-[#24302C]">
-                            Resumen del abono
-                        </h2>
+                    <section className="overflow-hidden rounded-[30px] border border-[#DCE5E0] bg-white shadow-[0_16px_45px_rgba(36,48,44,0.09)]">
+                        <div className="bg-[#26332F] p-5 text-white">
+                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#AFC2B9]">
+                                Resumen
+                            </p>
 
-                        <label className="mt-5 block">
-                            <span className="mb-2 block text-sm font-bold text-[#3D4A45]">
-                                Caja
-                            </span>
+                            <h2 className="mt-1 text-xl font-black">
+                                Confirmar abono
+                            </h2>
 
-                            <select
-                                value={
-                                    cajaId
-                                }
-                                onChange={(
-                                    event,
-                                ) =>
-                                    setCajaId(
-                                        event
-                                            .target
-                                            .value,
-                                    )
-                                }
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm"
-                            >
-                                {cajas.length ===
-                                    0 ? (
-                                    <option value="">
-                                        No hay caja abierta
-                                    </option>
-                                ) : (
-                                    cajas.map(
-                                        (
-                                            caja,
-                                        ) => (
-                                            <option
-                                                key={
-                                                    caja.id
-                                                }
-                                                value={
-                                                    caja.id
-                                                }
-                                            >
-                                                {caja
-                                                    .sucursales
-                                                    ?.nombre ??
-                                                    "Caja abierta"}
-                                            </option>
-                                        ),
-                                    )
-                                )}
-                            </select>
-                        </label>
-
-                        <div className="mt-5 space-y-3">
-                            <Fila
-                                titulo="Saldo actual"
-                                valor={dinero(
-                                    cuenta.saldo_pendiente,
-                                )}
-                            />
-                            <Fila
-                                titulo="Abono"
-                                valor={dinero(
-                                    totalPagos,
-                                )}
-                            />
-
-                            <div className="border-t border-[#DDE3DF] pt-3">
-                                <Fila
-                                    titulo="Saldo después"
-                                    valor={dinero(
-                                        Math.max(
-                                            0,
-                                            saldoRestante,
-                                        ),
-                                    )}
-                                    destacado
-                                />
-                            </div>
+                            <p className="mt-1 text-xs text-[#C7D4CE]">
+                                Revisa los montos antes de registrar.
+                            </p>
                         </div>
 
-                        {saldoRestante <
-                            -0.005 && (
-                                <div className="mt-4 rounded-xl bg-[#F8E5E5] p-3 text-xs font-semibold text-[#985858]">
-                                    El abono supera el
-                                    saldo pendiente.
+                        <div className="p-5">
+                            <div className="rounded-2xl border border-[#DFE6E2] bg-[#F8FAF8] p-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-[#607C6F] shadow-sm">
+                                        <UserRound className="h-5 w-5" />
+                                    </div>
+
+                                    <div className="min-w-0">
+                                        <p className="truncate text-sm font-black text-[#33413B]">
+                                            {cuenta.clientes
+                                                ?.nombre_completo ??
+                                                "Cliente"}
+                                        </p>
+
+                                        <p className="mt-0.5 text-xs text-[#7B8781]">
+                                            {
+                                                cuenta.codigo_cuenta
+                                            }
+                                        </p>
+                                    </div>
                                 </div>
-                            )}
+                            </div>
 
-                        {cajas.length ===
-                            0 && (
-                                <div className="mt-4 rounded-xl bg-[#FAF0DC] p-3 text-xs font-semibold text-[#81652F]">
-                                    Debes abrir una caja
-                                    en esta sucursal antes
-                                    de recibir el abono.
+                            <label className="mt-5 block">
+                                <span className="mb-2 block text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
+                                    Caja
+                                </span>
+
+                                <div className="relative">
+                                    <Store className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
+
+                                    <select
+                                        value={
+                                            cajaId
+                                        }
+                                        onChange={(
+                                            event,
+                                        ) =>
+                                            setCajaId(
+                                                event
+                                                    .target
+                                                    .value,
+                                            )
+                                        }
+                                        className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-3 text-sm font-semibold"
+                                    >
+                                        {cajas.length ===
+                                            0 ? (
+                                            <option value="">
+                                                No hay caja abierta
+                                            </option>
+                                        ) : (
+                                            cajas.map(
+                                                (
+                                                    caja,
+                                                ) => (
+                                                    <option
+                                                        key={
+                                                            caja.id
+                                                        }
+                                                        value={
+                                                            caja.id
+                                                        }
+                                                    >
+                                                        {caja
+                                                            .sucursales
+                                                            ?.nombre ??
+                                                            "Caja abierta"}
+                                                    </option>
+                                                ),
+                                            )
+                                        )}
+                                    </select>
                                 </div>
-                            )}
+                            </label>
 
-                        <button
-                            type="submit"
-                            disabled={
-                                guardando ||
-                                !cajaId ||
-                                totalPagos <= 0 ||
-                                saldoRestante <
-                                -0.005
-                            }
-                            className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] font-bold text-white transition hover:bg-[#607F74] disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                            {guardando ? (
-                                <LoaderCircle className="h-5 w-5 animate-spin" />
-                            ) : (
-                                <ReceiptText className="h-5 w-5" />
-                            )}
+                            <div className="mt-5 space-y-3">
+                                <FilaResumen
+                                    titulo="Saldo actual"
+                                    valor={dinero(
+                                        saldoInicial,
+                                    )}
+                                />
 
-                            {guardando
-                                ? "Registrando..."
-                                : "Registrar abono"}
-                        </button>
+                                <FilaResumen
+                                    titulo="Abono"
+                                    valor={dinero(
+                                        totalPagos,
+                                    )}
+                                    resaltado
+                                />
+
+                                <div className="border-t border-[#E1E7E3] pt-3">
+                                    <FilaResumen
+                                        titulo="Saldo después"
+                                        valor={dinero(
+                                            Math.max(
+                                                0,
+                                                saldoRestante,
+                                            ),
+                                        )}
+                                        grande
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="mt-5">
+                                <div className="flex items-center justify-between text-xs">
+                                    <span className="font-bold text-[#74817B]">
+                                        Porcentaje cubierto
+                                    </span>
+
+                                    <strong className="text-[#527064]">
+                                        {
+                                            porcentajeAbono
+                                        }
+                                        %
+                                    </strong>
+                                </div>
+
+                                <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-[#E4EAE6]">
+                                    <div
+                                        className="h-full rounded-full bg-[#6F8F83] transition-all"
+                                        style={{
+                                            width:
+                                                `${Math.min(
+                                                    100,
+                                                    porcentajeAbono,
+                                                )}%`,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            {saldoRestante <
+                                -0.005 && (
+                                    <div className="mt-4 flex items-start gap-2 rounded-2xl border border-[#EBCBCB] bg-[#F8E5E5] p-3 text-xs font-bold text-[#985858]">
+                                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                                        El abono supera el saldo pendiente.
+                                    </div>
+                                )}
+
+                            {cajas.length ===
+                                0 && (
+                                    <div className="mt-4 flex items-start gap-2 rounded-2xl border border-[#E8D9B9] bg-[#FAF0DC] p-3 text-xs font-bold text-[#81652F]">
+                                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                                        Debes abrir una caja en esta sucursal antes de recibir el abono.
+                                    </div>
+                                )}
+
+                            <button
+                                type="submit"
+                                disabled={
+                                    guardando ||
+                                    !cajaId ||
+                                    totalPagos <=
+                                    0 ||
+                                    saldoRestante <
+                                    -0.005
+                                }
+                                className="mt-5 inline-flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] px-5 text-sm font-black text-white shadow-sm transition hover:bg-[#607F74] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-45"
+                            >
+                                {guardando ? (
+                                    <LoaderCircle className="h-5 w-5 animate-spin" />
+                                ) : (
+                                    <ReceiptText className="h-5 w-5" />
+                                )}
+
+                                {guardando
+                                    ? "Registrando..."
+                                    : "Registrar abono"}
+                            </button>
+
+                            <p className="mt-3 text-center text-[11px] leading-5 text-[#8A9690]">
+                                El abono se registrará en la cuenta del cliente y en la caja seleccionada.
+                            </p>
+                        </div>
                     </section>
                 </aside>
             </form>
         </div>
+    );
+}
+
+function MetodoCard({
+    texto,
+    descripcion,
+    icono: Icono,
+    onClick,
+}: {
+    texto: string;
+    descripcion: string;
+    icono: React.ComponentType<{
+        className?: string;
+    }>;
+    onClick: () => void;
+}) {
+    return (
+        <button
+            type="button"
+            onClick={
+                onClick
+            }
+            className="group rounded-[22px] border border-[#DFE6E2] bg-[#FBFCFA] p-4 text-left transition hover:-translate-y-0.5 hover:border-[#AFC2B8] hover:bg-white hover:shadow-[0_9px_24px_rgba(36,48,44,0.07)]"
+        >
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064] transition group-hover:bg-[#26332F] group-hover:text-white">
+                <Icono className="h-5 w-5" />
+            </div>
+
+            <p className="mt-4 font-black text-[#2F3D37]">
+                {
+                    texto
+                }
+            </p>
+
+            <p className="mt-1 text-xs leading-5 text-[#7B8781]">
+                {
+                    descripcion
+                }
+            </p>
+        </button>
     );
 }
 
@@ -726,8 +1051,7 @@ function PagoCard({
     ) => void;
     cambiarMetodo: (
         pago: PagoFormulario,
-        metodo:
-            PagoFormulario["metodoPago"],
+        metodo: PagoFormulario["metodoPago"],
     ) => void;
     eliminar: (
         idLocal: string,
@@ -735,7 +1059,9 @@ function PagoCard({
 }) {
     const terminal =
         terminales.find(
-            (item) =>
+            (
+                item,
+            ) =>
                 item.id ===
                 pago.terminalPosId,
         );
@@ -744,9 +1070,13 @@ function PagoCard({
         pago.metodoPago ===
             "TARJETA" &&
             terminal
-            ? Number(pago.monto) *
-            Number(
-                terminal.porcentaje_comision,
+            ? (
+                Number(
+                    pago.monto,
+                ) *
+                Number(
+                    terminal.porcentaje_comision,
+                )
             ) /
             100
             : 0;
@@ -766,12 +1096,39 @@ function PagoCard({
             )
             : 0;
 
+    const MetodoIcono =
+        pago.metodoPago ===
+            "EFECTIVO"
+            ? Banknote
+            : pago.metodoPago ===
+                "TARJETA"
+                ? CreditCard
+                : Landmark;
+
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4">
-            <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-bold text-[#24302C]">
-                    Pago {indice + 1}
-                </p>
+        <article className="overflow-hidden rounded-[24px] border border-[#E0E6E2] bg-white shadow-[0_7px_20px_rgba(36,48,44,0.04)]">
+            <div className="flex items-center justify-between gap-3 border-b border-[#E9EDEA] bg-[#FBFCFA] px-4 py-3">
+                <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                        <MetodoIcono className="h-4 w-4" />
+                    </div>
+
+                    <div>
+                        <p className="text-sm font-black text-[#33413B]">
+                            Método{" "}
+                            {
+                                indice +
+                                1
+                            }
+                        </p>
+
+                        <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#87958D]">
+                            {formatearMetodo(
+                                pago.metodoPago,
+                            )}
+                        </p>
+                    </div>
+                </div>
 
                 {permitirEliminar && (
                     <button
@@ -781,150 +1138,231 @@ function PagoCard({
                                 pago.idLocal,
                             )
                         }
-                        className="rounded-lg p-2 text-[#A25E5E] hover:bg-[#F8E5E5]"
+                        className="flex h-9 w-9 items-center justify-center rounded-xl text-[#A25E5E] transition hover:bg-[#F8E5E5]"
+                        aria-label="Eliminar método"
                     >
                         <Trash2 className="h-4 w-4" />
                     </button>
                 )}
             </div>
 
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <label>
-                    <span className="mb-1 block text-xs font-bold text-[#52605A]">
-                        Método
-                    </span>
+            <div className="p-4 sm:p-5">
+                <div className="grid gap-4 sm:grid-cols-2">
+                    <label>
+                        <span className="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#6D7A74]">
+                            Método
+                        </span>
 
-                    <select
-                        value={
-                            pago.metodoPago
-                        }
-                        onChange={(
-                            event,
-                        ) =>
-                            cambiarMetodo(
-                                pago,
-                                event
-                                    .target
-                                    .value as PagoFormulario["metodoPago"],
-                            )
-                        }
-                        className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm"
-                    >
-                        {metodos.map(
-                            (metodo) => (
-                                <option
-                                    key={
-                                        metodo.valor
-                                    }
-                                    value={
-                                        metodo.valor
-                                    }
-                                >
-                                    {
-                                        metodo.texto
-                                    }
-                                </option>
-                            ),
-                        )}
-                    </select>
-                </label>
+                        <select
+                            value={
+                                pago.metodoPago
+                            }
+                            onChange={(
+                                event,
+                            ) =>
+                                cambiarMetodo(
+                                    pago,
+                                    event
+                                        .target
+                                        .value as PagoFormulario["metodoPago"],
+                                )
+                            }
+                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-bold text-[#33413B]"
+                        >
+                            <option value="EFECTIVO">
+                                Efectivo
+                            </option>
+                            <option value="TARJETA">
+                                Tarjeta / POS
+                            </option>
+                            <option value="TRANSFERENCIA">
+                                Transferencia
+                            </option>
+                        </select>
+                    </label>
 
-                <label>
-                    <span className="mb-1 block text-xs font-bold text-[#52605A]">
-                        Monto
-                    </span>
+                    <label>
+                        <span className="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#6D7A74]">
+                            Monto aplicado
+                        </span>
 
-                    <input
-                        type="number"
-                        min={0.01}
-                        step={0.01}
-                        value={
-                            pago.monto
-                        }
-                        onChange={(
-                            event,
-                        ) =>
-                            actualizar(
-                                pago.idLocal,
+                        <div className="relative">
+                            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-black text-[#829089]">
                                 {
-                                    monto: Number(
-                                        event
-                                            .target
-                                            .value,
-                                    ),
-                                    montoRecibido:
-                                        pago.metodoPago ===
-                                            "EFECTIVO"
-                                            ? Number(
-                                                event
-                                                    .target
-                                                    .value,
-                                            )
-                                            : pago.montoRecibido,
-                                },
-                            )
-                        }
-                        className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-right text-sm font-bold"
-                    />
-                </label>
-            </div>
-
-            {pago.metodoPago ===
-                "EFECTIVO" && (
-                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                        <label>
-                            <span className="mb-1 block text-xs font-bold text-[#52605A]">
-                                Efectivo recibido
+                                    simboloMoneda
+                                }
                             </span>
+
                             <input
                                 type="number"
-                                min={
-                                    pago.monto
-                                }
+                                min={0.01}
                                 step={0.01}
                                 value={
-                                    pago.montoRecibido ??
                                     pago.monto
                                 }
                                 onChange={(
                                     event,
-                                ) =>
+                                ) => {
+                                    const nuevoMonto =
+                                        Number(
+                                            event
+                                                .target
+                                                .value,
+                                        );
+
                                     actualizar(
                                         pago.idLocal,
                                         {
+                                            monto:
+                                                nuevoMonto,
                                             montoRecibido:
-                                                Number(
+                                                pago.metodoPago ===
+                                                    "EFECTIVO"
+                                                    ? nuevoMonto
+                                                    : pago.montoRecibido,
+                                        },
+                                    );
+                                }}
+                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-right text-base font-black text-[#26332F]"
+                            />
+                        </div>
+                    </label>
+                </div>
+
+                {pago.metodoPago ===
+                    "EFECTIVO" && (
+                        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                            <label>
+                                <span className="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#6D7A74]">
+                                    Efectivo recibido
+                                </span>
+
+                                <input
+                                    type="number"
+                                    min={
+                                        pago.monto
+                                    }
+                                    step={0.01}
+                                    value={
+                                        pago.montoRecibido ??
+                                        pago.monto
+                                    }
+                                    onChange={(
+                                        event,
+                                    ) =>
+                                        actualizar(
+                                            pago.idLocal,
+                                            {
+                                                montoRecibido:
+                                                    Number(
+                                                        event
+                                                            .target
+                                                            .value,
+                                                    ),
+                                            },
+                                        )
+                                    }
+                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-right text-base font-black text-[#26332F]"
+                                />
+                            </label>
+
+                            <MiniResultado
+                                titulo="Cambio a entregar"
+                                valor={`${simboloMoneda} ${cambio.toFixed(
+                                    2,
+                                )}`}
+                                destacado={
+                                    cambio >
+                                    0
+                                }
+                            />
+                        </div>
+                    )}
+
+                {pago.metodoPago ===
+                    "TARJETA" && (
+                        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                            <label>
+                                <span className="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#6D7A74]">
+                                    Terminal POS
+                                </span>
+
+                                <select
+                                    value={
+                                        pago.terminalPosId ??
+                                        ""
+                                    }
+                                    onChange={(
+                                        event,
+                                    ) =>
+                                        actualizar(
+                                            pago.idLocal,
+                                            {
+                                                terminalPosId:
                                                     event
                                                         .target
-                                                        .value,
-                                                ),
-                                        },
-                                    )
-                                }
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-right text-sm"
+                                                        .value ||
+                                                    null,
+                                            },
+                                        )
+                                    }
+                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-bold text-[#33413B]"
+                                >
+                                    <option value="">
+                                        Selecciona POS
+                                    </option>
+
+                                    {terminales.map(
+                                        (
+                                            terminal,
+                                        ) => (
+                                            <option
+                                                key={
+                                                    terminal.id
+                                                }
+                                                value={
+                                                    terminal.id
+                                                }
+                                            >
+                                                {
+                                                    terminal.nombre
+                                                }{" "}
+                                                ·{" "}
+                                                {Number(
+                                                    terminal.porcentaje_comision,
+                                                ).toLocaleString(
+                                                    "es-NI",
+                                                    {
+                                                        maximumFractionDigits:
+                                                            4,
+                                                    },
+                                                )}
+                                                %
+                                            </option>
+                                        ),
+                                    )}
+                                </select>
+                            </label>
+
+                            <MiniResultado
+                                titulo="Comisión estimada"
+                                valor={`${simboloMoneda} ${comision.toFixed(
+                                    2,
+                                )}`}
                             />
-                        </label>
+                        </div>
+                    )}
 
-                        <MiniResultado
-                            titulo="Cambio"
-                            valor={`${simboloMoneda} ${cambio.toFixed(
-                                2,
-                            )}`}
-                        />
-                    </div>
-                )}
-
-            {pago.metodoPago ===
-                "TARJETA" && (
-                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                        <label>
-                            <span className="mb-1 block text-xs font-bold text-[#52605A]">
-                                Terminal POS
+                {pago.metodoPago ===
+                    "TRANSFERENCIA" && (
+                        <label className="mt-4 block">
+                            <span className="mb-2 block text-xs font-black uppercase tracking-[0.08em] text-[#6D7A74]">
+                                Referencia de transferencia
                             </span>
 
-                            <select
+                            <input
                                 value={
-                                    pago.terminalPosId ??
+                                    pago.referencia ??
                                     ""
                                 }
                                 onChange={(
@@ -933,96 +1371,129 @@ function PagoCard({
                                     actualizar(
                                         pago.idLocal,
                                         {
-                                            terminalPosId:
+                                            referencia:
                                                 event
                                                     .target
-                                                    .value ||
-                                                null,
+                                                    .value,
                                         },
                                     )
                                 }
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm"
-                            >
-                                <option value="">
-                                    Selecciona POS
-                                </option>
-
-                                {terminales.map(
-                                    (
-                                        terminal,
-                                    ) => (
-                                        <option
-                                            key={
-                                                terminal.id
-                                            }
-                                            value={
-                                                terminal.id
-                                            }
-                                        >
-                                            {
-                                                terminal.nombre
-                                            }
-                                            {" · "}
-                                            {Number(
-                                                terminal.porcentaje_comision,
-                                            ).toLocaleString(
-                                                "es-NI",
-                                                {
-                                                    maximumFractionDigits: 4,
-                                                },
-                                            )}
-                                            %
-                                        </option>
-                                    ),
-                                )}
-                            </select>
+                                placeholder="Número de transferencia o comprobante"
+                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                            />
                         </label>
-
-                        <MiniResultado
-                            titulo="Comisión estimada"
-                            valor={`${simboloMoneda} ${comision.toFixed(
-                                2,
-                            )}`}
-                        />
-                    </div>
-                )}
-
-            {[
-                "TRANSFERENCIA",
-                "DEPOSITO",
-                "OTRO",
-            ].includes(
-                pago.metodoPago,
-            ) && (
-                    <label className="mt-3 block">
-                        <span className="mb-1 block text-xs font-bold text-[#52605A]">
-                            Referencia
-                        </span>
-
-                        <input
-                            value={
-                                pago.referencia ??
-                                ""
-                            }
-                            onChange={(
-                                event,
-                            ) =>
-                                actualizar(
-                                    pago.idLocal,
-                                    {
-                                        referencia:
-                                            event
-                                                .target
-                                                .value,
-                                    },
-                                )
-                            }
-                            placeholder="Número de transferencia o comprobante..."
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm"
-                        />
-                    </label>
-                )}
+                    )}
+            </div>
         </article>
+    );
+}
+
+function HeroDato({
+    titulo,
+    valor,
+}: {
+    titulo: string;
+    valor: string;
+}) {
+    return (
+        <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+            <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                {
+                    titulo
+                }
+            </p>
+
+            <p className="mt-2 truncate text-sm font-black text-white">
+                {
+                    valor
+                }
+            </p>
+        </div>
+    );
+}
+
+function FilaResumen({
+    titulo,
+    valor,
+    resaltado = false,
+    grande = false,
+}: {
+    titulo: string;
+    valor: string;
+    resaltado?: boolean;
+    grande?: boolean;
+}) {
+    return (
+        <div className="flex items-center justify-between gap-4">
+            <span
+                className={[
+                    "text-sm",
+                    grande
+                        ? "font-black text-[#26332F]"
+                        : "font-semibold text-[#6B756F]",
+                ].join(
+                    " ",
+                )}
+            >
+                {
+                    titulo
+                }
+            </span>
+
+            <strong
+                className={[
+                    grande
+                        ? "text-xl"
+                        : "text-sm",
+                    resaltado
+                        ? "text-[#527064]"
+                        : grande
+                            ? "text-[#26332F]"
+                            : "text-[#33413B]",
+                ].join(
+                    " ",
+                )}
+            >
+                {
+                    valor
+                }
+            </strong>
+        </div>
+    );
+}
+
+function MiniResultado({
+    titulo,
+    valor,
+    destacado = false,
+}: {
+    titulo: string;
+    valor: string;
+    destacado?: boolean;
+}) {
+    return (
+        <div
+            className={[
+                "rounded-2xl border p-4",
+                destacado
+                    ? "border-[#C8DBD1] bg-[#EAF2EE]"
+                    : "border-[#E3E7E4] bg-[#FBFCFA]",
+            ].join(
+                " ",
+            )}
+        >
+            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+                {
+                    titulo
+                }
+            </p>
+
+            <p className="mt-1 text-base font-black text-[#33413B]">
+                {
+                    valor
+                }
+            </p>
+        </div>
     );
 }
 
@@ -1036,7 +1507,12 @@ function crearPago(
             `${Date.now()}-${Math.random()}`,
         metodoPago,
         monto: Number(
-            Math.max(0, monto).toFixed(2),
+            Math.max(
+                0,
+                monto,
+            ).toFixed(
+                2,
+            ),
         ),
         montoRecibido:
             metodoPago ===
@@ -1050,92 +1526,37 @@ function crearPago(
                     ),
                 )
                 : null,
-        terminalPosId: null,
-        referencia: null,
-        banco: null,
-        observaciones: null,
+        terminalPosId:
+            null,
+        referencia:
+            null,
+        banco:
+            null,
+        observaciones:
+            null,
     };
 }
 
-function Resumen({
-    titulo,
-    valor,
-    destacado = false,
-}: {
-    titulo: string;
-    valor: string;
-    destacado?: boolean;
-}) {
-    return (
-        <article
-            className={[
-                "rounded-3xl border p-5 shadow-sm",
-                destacado
-                    ? "border-[#BFD1C8] bg-[#EAF2EE]"
-                    : "border-[#E3E7E4] bg-white",
-            ].join(" ")}
-        >
-            <p className="text-sm text-[#6B756F]">
-                {titulo}
-            </p>
+function formatearMetodo(
+    metodo: string,
+) {
+    const nombres: Record<
+        string,
+        string
+    > = {
+        EFECTIVO:
+            "Efectivo",
+        TARJETA:
+            "Tarjeta / POS",
+        TRANSFERENCIA:
+            "Transferencia",
+        DEPOSITO:
+            "Depósito",
+        OTRO:
+            "Otro",
+    };
 
-            <p className="mt-3 text-xl font-bold text-[#24302C]">
-                {valor}
-            </p>
-        </article>
-    );
-}
-
-function Fila({
-    titulo,
-    valor,
-    destacado = false,
-}: {
-    titulo: string;
-    valor: string;
-    destacado?: boolean;
-}) {
-    return (
-        <div className="flex items-center justify-between gap-4">
-            <span
-                className={
-                    destacado
-                        ? "font-bold text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
-                }
-            >
-                {titulo}
-            </span>
-
-            <strong
-                className={
-                    destacado
-                        ? "text-xl text-[#24302C]"
-                        : "text-sm text-[#33413B]"
-                }
-            >
-                {valor}
-            </strong>
-        </div>
-    );
-}
-
-function MiniResultado({
-    titulo,
-    valor,
-}: {
-    titulo: string;
-    valor: string;
-}) {
-    return (
-        <div className="rounded-xl border border-[#E3E7E4] bg-white p-3">
-            <p className="text-[10px] font-bold uppercase text-[#829089]">
-                {titulo}
-            </p>
-
-            <p className="mt-1 text-sm font-bold text-[#33413B]">
-                {valor}
-            </p>
-        </div>
-    );
+    return nombres[
+        metodo
+    ] ?? metodo;
 }

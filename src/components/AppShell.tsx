@@ -15,6 +15,8 @@ import {
     LayoutDashboard,
     LogOut,
     Menu,
+    PanelLeftClose,
+    PanelLeftOpen,
     PackageOpen,
     ReceiptText,
     Scissors,
@@ -48,8 +50,23 @@ type PerfilAppShell = {
     sucursalNombre: string;
 };
 
+type TemaColorSistema =
+    | "SALVIA"
+    | "AZUL"
+    | "LILA"
+    | "ROSA"
+    | "TERRACOTA"
+    | "GRAFITO"
+    | "ESMERALDA"
+    | "OLIVA"
+    | "ARENA"
+    | "VINO"
+    | "LAVANDA"
+    | "CELESTE";
+
 type AppShellProps = {
     perfil: PerfilAppShell;
+    temaColor: TemaColorSistema;
     children: React.ReactNode;
 };
 
@@ -245,12 +262,14 @@ const menu: GrupoMenu[] = [
 
 export default function AppShell({
     perfil,
+    temaColor,
     children,
 }: AppShellProps) {
     const pathname = usePathname();
     const router = useRouter();
 
     const [menuAbierto, setMenuAbierto] = useState(false);
+    const [menuCompacto, setMenuCompacto] = useState(false);
     const [cerrandoSesion, setCerrandoSesion] = useState(false);
 
     const [permisosUsuario, setPermisosUsuario] =
@@ -270,6 +289,27 @@ export default function AppShell({
 
     const iniciales = obtenerIniciales(perfil.nombreCompleto);
     const informacionRuta = obtenerInformacionRuta(pathname);
+
+    useEffect(() => {
+        const preferenciaGuardada = window.localStorage.getItem(
+            "salon-menu-compacto",
+        );
+
+        setMenuCompacto(preferenciaGuardada === "1");
+    }, []);
+
+    function alternarMenuCompacto() {
+        setMenuCompacto((actual) => {
+            const nuevoValor = !actual;
+
+            window.localStorage.setItem(
+                "salon-menu-compacto",
+                nuevoValor ? "1" : "0",
+            );
+
+            return nuevoValor;
+        });
+    }
 
     useEffect(() => {
         let activo = true;
@@ -614,7 +654,10 @@ export default function AppShell({
     }
 
     return (
-        <div className="min-h-screen bg-[#F6F7F4] text-[#24302C]">
+        <div
+            data-tema={temaColor}
+            className="min-h-screen bg-[#F6F7F4] text-[#24302C]"
+        >
             {menuAbierto && (
                 <button
                     type="button"
@@ -626,32 +669,46 @@ export default function AppShell({
 
             <aside
                 className={[
-                    "fixed inset-y-0 left-0 z-50 flex w-[286px] flex-col",
+                    "fixed inset-y-0 left-0 z-50 flex flex-col",
+                    menuCompacto ? "w-[92px]" : "w-[286px]",
                     "border-r border-white/5 bg-[#26332F] text-white",
                     "shadow-[14px_0_45px_rgba(36,48,44,0.08)]",
-                    "transition-transform duration-300 lg:translate-x-0",
+                    "transition-[width,transform] duration-300 lg:translate-x-0",
                     menuAbierto ? "translate-x-0" : "-translate-x-full",
                 ].join(" ")}
             >
-                <div className="flex h-20 items-center justify-between border-b border-white/10 px-5">
+                <div
+                    className={[
+                        "flex h-20 items-center border-b border-white/10",
+                        menuCompacto
+                            ? "justify-center px-3"
+                            : "justify-between px-5",
+                    ].join(" ")}
+                >
                     <Link
                         href="/inicio"
                         onClick={cerrarMenuMovil}
-                        className="flex min-w-0 items-center gap-3"
+                        title={menuCompacto ? perfil.salonNombre : undefined}
+                        className={[
+                            "flex min-w-0 items-center",
+                            menuCompacto ? "justify-center" : "gap-3",
+                        ].join(" ")}
                     >
                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F] shadow-lg shadow-black/10">
                             <Sparkles className="h-5 w-5" strokeWidth={2.1} />
                         </div>
 
-                        <div className="min-w-0">
-                            <p className="truncate text-sm font-bold tracking-tight text-white">
-                                {perfil.salonNombre}
-                            </p>
+                        {!menuCompacto && (
+                            <div className="min-w-0">
+                                <p className="truncate text-sm font-bold tracking-tight text-white">
+                                    {perfil.salonNombre}
+                                </p>
 
-                            <p className="mt-0.5 truncate text-xs text-[#B9C8C1]">
-                                {perfil.sucursalNombre}
-                            </p>
-                        </div>
+                                <p className="mt-0.5 truncate text-xs text-[#B9C8C1]">
+                                    {perfil.sucursalNombre}
+                                </p>
+                            </div>
+                        )}
                     </Link>
 
                     <button
@@ -664,7 +721,12 @@ export default function AppShell({
                     </button>
                 </div>
 
-                <nav className="flex-1 overflow-y-auto px-3 py-5">
+                <nav
+                    className={[
+                        "flex-1 overflow-y-auto py-5",
+                        menuCompacto ? "px-2" : "px-3",
+                    ].join(" ")}
+                >
                     <div className="space-y-7">
                         {menu.map((grupo) => {
                             const elementosVisibles = grupo.elementos.filter(
@@ -685,9 +747,11 @@ export default function AppShell({
 
                             return (
                                 <section key={grupo.nombre}>
-                                    <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#82968D]">
-                                        {grupo.nombre}
-                                    </p>
+                                    {!menuCompacto && (
+                                        <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#82968D]">
+                                            {grupo.nombre}
+                                        </p>
+                                    )}
 
                                     <div className="space-y-1">
                                         {elementosVisibles.map((elemento) => (
@@ -703,6 +767,7 @@ export default function AppShell({
                                                         : false
                                                 }
                                                 alNavegar={cerrarMenuMovil}
+                                                compacto={menuCompacto}
                                             />
                                         ))}
                                     </div>
@@ -712,22 +777,44 @@ export default function AppShell({
                     </div>
                 </nav>
 
-                <div className="border-t border-white/10 p-4">
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-3">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-sm font-bold text-[#26332F]">
+                <div
+                    className={[
+                        "border-t border-white/10",
+                        menuCompacto ? "p-2" : "p-4",
+                    ].join(" ")}
+                >
+                    <div
+                        className={[
+                            "rounded-2xl border border-white/10 bg-white/[0.06]",
+                            menuCompacto ? "p-2" : "p-3",
+                        ].join(" ")}
+                    >
+                        <div
+                            className={[
+                                "flex items-center",
+                                menuCompacto
+                                    ? "flex-col justify-center gap-2"
+                                    : "gap-3",
+                            ].join(" ")}
+                        >
+                            <div
+                                title={menuCompacto ? perfil.nombreCompleto : undefined}
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-sm font-bold text-[#26332F]"
+                            >
                                 {iniciales}
                             </div>
 
-                            <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-semibold text-white">
-                                    {perfil.nombreCompleto}
-                                </p>
+                            {!menuCompacto && (
+                                <div className="min-w-0 flex-1">
+                                    <p className="truncate text-sm font-semibold text-white">
+                                        {perfil.nombreCompleto}
+                                    </p>
 
-                                <p className="mt-0.5 truncate text-xs text-[#AABBB3]">
-                                    {formatearRol(perfil.rol)}
-                                </p>
-                            </div>
+                                    <p className="mt-0.5 truncate text-xs text-[#AABBB3]">
+                                        {formatearRol(perfil.rol)}
+                                    </p>
+                                </div>
+                            )}
 
                             <button
                                 type="button"
@@ -744,7 +831,14 @@ export default function AppShell({
                 </div>
             </aside>
 
-            <div className="min-h-screen lg:pl-[286px]">
+            <div
+                className={[
+                    "min-h-screen transition-[padding] duration-300",
+                    menuCompacto
+                        ? "lg:pl-[92px]"
+                        : "lg:pl-[286px]",
+                ].join(" ")}
+            >
                 <header className="sticky top-0 z-30 flex min-h-20 items-center justify-between border-b border-[#E3E7E4] bg-white/90 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-8">
                     <div className="flex min-w-0 items-center gap-3">
                         <button
@@ -754,6 +848,28 @@ export default function AppShell({
                             className="rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#52605A] transition hover:border-[#C9D5D0] hover:bg-[#EEF2EF] lg:hidden"
                         >
                             <Menu className="h-5 w-5" />
+                        </button>
+
+                        <button
+                            type="button"
+                            aria-label={
+                                menuCompacto
+                                    ? "Mostrar menú completo"
+                                    : "Ocultar menú lateral"
+                            }
+                            title={
+                                menuCompacto
+                                    ? "Mostrar menú completo"
+                                    : "Ocultar menú lateral"
+                            }
+                            onClick={alternarMenuCompacto}
+                            className="hidden rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#52605A] transition hover:border-[#C9D5D0] hover:bg-[#EEF2EF] lg:inline-flex"
+                        >
+                            {menuCompacto ? (
+                                <PanelLeftOpen className="h-5 w-5" />
+                            ) : (
+                                <PanelLeftClose className="h-5 w-5" />
+                            )}
                         </button>
 
                         <div className="min-w-0">
@@ -1120,10 +1236,12 @@ function ElementoNavegacion({
     elemento,
     activo,
     alNavegar,
+    compacto,
 }: {
     elemento: ElementoMenu;
     activo: boolean;
     alNavegar: () => void;
+    compacto: boolean;
 }) {
     const Icono = elemento.icono;
 
@@ -1131,19 +1249,28 @@ function ElementoNavegacion({
         return (
             <div
                 title="Este módulo se agregará próximamente"
-                className="flex cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-[#789087] opacity-65"
+                className={[
+                    "flex cursor-not-allowed items-center rounded-xl text-[#789087] opacity-65",
+                    compacto
+                        ? "justify-center px-2 py-3"
+                        : "gap-3 px-3 py-2.5",
+                ].join(" ")}
             >
                 <Icono className="h-5 w-5 shrink-0" />
 
-                <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
-                        {elemento.nombre}
-                    </p>
-                </div>
+                {!compacto && (
+                    <>
+                        <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-medium">
+                                {elemento.nombre}
+                            </p>
+                        </div>
 
-                <span className="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[8px] font-bold uppercase tracking-wide text-[#8FA39A]">
-                    Pronto
-                </span>
+                        <span className="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[8px] font-bold uppercase tracking-wide text-[#8FA39A]">
+                            Pronto
+                        </span>
+                    </>
+                )}
             </div>
         );
     }
@@ -1152,8 +1279,12 @@ function ElementoNavegacion({
         <Link
             href={elemento.href}
             onClick={alNavegar}
+            title={compacto ? elemento.nombre : undefined}
             className={[
-                "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-200",
+                "group relative flex items-center rounded-xl transition-all duration-200",
+                compacto
+                    ? "justify-center px-2 py-3"
+                    : "gap-3 px-3 py-2.5",
                 activo
                     ? "bg-[#DCE7E2] text-[#26332F] shadow-sm"
                     : "text-[#C6D2CC] hover:bg-white/[0.07] hover:text-white",
@@ -1172,13 +1303,15 @@ function ElementoNavegacion({
                 ].join(" ")}
             />
 
-            <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold">
-                    {elemento.nombre}
-                </p>
-            </div>
+            {!compacto && (
+                <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold">
+                        {elemento.nombre}
+                    </p>
+                </div>
+            )}
 
-            {activo && (
+            {!compacto && activo && (
                 <ChevronRight className="h-4 w-4 text-[#6F8F83]" />
             )}
         </Link>

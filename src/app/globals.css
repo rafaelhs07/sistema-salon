@@ -205,3 +205,236 @@ a {
         background: var(--primary-soft);
         transform: translateY(-1px);
     }
+
+
+/* ============================================================
+   TEMAS VISUALES DEL SALON
+   ============================================================ */
+
+[data-tema="SALVIA"] {
+    --sidebar: #26332f;
+    --sidebar-hover: #34463f;
+    --primary: #6f8f83;
+    --primary-hover: #607f74;
+    --primary-soft: #dce7e2;
+    --primary-soft-2: #eef3f0;
+    --primary-strong: #527064;
+    --secondary: #c79aa1;
+    --secondary-hover: #b98991;
+}
+
+[data-tema="AZUL"] {
+    --sidebar: #243642;
+    --sidebar-hover: #304a5a;
+    --primary: #66899b;
+    --primary-hover: #55798c;
+    --primary-soft: #ddeaf0;
+    --primary-soft-2: #edf4f7;
+    --primary-strong: #4f7182;
+    --secondary: #a38fa6;
+    --secondary-hover: #917c95;
+}
+
+[data-tema="LILA"] {
+    --sidebar: #382f44;
+    --sidebar-hover: #4a3e59;
+    --primary: #82709a;
+    --primary-hover: #725f8c;
+    --primary-soft: #e9e2f0;
+    --primary-soft-2: #f3eff6;
+    --primary-strong: #67577d;
+    --secondary: #c597a8;
+    --secondary-hover: #b48799;
+}
+
+[data-tema="ROSA"] {
+    --sidebar: #433138;
+    --sidebar-hover: #574049;
+    --primary: #a77184;
+    --primary-hover: #956275;
+    --primary-soft: #f0dfe5;
+    --primary-soft-2: #f8eef2;
+    --primary-strong: #86586a;
+    --secondary: #c4939d;
+    --secondary-hover: #b1808b;
+}
+
+[data-tema="TERRACOTA"] {
+    --sidebar: #49372f;
+    --sidebar-hover: #5d473d;
+    --primary: #a56f59;
+    --primary-hover: #925f4c;
+    --primary-soft: #f0e1d9;
+    --primary-soft-2: #f8f0ec;
+    --primary-strong: #805442;
+    --secondary: #b88991;
+    --secondary-hover: #a5777f;
+}
+
+[data-tema="GRAFITO"] {
+    --sidebar: #292b2c;
+    --sidebar-hover: #3a3d3e;
+    --primary: #6e7472;
+    --primary-hover: #5e6462;
+    --primary-soft: #e3e6e5;
+    --primary-soft-2: #f0f2f1;
+    --primary-strong: #555b59;
+    --secondary: #9a8c91;
+    --secondary-hover: #877a7f;
+}
+
+/*
+ * Compatibilidad con las pantallas antiguas que todavía utilizan
+ * la paleta original mediante clases Tailwind con valores HEX.
+ * Así el tema se nota en todo el sistema sin tener que reescribir
+ * todos los módulos de una sola vez.
+ */
+
+[data-tema] .bg-\[\#26332F\] {
+    background-color: var(--sidebar) !important;
+}
+
+[data-tema] .text-\[\#26332F\] {
+    color: var(--sidebar) !important;
+}
+
+[data-tema] .border-\[\#26332F\] {
+    border-color: var(--sidebar) !important;
+}
+
+[data-tema] .hover\:bg-\[\#34463F\]:hover,
+[data-tema] .hover\:bg-\[\#33433D\]:hover,
+[data-tema] .hover\:bg-\[\#32423C\]:hover {
+    background-color: var(--sidebar-hover) !important;
+}
+
+[data-tema] .bg-\[\#6F8F83\] {
+    background-color: var(--primary) !important;
+}
+
+[data-tema] .text-\[\#6F8F83\] {
+    color: var(--primary) !important;
+}
+
+[data-tema] .border-\[\#6F8F83\] {
+    border-color: var(--primary) !important;
+}
+
+[data-tema] .focus\:border-\[\#6F8F83\]:focus {
+    border-color: var(--primary) !important;
+}
+
+[data-tema] .hover\:bg-\[\#607F74\]:hover,
+[data-tema] .hover\:bg-\[\#5E7D71\]:hover {
+    background-color: var(--primary-hover) !important;
+}
+
+[data-tema] .bg-\[\#DCE7E2\] {
+    background-color: var(--primary-soft) !important;
+}
+
+[data-tema] .text-\[\#DCE7E2\] {
+    color: var(--primary-soft) !important;
+}
+
+[data-tema] .border-\[\#DCE7E2\] {
+    border-color: var(--primary-soft) !important;
+}
+
+[data-tema] .bg-\[\#EAF1ED\],
+[data-tema] .bg-\[\#EEF3F0\],
+[data-tema] .bg-\[\#EAF2EE\],
+[data-tema] .bg-\[\#F0F5F2\] {
+    background-color: var(--primary-soft-2) !important;
+}
+
+[data-tema] .text-\[\#527064\],
+[data-tema] .text-\[\#5D796C\],
+[data-tema] .text-\[\#607C6F\] {
+    color: var(--primary-strong) !important;
+}
+
+[data-tema] .bg-\[\#C79AA1\] {
+    background-color: var(--secondary) !important;
+}
+
+[data-tema] .text-\[\#C79AA1\] {
+    color: var(--secondary) !important;
+}
+
+[data-tema] .hover\:bg-\[\#B98991\]:hover {
+    background-color: var(--secondary-hover) !important;
+}
+
+
+[data-tema="ESMERALDA"] {
+    --sidebar: #173a34;
+    --sidebar-hover: #214c44;
+    --primary: #2f8a72;
+    --primary-hover: #277761;
+    --primary-soft: #d8efe8;
+    --primary-soft-2: #edf7f4;
+    --primary-strong: #246b59;
+    --secondary: #d0a27b;
+    --secondary-hover: #bb8e69;
+}
+
+[data-tema="OLIVA"] {
+    --sidebar: #34382a;
+    --sidebar-hover: #464b38;
+    --primary: #7a835b;
+    --primary-hover: #69724d;
+    --primary-soft: #e8ead9;
+    --primary-soft-2: #f3f4ea;
+    --primary-strong: #5f6746;
+    --secondary: #b88d75;
+    --secondary-hover: #a57a64;
+}
+
+[data-tema="ARENA"] {
+    --sidebar: #403a34;
+    --sidebar-hover: #514940;
+    --primary: #a48c73;
+    --primary-hover: #917a63;
+    --primary-soft: #efe8df;
+    --primary-soft-2: #f7f3ee;
+    --primary-strong: #806c58;
+    --secondary: #b9978a;
+    --secondary-hover: #a68478;
+}
+
+[data-tema="VINO"] {
+    --sidebar: #412a30;
+    --sidebar-hover: #54373f;
+    --primary: #8b5361;
+    --primary-hover: #784653;
+    --primary-soft: #eedfe3;
+    --primary-soft-2: #f7eef1;
+    --primary-strong: #6d3f4b;
+    --secondary: #b98b78;
+    --secondary-hover: #a77866;
+}
+
+[data-tema="LAVANDA"] {
+    --sidebar: #3d3548;
+    --sidebar-hover: #50455f;
+    --primary: #8b78a5;
+    --primary-hover: #796792;
+    --primary-soft: #ece6f2;
+    --primary-soft-2: #f5f1f8;
+    --primary-strong: #6d5b84;
+    --secondary: #c78e9e;
+    --secondary-hover: #b47b8c;
+}
+
+[data-tema="CELESTE"] {
+    --sidebar: #263a43;
+    --sidebar-hover: #334c57;
+    --primary: #6c98a8;
+    --primary-hover: #5b8797;
+    --primary-soft: #dfeef2;
+    --primary-soft-2: #eef6f8;
+    --primary-strong: #527787;
+    --secondary: #b4939a;
+    --secondary-hover: #a17f87;
+}

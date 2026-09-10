@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
 import {
     Building2,
+    Palette,
     Settings2,
     ShieldCheck,
+    SlidersHorizontal,
 } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/server";
@@ -11,7 +13,9 @@ import FormularioConfiguracion, {
     type SucursalConfiguracion,
     type TerminalPosConfiguracion,
 } from "./FormularioConfiguracion";
+import TemaSistemaClient from "./TemaSistemaClient";
 import type { DatosConfiguracion } from "./actions";
+import type { TemaColorSistema } from "./tema-actions";
 
 type ConfiguracionConsulta = {
     nombre_salon: string;
@@ -28,6 +32,7 @@ type ConfiguracionConsulta = {
     permitir_pago_combinado: boolean;
     mensaje_recibo: string | null;
     politica_cancelacion: string | null;
+    tema_color: TemaColorSistema;
 };
 
 export default async function ConfiguracionPage() {
@@ -38,130 +43,162 @@ export default async function ConfiguracionPage() {
         error: usuarioError,
     } = await supabase.auth.getUser();
 
-    if (usuarioError || !user) {
-        redirect("/login");
+    if (
+        usuarioError ||
+        !user
+    ) {
+        redirect(
+            "/login",
+        );
     }
 
-    const { data: perfil, error: perfilError } =
+    const {
+        data: perfil,
+        error: perfilError,
+    } =
         await supabase
-            .from("usuarios_perfiles")
-            .select("salon_id, rol, estado")
-            .eq("id", user.id)
+            .from(
+                "usuarios_perfiles",
+            )
+            .select(
+                "salon_id, rol, estado",
+            )
+            .eq(
+                "id",
+                user.id,
+            )
             .single();
 
     if (
         perfilError ||
         !perfil ||
-        perfil.estado !== "ACTIVO"
+        perfil.estado !==
+        "ACTIVO"
     ) {
-        redirect("/login");
+        redirect(
+            "/login",
+        );
     }
 
     if (
-        !["SUPER_ADMIN", "ADMIN"].includes(
+        ![
+            "SUPER_ADMIN",
+            "ADMIN",
+        ].includes(
             perfil.rol,
         )
     ) {
-        redirect("/inicio");
+        redirect(
+            "/inicio",
+        );
     }
 
     const [
         resultadoConfiguracion,
         resultadoSucursales,
         resultadoTerminales,
-    ] = await Promise.all([
-        supabase
-            .from("configuracion_salon")
-            .select(`
-                nombre_salon,
-                telefono,
-                whatsapp,
-                correo,
-                direccion,
-                moneda,
-                simbolo_moneda,
-                hora_apertura,
-                hora_cierre,
-                intervalo_citas_minutos,
-                permitir_credito,
-                permitir_pago_combinado,
-                mensaje_recibo,
-                politica_cancelacion
-            `)
-            .eq("salon_id", perfil.salon_id)
-            .single(),
-
-        supabase
-            .from("sucursales")
-            .select(`
-                id,
-                nombre,
-                es_principal,
-                estado
-            `)
-            .eq("salon_id", perfil.salon_id)
-            .eq("estado", "ACTIVA")
-            .order("es_principal", {
-                ascending: false,
-            })
-            .order("nombre"),
-
-        supabase
-            .from("terminales_pos")
-            .select(`
-                id,
-                nombre,
-                banco,
-                sucursal_id,
-                porcentaje_comision,
-                estado,
-                fecha_registro,
-                sucursales (
-                    nombre
+    ] =
+        await Promise.all([
+            supabase
+                .from(
+                    "configuracion_salon",
                 )
-            `)
-            .eq("salon_id", perfil.salon_id)
-            .order("estado")
-            .order("nombre"),
-    ]);
+                .select(`
+                    nombre_salon,
+                    telefono,
+                    whatsapp,
+                    correo,
+                    direccion,
+                    moneda,
+                    simbolo_moneda,
+                    hora_apertura,
+                    hora_cierre,
+                    intervalo_citas_minutos,
+                    permitir_credito,
+                    permitir_pago_combinado,
+                    mensaje_recibo,
+                    politica_cancelacion,
+                    tema_color
+                `)
+                .eq(
+                    "salon_id",
+                    perfil.salon_id,
+                )
+                .single(),
+
+            supabase
+                .from(
+                    "sucursales",
+                )
+                .select(`
+                    id,
+                    nombre,
+                    es_principal,
+                    estado
+                `)
+                .eq(
+                    "salon_id",
+                    perfil.salon_id,
+                )
+                .eq(
+                    "estado",
+                    "ACTIVA",
+                )
+                .order(
+                    "es_principal",
+                    {
+                        ascending:
+                            false,
+                    },
+                )
+                .order(
+                    "nombre",
+                ),
+
+            supabase
+                .from(
+                    "terminales_pos",
+                )
+                .select(`
+                    id,
+                    nombre,
+                    banco,
+                    sucursal_id,
+                    porcentaje_comision,
+                    estado,
+                    fecha_registro,
+                    sucursales (
+                        nombre
+                    )
+                `)
+                .eq(
+                    "salon_id",
+                    perfil.salon_id,
+                )
+                .order(
+                    "estado",
+                )
+                .order(
+                    "nombre",
+                ),
+        ]);
 
     if (
         resultadoConfiguracion.error ||
         !resultadoConfiguracion.data
     ) {
-        console.error(
-            "No se pudo cargar la configuración:",
-            resultadoConfiguracion.error,
-        );
-
         return (
             <div className="mx-auto max-w-7xl">
                 <div className="rounded-3xl border border-[#EBCBCB] bg-[#F8E5E5] p-6 text-[#985858]">
-                    <h1 className="text-xl font-bold">
+                    <h1 className="text-xl font-black">
                         No se pudo cargar la configuración
                     </h1>
 
-                    <p className="mt-2 text-sm leading-6">
-                        Verifica que el salón tenga un
-                        registro en la tabla
-                        configuracion_salon.
+                    <p className="mt-2 text-sm">
+                        Verifica la configuración del salón.
                     </p>
                 </div>
             </div>
-        );
-    }
-
-    if (resultadoSucursales.error) {
-        console.error(
-            "No se pudieron cargar las sucursales:",
-            resultadoSucursales.error,
-        );
-    }
-
-    if (resultadoTerminales.error) {
-        console.error(
-            "No se pudieron cargar las terminales POS:",
-            resultadoTerminales.error,
         );
     }
 
@@ -172,21 +209,29 @@ export default async function ConfiguracionPage() {
         nombreSalon:
             configuracion.nombre_salon,
         telefono:
-            configuracion.telefono ?? "",
+            configuracion.telefono ??
+            "",
         whatsapp:
-            configuracion.whatsapp ?? "",
-        correo: configuracion.correo ?? "",
+            configuracion.whatsapp ??
+            "",
+        correo:
+            configuracion.correo ??
+            "",
         direccion:
-            configuracion.direccion ?? "",
-        moneda: configuracion.moneda,
+            configuracion.direccion ??
+            "",
+        moneda:
+            configuracion.moneda,
         simboloMoneda:
             configuracion.simbolo_moneda,
-        horaApertura: normalizarHora(
-            configuracion.hora_apertura,
-        ),
-        horaCierre: normalizarHora(
-            configuracion.hora_cierre,
-        ),
+        horaApertura:
+            normalizarHora(
+                configuracion.hora_apertura,
+            ),
+        horaCierre:
+            normalizarHora(
+                configuracion.hora_cierre,
+            ),
         intervaloCitasMinutos:
             configuracion.intervalo_citas_minutos,
         permitirCredito:
@@ -201,95 +246,168 @@ export default async function ConfiguracionPage() {
             "",
     };
 
-    return (
-        <div className="mx-auto max-w-7xl">
-            <section className="relative overflow-hidden rounded-3xl border border-[#DCE5E0] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+    const sucursales =
+        (
+            resultadoSucursales.data ??
+            []
+        ) as SucursalConfiguracion[];
 
-                <div className="relative flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+    const terminales =
+        (
+            resultadoTerminales.data ??
+            []
+        ) as unknown as TerminalPosConfiguracion[];
+
+    return (
+        <div className="mx-auto max-w-[1450px] space-y-6 pb-8">
+            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_20px_60px_rgba(36,48,44,0.16)] sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+
+                <div className="relative flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F] shadow-lg shadow-black/10">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
                             <Settings2 className="h-7 w-7" />
                         </div>
 
                         <div>
-                            <p className="text-sm font-semibold text-[#B9C8C1]">
+                            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#AFC2B9]">
                                 Administración
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
-                                Configuración del salón
+                            <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
+                                Configuración
                             </h1>
 
-                            <p className="mt-3 max-w-2xl leading-7 text-[#CFD9D4]">
-                                Personaliza los datos generales,
-                                horarios, cobros y terminales POS.
+                            <p className="mt-3 max-w-2xl text-sm leading-7 text-[#CFD9D4] sm:text-base">
+                                Ajusta la identidad, agenda, cobros y preferencias del salón desde un solo lugar.
                             </p>
                         </div>
                     </div>
 
-                    <div className="grid gap-3 sm:grid-cols-2 xl:w-[370px]">
-                        <ResumenSuperior
-                            icono={Building2}
-                            titulo="Datos centralizados"
-                            descripcion="Una sola configuración para todo el salón."
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 xl:min-w-[560px]">
+                        <DatoHero
+                            icono={
+                                Building2
+                            }
+                            titulo="Sucursal"
+                            valor={`${sucursales.length}`}
                         />
 
-                        <ResumenSuperior
-                            icono={ShieldCheck}
-                            titulo="Acceso protegido"
-                            descripcion="Solo administradores pueden modificarla."
+                        <DatoHero
+                            icono={
+                                SlidersHorizontal
+                            }
+                            titulo="Agenda"
+                            valor={`${configuracion.intervalo_citas_minutos} min`}
+                        />
+
+                        <DatoHero
+                            icono={
+                                Palette
+                            }
+                            titulo="Tema"
+                            valor={formatearTema(
+                                configuracion.tema_color,
+                            )}
+                        />
+
+                        <DatoHero
+                            icono={
+                                ShieldCheck
+                            }
+                            titulo="Acceso"
+                            valor="Admin"
                         />
                     </div>
                 </div>
             </section>
 
-            <div className="mt-6">
-                <FormularioConfiguracion
-                    configuracionInicial={
-                        configuracionInicial
-                    }
-                    sucursales={
-                        (resultadoSucursales.data ??
-                            []) as SucursalConfiguracion[]
-                    }
-                    terminalesIniciales={
-                        (resultadoTerminales.data ??
-                            []) as unknown as TerminalPosConfiguracion[]
-                    }
-                />
-            </div>
+            <TemaSistemaClient
+                temaInicial={
+                    configuracion.tema_color ??
+                    "SALVIA"
+                }
+            />
+
+            <FormularioConfiguracion
+                configuracionInicial={
+                    configuracionInicial
+                }
+                sucursales={
+                    sucursales
+                }
+                terminalesIniciales={
+                    terminales
+                }
+            />
         </div>
     );
 }
 
-function ResumenSuperior({
+function DatoHero({
     icono: Icono,
     titulo,
-    descripcion,
+    valor,
 }: {
     icono: React.ComponentType<{
         className?: string;
     }>;
     titulo: string;
-    descripcion: string;
+    valor: string;
 }) {
     return (
-        <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-4 backdrop-blur-sm">
-            <Icono className="h-5 w-5 text-[#DCE7E2]" />
+        <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-3">
+            <div className="flex items-center gap-2 text-[#AEC0B7]">
+                <Icono className="h-3.5 w-3.5" />
 
-            <p className="mt-3 text-sm font-bold text-white">
-                {titulo}
-            </p>
+                <p className="text-[9px] font-black uppercase tracking-[0.12em]">
+                    {
+                        titulo
+                    }
+                </p>
+            </div>
 
-            <p className="mt-1 text-xs leading-5 text-[#B9C8C1]">
-                {descripcion}
+            <p className="mt-2 truncate text-sm font-black text-white">
+                {
+                    valor
+                }
             </p>
         </div>
     );
 }
 
-function normalizarHora(hora: string) {
-    return hora.slice(0, 5);
+function normalizarHora(
+    hora: string,
+) {
+    return hora.slice(
+        0,
+        5,
+    );
+}
+
+function formatearTema(
+    tema: string,
+) {
+    const nombres: Record<
+        string,
+        string
+    > = {
+        SALVIA:
+            "Salvia",
+        AZUL:
+            "Azul",
+        LILA:
+            "Lila",
+        ROSA:
+            "Rosa",
+        TERRACOTA:
+            "Terracota",
+        GRAFITO:
+            "Grafito",
+    };
+
+    return nombres[
+        tema
+    ] ?? "Salvia";
 }

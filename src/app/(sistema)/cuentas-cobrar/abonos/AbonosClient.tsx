@@ -5,6 +5,7 @@ import {
     ArrowLeft,
     Banknote,
     CalendarDays,
+    CheckCircle2,
     CreditCard,
     Eye,
     Filter,
@@ -121,9 +122,7 @@ export default function AbonosClient({
                 abono.fecha_abono.slice(0, 10);
 
             const cliente =
-                abono.cuentas_cobrar
-                    ?.clientes;
-
+                abono.cuentas_cobrar?.clientes;
             const cuenta =
                 abono.cuentas_cobrar;
 
@@ -144,8 +143,7 @@ export default function AbonosClient({
                 cuenta?.codigo_cuenta
                     .toLowerCase()
                     .includes(texto) ||
-                cuenta?.ventas
-                    ?.codigo_venta
+                cuenta?.ventas?.codigo_venta
                     ?.toLowerCase()
                     .includes(texto) ||
                 abono.referencia
@@ -169,8 +167,7 @@ export default function AbonosClient({
                     abono.sucursal_id ===
                     sucursalId) &&
                 (!estado ||
-                    abono.estado ===
-                    estado) &&
+                    abono.estado === estado) &&
                 (!fechaDesde ||
                     fecha >= fechaDesde) &&
                 (!fechaHasta ||
@@ -191,8 +188,7 @@ export default function AbonosClient({
         return abonosFiltrados.reduce(
             (acumulado, abono) => {
                 if (
-                    abono.estado !==
-                    "APLICADO"
+                    abono.estado !== "APLICADO"
                 ) {
                     return acumulado;
                 }
@@ -236,6 +232,22 @@ export default function AbonosClient({
                             0,
                         );
 
+                const transferencia =
+                    pagosAplicados
+                        .filter(
+                            (pago) =>
+                                pago.metodo_pago ===
+                                "TRANSFERENCIA",
+                        )
+                        .reduce(
+                            (total, pago) =>
+                                total +
+                                Number(
+                                    pago.monto,
+                                ),
+                            0,
+                        );
+
                 const comisionPos =
                     pagosAplicados.reduce(
                         (total, pago) =>
@@ -259,6 +271,9 @@ export default function AbonosClient({
                     tarjeta:
                         acumulado.tarjeta +
                         tarjeta,
+                    transferencia:
+                        acumulado.transferencia +
+                        transferencia,
                     comisionPos:
                         acumulado.comisionPos +
                         comisionPos,
@@ -269,6 +284,7 @@ export default function AbonosClient({
                 total: 0,
                 efectivo: 0,
                 tarjeta: 0,
+                transferencia: 0,
                 comisionPos: 0,
             },
         );
@@ -301,112 +317,142 @@ export default function AbonosClient({
     }
 
     return (
-        <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+        <div className="space-y-6 pb-10">
+            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
 
                 <div className="relative">
                     <Link
                         href="/cuentas-cobrar"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-[#C7D4CE] transition hover:text-white"
                     >
                         <ArrowLeft className="h-4 w-4" />
                         Volver a Cuentas por cobrar
                     </Link>
 
-                    <div className="mt-5 flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
-                            <History className="h-7 w-7" />
+                    <div className="mt-6 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+                        <div className="flex items-start gap-4">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                                <History className="h-7 w-7" />
+                            </div>
+
+                            <div>
+                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                    Cuentas por cobrar
+                                </p>
+
+                                <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
+                                    Historial de abonos
+                                </h1>
+
+                                <p className="mt-3 max-w-2xl text-sm leading-7 text-[#CFD9D4] sm:text-base">
+                                    Revisa todos los pagos aplicados a cuentas pendientes, sus métodos de pago y referencias.
+                                </p>
+                            </div>
                         </div>
 
-                        <div>
-                            <p className="text-sm font-semibold text-[#B9C8C1]">
-                                Cuentas por cobrar
-                            </p>
+                        <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[570px]">
+                            <HeroDato
+                                titulo="Total recibido"
+                                valor={dinero(
+                                    resumen.total,
+                                )}
+                                icono={WalletCards}
+                            />
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
-                                Historial de abonos
-                            </h1>
+                            <HeroDato
+                                titulo="Abonos"
+                                valor={String(
+                                    resumen.cantidad,
+                                )}
+                                icono={History}
+                            />
 
-                            <p className="mt-3 max-w-2xl leading-7 text-[#CFD9D4]">
-                                Consulta todos los pagos recibidos
-                                de clientes con saldo pendiente,
-                                incluyendo pagos mixtos y POS.
-                            </p>
+                            <HeroDato
+                                titulo="Comisión POS"
+                                valor={dinero(
+                                    resumen.comisionPos,
+                                )}
+                                icono={CreditCard}
+                            />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-                <Resumen
-                    titulo="Abonos"
-                    valor={String(
-                        resumen.cantidad,
-                    )}
-                    icono={History}
-                />
-                <Resumen
-                    titulo="Total recibido"
-                    valor={dinero(
-                        resumen.total,
-                    )}
-                    icono={WalletCards}
-                />
-                <Resumen
+            <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <ResumenMetodo
                     titulo="Efectivo"
                     valor={dinero(
                         resumen.efectivo,
                     )}
                     icono={Banknote}
+                    descripcion="Ingresos recibidos en efectivo"
                 />
-                <Resumen
+
+                <ResumenMetodo
                     titulo="Tarjeta"
                     valor={dinero(
                         resumen.tarjeta,
                     )}
                     icono={CreditCard}
+                    descripcion="Cobros procesados por POS"
                 />
-                <Resumen
+
+                <ResumenMetodo
+                    titulo="Transferencia"
+                    valor={dinero(
+                        resumen.transferencia,
+                    )}
+                    icono={Landmark}
+                    descripcion="Transferencias registradas"
+                />
+
+                <ResumenMetodo
                     titulo="Comisión POS"
                     valor={dinero(
                         resumen.comisionPos,
                     )}
-                    icono={Landmark}
+                    icono={ReceiptText}
+                    descripcion="Costo estimado por tarjetas"
                 />
             </section>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
-                <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                    <div className="flex items-center justify-between gap-3">
+            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <h2 className="font-bold text-[#24302C]">
-                                Filtros
+                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                Búsqueda
+                            </p>
+
+                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                                Filtrar movimientos
                             </h2>
-                            <p className="mt-1 text-sm text-[#6B756F]">
-                                Busca por cliente, cuenta,
-                                venta o referencia.
+
+                            <p className="mt-1 text-sm text-[#74817B]">
+                                Busca por cliente, cuenta, venta, referencia o método de pago.
                             </p>
                         </div>
 
                         {hayFiltros && (
                             <button
                                 type="button"
-                                onClick={
-                                    limpiarFiltros
-                                }
-                                className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-3 text-xs font-bold text-[#52605A]"
+                                onClick={limpiarFiltros}
+                                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white px-4 text-xs font-black text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
-                                Limpiar
+                                Limpiar filtros
                             </button>
                         )}
                     </div>
                 </header>
 
-                <div className="grid gap-4 p-5 sm:grid-cols-2 lg:grid-cols-6 sm:p-6">
-                    <div className="relative sm:col-span-2">
+                <div className="grid gap-3 p-5 sm:p-6 lg:grid-cols-[minmax(0,1.4fr)_210px_190px_170px]">
+                    <div className="relative">
                         <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
+
                         <input
                             value={busqueda}
                             onChange={(event) =>
@@ -415,7 +461,7 @@ export default function AbonosClient({
                                 )
                             }
                             placeholder="Cliente, cuenta, venta o referencia..."
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
                         />
                     </div>
 
@@ -430,8 +476,7 @@ export default function AbonosClient({
                             },
                             ...sucursales.map(
                                 (sucursal) => ({
-                                    valor:
-                                        sucursal.id,
+                                    valor: sucursal.id,
                                     texto:
                                         sucursal.nombre,
                                 }),
@@ -451,8 +496,7 @@ export default function AbonosClient({
                             },
                             {
                                 valor: "EFECTIVO",
-                                texto:
-                                    "Efectivo",
+                                texto: "Efectivo",
                             },
                             {
                                 valor: "TARJETA",
@@ -467,8 +511,7 @@ export default function AbonosClient({
                             },
                             {
                                 valor: "DEPOSITO",
-                                texto:
-                                    "Depósito",
+                                texto: "Depósito",
                             },
                             {
                                 valor: "OTRO",
@@ -489,64 +532,75 @@ export default function AbonosClient({
                             },
                             {
                                 valor: "APLICADO",
-                                texto:
-                                    "Aplicado",
+                                texto: "Aplicados",
                             },
                             {
                                 valor: "ANULADO",
-                                texto:
-                                    "Anulado",
+                                texto: "Anulados",
                             },
                         ]}
                         icono={ReceiptText}
                     />
 
-                    <div className="grid grid-cols-2 gap-2">
-                        <Fecha
-                            titulo="Desde"
-                            valor={fechaDesde}
-                            cambiar={setFechaDesde}
-                        />
-                        <Fecha
-                            titulo="Hasta"
-                            valor={fechaHasta}
-                            cambiar={setFechaHasta}
-                        />
+                    <div className="lg:col-span-4">
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            <Fecha
+                                titulo="Desde"
+                                valor={fechaDesde}
+                                cambiar={setFechaDesde}
+                            />
+
+                            <Fecha
+                                titulo="Hasta"
+                                valor={fechaHasta}
+                                cambiar={setFechaHasta}
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
-                <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
-                    <h2 className="font-bold text-[#24302C]">
-                        Abonos registrados
-                    </h2>
-                    <p className="mt-1 text-sm text-[#6B756F]">
-                        {abonosFiltrados.length} resultado
-                        {abonosFiltrados.length ===
-                            1
-                            ? ""
-                            : "s"}
-                    </p>
+            <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                <header className="flex flex-col gap-3 border-b border-[#E8ECE9] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            Movimientos
+                        </p>
+
+                        <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                            Abonos registrados
+                        </h2>
+
+                        <p className="mt-1 text-sm text-[#6B756F]">
+                            {abonosFiltrados.length} resultado
+                            {abonosFiltrados.length ===
+                                1
+                                ? ""
+                                : "s"}
+                        </p>
+                    </div>
+
+                    <div className="rounded-2xl bg-[#F5F8F6] px-4 py-2 text-right">
+                        <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+                            Total visible
+                        </p>
+
+                        <p className="mt-1 text-sm font-black text-[#527064]">
+                            {dinero(
+                                resumen.total,
+                            )}
+                        </p>
+                    </div>
                 </header>
 
                 {abonosFiltrados.length ===
                     0 ? (
-                    <div className="p-12 text-center">
-                        <History className="mx-auto h-9 w-9 text-[#829089]" />
-                        <p className="mt-3 font-bold text-[#24302C]">
-                            No hay abonos para mostrar
-                        </p>
-                        <p className="mt-1 text-sm text-[#6B756F]">
-                            Ajusta los filtros o registra
-                            un abono nuevo.
-                        </p>
-                    </div>
+                    <EstadoVacio />
                 ) : (
                     <>
-                        <div className="hidden overflow-x-auto lg:block">
-                            <table className="w-full min-w-[1250px]">
-                                <thead className="bg-[#FBFCFA] text-left text-xs uppercase text-[#76817B]">
+                        <div className="hidden overflow-x-auto xl:block">
+                            <table className="w-full min-w-[1200px]">
+                                <thead className="bg-[#FBFCFA] text-left text-[10px] uppercase tracking-[0.1em] text-[#76817B]">
                                     <tr>
                                         <Th>
                                             Fecha
@@ -598,7 +652,7 @@ export default function AbonosClient({
                             </table>
                         </div>
 
-                        <div className="space-y-3 p-4 lg:hidden">
+                        <div className="grid gap-4 p-4 sm:grid-cols-2 xl:hidden sm:p-5">
                             {abonosFiltrados.map(
                                 (abono) => (
                                     <TarjetaAbono
@@ -637,33 +691,44 @@ function FilaAbono({
     const pagos =
         abono.cuentas_cobrar_abono_pagos.filter(
             (pago) =>
-                pago.estado === "APLICADO",
+                pago.estado ===
+                "APLICADO",
         );
 
     return (
-        <tr className="text-sm text-[#33413B] hover:bg-[#FBFCFA]">
+        <tr className="text-sm text-[#33413B] transition hover:bg-[#FBFCFA]">
             <Td>
-                {formatearFechaHora(
-                    abono.fecha_abono,
-                )}
+                <div className="inline-flex items-center gap-2 text-xs font-bold text-[#66746D]">
+                    <CalendarDays className="h-4 w-4 text-[#829089]" />
+                    {formatearFechaHora(
+                        abono.fecha_abono,
+                    )}
+                </div>
             </Td>
 
             <Td>
-                <p className="font-bold text-[#24302C]">
-                    {cliente
-                        ?.nombre_completo ??
-                        "Cliente"}
-                </p>
-                <p className="mt-1 text-xs text-[#829089]">
-                    {cliente
-                        ?.codigo_cliente ??
-                        cliente?.telefono ??
-                        ""}
-                </p>
+                <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+                        <UserRound className="h-4 w-4" />
+                    </div>
+
+                    <div>
+                        <p className="font-black text-[#24302C]">
+                            {cliente?.nombre_completo ??
+                                "Cliente"}
+                        </p>
+
+                        <p className="mt-1 text-xs text-[#829089]">
+                            {cliente?.codigo_cliente ??
+                                cliente?.telefono ??
+                                ""}
+                        </p>
+                    </div>
+                </div>
             </Td>
 
             <Td>
-                <p className="font-semibold">
+                <p className="font-black text-[#3F4D47]">
                     {cuenta?.codigo_cuenta ??
                         "Cuenta"}
                 </p>
@@ -680,44 +745,39 @@ function FilaAbono({
             </Td>
 
             <Td>
-                {abono.sucursales?.nombre ??
-                    "Sucursal"}
+                <span className="inline-flex items-center gap-1.5 rounded-xl bg-[#F4F7F5] px-3 py-1.5 text-xs font-bold text-[#607069]">
+                    <Store className="h-3.5 w-3.5" />
+                    {abono.sucursales
+                        ?.nombre ?? "Sucursal"}
+                </span>
             </Td>
 
             <Td>
-                <div className="flex max-w-[300px] flex-wrap gap-1.5">
-                    {pagos.map(
-                        (pago) => (
-                            <MetodoPago
-                                key={
-                                    pago.id
-                                }
-                                pago={
-                                    pago
-                                }
-                                dinero={
-                                    dinero
-                                }
-                            />
-                        ),
-                    )}
+                <div className="flex max-w-[320px] flex-wrap gap-1.5">
+                    {pagos.map((pago) => (
+                        <MetodoPago
+                            key={pago.id}
+                            pago={pago}
+                            dinero={dinero}
+                        />
+                    ))}
                 </div>
             </Td>
 
             <Td>
-                {abono.referencia ??
-                    pagos.find(
-                        (pago) =>
-                            pago.referencia,
-                    )?.referencia ??
-                    "—"}
+                <span className="text-xs font-semibold text-[#67746E]">
+                    {abono.referencia ??
+                        pagos.find(
+                            (pago) =>
+                                pago.referencia,
+                        )?.referencia ??
+                        "—"}
+                </span>
             </Td>
 
             <Td>
-                <strong className="text-[#3F6657]">
-                    {dinero(
-                        abono.monto,
-                    )}
+                <strong className="text-base text-[#527865]">
+                    {dinero(abono.monto)}
                 </strong>
             </Td>
 
@@ -731,10 +791,10 @@ function FilaAbono({
                 {cuenta?.cliente_id && (
                     <Link
                         href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#26332F] px-3 text-xs font-bold text-white"
+                        className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#26332F] px-4 text-xs font-black text-white transition hover:bg-[#34463F]"
                     >
                         <Eye className="h-4 w-4" />
-                        Estado de cuenta
+                        Ver cuenta
                     </Link>
                 )}
             </Td>
@@ -757,60 +817,162 @@ function TarjetaAbono({
     const pagos =
         abono.cuentas_cobrar_abono_pagos.filter(
             (pago) =>
-                pago.estado === "APLICADO",
+                pago.estado ===
+                "APLICADO",
         );
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] p-4">
-            <div className="flex items-start justify-between gap-3">
-                <div>
-                    <p className="font-bold text-[#24302C]">
-                        {cliente
-                            ?.nombre_completo ??
-                            "Cliente"}
-                    </p>
-                    <p className="mt-1 text-xs text-[#76817B]">
-                        {cuenta
-                            ?.codigo_cuenta ??
-                            "Cuenta"}{" "}
-                        ·{" "}
-                        {formatearFechaHora(
-                            abono.fecha_abono,
-                        )}
-                    </p>
-                </div>
+        <article className="overflow-hidden rounded-[24px] border border-[#E0E6E2] bg-white shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+            <div className="border-b border-[#E9EDEA] bg-[#FBFCFA] p-4">
+                <div className="flex items-start justify-between gap-3">
+                    <div className="flex min-w-0 items-start gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#E3EEE8] text-[#527865]">
+                            <CheckCircle2 className="h-5 w-5" />
+                        </div>
 
-                <EstadoAbono
-                    estado={abono.estado}
-                />
+                        <div className="min-w-0">
+                            <p className="truncate font-black text-[#24302C]">
+                                {cliente?.nombre_completo ??
+                                    "Cliente"}
+                            </p>
+
+                            <p className="mt-1 text-xs text-[#76817B]">
+                                {cuenta?.codigo_cuenta ??
+                                    "Cuenta"}
+                            </p>
+                        </div>
+                    </div>
+
+                    <EstadoAbono
+                        estado={abono.estado}
+                    />
+                </div>
             </div>
 
-            <p className="mt-4 text-2xl font-bold text-[#3F6657]">
-                {dinero(abono.monto)}
-            </p>
+            <div className="p-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+                    Monto abonado
+                </p>
 
-            <div className="mt-3 flex flex-wrap gap-2">
-                {pagos.map(
-                    (pago) => (
+                <p className="mt-1 text-2xl font-black text-[#527865]">
+                    {dinero(abono.monto)}
+                </p>
+
+                <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#74817B]">
+                    <CalendarDays className="h-4 w-4" />
+                    {formatearFechaHora(
+                        abono.fecha_abono,
+                    )}
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                    {pagos.map((pago) => (
                         <MetodoPago
                             key={pago.id}
                             pago={pago}
                             dinero={dinero}
                         />
-                    ),
+                    ))}
+                </div>
+
+                {(abono.referencia ||
+                    pagos.find(
+                        (pago) =>
+                            pago.referencia,
+                    )?.referencia) && (
+                        <div className="mt-4 rounded-2xl bg-[#F8FAF8] p-3">
+                            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+                                Referencia
+                            </p>
+
+                            <p className="mt-1 text-xs font-bold text-[#52605A]">
+                                {abono.referencia ??
+                                    pagos.find(
+                                        (pago) =>
+                                            pago.referencia,
+                                    )
+                                        ?.referencia}
+                            </p>
+                        </div>
+                    )}
+
+                {cuenta?.cliente_id && (
+                    <Link
+                        href={`/cuentas-cobrar/${cuenta.cliente_id}`}
+                        className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] text-sm font-black text-white"
+                    >
+                        <Eye className="h-4 w-4" />
+                        Abrir estado de cuenta
+                    </Link>
                 )}
             </div>
-
-            {cuenta?.cliente_id && (
-                <Link
-                    href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                    className="mt-4 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-[#26332F] text-sm font-bold text-white"
-                >
-                    <Eye className="h-4 w-4" />
-                    Estado de cuenta
-                </Link>
-            )}
         </article>
+    );
+}
+
+function ResumenMetodo({
+    titulo,
+    valor,
+    descripcion,
+    icono: Icono,
+}: {
+    titulo: string;
+    valor: string;
+    descripcion: string;
+    icono: React.ComponentType<{
+        className?: string;
+    }>;
+}) {
+    return (
+        <article className="rounded-[24px] border border-[#E1E7E3] bg-white p-5 shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+            <div className="flex items-start justify-between gap-3">
+                <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#87958D]">
+                        {titulo}
+                    </p>
+
+                    <p className="mt-2 text-xl font-black text-[#24302C]">
+                        {valor}
+                    </p>
+                </div>
+
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                    <Icono className="h-5 w-5" />
+                </div>
+            </div>
+
+            <p className="mt-3 text-xs leading-5 text-[#7A8781]">
+                {descripcion}
+            </p>
+        </article>
+    );
+}
+
+function HeroDato({
+    titulo,
+    valor,
+    icono: Icono,
+}: {
+    titulo: string;
+    valor: string;
+    icono: React.ComponentType<{
+        className?: string;
+    }>;
+}) {
+    return (
+        <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
+            <div className="flex items-center justify-between gap-3">
+                <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                    {titulo}
+                </p>
+
+                <Icono className="h-4 w-4 text-[#DCE7E2]" />
+            </div>
+
+            <p className="mt-2 truncate text-lg font-black text-white">
+                {valor}
+            </p>
+        </div>
     );
 }
 
@@ -822,8 +984,7 @@ function MetodoPago({
     dinero: (valor: number) => string;
 }) {
     const texto =
-        pago.metodo_pago ===
-            "TARJETA" &&
+        pago.metodo_pago === "TARJETA" &&
             pago.terminales_pos?.nombre
             ? `Tarjeta · ${pago.terminales_pos.nombre}`
             : formatearTexto(
@@ -833,8 +994,7 @@ function MetodoPago({
     return (
         <span
             title={
-                pago.metodo_pago ===
-                    "TARJETA" &&
+                pago.metodo_pago === "TARJETA" &&
                     Number(
                         pago.monto_comision_pos,
                     ) > 0
@@ -843,10 +1003,9 @@ function MetodoPago({
                     )}`
                     : undefined
             }
-            className="inline-flex rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-bold text-[#52605A]"
+            className="inline-flex rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-black text-[#52605A]"
         >
-            {texto} ·{" "}
-            {dinero(pago.monto)}
+            {texto} · {dinero(pago.monto)}
         </span>
     );
 }
@@ -859,7 +1018,7 @@ function EstadoAbono({
     return (
         <span
             className={[
-                "inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase",
+                "inline-flex rounded-full px-2.5 py-1 text-[10px] font-black uppercase",
                 estado === "APLICADO"
                     ? "bg-[#E3EEE8] text-[#527865]"
                     : "bg-[#F8E5E5] text-[#A25E5E]",
@@ -889,6 +1048,7 @@ function Select({
     return (
         <div className="relative">
             <Icono className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
+
             <select
                 value={valor}
                 onChange={(event) =>
@@ -896,23 +1056,19 @@ function Select({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold text-[#33413B]"
             >
-                {opciones.map(
-                    (opcion) => (
-                        <option
-                            key={
-                                opcion.valor ||
-                                opcion.texto
-                            }
-                            value={
-                                opcion.valor
-                            }
-                        >
-                            {opcion.texto}
-                        </option>
-                    ),
-                )}
+                {opciones.map((opcion) => (
+                    <option
+                        key={
+                            opcion.valor ||
+                            opcion.texto
+                        }
+                        value={opcion.valor}
+                    >
+                        {opcion.texto}
+                    </option>
+                ))}
             </select>
         </div>
     );
@@ -929,9 +1085,10 @@ function Fecha({
 }) {
     return (
         <label>
-            <span className="mb-1 block text-[10px] font-bold uppercase text-[#829089]">
+            <span className="mb-2 block text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
                 {titulo}
             </span>
+
             <input
                 type="date"
                 value={valor}
@@ -940,40 +1097,27 @@ function Fecha({
                         event.target.value,
                     )
                 }
-                className="h-9 w-full rounded-lg border border-[#D4DAD6] px-2 text-xs"
+                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-3 text-sm font-semibold"
             />
         </label>
     );
 }
 
-function Resumen({
-    titulo,
-    valor,
-    icono: Icono,
-}: {
-    titulo: string;
-    valor: string;
-    icono: React.ComponentType<{
-        className?: string;
-    }>;
-}) {
+function EstadoVacio() {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-sm">
-            <div className="flex items-start justify-between gap-3">
-                <div>
-                    <p className="text-sm text-[#6B756F]">
-                        {titulo}
-                    </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
-                        {valor}
-                    </p>
-                </div>
-
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
-                    <Icono className="h-5 w-5" />
-                </div>
+        <div className="p-12 text-center">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+                <History className="h-7 w-7" />
             </div>
-        </article>
+
+            <h3 className="mt-4 font-black text-[#24302C]">
+                No hay abonos para mostrar
+            </h3>
+
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[#6B756F]">
+                Ajusta los filtros o registra un nuevo abono desde el estado de cuenta de un cliente.
+            </p>
+        </div>
     );
 }
 
@@ -983,7 +1127,7 @@ function Th({
     children: React.ReactNode;
 }) {
     return (
-        <th className="px-4 py-3 font-bold">
+        <th className="px-4 py-3 font-black">
             {children}
         </th>
     );
@@ -995,7 +1139,7 @@ function Td({
     children: React.ReactNode;
 }) {
     return (
-        <td className="px-4 py-4 align-top">
+        <td className="px-4 py-4 align-middle">
             {children}
         </td>
     );

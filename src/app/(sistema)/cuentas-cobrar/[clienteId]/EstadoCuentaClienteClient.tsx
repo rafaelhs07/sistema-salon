@@ -4,19 +4,23 @@ import Link from "next/link";
 import {
     AlertTriangle,
     ArrowLeft,
-    Banknote,
     CalendarClock,
     CheckCircle2,
     CircleDollarSign,
-    CreditCard,
     Eye,
     FileText,
+    Mail,
     Phone,
     ReceiptText,
+    Store,
     UserRound,
     WalletCards,
 } from "lucide-react";
-import { useMemo, useState, useTransition } from "react";
+import {
+    useMemo,
+    useState,
+    useTransition,
+} from "react";
 import { useRouter } from "next/navigation";
 
 import { cambiarVencimiento } from "./actions";
@@ -108,11 +112,19 @@ export default function EstadoCuentaClienteClient({
     simboloMoneda: string;
 }) {
     const router = useRouter();
-    const [actualizandoVencimiento, iniciarActualizacionVencimiento] =
-        useTransition();
 
-    const [filtro, setFiltro] =
-        useState<FiltroEstado>("TODAS");
+    const [
+        actualizandoVencimiento,
+        iniciarActualizacionVencimiento,
+    ] = useTransition();
+
+    const [
+        filtro,
+        setFiltro,
+    ] =
+        useState<FiltroEstado>(
+            "TODAS",
+        );
 
     const cuentasFiltradas = useMemo(() => {
         return cuentas.filter((cuenta) => {
@@ -194,7 +206,8 @@ export default function EstadoCuentaClienteClient({
                     )
                     .map((abono) => ({
                         ...abono,
-                        cuentaId: cuenta.id,
+                        cuentaId:
+                            cuenta.id,
                         codigoCuenta:
                             cuenta.codigo_cuenta,
                         ventaId:
@@ -216,6 +229,29 @@ export default function EstadoCuentaClienteClient({
             );
     }, [cuentas]);
 
+    const porcentajeRecuperado =
+        resumen.deudaOriginal > 0
+            ? Math.min(
+                100,
+                Math.round(
+                    (resumen.abonado /
+                        resumen.deudaOriginal) *
+                    100,
+                ),
+            )
+            : 0;
+
+    const cuentasPendientes =
+        cuentas.filter((cuenta) =>
+            [
+                "PENDIENTE",
+                "PARCIAL",
+                "VENCIDA",
+            ].includes(
+                estadoCuentaActual(cuenta),
+            ),
+        ).length;
+
     function dinero(valor: number) {
         return `${simboloMoneda} ${Number(
             valor,
@@ -226,42 +262,40 @@ export default function EstadoCuentaClienteClient({
     }
 
     return (
-        <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+        <div className="space-y-6 pb-10">
+            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
 
-                <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-                    <div>
-                        <Link
-                            href="/cuentas-cobrar"
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
-                        >
-                            <ArrowLeft className="h-4 w-4" />
-                            Volver a Cuentas por cobrar
-                        </Link>
+                <div className="relative">
+                    <Link
+                        href="/cuentas-cobrar"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-[#C7D4CE] transition hover:text-white"
+                    >
+                        <ArrowLeft className="h-4 w-4" />
+                        Volver a Cuentas por cobrar
+                    </Link>
 
-                        <div className="mt-5 flex items-start gap-4">
+                    <div className="mt-6 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+                        <div className="flex min-w-0 items-start gap-4">
                             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
                                 <UserRound className="h-7 w-7" />
                             </div>
 
-                            <div>
-                                <p className="text-sm font-semibold text-[#B9C8C1]">
+                            <div className="min-w-0">
+                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
                                     Estado de cuenta
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
-                                    {
-                                        cliente.nombre_completo
-                                    }
+                                <h1 className="mt-1 truncate text-3xl font-black tracking-tight sm:text-4xl">
+                                    {cliente.nombre_completo}
                                 </h1>
 
                                 <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-[#CFD9D4]">
                                     {cliente.codigo_cliente && (
-                                        <span>
-                                            {
-                                                cliente.codigo_cliente
-                                            }
+                                        <span className="inline-flex items-center gap-1.5">
+                                            <ReceiptText className="h-4 w-4" />
+                                            {cliente.codigo_cliente}
                                         </span>
                                     )}
 
@@ -273,295 +307,316 @@ export default function EstadoCuentaClienteClient({
                                                     cliente.whatsapp}
                                             </span>
                                         )}
+
+                                    {cliente.correo && (
+                                        <span className="inline-flex items-center gap-1.5">
+                                            <Mail className="h-4 w-4" />
+                                            {cliente.correo}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                         </div>
+
+                        <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[570px]">
+                            <HeroDato
+                                titulo="Saldo pendiente"
+                                valor={dinero(
+                                    resumen.pendiente,
+                                )}
+                                icono={WalletCards}
+                            />
+
+                            <HeroDato
+                                titulo="Vencido"
+                                valor={dinero(
+                                    resumen.vencido,
+                                )}
+                                icono={AlertTriangle}
+                                alerta
+                            />
+
+                            <HeroDato
+                                titulo="Cuentas abiertas"
+                                valor={String(
+                                    cuentasPendientes,
+                                )}
+                                icono={FileText}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_350px]">
+                <div className="rounded-[28px] border border-[#E1E7E3] bg-white p-5 shadow-[0_10px_28px_rgba(36,48,44,0.05)] sm:p-6">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                Recuperación
+                            </p>
+
+                            <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                                Progreso de pago del cliente
+                            </h2>
+
+                            <p className="mt-1 text-sm text-[#74817B]">
+                                Qué parte de la deuda acumulada ya fue cubierta.
+                            </p>
+                        </div>
+
+                        <div className="text-right">
+                            <p className="text-3xl font-black text-[#26332F]">
+                                {porcentajeRecuperado}%
+                            </p>
+                            <p className="text-xs font-bold text-[#829089]">
+                                recuperado
+                            </p>
+                        </div>
                     </div>
 
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-[#B9C8C1]">
-                            Saldo total pendiente
-                        </p>
-                        <p className="mt-2 text-3xl font-bold">
-                            {dinero(
+                    <div className="mt-5 h-3 overflow-hidden rounded-full bg-[#E6ECE8]">
+                        <div
+                            className="h-full rounded-full bg-[#6F8F83] transition-all"
+                            style={{
+                                width: `${porcentajeRecuperado}%`,
+                            }}
+                        />
+                    </div>
+
+                    <div className="mt-4 grid grid-cols-3 gap-3">
+                        <MiniDato
+                            titulo="Deuda original"
+                            valor={dinero(
+                                resumen.deudaOriginal,
+                            )}
+                        />
+
+                        <MiniDato
+                            titulo="Total abonado"
+                            valor={dinero(
+                                resumen.abonado,
+                            )}
+                        />
+
+                        <MiniDato
+                            titulo="Pendiente"
+                            valor={dinero(
                                 resumen.pendiente,
                             )}
-                        </p>
+                            destacado
+                        />
+                    </div>
+                </div>
+
+                <div className="rounded-[28px] border border-[#E4E9E6] bg-[#F8FAF8] p-5 shadow-[0_10px_28px_rgba(36,48,44,0.04)] sm:p-6">
+                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        Perfil financiero
+                    </p>
+
+                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                        Datos rápidos
+                    </h2>
+
+                    <div className="mt-5 space-y-3">
+                        <DatoCliente
+                            titulo="Código"
+                            valor={
+                                cliente.codigo_cliente ??
+                                "Sin código"
+                            }
+                        />
+                        <DatoCliente
+                            titulo="Teléfono"
+                            valor={
+                                cliente.telefono ??
+                                "No registrado"
+                            }
+                        />
+                        <DatoCliente
+                            titulo="WhatsApp"
+                            valor={
+                                cliente.whatsapp ??
+                                "No registrado"
+                            }
+                        />
+                        <DatoCliente
+                            titulo="Correo"
+                            valor={
+                                cliente.correo ??
+                                "No registrado"
+                            }
+                        />
                     </div>
                 </div>
             </section>
 
-            <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                <Resumen
-                    titulo="Deuda original"
-                    valor={dinero(
-                        resumen.deudaOriginal,
-                    )}
-                    icono={CircleDollarSign}
-                />
-                <Resumen
-                    titulo="Total abonado"
-                    valor={dinero(
-                        resumen.abonado,
-                    )}
-                    icono={CheckCircle2}
-                />
-                <Resumen
-                    titulo="Saldo pendiente"
-                    valor={dinero(
-                        resumen.pendiente,
-                    )}
-                    icono={WalletCards}
-                />
-                <Resumen
-                    titulo="Saldo vencido"
-                    valor={dinero(
-                        resumen.vencido,
-                    )}
-                    icono={AlertTriangle}
-                />
-            </section>
+            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                <div className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                Cuentas
+                            </p>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white p-4 shadow-sm sm:p-5">
-                <div className="flex flex-wrap gap-2">
-                    {(
-                        [
-                            [
-                                "TODAS",
-                                "Todas",
-                            ],
-                            [
-                                "PENDIENTES",
-                                "Pendientes",
-                            ],
-                            [
-                                "PAGADAS",
-                                "Pagadas",
-                            ],
-                            [
-                                "ANULADAS",
-                                "Anuladas",
-                            ],
-                        ] as const
-                    ).map(
-                        ([
-                            valor,
-                            texto,
-                        ]) => (
-                            <button
-                                key={valor}
-                                type="button"
-                                onClick={() =>
-                                    setFiltro(
-                                        valor,
-                                    )
-                                }
-                                className={[
-                                    "h-9 rounded-xl px-4 text-sm font-bold transition",
-                                    filtro ===
-                                        valor
-                                        ? "bg-[#26332F] text-white"
-                                        : "bg-[#EEF2EF] text-[#52605A] hover:bg-[#E3E8E5]",
-                                ].join(
-                                    " ",
-                                )}
-                            >
-                                {texto}
-                            </button>
-                        ),
-                    )}
-                </div>
-            </section>
-
-            <div className="grid gap-6 xl:grid-cols-[1fr_390px]">
-                <div className="space-y-6">
-                    <Seccion
-                        titulo="Deudas del cliente"
-                        subtitulo={`${cuentasFiltradas.length} cuenta${cuentasFiltradas.length ===
-                                1
-                                ? ""
-                                : "s"
-                            }`}
-                    >
-                        {cuentasFiltradas.length ===
-                            0 ? (
-                            <EstadoVacio
-                                titulo="No hay cuentas en este filtro"
-                                descripcion="Selecciona otro estado para revisar el historial."
-                            />
-                        ) : (
-                            <div className="space-y-4">
-                                {cuentasFiltradas.map(
-                                    (cuenta) => (
-                                        <CuentaCard
-                                            key={
-                                                cuenta.id
-                                            }
-                                            cuenta={
-                                                cuenta
-                                            }
-                                            dinero={
-                                                dinero
-                                            }
-                                            actualizandoVencimiento={
-                                                actualizandoVencimiento
-                                            }
-                                            cambiarFecha={(
-                                                cuentaId,
-                                                fecha,
-                                            ) => {
-                                                iniciarActualizacionVencimiento(
-                                                    async () => {
-                                                        const resultado =
-                                                            await cambiarVencimiento(
-                                                                cuentaId,
-                                                                cliente.id,
-                                                                fecha || null,
-                                                            );
-
-                                                        if (
-                                                            !resultado.exito
-                                                        ) {
-                                                            alert(
-                                                                resultado.mensaje,
-                                                            );
-                                                            return;
-                                                        }
-
-                                                        router.refresh();
-                                                    },
-                                                );
-                                            }}
-                                        />
-                                    ),
-                                )}
-                            </div>
-                        )}
-                    </Seccion>
-
-                    <Seccion
-                        titulo="Historial de abonos"
-                        subtitulo={`${abonos.length} abono${abonos.length ===
-                                1
-                                ? ""
-                                : "s"
-                            } aplicado${abonos.length ===
-                                1
-                                ? ""
-                                : "s"
-                            }`}
-                    >
-                        {abonos.length === 0 ? (
-                            <EstadoVacio
-                                titulo="Todavía no hay abonos"
-                                descripcion="Los pagos realizados a las cuentas aparecerán aquí."
-                            />
-                        ) : (
-                            <div className="divide-y divide-[#E8ECE9]">
-                                {abonos.map(
-                                    (abono) => (
-                                        <AbonoFila
-                                            key={
-                                                abono.id
-                                            }
-                                            abono={
-                                                abono
-                                            }
-                                            dinero={
-                                                dinero
-                                            }
-                                        />
-                                    ),
-                                )}
-                            </div>
-                        )}
-                    </Seccion>
-                </div>
-
-                <aside className="space-y-6 xl:sticky xl:top-24 xl:self-start">
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                        <h2 className="font-bold text-[#24302C]">
-                            Resumen
-                        </h2>
-
-                        <div className="mt-5 space-y-3">
-                            <Fila
-                                titulo="Deuda acumulada"
-                                valor={dinero(
-                                    resumen.deudaOriginal,
-                                )}
-                            />
-                            <Fila
-                                titulo="Abonos"
-                                valor={`- ${dinero(
-                                    resumen.abonado,
-                                )}`}
-                            />
-
-                            <div className="border-t border-[#DDE3DF] pt-3">
-                                <Fila
-                                    titulo="Saldo actual"
-                                    valor={dinero(
-                                        resumen.pendiente,
-                                    )}
-                                    destacado
-                                />
-                            </div>
+                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                                Historial de saldos
+                            </h2>
                         </div>
 
-                        {resumen.pendiente >
-                            0 && (
-                                <div className="mt-5 rounded-2xl bg-[#FAF0DC] p-4 text-sm text-[#81652F]">
-                                    <p className="font-bold">
-                                        Tiene saldo pendiente
-                                    </p>
-                                    <p className="mt-1 leading-5">
-                                        El registro de abonos se
-                                        habilitará en el siguiente
-                                        paso.
-                                    </p>
-                                </div>
+                        <div className="flex gap-2 overflow-x-auto">
+                            {(
+                                [
+                                    ["TODAS", "Todas"],
+                                    [
+                                        "PENDIENTES",
+                                        "Pendientes",
+                                    ],
+                                    [
+                                        "PAGADAS",
+                                        "Pagadas",
+                                    ],
+                                    [
+                                        "ANULADAS",
+                                        "Anuladas",
+                                    ],
+                                ] as const
+                            ).map(
+                                ([valor, texto]) => (
+                                    <button
+                                        key={valor}
+                                        type="button"
+                                        onClick={() =>
+                                            setFiltro(
+                                                valor,
+                                            )
+                                        }
+                                        className={[
+                                            "h-9 shrink-0 rounded-xl px-4 text-xs font-black transition",
+                                            filtro ===
+                                                valor
+                                                ? "bg-[#26332F] text-white"
+                                                : "bg-[#EEF2EF] text-[#52605A] hover:bg-[#E3E8E5]",
+                                        ].join(
+                                            " ",
+                                        )}
+                                    >
+                                        {texto}
+                                    </button>
+                                ),
                             )}
-                    </section>
-
-                    <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                        <h2 className="font-bold text-[#24302C]">
-                            Datos del cliente
-                        </h2>
-
-                        <div className="mt-5 space-y-3">
-                            <Fila
-                                titulo="Código"
-                                valor={
-                                    cliente.codigo_cliente ??
-                                    "Sin código"
-                                }
-                            />
-                            <Fila
-                                titulo="Teléfono"
-                                valor={
-                                    cliente.telefono ??
-                                    "No registrado"
-                                }
-                            />
-                            <Fila
-                                titulo="WhatsApp"
-                                valor={
-                                    cliente.whatsapp ??
-                                    "No registrado"
-                                }
-                            />
-                            <Fila
-                                titulo="Correo"
-                                valor={
-                                    cliente.correo ??
-                                    "No registrado"
-                                }
-                            />
                         </div>
-                    </section>
-                </aside>
-            </div>
+                    </div>
+                </div>
+
+                <div className="p-5 sm:p-6">
+                    {cuentasFiltradas.length ===
+                        0 ? (
+                        <EstadoVacio
+                            titulo="No hay cuentas en este filtro"
+                            descripcion="Selecciona otro estado para revisar el historial."
+                        />
+                    ) : (
+                        <div className="grid gap-4 xl:grid-cols-2">
+                            {cuentasFiltradas.map(
+                                (cuenta) => (
+                                    <CuentaCard
+                                        key={
+                                            cuenta.id
+                                        }
+                                        cuenta={
+                                            cuenta
+                                        }
+                                        dinero={
+                                            dinero
+                                        }
+                                        actualizandoVencimiento={
+                                            actualizandoVencimiento
+                                        }
+                                        cambiarFecha={(
+                                            cuentaId,
+                                            fecha,
+                                        ) => {
+                                            iniciarActualizacionVencimiento(
+                                                async () => {
+                                                    const resultado =
+                                                        await cambiarVencimiento(
+                                                            cuentaId,
+                                                            cliente.id,
+                                                            fecha ||
+                                                            null,
+                                                        );
+
+                                                    if (
+                                                        !resultado.exito
+                                                    ) {
+                                                        alert(
+                                                            resultado.mensaje,
+                                                        );
+                                                        return;
+                                                    }
+
+                                                    router.refresh();
+                                                },
+                                            );
+                                        }}
+                                    />
+                                ),
+                            )}
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
+                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        Movimientos
+                    </p>
+
+                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                        Historial de abonos
+                    </h2>
+
+                    <p className="mt-1 text-xs text-[#829089]">
+                        {abonos.length} abono
+                        {abonos.length === 1
+                            ? ""
+                            : "s"}{" "}
+                        aplicado
+                        {abonos.length === 1
+                            ? ""
+                            : "s"}
+                    </p>
+                </header>
+
+                <div className="p-5 sm:p-6">
+                    {abonos.length === 0 ? (
+                        <EstadoVacio
+                            titulo="Todavía no hay abonos"
+                            descripcion="Los pagos realizados a las cuentas aparecerán aquí."
+                        />
+                    ) : (
+                        <div className="space-y-3">
+                            {abonos.map(
+                                (abono) => (
+                                    <AbonoFila
+                                        key={
+                                            abono.id
+                                        }
+                                        abono={
+                                            abono
+                                        }
+                                        dinero={
+                                            dinero
+                                        }
+                                    />
+                                ),
+                            )}
+                        </div>
+                    )}
+                </div>
+            </section>
         </div>
     );
 }
@@ -584,7 +639,9 @@ function CuentaCard({
         estadoCuentaActual(cuenta);
 
     const porcentaje =
-        Number(cuenta.monto_original) > 0
+        Number(
+            cuenta.monto_original,
+        ) > 0
             ? Math.min(
                 100,
                 Math.max(
@@ -601,159 +658,155 @@ function CuentaCard({
             : 0;
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] p-5">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                        <p className="font-bold text-[#24302C]">
-                            {
-                                cuenta.codigo_cuenta
-                            }
+        <article className="overflow-hidden rounded-[24px] border border-[#E0E6E2] bg-white shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+            <div className="border-b border-[#E9EDEA] bg-[#FBFCFA] p-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                            <p className="font-black text-[#24302C]">
+                                {cuenta.codigo_cuenta}
+                            </p>
+
+                            <EstadoCuenta
+                                estado={estado}
+                            />
+                        </div>
+
+                        <p className="mt-2 text-xs font-semibold text-[#74817B]">
+                            {cuenta.sucursales
+                                ?.nombre ??
+                                "Sucursal"}{" "}
+                            ·{" "}
+                            {formatearFecha(
+                                cuenta.fecha_origen,
+                            )}
                         </p>
-                        <EstadoCuenta
-                            estado={estado}
-                        />
                     </div>
 
-                    <p className="mt-2 text-sm text-[#6B756F]">
-                        {cuenta.sucursales
-                            ?.nombre ??
-                            "Sucursal"}{" "}
-                        ·{" "}
-                        {formatearFecha(
-                            cuenta.fecha_origen,
-                        )}
-                    </p>
+                    {cuenta.venta_id && (
+                        <Link
+                            href={`/caja/ventas/${cuenta.venta_id}`}
+                            className="inline-flex h-9 items-center gap-2 self-start rounded-xl bg-[#DCE7E2] px-3 text-xs font-black text-[#43524B]"
+                        >
+                            <Eye className="h-4 w-4" />
+                            {cuenta.ventas
+                                ?.codigo_venta ??
+                                "Ver venta"}
+                        </Link>
+                    )}
                 </div>
-
-                {cuenta.venta_id && (
-                    <Link
-                        href={`/caja/ventas/${cuenta.venta_id}`}
-                        className="inline-flex h-9 items-center gap-2 self-start rounded-xl bg-[#DCE7E2] px-3 text-xs font-bold text-[#43524B]"
-                    >
-                        <Eye className="h-4 w-4" />
-                        {cuenta.ventas
-                            ?.codigo_venta ??
-                            "Ver venta"}
-                    </Link>
-                )}
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                <MiniDato
-                    titulo="Deuda"
-                    valor={dinero(
-                        cuenta.monto_original,
-                    )}
-                />
-                <MiniDato
-                    titulo="Abonado"
-                    valor={dinero(
-                        cuenta.monto_abonado,
-                    )}
-                />
-                <MiniDato
-                    titulo="Saldo"
-                    valor={dinero(
+            <div className="p-4 sm:p-5">
+                <div className="grid grid-cols-3 gap-3">
+                    <MiniDato
+                        titulo="Deuda"
+                        valor={dinero(
+                            cuenta.monto_original,
+                        )}
+                    />
+                    <MiniDato
+                        titulo="Abonado"
+                        valor={dinero(
+                            cuenta.monto_abonado,
+                        )}
+                    />
+                    <MiniDato
+                        titulo="Saldo"
+                        valor={dinero(
+                            cuenta.saldo_pendiente,
+                        )}
+                        destacado
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <div className="mb-2 flex items-center justify-between text-xs">
+                        <span className="font-semibold text-[#6B756F]">
+                            Progreso de pago
+                        </span>
+                        <span className="font-black text-[#527064]">
+                            {porcentaje.toLocaleString(
+                                "es-NI",
+                                {
+                                    maximumFractionDigits:
+                                        0,
+                                },
+                            )}
+                            %
+                        </span>
+                    </div>
+
+                    <div className="h-2 overflow-hidden rounded-full bg-[#EEF2EF]">
+                        <div
+                            className="h-full rounded-full bg-[#6F8F83]"
+                            style={{
+                                width: `${porcentaje}%`,
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {[
+                    "PENDIENTE",
+                    "PARCIAL",
+                    "VENCIDA",
+                ].includes(estado) &&
+                    Number(
                         cuenta.saldo_pendiente,
+                    ) > 0 && (
+                        <Link
+                            href={`/cuentas-cobrar/${cuenta.cliente_id}/abonar/${cuenta.id}`}
+                            className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] text-sm font-black text-white transition hover:bg-[#607F74]"
+                        >
+                            <WalletCards className="h-4 w-4" />
+                            Registrar abono
+                        </Link>
                     )}
-                />
-            </div>
 
-            <div className="mt-4">
-                <div className="mb-2 flex items-center justify-between text-xs">
-                    <span className="font-semibold text-[#6B756F]">
-                        Progreso de pago
-                    </span>
-                    <span className="font-bold text-[#52605A]">
-                        {porcentaje.toLocaleString(
-                            "es-NI",
-                            {
-                                maximumFractionDigits: 0,
-                            },
-                        )}
-                        %
-                    </span>
-                </div>
+                {estado !== "ANULADA" && (
+                    <label className="mt-4 block rounded-2xl border border-[#E1E7E3] bg-[#F8FAF8] p-4">
+                        <span className="mb-2 flex items-center gap-2 text-xs font-black text-[#52605A]">
+                            <CalendarClock className="h-4 w-4" />
+                            Fecha de vencimiento
+                        </span>
 
-                <div className="h-2 overflow-hidden rounded-full bg-[#EEF2EF]">
-                    <div
-                        className="h-full rounded-full bg-[#6F8F83]"
-                        style={{
-                            width: `${porcentaje}%`,
-                        }}
-                    />
-                </div>
-            </div>
+                        <input
+                            type="date"
+                            defaultValue={
+                                cuenta.fecha_vencimiento ??
+                                ""
+                            }
+                            disabled={
+                                actualizandoVencimiento
+                            }
+                            onBlur={(event) => {
+                                const nuevaFecha =
+                                    event.target
+                                        .value;
 
-            {[
-                "PENDIENTE",
-                "PARCIAL",
-                "VENCIDA",
-            ].includes(estado) &&
-                Number(
-                    cuenta.saldo_pendiente,
-                ) > 0 && (
-                    <Link
-                        href={`/cuentas-cobrar/${cuenta.cliente_id}/abonar/${cuenta.id}`}
-                        className="mt-4 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] text-sm font-bold text-white transition hover:bg-[#607F74]"
-                    >
-                        <WalletCards className="h-4 w-4" />
-                        Registrar abono
-                    </Link>
+                                if (
+                                    nuevaFecha !==
+                                    (cuenta.fecha_vencimiento ??
+                                        "")
+                                ) {
+                                    cambiarFecha(
+                                        cuenta.id,
+                                        nuevaFecha,
+                                    );
+                                }
+                            }}
+                            className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm font-semibold disabled:opacity-50"
+                        />
+                    </label>
                 )}
 
-            {estado !== "ANULADA" && (
-                <label className="mt-4 block rounded-xl bg-[#FBFCFA] p-3">
-                    <span className="mb-2 flex items-center gap-2 text-xs font-bold text-[#52605A]">
-                        <CalendarClock className="h-4 w-4" />
-                        Fecha de vencimiento
-                    </span>
-
-                    <input
-                        type="date"
-                        defaultValue={
-                            cuenta.fecha_vencimiento ??
-                            ""
-                        }
-                        disabled={
-                            actualizandoVencimiento
-                        }
-                        onBlur={(event) => {
-                            const nuevaFecha =
-                                event.target.value;
-
-                            if (
-                                nuevaFecha !==
-                                (cuenta.fecha_vencimiento ??
-                                    "")
-                            ) {
-                                cambiarFecha(
-                                    cuenta.id,
-                                    nuevaFecha,
-                                );
-                            }
-                        }}
-                        className="h-10 w-full rounded-lg border border-[#D4DAD6] bg-white px-3 text-sm disabled:opacity-50"
-                    />
-                </label>
-            )}
-
-            {cuenta.fecha_vencimiento && (
-                <div className="mt-3 flex items-center gap-2 text-xs text-[#6B756F]">
-                    <CalendarClock className="h-4 w-4" />
-                    Vence:{" "}
-                    {formatearFechaSimple(
-                        cuenta.fecha_vencimiento,
-                    )}
-                </div>
-            )}
-
-            {cuenta.observaciones && (
-                <p className="mt-4 rounded-xl bg-[#FBFCFA] p-3 text-sm leading-6 text-[#6B756F]">
-                    {cuenta.observaciones}
-                </p>
-            )}
+                {cuenta.observaciones && (
+                    <p className="mt-4 rounded-2xl bg-[#FBFCFA] p-3 text-sm leading-6 text-[#6B756F]">
+                        {cuenta.observaciones}
+                    </p>
+                )}
+            </div>
         </article>
     );
 }
@@ -781,62 +834,73 @@ function AbonoFila({
     const pagos =
         abono.cuentas_cobrar_abono_pagos.filter(
             (pago) =>
-                pago.estado === "APLICADO",
+                pago.estado ===
+                "APLICADO",
         );
 
     return (
-        <article className="py-4 first:pt-0 last:pb-0">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                    <p className="font-bold text-[#24302C]">
-                        {dinero(abono.monto)}
-                    </p>
-                    <p className="mt-1 text-xs text-[#829089]">
-                        {formatearFechaHora(
-                            abono.fecha_abono,
-                        )}{" "}
-                        · {abono.codigoCuenta}
-                    </p>
-
-                    <div className="mt-3 flex flex-wrap gap-2">
-                        {pagos.map(
-                            (pago) => (
-                                <span
-                                    key={
-                                        pago.id
-                                    }
-                                    className="rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-bold text-[#52605A]"
-                                >
-                                    {pago.metodo_pago ===
-                                        "TARJETA" &&
-                                        pago.terminales_pos
-                                            ?.nombre
-                                        ? `Tarjeta · ${pago.terminales_pos.nombre}`
-                                        : formatearTexto(
-                                            pago.metodo_pago,
-                                        )}
-                                    {" · "}
-                                    {dinero(
-                                        pago.monto,
-                                    )}
-                                </span>
-                            ),
-                        )}
+        <article className="rounded-[22px] border border-[#E0E6E2] bg-white p-4 transition hover:border-[#CAD6D0]">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#E3EEE8] text-[#527865]">
+                        <CheckCircle2 className="h-5 w-5" />
                     </div>
 
-                    {abono.observaciones && (
-                        <p className="mt-2 text-xs text-[#6B756F]">
-                            {
-                                abono.observaciones
-                            }
+                    <div>
+                        <p className="text-lg font-black text-[#24302C]">
+                            {dinero(
+                                abono.monto,
+                            )}
                         </p>
-                    )}
+
+                        <p className="mt-1 text-xs font-semibold text-[#829089]">
+                            {formatearFechaHora(
+                                abono.fecha_abono,
+                            )}{" "}
+                            ·{" "}
+                            {abono.codigoCuenta}
+                        </p>
+
+                        <div className="mt-3 flex flex-wrap gap-2">
+                            {pagos.map(
+                                (pago) => (
+                                    <span
+                                        key={
+                                            pago.id
+                                        }
+                                        className="rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-black text-[#52605A]"
+                                    >
+                                        {pago.metodo_pago ===
+                                            "TARJETA" &&
+                                            pago.terminales_pos
+                                                ?.nombre
+                                            ? `Tarjeta · ${pago.terminales_pos.nombre}`
+                                            : formatearTexto(
+                                                pago.metodo_pago,
+                                            )}
+                                        {" · "}
+                                        {dinero(
+                                            pago.monto,
+                                        )}
+                                    </span>
+                                ),
+                            )}
+                        </div>
+
+                        {abono.observaciones && (
+                            <p className="mt-3 text-xs leading-5 text-[#6B756F]">
+                                {
+                                    abono.observaciones
+                                }
+                            </p>
+                        )}
+                    </div>
                 </div>
 
                 {abono.ventaId && (
                     <Link
                         href={`/caja/ventas/${abono.ventaId}`}
-                        className="inline-flex h-9 items-center gap-2 self-start rounded-xl border border-[#DCE3DF] px-3 text-xs font-bold text-[#52605A]"
+                        className="inline-flex h-9 items-center gap-2 self-start rounded-xl border border-[#DCE3DF] px-3 text-xs font-black text-[#52605A]"
                     >
                         <ReceiptText className="h-4 w-4" />
                         {abono.codigoVenta ??
@@ -845,6 +909,153 @@ function AbonoFila({
                 )}
             </div>
         </article>
+    );
+}
+
+function HeroDato({
+    titulo,
+    valor,
+    icono: Icono,
+    alerta = false,
+}: {
+    titulo: string;
+    valor: string;
+    icono: React.ComponentType<{
+        className?: string;
+    }>;
+    alerta?: boolean;
+}) {
+    return (
+        <div
+            className={[
+                "rounded-2xl border p-4 backdrop-blur-sm",
+                alerta
+                    ? "border-[#D6A9AE]/20 bg-[#C79AA1]/10"
+                    : "border-white/10 bg-white/[0.06]",
+            ].join(" ")}
+        >
+            <div className="flex items-center justify-between gap-3">
+                <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                    {titulo}
+                </p>
+
+                <Icono className="h-4 w-4 text-[#DCE7E2]" />
+            </div>
+
+            <p className="mt-2 truncate text-lg font-black text-white">
+                {valor}
+            </p>
+        </div>
+    );
+}
+
+function MiniDato({
+    titulo,
+    valor,
+    destacado = false,
+}: {
+    titulo: string;
+    valor: string;
+    destacado?: boolean;
+}) {
+    return (
+        <div className="rounded-2xl bg-[#F7F9F7] p-3">
+            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+                {titulo}
+            </p>
+
+            <p
+                className={[
+                    "mt-1 text-sm font-black",
+                    destacado
+                        ? "text-[#9A6267]"
+                        : "text-[#33413B]",
+                ].join(" ")}
+            >
+                {valor}
+            </p>
+        </div>
+    );
+}
+
+function DatoCliente({
+    titulo,
+    valor,
+}: {
+    titulo: string;
+    valor: string;
+}) {
+    return (
+        <div className="flex items-center justify-between gap-3 border-b border-[#E7ECE9] pb-3 last:border-0 last:pb-0">
+            <span className="text-xs font-semibold text-[#7B8781]">
+                {titulo}
+            </span>
+
+            <strong
+                className="max-w-[190px] truncate text-right text-xs text-[#33413B]"
+                title={valor}
+            >
+                {valor}
+            </strong>
+        </div>
+    );
+}
+
+function EstadoCuenta({
+    estado,
+}: {
+    estado: string;
+}) {
+    const estilos: Record<
+        string,
+        string
+    > = {
+        PENDIENTE:
+            "bg-[#F8E5E5] text-[#A25E5E]",
+        PARCIAL:
+            "bg-[#FAF0DC] text-[#9A742D]",
+        PAGADA:
+            "bg-[#E3EEE8] text-[#527865]",
+        VENCIDA:
+            "bg-[#F0DEDE] text-[#934A4A]",
+        ANULADA:
+            "bg-[#EFE7E1] text-[#8B6754]",
+    };
+
+    return (
+        <span
+            className={[
+                "rounded-full px-2.5 py-1 text-[10px] font-black uppercase",
+                estilos[estado] ??
+                "bg-[#EEF2EF] text-[#6B756F]",
+            ].join(" ")}
+        >
+            {formatearTexto(
+                estado,
+            )}
+        </span>
+    );
+}
+
+function EstadoVacio({
+    titulo,
+    descripcion,
+}: {
+    titulo: string;
+    descripcion: string;
+}) {
+    return (
+        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-10 text-center">
+            <FileText className="mx-auto h-8 w-8 text-[#829089]" />
+
+            <p className="mt-3 font-black text-[#24302C]">
+                {titulo}
+            </p>
+
+            <p className="mt-1 text-sm text-[#6B756F]">
+                {descripcion}
+            </p>
+        </div>
     );
 }
 
@@ -877,172 +1088,6 @@ function estadoCuentaActual(
     return cuenta.estado;
 }
 
-function EstadoCuenta({
-    estado,
-}: {
-    estado: string;
-}) {
-    const estilos: Record<
-        string,
-        string
-    > = {
-        PENDIENTE:
-            "bg-[#F8E5E5] text-[#A25E5E]",
-        PARCIAL:
-            "bg-[#FAF0DC] text-[#9A742D]",
-        PAGADA:
-            "bg-[#E3EEE8] text-[#527865]",
-        VENCIDA:
-            "bg-[#F0DEDE] text-[#934A4A]",
-        ANULADA:
-            "bg-[#EFE7E1] text-[#8B6754]",
-    };
-
-    return (
-        <span
-            className={[
-                "rounded-full px-2.5 py-1 text-[10px] font-bold uppercase",
-                estilos[estado] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
-            ].join(" ")}
-        >
-            {formatearTexto(estado)}
-        </span>
-    );
-}
-
-function Resumen({
-    titulo,
-    valor,
-    icono: Icono,
-}: {
-    titulo: string;
-    valor: string;
-    icono: React.ComponentType<{
-        className?: string;
-    }>;
-}) {
-    return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-sm">
-            <div className="flex items-start justify-between gap-4">
-                <div>
-                    <p className="text-sm text-[#6B756F]">
-                        {titulo}
-                    </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
-                        {valor}
-                    </p>
-                </div>
-
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
-                    <Icono className="h-5 w-5" />
-                </div>
-            </div>
-        </article>
-    );
-}
-
-function Seccion({
-    titulo,
-    subtitulo,
-    children,
-}: {
-    titulo: string;
-    subtitulo?: string;
-    children: React.ReactNode;
-}) {
-    return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
-            <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                <h2 className="font-bold text-[#24302C]">
-                    {titulo}
-                </h2>
-                {subtitulo && (
-                    <p className="mt-1 text-xs text-[#829089]">
-                        {subtitulo}
-                    </p>
-                )}
-            </header>
-            <div className="p-5 sm:p-6">
-                {children}
-            </div>
-        </section>
-    );
-}
-
-function MiniDato({
-    titulo,
-    valor,
-}: {
-    titulo: string;
-    valor: string;
-}) {
-    return (
-        <div className="rounded-xl bg-[#FBFCFA] p-3">
-            <p className="text-[10px] font-bold uppercase text-[#829089]">
-                {titulo}
-            </p>
-            <p className="mt-1 text-sm font-bold text-[#33413B]">
-                {valor}
-            </p>
-        </div>
-    );
-}
-
-function Fila({
-    titulo,
-    valor,
-    destacado = false,
-}: {
-    titulo: string;
-    valor: string;
-    destacado?: boolean;
-}) {
-    return (
-        <div className="flex items-center justify-between gap-4">
-            <span
-                className={
-                    destacado
-                        ? "font-bold text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
-                }
-            >
-                {titulo}
-            </span>
-            <strong
-                className={
-                    destacado
-                        ? "text-xl text-[#24302C]"
-                        : "max-w-[210px] truncate text-right text-sm text-[#33413B]"
-                }
-                title={valor}
-            >
-                {valor}
-            </strong>
-        </div>
-    );
-}
-
-function EstadoVacio({
-    titulo,
-    descripcion,
-}: {
-    titulo: string;
-    descripcion: string;
-}) {
-    return (
-        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-10 text-center">
-            <FileText className="mx-auto h-8 w-8 text-[#829089]" />
-            <p className="mt-3 font-bold text-[#24302C]">
-                {titulo}
-            </p>
-            <p className="mt-1 text-sm text-[#6B756F]">
-                {descripcion}
-            </p>
-        </div>
-    );
-}
-
 function formatearFecha(
     fecha: string,
 ) {
@@ -1073,15 +1118,6 @@ function formatearFechaHora(
                 "America/Managua",
         },
     ).format(new Date(fecha));
-}
-
-function formatearFechaSimple(
-    fecha: string,
-) {
-    const [anio, mes, dia] =
-        fecha.split("-");
-
-    return `${dia}/${mes}/${anio}`;
 }
 
 function formatearTexto(

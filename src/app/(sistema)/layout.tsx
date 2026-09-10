@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import AppShell from "@/components/AppShell";
 import { createClient } from "@/lib/supabase/server";
+import type { TemaColorSistema } from "./configuracion/tema-actions";
 
 type RolUsuario =
     | "SUPER_ADMIN"
@@ -12,6 +13,7 @@ type RolUsuario =
     | "INVENTARIO";
 
 type PerfilConsulta = {
+    salon_id: string;
     nombre_completo: string;
     correo: string;
     rol: RolUsuario;
@@ -43,42 +45,81 @@ export default async function SistemaLayout({
     const { data, error } = await supabase
         .from("usuarios_perfiles")
         .select(`
-      nombre_completo,
-      correo,
-      rol,
-      estado,
-      salones (
-        nombre
-      ),
-      sucursales (
-        nombre
-      )
-    `)
+            salon_id,
+            nombre_completo,
+            correo,
+            rol,
+            estado,
+            salones (
+                nombre
+            ),
+            sucursales (
+                nombre
+            )
+        `)
         .eq("id", user.id)
         .single();
 
     if (error || !data) {
-        console.error("No se pudo cargar el perfil:", error);
+        console.error(
+            "No se pudo cargar el perfil:",
+            error,
+        );
+
         redirect("/login");
     }
 
-    const perfil = data as unknown as PerfilConsulta;
+    const perfil =
+        data as unknown as PerfilConsulta;
 
-    if (perfil.estado !== "ACTIVO") {
+    if (
+        perfil.estado !==
+        "ACTIVO"
+    ) {
         await supabase.auth.signOut();
         redirect("/login");
     }
 
+    const {
+        data: configuracionTema,
+    } =
+        await supabase
+            .from(
+                "configuracion_salon",
+            )
+            .select(
+                "tema_color",
+            )
+            .eq(
+                "salon_id",
+                perfil.salon_id,
+            )
+            .maybeSingle();
+
+    const temaColor =
+        (
+            configuracionTema?.tema_color ??
+            "SALVIA"
+        ) as TemaColorSistema;
+
     return (
         <AppShell
+            temaColor={
+                temaColor
+            }
             perfil={{
-                nombreCompleto: perfil.nombre_completo,
-                correo: perfil.correo,
-                rol: perfil.rol,
+                nombreCompleto:
+                    perfil.nombre_completo,
+                correo:
+                    perfil.correo,
+                rol:
+                    perfil.rol,
                 salonNombre:
-                    perfil.salones?.nombre ?? "Salón de belleza",
+                    perfil.salones?.nombre ??
+                    "Salón de belleza",
                 sucursalNombre:
-                    perfil.sucursales?.nombre ?? "Sucursal principal",
+                    perfil.sucursales?.nombre ??
+                    "Sucursal principal",
             }}
         >
             {children}
