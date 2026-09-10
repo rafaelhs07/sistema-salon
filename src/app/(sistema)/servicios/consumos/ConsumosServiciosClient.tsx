@@ -206,8 +206,8 @@ export default function ConsumosServiciosClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div>
@@ -220,7 +220,7 @@ export default function ConsumosServiciosClient({
                         </Link>
 
                         <div className="mt-5 flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <PackageMinus className="h-7 w-7" />
                             </div>
 
@@ -229,7 +229,7 @@ export default function ConsumosServiciosClient({
                                     Inventario por servicios
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
                                     Consumos
                                 </h1>
 
@@ -289,15 +289,15 @@ export default function ConsumosServiciosClient({
                 />
             </section>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
                         <div>
-                            <h2 className="text-xl font-bold text-[#24302C]">
+                            <h2 className="text-xl font-bold text-foreground tracking-tight">
                                 Historial de consumo
                             </h2>
 
-                            <p className="mt-1 text-sm text-[#6B756F]">
+                            <p className="mt-1 text-sm text-text-secondary">
                                 Cada registro corresponde
                                 a un descuento automático
                                 generado por una cita.
@@ -305,7 +305,7 @@ export default function ConsumosServiciosClient({
                         </div>
 
                         <div className="grid gap-3 sm:grid-cols-3">
-                            <div className="relative sm:min-w-64">
+                            <div className="relative min-w-0">
                                 <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
 
                                 <input
@@ -320,7 +320,7 @@ export default function ConsumosServiciosClient({
                                         )
                                     }
                                     placeholder="Producto, cita o cliente..."
-                                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                                    className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                                 />
                             </div>
 
@@ -340,7 +340,7 @@ export default function ConsumosServiciosClient({
                                                 .value,
                                         )
                                     }
-                                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                                    className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                                 >
                                     <option value="">
                                         Todas las sucursales
@@ -383,7 +383,7 @@ export default function ConsumosServiciosClient({
                                                 .value as FiltroFecha,
                                         )
                                     }
-                                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                                    className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                                 >
                                     <option value="HOY">
                                         Hoy
@@ -406,14 +406,14 @@ export default function ConsumosServiciosClient({
                 <div className="p-5 sm:p-6">
                     {consumosFiltrados.length ===
                         0 ? (
-                        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
+                        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
                             <PackageMinus className="mx-auto h-9 w-9 text-[#829089]" />
 
-                            <h3 className="mt-4 font-bold text-[#24302C]">
+                            <h3 className="mt-4 font-bold text-foreground tracking-tight">
                                 No hay consumos
                             </h3>
 
-                            <p className="mt-2 text-sm text-[#6B756F]">
+                            <p className="mt-2 text-sm text-text-secondary">
                                 No encontramos movimientos
                                 con los filtros actuales.
                             </p>
@@ -421,9 +421,9 @@ export default function ConsumosServiciosClient({
                     ) : (
                         <>
                             <div className="hidden overflow-x-auto lg:block">
-                                <table className="w-full min-w-[1000px]">
+                                <table className="salon-table w-full min-w-[1000px]">
                                     <thead>
-                                        <tr className="border-b border-[#E3E7E4] text-left text-[10px] font-bold uppercase tracking-wide text-[#829089]">
+                                        <tr className="border-b border-border text-left text-xs font-bold uppercase tracking-wide text-[#829089]">
                                             <th className="pb-3 pr-4">
                                                 Producto
                                             </th>
@@ -457,7 +457,7 @@ export default function ConsumosServiciosClient({
                                                     className="text-sm"
                                                 >
                                                     <td className="py-4 pr-4">
-                                                        <p className="font-bold text-[#24302C]">
+                                                        <p className="font-bold text-foreground">
                                                             {
                                                                 consumo.productoNombre
                                                             }
@@ -533,11 +533,11 @@ export default function ConsumosServiciosClient({
                                             key={
                                                 consumo.id
                                             }
-                                            className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4"
+                                            className="rounded-2xl border border-border bg-[#FBFCFA] p-4"
                                         >
                                             <div className="flex items-start justify-between gap-3">
                                                 <div>
-                                                    <p className="font-bold text-[#24302C]">
+                                                    <p className="font-bold text-foreground">
                                                         {
                                                             consumo.productoNombre
                                                         }
@@ -605,7 +605,7 @@ export default function ConsumosServiciosClient({
                                                 />
                                             </div>
 
-                                            <p className="mt-4 text-[11px] text-[#76817B]">
+                                            <p className="mt-4 text-xs text-[#76817B]">
                                                 {formatearFechaHora(
                                                     consumo.fechaMovimiento,
                                                 )}
@@ -634,19 +634,19 @@ function TarjetaResumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm font-medium text-[#6B756F]">
+                    <p className="text-sm font-medium text-text-secondary">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-2xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>

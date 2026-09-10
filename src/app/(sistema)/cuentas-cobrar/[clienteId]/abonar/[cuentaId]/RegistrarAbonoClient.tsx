@@ -525,9 +525,9 @@ export default function RegistrarAbonoClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_20px_60px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -540,12 +540,12 @@ export default function RegistrarAbonoClient({
 
                     <div className="mt-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <CircleDollarSign className="h-7 w-7" />
                             </div>
 
                             <div>
-                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                <p className="text-xs font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
                                     Cuentas por cobrar
                                 </p>
 
@@ -620,19 +620,19 @@ export default function RegistrarAbonoClient({
                 className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_390px]"
             >
                 <div className="space-y-6">
-                    <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                    <section className="salon-panel overflow-hidden border border-border bg-white">
                         <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6">
                             <div className="flex items-start gap-3">
-                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                                     <WalletCards className="h-5 w-5" />
                                 </div>
 
                                 <div>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                         Paso 1
                                     </p>
 
-                                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                                    <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                         ¿Cómo recibiste el abono?
                                     </h2>
 
@@ -644,7 +644,7 @@ export default function RegistrarAbonoClient({
                         </header>
 
                         <div className="p-5 sm:p-6">
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Agregar método
                             </p>
 
@@ -677,7 +677,7 @@ export default function RegistrarAbonoClient({
                             </div>
 
                             {!permitirPagoCombinado && (
-                                <div className="mt-4 rounded-2xl border border-[#E2E8E4] bg-[#F8FAF8] px-4 py-3 text-xs font-semibold text-[#6B756F]">
+                                <div className="mt-4 rounded-2xl border border-[#E2E8E4] bg-[#F8FAF8] px-4 py-3 text-xs font-semibold text-text-secondary">
                                     El pago combinado está desactivado. Al elegir otro método se reemplazará el actual.
                                 </div>
                             )}
@@ -724,13 +724,13 @@ export default function RegistrarAbonoClient({
                         </div>
                     </section>
 
-                    <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+                    <section className="salon-panel overflow-hidden border border-border bg-white">
                         <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6">
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Paso 2
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                            <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                 Información adicional
                             </h2>
 
@@ -759,7 +759,7 @@ export default function RegistrarAbonoClient({
                                         )
                                     }
                                     placeholder="Número de recibo o comprobante"
-                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                                    className="salon-control w-full border border-border-strong bg-white px-4 font-semibold outline-none transition focus:border-primary"
                                 />
                             </label>
 
@@ -783,7 +783,7 @@ export default function RegistrarAbonoClient({
                                         )
                                     }
                                     placeholder="Información adicional del abono..."
-                                    className="w-full resize-none rounded-2xl border border-[#D4DAD6] bg-white p-3 text-sm outline-none transition focus:border-[#6F8F83]"
+                                    className="salon-control w-full resize-none border border-border-strong bg-white p-3 outline-none transition focus:border-primary"
                                 />
                             </label>
                         </div>
@@ -791,13 +791,13 @@ export default function RegistrarAbonoClient({
                 </div>
 
                 <aside className="xl:sticky xl:top-24 xl:self-start">
-                    <section className="overflow-hidden rounded-[30px] border border-[#DCE5E0] bg-white shadow-[0_16px_45px_rgba(36,48,44,0.09)]">
-                        <div className="bg-[#26332F] p-5 text-white">
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#AFC2B9]">
+                    <section className="salon-panel overflow-hidden border border-border bg-white">
+                        <div className="bg-sidebar p-5 text-white">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#AFC2B9]">
                                 Resumen
                             </p>
 
-                            <h2 className="mt-1 text-xl font-black">
+                            <h2 className="mt-1 text-xl font-black tracking-tight">
                                 Confirmar abono
                             </h2>
 
@@ -809,7 +809,7 @@ export default function RegistrarAbonoClient({
                         <div className="p-5">
                             <div className="rounded-2xl border border-[#DFE6E2] bg-[#F8FAF8] p-4">
                                 <div className="flex items-center gap-3">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-[#607C6F] shadow-sm">
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-primary-strong shadow-sm">
                                         <UserRound className="h-5 w-5" />
                                     </div>
 
@@ -850,7 +850,7 @@ export default function RegistrarAbonoClient({
                                                     .value,
                                             )
                                         }
-                                        className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-3 text-sm font-semibold"
+                                        className="salon-control w-full border border-border-strong bg-white pl-11 pr-3 font-semibold"
                                     >
                                         {cajas.length ===
                                             0 ? (
@@ -898,7 +898,7 @@ export default function RegistrarAbonoClient({
                                     resaltado
                                 />
 
-                                <div className="border-t border-[#E1E7E3] pt-3">
+                                <div className="border-t border-border pt-3">
                                     <FilaResumen
                                         titulo="Saldo después"
                                         valor={dinero(
@@ -918,7 +918,7 @@ export default function RegistrarAbonoClient({
                                         Porcentaje cubierto
                                     </span>
 
-                                    <strong className="text-[#527064]">
+                                    <strong className="text-primary-strong">
                                         {
                                             porcentajeAbono
                                         }
@@ -928,7 +928,7 @@ export default function RegistrarAbonoClient({
 
                                 <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-[#E4EAE6]">
                                     <div
-                                        className="h-full rounded-full bg-[#6F8F83] transition-all"
+                                        className="h-full rounded-full bg-primary transition-all"
                                         style={{
                                             width:
                                                 `${Math.min(
@@ -966,7 +966,7 @@ export default function RegistrarAbonoClient({
                                     saldoRestante <
                                     -0.005
                                 }
-                                className="mt-5 inline-flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] px-5 text-sm font-black text-white shadow-sm transition hover:bg-[#607F74] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-45"
+                                className="mt-5 inline-flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 text-sm font-black text-white shadow-sm transition hover:bg-primary-hover hover:shadow-md disabled:cursor-not-allowed disabled:opacity-45"
                             >
                                 {guardando ? (
                                     <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -979,7 +979,7 @@ export default function RegistrarAbonoClient({
                                     : "Registrar abono"}
                             </button>
 
-                            <p className="mt-3 text-center text-[11px] leading-5 text-[#8A9690]">
+                            <p className="mt-3 text-center text-xs leading-5 text-[#8A9690]">
                                 El abono se registrará en la cuenta del cliente y en la caja seleccionada.
                             </p>
                         </div>
@@ -1011,7 +1011,7 @@ function MetodoCard({
             }
             className="group rounded-[22px] border border-[#DFE6E2] bg-[#FBFCFA] p-4 text-left transition hover:-translate-y-0.5 hover:border-[#AFC2B8] hover:bg-white hover:shadow-[0_9px_24px_rgba(36,48,44,0.07)]"
         >
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064] transition group-hover:bg-[#26332F] group-hover:text-white">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong transition group-hover:bg-sidebar group-hover:text-white">
                 <Icono className="h-5 w-5" />
             </div>
 
@@ -1106,10 +1106,10 @@ function PagoCard({
                 : Landmark;
 
     return (
-        <article className="overflow-hidden rounded-[24px] border border-[#E0E6E2] bg-white shadow-[0_7px_20px_rgba(36,48,44,0.04)]">
+        <article className="salon-panel overflow-hidden border border-border bg-white">
             <div className="flex items-center justify-between gap-3 border-b border-[#E9EDEA] bg-[#FBFCFA] px-4 py-3">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                         <MetodoIcono className="h-4 w-4" />
                     </div>
 
@@ -1122,7 +1122,7 @@ function PagoCard({
                             }
                         </p>
 
-                        <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#87958D]">
+                        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#87958D]">
                             {formatearMetodo(
                                 pago.metodoPago,
                             )}
@@ -1167,7 +1167,7 @@ function PagoCard({
                                         .value as PagoFormulario["metodoPago"],
                                 )
                             }
-                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-bold text-[#33413B]"
+                            className="salon-control w-full border border-border-strong bg-white px-4 text-[#33413B]"
                         >
                             <option value="EFECTIVO">
                                 Efectivo
@@ -1223,7 +1223,7 @@ function PagoCard({
                                         },
                                     );
                                 }}
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-right text-base font-black text-[#26332F]"
+                                className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 text-right text-sidebar"
                             />
                         </div>
                     </label>
@@ -1262,7 +1262,7 @@ function PagoCard({
                                             },
                                         )
                                     }
-                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-right text-base font-black text-[#26332F]"
+                                    className="salon-control w-full border border-border-strong bg-white px-4 text-right text-sidebar"
                                 />
                             </label>
 
@@ -1306,7 +1306,7 @@ function PagoCard({
                                             },
                                         )
                                     }
-                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-bold text-[#33413B]"
+                                    className="salon-control w-full border border-border-strong bg-white px-4 text-[#33413B]"
                                 >
                                     <option value="">
                                         Selecciona POS
@@ -1379,7 +1379,7 @@ function PagoCard({
                                     )
                                 }
                                 placeholder="Número de transferencia o comprobante"
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-white px-4 font-semibold outline-none transition focus:border-primary"
                             />
                         </label>
                     )}
@@ -1397,7 +1397,7 @@ function HeroDato({
 }) {
     return (
         <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+            <p className="text-xs font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
                 {
                     titulo
                 }
@@ -1429,8 +1429,8 @@ function FilaResumen({
                 className={[
                     "text-sm",
                     grande
-                        ? "font-black text-[#26332F]"
-                        : "font-semibold text-[#6B756F]",
+                        ? "font-black text-sidebar"
+                        : "font-semibold text-text-secondary",
                 ].join(
                     " ",
                 )}
@@ -1446,9 +1446,9 @@ function FilaResumen({
                         ? "text-xl"
                         : "text-sm",
                     resaltado
-                        ? "text-[#527064]"
+                        ? "text-primary-strong"
                         : grande
-                            ? "text-[#26332F]"
+                            ? "text-sidebar"
                             : "text-[#33413B]",
                 ].join(
                     " ",
@@ -1476,13 +1476,13 @@ function MiniResultado({
             className={[
                 "rounded-2xl border p-4",
                 destacado
-                    ? "border-[#C8DBD1] bg-[#EAF2EE]"
-                    : "border-[#E3E7E4] bg-[#FBFCFA]",
+                    ? "border-[#C8DBD1] bg-surface-soft"
+                    : "border-border bg-[#FBFCFA]",
             ].join(
                 " ",
             )}
         >
-            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {
                     titulo
                 }

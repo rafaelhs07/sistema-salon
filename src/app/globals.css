@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./sistema-visual.css";
 
 :root {
     /* Fondos */
@@ -11,15 +12,18 @@
     --primary: #6f8f83;
     --primary-hover: #5e7d71;
     --primary-soft: #dce7e2;
+    --primary-soft-2: #eef4f0;
+    --primary-strong: #527064;
     /* Color secundario */
     --secondary: #c79aa1;
+    --secondary-hover: #b98991;
     --secondary-soft: #f2e4e7;
     /* Textos */
     --foreground: #24302c;
-    --text-secondary: #6b756f;
-    --text-muted: #8b948f;
+    --text-secondary: #587064;
+    --text-muted: #65756d;
     /* Bordes */
-    --border: #e3e7e4;
+    --border: #dce5e0;
     --border-strong: #d4dad6;
     /* Estados */
     --success: #5f8a77;
@@ -45,7 +49,9 @@
     --color-primary: var(--primary);
     --color-primary-hover: var(--primary-hover);
     --color-primary-soft: var(--primary-soft);
+    --color-primary-strong: var(--primary-strong);
     --color-secondary: var(--secondary);
+    --color-secondary-hover: var(--secondary-hover);
     --color-secondary-soft: var(--secondary-soft);
     --color-text-secondary: var(--text-secondary);
     --color-text-muted: var(--text-muted);
@@ -59,7 +65,7 @@
     --color-info-soft: var(--info-soft);
     --color-danger: var(--danger);
     --color-danger-soft: var(--danger-soft);
-    --font-sans: Arial, Helvetica, sans-serif;
+    --font-sans: "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -76,17 +82,19 @@ body {
     margin: 0;
     background: var(--background);
     color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-button,
-input,
-textarea,
-select {
-    font: inherit;
+@layer base {
+    button,
+    input,
+    textarea,
+    select {
+        font: inherit;
+    }
 }
 
 button,

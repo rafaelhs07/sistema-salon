@@ -232,13 +232,13 @@ export default function TrabajadoresClient({
                 />
             )}
 
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <UsersRound className="h-7 w-7" />
                         </div>
 
@@ -247,7 +247,7 @@ export default function TrabajadoresClient({
                                 Personal del salón
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
                                 Trabajadores
                             </h1>
 
@@ -261,7 +261,7 @@ export default function TrabajadoresClient({
                     <button
                         type="button"
                         onClick={abrirNuevoTrabajador}
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-5 font-bold text-[#26332F] transition hover:bg-white"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                     >
                         <Plus className="h-5 w-5" />
                         Nuevo trabajador
@@ -292,13 +292,13 @@ export default function TrabajadoresClient({
                 />
             </section>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel border border-border bg-white">
                 <header className="flex flex-col gap-4 border-b border-[#E8ECE9] p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                        <h2 className="text-xl font-bold text-[#24302C]">
+                        <h2 className="text-xl font-bold text-foreground tracking-tight">
                             Equipo de trabajo
                         </h2>
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             {trabajadoresFiltrados.length} trabajador
                             {trabajadoresFiltrados.length === 1 ? "" : "es"} encontrado
                             {trabajadoresFiltrados.length === 1 ? "" : "s"}.
@@ -314,7 +314,7 @@ export default function TrabajadoresClient({
                                     setBusqueda(event.target.value)
                                 }
                                 placeholder="Buscar trabajador..."
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-sm text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                                className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:ring-4 focus:ring-primary/15"
                             />
                         </div>
 
@@ -329,7 +329,7 @@ export default function TrabajadoresClient({
                                         | EstadoTrabajador,
                                     )
                                 }
-                                className="h-11 min-w-44 appearance-none rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-8 text-sm font-medium text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                                className="salon-control min-w-44 appearance-none border border-border-strong bg-white pl-11 pr-8 font-medium text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
                             >
                                 <option value="TODOS">Todos los estados</option>
                                 <option value="ACTIVO">Activos</option>
@@ -396,18 +396,18 @@ function TarjetaResumen({
     icono: React.ComponentType<{ className?: string }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm font-medium text-[#6B756F]">
+                    <p className="text-sm font-medium text-text-secondary">
                         {titulo}
                     </p>
-                    <p className="mt-3 text-3xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-3xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -433,7 +433,7 @@ function TarjetaTrabajador({
     );
 
     return (
-        <article className="group overflow-hidden rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] transition hover:-translate-y-0.5 hover:border-[#C8D9D1] hover:shadow-lg">
+        <article className="group overflow-hidden rounded-2xl border border-border bg-[#FBFCFA] transition hover:-translate-y-0.5 hover:border-[#C8D9D1] hover:shadow-lg">
             <div
                 className="h-1.5 w-full"
                 style={{
@@ -454,7 +454,7 @@ function TarjetaTrabajador({
 
                     <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="truncate font-bold text-[#24302C]">
+                            <h3 className="truncate font-bold text-foreground tracking-tight">
                                 {trabajador.nombre_completo}
                             </h3>
 
@@ -479,14 +479,14 @@ function TarjetaTrabajador({
                                         relacion.especialidades && (
                                             <span
                                                 key={relacion.especialidad_id}
-                                                className="rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-bold text-[#527064]"
+                                                className="rounded-full bg-surface-soft px-2.5 py-1 text-xs font-bold text-primary-strong"
                                             >
                                                 {relacion.especialidades.nombre}
                                             </span>
                                         ),
                                 )
                             ) : (
-                                <span className="text-sm text-[#6B756F]">
+                                <span className="text-sm text-text-secondary">
                                     Sin especialidades
                                 </span>
                             )}
@@ -518,7 +518,7 @@ function TarjetaTrabajador({
 
                 <div className="mt-5 grid grid-cols-2 gap-3">
                     <div className="rounded-xl bg-white p-3">
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-[#839089]">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#839089]">
                             Modalidad
                         </p>
                         <p className="mt-1 text-sm font-bold text-[#33413B]">
@@ -529,7 +529,7 @@ function TarjetaTrabajador({
                     </div>
 
                     <div className="rounded-xl bg-white p-3">
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-[#839089]">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#839089]">
                             Pago
                         </p>
                         <p className="mt-1 text-sm font-bold text-[#33413B]">
@@ -542,7 +542,7 @@ function TarjetaTrabajador({
                 </div>
 
                 <div className="mt-3 rounded-xl bg-white p-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-[#839089]">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[#839089]">
                         Agenda
                     </p>
                     <p className="mt-1 text-sm font-bold text-[#33413B]">
@@ -556,7 +556,7 @@ function TarjetaTrabajador({
                     <button
                         type="button"
                         onClick={editar}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white text-xs font-bold text-[#43524B] transition hover:bg-[#EEF2EF]"
+                        className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-white text-text-secondary transition hover:bg-surface-soft"
                     >
                         <Edit3 className="h-4 w-4" />
                         Editar
@@ -564,7 +564,7 @@ function TarjetaTrabajador({
 
                     <Link
                         href={`/trabajadores/${trabajador.id}/horarios`}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#EEF2EF] text-xs font-bold text-[#52605A] transition hover:bg-[#DCE7E2]"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-surface-soft text-[#52605A] transition hover:bg-primary-soft"
                     >
                         <CalendarClock className="h-4 w-4" />
                         Horario
@@ -718,7 +718,7 @@ function ModalTrabajador({
             : "Monto fijo por servicio";
 
     return (
-        <div className="fixed inset-0 z-[70] flex justify-end bg-[#26332F]/45 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[70] flex justify-end bg-sidebar/45 backdrop-blur-sm">
             <button
                 type="button"
                 aria-label="Cerrar formulario"
@@ -726,15 +726,15 @@ function ModalTrabajador({
                 className="absolute inset-0"
             />
 
-            <aside className="relative z-10 h-full w-full max-w-2xl overflow-y-auto bg-[#F6F7F4] shadow-2xl">
-                <header className="sticky top-0 z-20 flex items-center justify-between border-b border-[#E3E7E4] bg-white/95 px-5 py-5 backdrop-blur-xl sm:px-7">
+            <aside className="salon-sheet relative z-10 h-full w-full max-w-2xl overflow-y-auto bg-background shadow-2xl">
+                <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-white/95 px-5 py-5 backdrop-blur-xl sm:px-7">
                     <div>
-                        <p className="text-sm font-semibold text-[#6F8F83]">
+                        <p className="text-sm font-semibold text-primary">
                             {editando
                                 ? "Editar información"
                                 : "Nuevo registro"}
                         </p>
-                        <h2 className="mt-1 text-2xl font-bold text-[#24302C]">
+                        <h2 className="mt-1 text-2xl font-bold text-foreground tracking-tight">
                             {editando
                                 ? trabajador?.nombre_completo
                                 : "Nuevo trabajador"}
@@ -745,7 +745,7 @@ function ModalTrabajador({
                         type="button"
                         onClick={cerrar}
                         disabled={guardando}
-                        className="rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#6B756F] transition hover:bg-[#EEF2EF]"
+                        className="rounded-xl border border-border bg-white p-2.5 text-text-secondary transition hover:bg-surface-soft"
                     >
                         <X className="h-5 w-5" />
                     </button>
@@ -993,9 +993,9 @@ function ModalTrabajador({
                                                         Number(event.target.value),
                                                     )
                                                 }
-                                                className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-14 text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                                                className="salon-control w-full border border-border-strong bg-white pl-12 pr-14 text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
                                             />
-                                            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-[#6B756F]">
+                                            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-text-secondary">
                                                 {formulario.tipoComision ===
                                                     "PORCENTAJE"
                                                     ? "%"
@@ -1022,7 +1022,7 @@ function ModalTrabajador({
                                             className={[
                                                 "flex h-10 w-10 items-center justify-center rounded-xl transition",
                                                 formulario.colorCalendario === color
-                                                    ? "ring-4 ring-[#6F8F83]/20"
+                                                    ? "ring-4 ring-primary/20"
                                                     : "hover:scale-105",
                                             ].join(" ")}
                                             style={{
@@ -1036,7 +1036,7 @@ function ModalTrabajador({
                                         </button>
                                     ))}
 
-                                    <label className="relative flex h-10 items-center gap-2 rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm font-semibold text-[#52605A]">
+                                    <label className="relative flex h-10 items-center gap-2 rounded-xl border border-border-strong bg-white px-3 text-sm font-semibold text-[#52605A]">
                                         <Palette className="h-4 w-4" />
                                         Otro
                                         <input
@@ -1093,12 +1093,12 @@ function ModalTrabajador({
                         </SeccionFormulario>
                     </div>
 
-                    <div className="sticky bottom-4 mt-6 flex flex-col-reverse gap-3 rounded-2xl border border-[#DCE3DF] bg-white/95 p-4 shadow-xl backdrop-blur-xl sm:flex-row sm:justify-end">
+                    <div className="sticky bottom-4 mt-6 flex flex-col-reverse gap-3 rounded-2xl border border-border-strong bg-white/95 p-4 shadow-xl backdrop-blur-xl sm:flex-row sm:justify-end">
                         <button
                             type="button"
                             onClick={cerrar}
                             disabled={guardando}
-                            className="h-11 rounded-xl border border-[#DCE3DF] bg-[#EEF2EF] px-5 text-sm font-bold text-[#43524B] transition hover:bg-[#E3EAE6]"
+                            className="salon-action border border-border-strong bg-surface-soft px-5 text-text-secondary transition hover:bg-[#E3EAE6]"
                         >
                             Cancelar
                         </button>
@@ -1106,7 +1106,7 @@ function ModalTrabajador({
                         <button
                             type="submit"
                             disabled={guardando}
-                            className="inline-flex h-11 min-w-44 items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white transition hover:bg-[#5E7D71] disabled:cursor-not-allowed disabled:bg-[#AAB9B3]"
+                            className="salon-action inline-flex min-w-44 items-center justify-center gap-2 bg-primary px-5 text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-[#AAB9B3]"
                         >
                             {guardando ? (
                                 <>
@@ -1195,7 +1195,7 @@ function SelectorEspecialidades({
                 <span className="ml-1 text-[#C97878]">*</span>
             </p>
 
-            <div className="rounded-2xl border border-[#D4DAD6] bg-[#FBFCFA] p-3">
+            <div className="rounded-2xl border border-border-strong bg-[#FBFCFA] p-3">
                 <div className="flex flex-wrap gap-2">
                     {especialidades.map((especialidad) => {
                         const seleccionada = seleccionadas.includes(
@@ -1210,8 +1210,8 @@ function SelectorEspecialidades({
                                 className={[
                                     "inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-bold transition",
                                     seleccionada
-                                        ? "border-[#6F8F83] bg-[#DCE7E2] text-[#3F6657]"
-                                        : "border-[#E0E5E2] bg-white text-[#6B756F] hover:border-[#B9CEC4]",
+                                        ? "border-primary bg-primary-soft text-[#3F6657]"
+                                        : "border-[#E0E5E2] bg-white text-text-secondary hover:border-[#B9CEC4]",
                                 ].join(" ")}
                             >
                                 {seleccionada && (
@@ -1230,7 +1230,7 @@ function SelectorEspecialidades({
                     </p>
                 )}
 
-                <div className="mt-4 border-t border-[#E3E7E4] pt-4">
+                <div className="mt-4 border-t border-border pt-4">
                     <p className="mb-2 text-xs font-bold uppercase tracking-wide text-[#718079]">
                         Agregar nueva especialidad
                     </p>
@@ -1250,14 +1250,14 @@ function SelectorEspecialidades({
                             }}
                             maxLength={80}
                             placeholder="Ej. Peinados, nail art, depilación..."
-                            className="h-11 min-w-0 flex-1 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                            className="salon-control min-w-0 flex-1 border border-border-strong bg-white px-4 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:ring-4 focus:ring-primary/15"
                         />
 
                         <button
                             type="button"
                             onClick={crearNueva}
                             disabled={creando}
-                            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#43524B] transition hover:bg-[#DCE7E2] disabled:cursor-not-allowed disabled:opacity-60"
+                            className="salon-action inline-flex items-center justify-center gap-2 bg-surface-soft px-4 text-text-secondary transition hover:bg-primary-soft disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {creando ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -1300,12 +1300,12 @@ function SeccionFormulario({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
-                <h3 className="font-bold text-[#24302C]">
+                <h3 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h3>
             </header>
@@ -1348,7 +1348,7 @@ function CampoTexto({
                     required={requerido}
                     placeholder={placeholder}
                     onChange={(event) => cambiar(event.target.value)}
-                    className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                    className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:ring-4 focus:ring-primary/15"
                 />
             </div>
         </div>
@@ -1373,7 +1373,7 @@ function CampoFecha({
                 type="date"
                 value={valor}
                 onChange={(event) => cambiar(event.target.value)}
-                className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                className="salon-control w-full border border-border-strong bg-white px-4 text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
             />
         </div>
     );
@@ -1402,7 +1402,7 @@ function CampoSelect({
                 value={valor}
                 required
                 onChange={(event) => cambiar(event.target.value)}
-                className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 font-medium text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                className="salon-control w-full border border-border-strong bg-white px-4 font-medium text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
             >
                 <option value="">Seleccionar</option>
                 {opciones.map((opcion) => (
@@ -1442,9 +1442,9 @@ function CampoDinero({
                     onChange={(event) =>
                         cambiar(Number(event.target.value))
                     }
-                    className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-14 text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                    className="salon-control w-full border border-border-strong bg-white pl-12 pr-14 text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
                 />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-[#6B756F]">
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-text-secondary">
                     {simbolo}
                 </span>
             </div>
@@ -1474,7 +1474,7 @@ function CampoArea({
                 value={valor}
                 placeholder={placeholder}
                 onChange={(event) => cambiar(event.target.value)}
-                className="w-full resize-y rounded-xl border border-[#D4DAD6] bg-white px-4 py-3 leading-6 text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                className="salon-control w-full resize-y border border-border-strong bg-white px-4 py-3 leading-6 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:ring-4 focus:ring-primary/15"
             />
             <p className="mt-1 text-right text-xs text-[#909A95]">
                 {valor.length}/500
@@ -1499,8 +1499,8 @@ function Interruptor({
             className={[
                 "flex cursor-pointer items-center gap-4 rounded-2xl border p-4 transition",
                 activo
-                    ? "border-[#C8D9D1] bg-[#F0F5F2]"
-                    : "border-[#E3E7E4] bg-[#FBFCFA]",
+                    ? "border-[#C8D9D1] bg-surface-soft"
+                    : "border-border bg-[#FBFCFA]",
             ].join(" ")}
         >
             <div className="min-w-0 flex-1">
@@ -1522,7 +1522,7 @@ function Interruptor({
             <span
                 className={[
                     "relative h-7 w-12 shrink-0 rounded-full transition-colors",
-                    activo ? "bg-[#6F8F83]" : "bg-[#CCD3CF]",
+                    activo ? "bg-primary" : "bg-[#CCD3CF]",
                 ].join(" ")}
             >
                 <span
@@ -1544,7 +1544,7 @@ function DatoTarjeta({
     texto: string;
 }) {
     return (
-        <div className="flex items-center gap-2.5 text-sm text-[#6B756F]">
+        <div className="flex items-center gap-2.5 text-sm text-text-secondary">
             <Icono className="h-4 w-4 shrink-0 text-[#829089]" />
             <span className="truncate">{texto}</span>
         </div>
@@ -1593,17 +1593,17 @@ function EstadoVacio({
 }) {
     return (
         <div className="flex min-h-80 flex-col items-center justify-center p-8 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#DCE7E2] text-[#527064]">
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-primary-soft text-primary-strong">
                 <UsersRound className="h-8 w-8" />
             </div>
 
-            <h3 className="mt-5 text-lg font-bold text-[#24302C]">
+            <h3 className="mt-5 text-lg font-bold text-foreground tracking-tight">
                 {tieneRegistros
                     ? "No encontramos resultados"
                     : "Todavía no hay trabajadores"}
             </h3>
 
-            <p className="mt-2 max-w-md text-sm leading-6 text-[#6B756F]">
+            <p className="mt-2 max-w-md text-sm leading-6 text-text-secondary">
                 {tieneRegistros
                     ? "Prueba utilizando otro nombre o cambiando el filtro seleccionado."
                     : "Registra el personal del salón para comenzar a asignar servicios, horarios y citas."}
@@ -1613,7 +1613,7 @@ function EstadoVacio({
                 <button
                     type="button"
                     onClick={crear}
-                    className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white transition hover:bg-[#5E7D71]"
+                    className="salon-action mt-5 inline-flex items-center justify-center gap-2 bg-primary px-5 text-white transition hover:bg-primary-hover"
                 >
                     <Plus className="h-5 w-5" />
                     Registrar trabajador

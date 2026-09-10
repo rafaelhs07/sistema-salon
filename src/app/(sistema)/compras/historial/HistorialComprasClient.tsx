@@ -189,7 +189,7 @@ export default function HistorialComprasClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/compras"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#B9C8C1]"
@@ -199,7 +199,7 @@ export default function HistorialComprasClient({
                 </Link>
 
                 <div className="mt-5 flex items-start gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                         <ReceiptText className="h-7 w-7" />
                     </div>
 
@@ -208,7 +208,7 @@ export default function HistorialComprasClient({
                             Registro de abastecimiento
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             Historial de compras
                         </h1>
 
@@ -262,7 +262,7 @@ export default function HistorialComprasClient({
                 />
             </section>
 
-            <section className="rounded-[30px] border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                         <div className="relative">
@@ -282,7 +282,7 @@ export default function HistorialComprasClient({
                                     )
                                 }
                                 placeholder="Compra, factura o proveedor..."
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                             />
                         </div>
 
@@ -299,7 +299,7 @@ export default function HistorialComprasClient({
                                         .value,
                                 )
                             }
-                            className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                            className="salon-control border border-border-strong bg-white px-4"
                         >
                             <option value="">
                                 Todos los proveedores
@@ -338,7 +338,7 @@ export default function HistorialComprasClient({
                                         .value,
                                 )
                             }
-                            className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                            className="salon-control border border-border-strong bg-white px-4"
                         >
                             <option value="">
                                 Todas las sucursales
@@ -380,7 +380,7 @@ export default function HistorialComprasClient({
                                             .value as EstadoFiltro,
                                     )
                                 }
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                             >
                                 <option value="TODAS">
                                     Todos los estados
@@ -405,10 +405,10 @@ export default function HistorialComprasClient({
                 <div className="p-5 sm:p-6">
                     {comprasFiltradas.length ===
                         0 ? (
-                        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
+                        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
                             <ReceiptText className="mx-auto h-9 w-9 text-[#829089]" />
 
-                            <h3 className="mt-4 font-bold text-[#24302C]">
+                            <h3 className="mt-4 font-bold text-foreground tracking-tight">
                                 No hay compras
                             </h3>
                         </div>
@@ -423,12 +423,12 @@ export default function HistorialComprasClient({
                                             compra.id
                                         }
                                         href={`/compras/${compra.id}`}
-                                        className="block rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4 transition hover:border-[#CAD7D1] hover:bg-white sm:p-5"
+                                        className="block rounded-2xl border border-border bg-[#FBFCFA] p-4 transition hover:border-[#CAD7D1] hover:bg-white sm:p-5"
                                     >
                                         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                                             <div className="min-w-0">
                                                 <div className="flex flex-wrap items-center gap-2">
-                                                    <p className="font-bold text-[#24302C]">
+                                                    <p className="font-bold text-foreground">
                                                         {
                                                             compra.codigoCompra
                                                         }
@@ -522,17 +522,17 @@ function ResumenCard({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5">
-            <p className="text-sm text-[#6B756F]">
+        <article className="salon-panel border border-border bg-white p-5">
+            <p className="text-sm text-text-secondary">
                 {titulo}
             </p>
 
             <div className="mt-3 flex items-center justify-between gap-3">
-                <p className="text-2xl font-bold text-[#24302C]">
+                <p className="text-2xl font-bold text-foreground">
                     {valor}
                 </p>
 
-                <Icono className="h-5 w-5 text-[#527064]" />
+                <Icono className="h-5 w-5 text-primary-strong" />
             </div>
         </article>
     );
@@ -554,7 +554,7 @@ function MiniDato({
             <div className="flex items-center gap-1.5 text-[#7B8781]">
                 <Icono className="h-3.5 w-3.5" />
 
-                <span className="text-[10px] font-bold uppercase tracking-wide">
+                <span className="text-xs font-bold uppercase tracking-wide">
                     {titulo}
                 </span>
             </div>

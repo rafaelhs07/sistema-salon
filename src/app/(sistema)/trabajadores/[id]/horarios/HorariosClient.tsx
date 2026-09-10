@@ -235,9 +235,9 @@ export default function HorariosClient({
 
     return (
         <div className= "space-y-6" >
-        <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8" >
-            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+        <section className="relative overflow-hidden rounded-3xl bg-sidebar p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8" >
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 right-40 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
 
                     <div className="relative" >
                         <Link
@@ -266,7 +266,7 @@ export default function HorariosClient({
             Horario semanal
                 </p>
 
-                < h1 className = "mt-1 text-3xl font-bold tracking-tight sm:text-4xl" >
+                < h1 className = "mt-1 text-3xl font-black tracking-tight sm:text-4xl" >
                     { trabajador.nombreCompleto }
                     </h1>
 
@@ -322,20 +322,20 @@ valor = {`${formatearHoras(
         />
       )}
 
-<section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]" >
+<section className="salon-panel overflow-hidden border border-border bg-white" >
     <header className="flex flex-col gap-4 border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between" >
         <div>
-        <h2 className="text-xl font-bold text-[#24302C]" >
+        <h2 className="text-xl font-bold text-foreground tracking-tight" >
             Jornada semanal
                 </h2>
 
-                < p className = "mt-1 text-sm leading-6 text-[#6B756F]" >
+                < p className = "mt-1 text-sm leading-6 text-text-secondary" >
                     Activa los días laborales y define las horas de
 entrada, salida y descanso.
             </p>
     </div>
 
-    < div className = "rounded-xl bg-[#EEF2EF] px-4 py-3 text-sm text-[#52605A]" >
+    < div className = "rounded-xl bg-surface-soft px-4 py-3 text-sm text-[#52605A]" >
         Horario general del salón: { " " }
 <strong>
     { formatearHora(horaAperturaSalon) } –{ " " }
@@ -368,7 +368,7 @@ copiar = {() => copiarHorario(horario)}
 </div>
     </section>
 
-    < div className = "sticky bottom-4 z-20 rounded-2xl border border-[#DCE3DF] bg-white/95 p-4 shadow-[0_14px_40px_rgba(36,48,44,0.12)] backdrop-blur-xl" >
+    < div className = "sticky bottom-4 z-20 rounded-2xl border border-border-strong bg-white/95 p-4 shadow-[0_14px_40px_rgba(36,48,44,0.12)] backdrop-blur-xl" >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between" >
             <div className="flex items-start gap-3" >
                 <div
@@ -404,7 +404,7 @@ copiar = {() => copiarHorario(horario)}
               type="button"
 onClick = { restaurarHorarios }
 disabled = {!hayCambios || guardando}
-className = "inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-[#EEF2EF] px-5 text-sm font-bold text-[#43524B] transition hover:bg-[#E3EAE6] disabled:cursor-not-allowed disabled:opacity-50"
+className = "salon-action inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border-strong bg-surface-soft px-5 text-sm font-bold text-text-secondary transition hover:bg-[#E3EAE6] disabled:cursor-not-allowed disabled:opacity-50"
     >
     <RotateCcw className="h-4 w-4" />
         Descartar cambios
@@ -414,7 +414,7 @@ className = "inline-flex h-11 items-center justify-center gap-2 rounded-xl borde
 type = "button"
 onClick = { guardar }
 disabled = {!hayCambios || guardando}
-className = "inline-flex h-11 min-w-44 items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white transition hover:bg-[#5E7D71] disabled:cursor-not-allowed disabled:bg-[#AAB9B3]"
+className = "salon-action inline-flex h-11 min-w-44 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-bold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-[#AAB9B3]"
     >
 {
     guardando?(
@@ -463,7 +463,7 @@ function FilaHorario({
         <div className="grid gap-5 xl:grid-cols-[180px_1fr_auto] xl:items-start" >
             <div className="flex items-center justify-between gap-4 xl:block" >
                 <div>
-                <p className="font-bold text-[#24302C]" >
+                <p className="font-bold text-foreground" >
                     { diasSemana[horario.diaSemana]}
                     </p>
 
@@ -507,10 +507,10 @@ function FilaHorario({
               />
     </div>
 
-    < div className = "rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4" >
+    < div className = "rounded-2xl border border-border bg-[#FBFCFA] p-4" >
         <div className="flex items-center justify-between gap-4" >
             <div className="flex items-center gap-3" >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EEF2EF] text-[#607169]" >
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-soft text-[#607169]" >
                     <Coffee className="h-4 w-4" />
                         </div>
 
@@ -585,7 +585,7 @@ actualizar({
 onClick = { copiar }
 disabled = {!horario.trabaja}
 title = "Copiar este horario a los demás días laborales"
-className = "inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white px-4 text-xs font-bold text-[#52605A] transition hover:bg-[#EEF2EF] disabled:cursor-not-allowed disabled:opacity-40"
+className = "salon-action inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-border-strong bg-white px-4 text-xs font-bold text-[#52605A] transition hover:bg-surface-soft disabled:cursor-not-allowed disabled:opacity-40"
     >
     <Copy className="h-4 w-4" />
         Copiar
@@ -620,7 +620,7 @@ function CampoHora({
     onChange = {(event) =>
     cambiar(event.target.value)
 }
-className = "h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+className = "salon-control h-11 w-full rounded-xl border border-border-strong bg-white pl-11 pr-4 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
     />
     </div>
     </div>
@@ -649,7 +649,7 @@ className = "sr-only"
         className={
     [
         "relative block h-7 w-12 rounded-full transition-colors",
-        activo ? "bg-[#6F8F83]" : "bg-[#CCD3CF]",
+        activo ? "bg-primary" : "bg-[#CCD3CF]",
     ].join(" ")
 }
       >

@@ -89,18 +89,18 @@ export default function LoginPage() {
     }
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#F4F6F3]">
-            <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-[#DCE7E2]/70 blur-3xl" />
-            <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+        <main className="salon-app relative min-h-screen overflow-hidden bg-background">
+            <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-primary-soft/70 blur-3xl" />
+            <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-secondary/15 blur-3xl" />
 
             <div className="relative grid min-h-screen lg:grid-cols-[1.08fr_0.92fr]">
-                <section className="relative hidden overflow-hidden bg-[#26332F] p-12 text-white lg:flex lg:flex-col lg:justify-between">
-                    <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#6F8F83]/35 blur-3xl" />
-                    <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[#C79AA1]/10 blur-3xl" />
+                <section className="salon-hero relative hidden overflow-hidden rounded-none bg-sidebar p-12 text-white lg:flex lg:flex-col lg:justify-between">
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/35 blur-3xl" />
+                    <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
 
                     <div className="relative">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <Sparkles className="h-6 w-6" />
                             </div>
 
@@ -164,11 +164,11 @@ export default function LoginPage() {
                 <section className="flex min-h-screen items-center justify-center px-5 py-8 sm:px-8 lg:px-12">
                     <div className="w-full max-w-[520px]">
                         <div className="mb-7 flex items-center gap-3 lg:hidden">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#26332F] text-white">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sidebar text-white">
                                 <Sparkles className="h-5 w-5" />
                             </div>
                             <div>
-                                <p className="font-black text-[#26332F]">
+                                <p className="font-black text-sidebar">
                                     Sistema de Salón
                                 </p>
                                 <p className="text-xs text-[#7A8781]">
@@ -177,19 +177,19 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <div className="overflow-hidden rounded-[34px] border border-[#DDE5E1] bg-white shadow-[0_26px_80px_rgba(36,48,44,0.12)]">
+                        <div className="salon-panel overflow-hidden border border-[#DDE5E1] bg-white">
                             <div className="border-b border-[#E7ECE9] px-6 py-7 sm:px-8">
                                 <div className="flex items-center justify-between gap-4">
                                     <div>
-                                        <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#84928A]">
+                                        <p className="text-xs font-black uppercase tracking-[0.16em] text-[#84928A]">
                                             Bienvenido
                                         </p>
-                                        <h2 className="mt-2 text-3xl font-black tracking-tight text-[#26332F] sm:text-4xl">
+                                        <h2 className="mt-2 text-3xl font-black tracking-tight text-sidebar sm:text-4xl">
                                             Iniciar sesión
                                         </h2>
                                     </div>
 
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#6F8F83]">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-soft text-primary">
                                         <LockKeyhole className="h-5 w-5" />
                                     </div>
                                 </div>
@@ -204,8 +204,8 @@ export default function LoginPage() {
                                 className="space-y-5 px-6 py-7 sm:px-8"
                             >
                                 <label className="block">
-                                    <span className="mb-2 flex items-center gap-2 text-sm font-black text-[#43524B]">
-                                        <Mail className="h-4 w-4 text-[#6F8F83]" />
+                                    <span className="mb-2 flex items-center gap-2 text-sm font-black text-text-secondary">
+                                        <Mail className="h-4 w-4 text-primary" />
                                         Correo electrónico
                                     </span>
 
@@ -220,13 +220,13 @@ export default function LoginPage() {
                                         autoComplete="email"
                                         required
                                         disabled={cargando}
-                                        className="h-12 w-full rounded-2xl border border-[#D6DFDA] bg-[#F9FBF9] px-4 text-sm font-semibold text-[#26332F] outline-none transition placeholder:text-[#A1AAA5] focus:border-[#6F8F83] focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)] disabled:cursor-not-allowed disabled:opacity-60"
+                                        className="salon-control w-full border border-[#D6DFDA] bg-[#F9FBF9] px-4 font-semibold text-sidebar outline-none transition placeholder:text-[#A1AAA5] focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)] disabled:cursor-not-allowed disabled:opacity-60"
                                     />
                                 </label>
 
                                 <label className="block">
-                                    <span className="mb-2 flex items-center gap-2 text-sm font-black text-[#43524B]">
-                                        <LockKeyhole className="h-4 w-4 text-[#6F8F83]" />
+                                    <span className="mb-2 flex items-center gap-2 text-sm font-black text-text-secondary">
+                                        <LockKeyhole className="h-4 w-4 text-primary" />
                                         Contraseña
                                     </span>
 
@@ -246,7 +246,7 @@ export default function LoginPage() {
                                             autoComplete="current-password"
                                             required
                                             disabled={cargando}
-                                            className="h-12 w-full rounded-2xl border border-[#D6DFDA] bg-[#F9FBF9] px-4 pr-12 text-sm font-semibold text-[#26332F] outline-none transition placeholder:text-[#A1AAA5] focus:border-[#6F8F83] focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)] disabled:cursor-not-allowed disabled:opacity-60"
+                                            className="salon-control w-full border border-[#D6DFDA] bg-[#F9FBF9] px-4 pr-12 font-semibold text-sidebar outline-none transition placeholder:text-[#A1AAA5] focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)] disabled:cursor-not-allowed disabled:opacity-60"
                                         />
 
                                         <button
@@ -256,7 +256,7 @@ export default function LoginPage() {
                                                     (valor) => !valor,
                                                 )
                                             }
-                                            className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[#74817B] transition hover:bg-[#EEF2EF]"
+                                            className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[#74817B] transition hover:bg-surface-soft"
                                             aria-label={
                                                 mostrarPassword
                                                     ? "Ocultar contraseña"
@@ -284,7 +284,7 @@ export default function LoginPage() {
                                 <button
                                     type="submit"
                                     disabled={cargando}
-                                    className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white shadow-[0_12px_24px_rgba(38,51,47,0.18)] transition hover:-translate-y-0.5 hover:bg-[#34463F] disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60"
+                                    className="salon-action group inline-flex w-full items-center justify-center gap-2 bg-sidebar px-5 text-white shadow-[0_12px_24px_rgba(38,51,47,0.18)] transition hover:-translate-y-0.5 hover:bg-sidebar-hover disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60"
                                 >
                                     {cargando ? (
                                         <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -297,7 +297,7 @@ export default function LoginPage() {
                                 </button>
 
                                 <div className="flex items-center justify-center gap-2 pt-1 text-xs font-semibold text-[#8A9690]">
-                                    <ShieldCheck className="h-3.5 w-3.5 text-[#6F8F83]" />
+                                    <ShieldCheck className="h-3.5 w-3.5 text-primary" />
                                     Acceso protegido con roles y permisos
                                 </div>
                             </form>
@@ -323,7 +323,7 @@ function Beneficio({
     return (
         <div className="rounded-[20px] border border-white/10 bg-white/[0.05] p-4">
             <div className="flex items-start gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10 text-[#DCE7E2]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10 text-primary-soft">
                     <Icono className="h-4 w-4" />
                 </div>
 

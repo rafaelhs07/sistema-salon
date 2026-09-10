@@ -235,8 +235,8 @@ export default function NuevoGastoClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#C79AA1]/20 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-secondary/20 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -257,7 +257,7 @@ export default function NuevoGastoClient({
                                 Salida del negocio
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 Registrar gasto
                             </h1>
 
@@ -295,9 +295,9 @@ export default function NuevoGastoClient({
             )}
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-                <section className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+                <section className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div>
-                        <h2 className="text-xl font-bold text-[#26332F]">
+                        <h2 className="text-xl font-bold text-sidebar tracking-tight">
                             Datos del gasto
                         </h2>
 
@@ -430,8 +430,8 @@ export default function NuevoGastoClient({
 
                         <div className="md:col-span-2">
                             <label className="block">
-                                <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#43524B]">
-                                    <FileText className="h-4 w-4 text-[#C79AA1]" />
+                                <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-text-secondary">
+                                    <FileText className="h-4 w-4 text-secondary" />
                                     Descripción / observaciones
                                 </span>
 
@@ -448,7 +448,7 @@ export default function NuevoGastoClient({
                                         )
                                     }
                                     placeholder="Información adicional..."
-                                    className="w-full rounded-2xl border border-[#DCE5E0] bg-[#F9FBFA] px-4 py-3 text-sm text-[#33413B] outline-none transition focus:border-[#C79AA1] focus:bg-white"
+                                    className="salon-control w-full border border-border bg-[#F9FBFA] px-4 py-3 text-[#33413B] outline-none transition focus:border-secondary focus:bg-white"
                                 />
                             </label>
                         </div>
@@ -457,7 +457,7 @@ export default function NuevoGastoClient({
                     <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                         <Link
                             href="/finanzas"
-                            className="inline-flex h-12 items-center justify-center rounded-xl border border-[#DCE5E0] bg-white px-5 text-sm font-bold text-[#52605A] transition hover:bg-[#EEF2EF]"
+                            className="salon-action inline-flex items-center justify-center border border-border bg-white px-5 text-[#52605A] transition hover:bg-surface-soft"
                         >
                             Cancelar
                         </Link>
@@ -469,7 +469,7 @@ export default function NuevoGastoClient({
                                 !formularioValido ||
                                 procesando
                             }
-                            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#A66D79] px-6 text-sm font-bold text-white transition hover:bg-[#935E69] disabled:cursor-not-allowed disabled:opacity-50"
+                            className="salon-action inline-flex items-center justify-center gap-2 bg-[#A66D79] px-6 text-white transition hover:bg-[#935E69] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {procesando ? (
                                 <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -485,12 +485,12 @@ export default function NuevoGastoClient({
                 </section>
 
                 <aside className="space-y-5">
-                    <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+                    <article className="salon-panel border border-border bg-white p-5">
                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F5E8EB] text-[#9B6470]">
                             <Building2 className="h-5 w-5" />
                         </div>
 
-                        <h3 className="mt-4 font-bold text-[#26332F]">
+                        <h3 className="mt-4 font-bold text-sidebar tracking-tight">
                             Estado de caja
                         </h3>
 
@@ -523,12 +523,12 @@ export default function NuevoGastoClient({
                         )}
                     </article>
 
-                    <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF4F0] text-[#52655D]">
+                    <article className="salon-panel border border-border bg-white p-5">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-soft text-[#52655D]">
                             <Banknote className="h-5 w-5" />
                         </div>
 
-                        <h3 className="mt-4 font-bold text-[#26332F]">
+                        <h3 className="mt-4 font-bold text-sidebar tracking-tight">
                             ¿Qué pasará al guardar?
                         </h3>
 
@@ -549,7 +549,7 @@ export default function NuevoGastoClient({
                         </div>
                     </article>
 
-                    <article className="rounded-[28px] border border-[#DCE5E0] bg-[#26332F] p-5 text-white shadow-[0_12px_35px_rgba(36,48,44,0.12)]">
+                    <article className="rounded-[28px] border border-border bg-sidebar p-5 text-white shadow-[0_12px_35px_rgba(36,48,44,0.12)]">
                         <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D4B8BE]">
                             Gasto a registrar
                         </p>
@@ -601,8 +601,8 @@ function CampoSelect({
 }) {
     return (
         <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#43524B]">
-                <Icono className="h-4 w-4 text-[#C79AA1]" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-text-secondary">
+                <Icono className="h-4 w-4 text-secondary" />
                 {titulo}
             </span>
 
@@ -617,7 +617,7 @@ function CampoSelect({
                             .value,
                     )
                 }
-                className="h-12 w-full rounded-2xl border border-[#DCE5E0] bg-[#F9FBFA] px-4 text-sm font-medium text-[#33413B] outline-none transition focus:border-[#C79AA1] focus:bg-white"
+                className="salon-control w-full border border-border bg-[#F9FBFA] px-4 font-medium text-[#33413B] outline-none transition focus:border-secondary focus:bg-white"
             >
                 {children}
             </select>
@@ -644,8 +644,8 @@ function CampoTexto({
 }) {
     return (
         <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#43524B]">
-                <Icono className="h-4 w-4 text-[#C79AA1]" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-text-secondary">
+                <Icono className="h-4 w-4 text-secondary" />
                 {titulo}
             </span>
 
@@ -661,7 +661,7 @@ function CampoTexto({
                     )
                 }
                 placeholder={placeholder}
-                className="h-12 w-full rounded-2xl border border-[#DCE5E0] bg-[#F9FBFA] px-4 text-sm text-[#33413B] outline-none transition focus:border-[#C79AA1] focus:bg-white"
+                className="salon-control w-full border border-border bg-[#F9FBFA] px-4 text-[#33413B] outline-none transition focus:border-secondary focus:bg-white"
             />
         </label>
     );
@@ -680,8 +680,8 @@ function CampoMonto({
 }) {
     return (
         <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#43524B]">
-                <CircleDollarSign className="h-4 w-4 text-[#C79AA1]" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-text-secondary">
+                <CircleDollarSign className="h-4 w-4 text-secondary" />
                 Monto
             </span>
 
@@ -705,7 +705,7 @@ function CampoMonto({
                         )
                     }
                     placeholder="0.00"
-                    className="h-12 w-full rounded-2xl border border-[#DCE5E0] bg-[#F9FBFA] pl-14 pr-4 text-sm font-bold text-[#26332F] outline-none transition focus:border-[#C79AA1] focus:bg-white"
+                    className="salon-control w-full border border-border bg-[#F9FBFA] pl-14 pr-4 text-sidebar outline-none transition focus:border-secondary focus:bg-white"
                 />
             </div>
         </label>

@@ -426,7 +426,7 @@ export default function NuevaCompraClient({
                 </div>
             )}
 
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/compras"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#B9C8C1]"
@@ -436,7 +436,7 @@ export default function NuevaCompraClient({
                 </Link>
 
                 <div className="mt-5 flex items-start gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                         <PackagePlus className="h-7 w-7" />
                     </div>
 
@@ -445,7 +445,7 @@ export default function NuevaCompraClient({
                             Entrada de mercancía
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             Nueva compra
                         </h1>
 
@@ -458,8 +458,8 @@ export default function NuevaCompraClient({
 
             <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
                 <div className="space-y-6">
-                    <div className="rounded-[28px] border border-[#E3E7E4] bg-white p-5 sm:p-6">
-                        <h2 className="text-lg font-bold text-[#24302C]">
+                    <div className="salon-panel border border-border bg-white p-5 sm:p-6">
+                        <h2 className="text-lg font-bold text-foreground tracking-tight">
                             Datos de la compra
                         </h2>
 
@@ -589,14 +589,14 @@ export default function NuevaCompraClient({
                         </div>
                     </div>
 
-                    <div className="rounded-[28px] border border-[#E3E7E4] bg-white p-5 sm:p-6">
+                    <div className="salon-panel border border-border bg-white p-5 sm:p-6">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div>
-                                <h2 className="text-lg font-bold text-[#24302C]">
+                                <h2 className="text-lg font-bold text-foreground tracking-tight">
                                     Productos
                                 </h2>
 
-                                <p className="mt-1 text-sm text-[#6B756F]">
+                                <p className="mt-1 text-sm text-text-secondary">
                                     Busca y agrega todos los productos de la factura.
                                 </p>
                             </div>
@@ -619,12 +619,12 @@ export default function NuevaCompraClient({
                                     )
                                 }
                                 placeholder="Nombre, código o código de barras..."
-                                className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-4 outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 outline-none focus:border-primary"
                             />
                         </div>
 
-                        <div className="mt-3 overflow-hidden rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA]">
-                            <div className="flex items-center justify-between gap-3 border-b border-[#E3E7E4] bg-white px-4 py-3">
+                        <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-[#FBFCFA]">
+                            <div className="flex items-center justify-between gap-3 border-b border-border bg-white px-4 py-3">
                                 <div>
                                     <p className="text-sm font-bold text-[#33413B]">
                                         Productos del inventario
@@ -678,14 +678,14 @@ export default function NuevaCompraClient({
                                                 >
                                                     <div className="min-w-0">
                                                         <div className="flex flex-wrap items-center gap-2">
-                                                            <p className="truncate font-bold text-[#24302C]">
+                                                            <p className="truncate font-bold text-foreground">
                                                                 {
                                                                     producto.nombre
                                                                 }
                                                             </p>
 
                                                             {agregado && (
-                                                                <span className="rounded-full bg-[#E3EEE8] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#527865]">
+                                                                <span className="rounded-full bg-[#E3EEE8] px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-[#527865]">
                                                                     Agregado
                                                                 </span>
                                                             )}
@@ -707,7 +707,7 @@ export default function NuevaCompraClient({
                                                                 : ""}
                                                         </p>
 
-                                                        <p className="mt-1 text-xs font-semibold text-[#527064]">
+                                                        <p className="mt-1 text-xs font-semibold text-primary-strong">
                                                             Último costo: C${" "}
                                                             {Number(
                                                                 producto.costo_unitario ??
@@ -722,7 +722,7 @@ export default function NuevaCompraClient({
                                                         </p>
                                                     </div>
 
-                                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064] transition group-hover:bg-[#26332F] group-hover:text-white">
+                                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary-strong transition group-hover:bg-sidebar group-hover:text-white">
                                                         <Plus className="h-4 w-4" />
                                                     </div>
                                                 </button>
@@ -735,7 +735,7 @@ export default function NuevaCompraClient({
 
                         {items.length ===
                             0 ? (
-                            <div className="mt-5 rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-10 text-center">
+                            <div className="mt-5 rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-10 text-center">
                                 <PackagePlus className="mx-auto h-8 w-8 text-[#829089]" />
 
                                 <p className="mt-3 font-semibold text-[#33413B]">
@@ -752,11 +752,11 @@ export default function NuevaCompraClient({
                                             key={
                                                 item.productoId
                                             }
-                                            className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4"
+                                            className="rounded-2xl border border-border bg-[#FBFCFA] p-4"
                                         >
                                             <div className="flex items-start justify-between gap-3">
                                                 <div>
-                                                    <p className="font-bold text-[#24302C]">
+                                                    <p className="font-bold text-foreground">
                                                         {
                                                             item.nombre
                                                         }
@@ -911,8 +911,8 @@ export default function NuevaCompraClient({
                 </div>
 
                 <aside className="space-y-5">
-                    <div className="sticky top-24 rounded-[28px] border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.06)]">
-                        <h2 className="font-bold text-[#24302C]">
+                    <div className="salon-panel sticky top-24 border border-border bg-white p-5">
+                        <h2 className="font-bold text-foreground tracking-tight">
                             Resumen
                         </h2>
 
@@ -963,7 +963,7 @@ export default function NuevaCompraClient({
                                 }
                             />
 
-                            <div className="border-t border-[#DCE3DF] pt-3">
+                            <div className="border-t border-border-strong pt-3">
                                 <Linea
                                     titulo="TOTAL"
                                     valor={
@@ -995,7 +995,7 @@ export default function NuevaCompraClient({
                                     )
                                 }
                                 placeholder="Observaciones de la compra..."
-                                className="w-full rounded-xl border border-[#D4DAD6] bg-white px-4 py-3 text-sm outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-white px-4 py-3 outline-none focus:border-primary"
                             />
                         </div>
 
@@ -1009,7 +1009,7 @@ export default function NuevaCompraClient({
                                 items.length ===
                                 0
                             }
-                            className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 font-bold text-white transition hover:bg-[#5E7D71] disabled:cursor-not-allowed disabled:opacity-50"
+                            className="salon-action mt-5 inline-flex w-full items-center justify-center gap-2 bg-primary px-5 text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             <FileText className="h-5 w-5" />
 
@@ -1018,7 +1018,7 @@ export default function NuevaCompraClient({
                                 : "Continuar y revisar compra"}
                         </button>
 
-                        <p className="mt-3 text-center text-[11px] leading-5 text-[#76817B]">
+                        <p className="mt-3 text-center text-xs leading-5 text-[#76817B]">
                             El inventario se actualizará únicamente cuando confirmes la compra en la siguiente pantalla.
                         </p>
                     </div>
@@ -1063,7 +1063,7 @@ function CampoTexto({
                             .value,
                     )
                 }
-                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-3 outline-none focus:border-primary"
             />
         </div>
     );
@@ -1106,7 +1106,7 @@ function CampoNumero({
                         ),
                     )
                 }
-                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-3 outline-none focus:border-primary"
             />
         </div>
     );
@@ -1143,7 +1143,7 @@ function CampoFecha({
                             .value,
                     )
                 }
-                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-3 outline-none focus:border-primary"
             />
         </div>
     );
@@ -1186,7 +1186,7 @@ function CampoSelect({
                             .value,
                     )
                 }
-                className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm outline-none focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-3 outline-none focus:border-primary"
             >
                 {placeholder && (
                     <option value="">
@@ -1233,8 +1233,8 @@ function Linea({
             <span
                 className={
                     fuerte
-                        ? "font-bold text-[#24302C]"
-                        : "text-[#6B756F]"
+                        ? "font-bold text-foreground"
+                        : "text-text-secondary"
                 }
             >
                 {titulo}
@@ -1243,7 +1243,7 @@ function Linea({
             <strong
                 className={
                     fuerte
-                        ? "text-lg text-[#24302C]"
+                        ? "text-lg text-foreground"
                         : "text-[#33413B]"
                 }
             >

@@ -449,7 +449,7 @@ export default function VentaDirectaClient({
 
     return (
         <div className="space-y-6">
-            <section className="rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
+            <section className="salon-hero bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/caja"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
@@ -459,7 +459,7 @@ export default function VentaDirectaClient({
                 </Link>
 
                 <div className="mt-6 flex items-start gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                         <ReceiptText className="h-7 w-7" />
                     </div>
 
@@ -468,7 +468,7 @@ export default function VentaDirectaClient({
                             Venta sin cita
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             Venta directa
                         </h1>
 
@@ -525,7 +525,7 @@ export default function VentaDirectaClient({
                                                     pagos: [],
                                                 }))
                                             }
-                                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4"
+                                            className="salon-control w-full border border-border-strong bg-white px-4"
                                         >
                                             <option value="">
                                                 Seleccionar caja
@@ -585,12 +585,12 @@ export default function VentaDirectaClient({
                                                     );
                                                 }}
                                                 placeholder="Nombre, código o teléfono..."
-                                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4"
+                                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                                             />
                                         </div>
 
                                         {mostrarClientes && (
-                                            <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-64 overflow-y-auto rounded-2xl border border-[#DCE3DF] bg-white p-2 shadow-xl">
+                                            <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-64 overflow-y-auto rounded-2xl border border-border-strong bg-white p-2 shadow-xl">
                                                 <button
                                                     type="button"
                                                     onClick={() => {
@@ -605,7 +605,7 @@ export default function VentaDirectaClient({
                                                             false,
                                                         );
                                                     }}
-                                                    className="w-full rounded-xl p-3 text-left text-sm font-semibold text-[#6B756F] hover:bg-[#EEF2EF]"
+                                                    className="w-full rounded-xl p-3 text-left text-sm font-semibold text-text-secondary hover:bg-surface-soft"
                                                 >
                                                     Venta sin cliente
                                                 </button>
@@ -631,7 +631,7 @@ export default function VentaDirectaClient({
                                                                     false,
                                                                 );
                                                             }}
-                                                            className="w-full rounded-xl p-3 text-left hover:bg-[#EEF2EF]"
+                                                            className="w-full rounded-xl p-3 text-left hover:bg-surface-soft"
                                                         >
                                                             <p className="font-semibold text-[#33413B]">
                                                                 {
@@ -651,7 +651,7 @@ export default function VentaDirectaClient({
                                 </div>
 
                                 {clienteSeleccionado && (
-                                    <div className="mt-4 rounded-2xl bg-[#F0F5F2] p-4 text-sm font-semibold text-[#43524B]">
+                                    <div className="mt-4 rounded-2xl bg-surface-soft p-4 text-sm font-semibold text-text-secondary">
                                         Cliente:{" "}
                                         {
                                             clienteSeleccionado.nombre_completo
@@ -672,7 +672,7 @@ export default function VentaDirectaClient({
                                         onClick={
                                             agregarItem
                                         }
-                                        className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B]"
+                                        className="salon-action inline-flex items-center gap-2 bg-primary-soft px-4 text-text-secondary"
                                     >
                                         <Plus className="h-4 w-4" />
                                         Agregar servicio
@@ -689,7 +689,7 @@ export default function VentaDirectaClient({
                                                 key={
                                                     indice
                                                 }
-                                                className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4"
+                                                className="rounded-2xl border border-border bg-[#FBFCFA] p-4"
                                             >
                                                 <div className="flex justify-between">
                                                     <strong>
@@ -842,7 +842,7 @@ export default function VentaDirectaClient({
                                 }
                             >
                                 <div className="flex items-center justify-between gap-3">
-                                    <p className="text-sm text-[#6B756F]">
+                                    <p className="text-sm text-text-secondary">
                                         {permitirPagoCombinado
                                             ? "Puedes combinar varios métodos."
                                             : "Solo se permite un método de pago."}
@@ -858,7 +858,7 @@ export default function VentaDirectaClient({
                                             (!permitirPagoCombinado &&
                                                 formulario.pagos.length > 0)
                                         }
-                                        className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#DCE7E2] px-4 text-sm font-bold text-[#43524B] disabled:opacity-50"
+                                        className="salon-action inline-flex items-center gap-2 bg-primary-soft px-4 text-text-secondary disabled:opacity-50"
                                     >
                                         <Plus className="h-4 w-4" />
                                         {formulario.pagos.length > 0
@@ -894,8 +894,8 @@ export default function VentaDirectaClient({
                         </div>
 
                         <aside className="xl:sticky xl:top-24 xl:self-start">
-                            <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                                <h2 className="text-xl font-bold">
+                            <section className="salon-panel border border-border bg-white p-6 shadow-sm">
+                                <h2 className="text-xl font-bold tracking-tight">
                                     Resumen
                                 </h2>
 
@@ -970,7 +970,7 @@ export default function VentaDirectaClient({
                                         )
                                     }
                                     placeholder="Notas de la venta..."
-                                    className="mt-5 w-full rounded-xl border border-[#D4DAD6] p-3"
+                                    className="salon-control mt-5 w-full border border-border-strong p-3"
                                 />
 
                                 <button
@@ -983,7 +983,7 @@ export default function VentaDirectaClient({
                                         totalPagos >
                                         total
                                     }
-                                    className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6F8F83] font-bold text-white disabled:opacity-50"
+                                    className="salon-action mt-5 inline-flex w-full items-center justify-center gap-2 bg-primary text-white disabled:opacity-50"
                                 >
                                     {guardando ? (
                                         <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -1033,9 +1033,9 @@ function PagoVentaEditor({
             : 0;
 
     return (
-        <article className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4">
+        <article className="rounded-2xl border border-border bg-[#FBFCFA] p-4">
             <div className="flex items-center justify-between">
-                <p className="font-bold text-[#24302C]">
+                <p className="font-bold text-foreground">
                     Pago {indice + 1}
                 </p>
 
@@ -1221,7 +1221,7 @@ function DatoPago({
     valor: string;
 }) {
     return (
-        <div className="rounded-xl bg-[#F0F5F2] p-3">
+        <div className="rounded-xl bg-surface-soft p-3">
             <p className="text-xs text-[#76817B]">
                 {titulo}
             </p>
@@ -1244,10 +1244,10 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-visible rounded-3xl border border-[#E3E7E4] bg-white shadow-sm">
+        <section className="salon-panel overflow-visible border border-border bg-white shadow-sm">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4">
-                <Icono className="h-5 w-5 text-[#527064]" />
-                <h2 className="font-bold">
+                <Icono className="h-5 w-5 text-primary-strong" />
+                <h2 className="font-bold tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -1282,7 +1282,7 @@ function CampoSelect({
                 onChange={(event) =>
                     cambiar(event.target.value)
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4"
+                className="salon-control w-full border border-border-strong bg-white px-4"
             >
                 {opciones.map((opcion) => (
                     <option
@@ -1324,7 +1324,7 @@ function CampoDinero({
                         Number(event.target.value),
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4 text-right"
+                className="salon-control w-full border border-border-strong px-4 text-right"
             />
         </label>
     );
@@ -1349,7 +1349,7 @@ function CampoTexto({
                 onChange={(event) =>
                     cambiar(event.target.value)
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4"
+                className="salon-control w-full border border-border-strong px-4"
             />
         </label>
     );

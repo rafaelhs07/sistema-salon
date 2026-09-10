@@ -176,9 +176,9 @@ export default function NuevoUsuarioClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-52 w-52 rounded-full bg-[#C79AA1]/10 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-52 w-52 rounded-full bg-secondary/10 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -191,7 +191,7 @@ export default function NuevoUsuarioClient({
 
                     <div className="mt-5 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <UserPlus className="h-7 w-7" />
                             </div>
 
@@ -200,7 +200,7 @@ export default function NuevoUsuarioClient({
                                     Administración de accesos
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                     Crear usuario
                                 </h1>
 
@@ -213,7 +213,7 @@ export default function NuevoUsuarioClient({
 
                         <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
                             <div className="flex items-center gap-3">
-                                <ShieldCheck className="h-5 w-5 text-[#DCE7E2]" />
+                                <ShieldCheck className="h-5 w-5 text-primary-soft" />
 
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#B9C8C1]">
@@ -253,9 +253,9 @@ export default function NuevoUsuarioClient({
             )}
 
             <section className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
-                <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_10px_30px_rgba(36,48,44,0.06)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div>
-                        <h2 className="text-lg font-bold text-[#26332F]">
+                        <h2 className="text-lg font-bold text-sidebar tracking-tight">
                             Datos de acceso
                         </h2>
 
@@ -282,7 +282,7 @@ export default function NuevoUsuarioClient({
                                 }
                                 placeholder="Ej. María López"
                                 autoComplete="off"
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#FAFCFB] px-4 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                className="salon-control w-full border border-border-strong bg-[#FAFCFB] px-4 outline-none transition focus:border-primary focus:bg-white"
                             />
                         </Campo>
 
@@ -304,7 +304,7 @@ export default function NuevoUsuarioClient({
                                 }
                                 placeholder="usuario@salon.com"
                                 autoComplete="off"
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#FAFCFB] px-4 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                className="salon-control w-full border border-border-strong bg-[#FAFCFB] px-4 outline-none transition focus:border-primary focus:bg-white"
                             />
                         </Campo>
 
@@ -331,7 +331,7 @@ export default function NuevoUsuarioClient({
                                     }
                                     placeholder="Mínimo 8 caracteres"
                                     autoComplete="new-password"
-                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#FAFCFB] px-4 pr-12 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                    className="salon-control w-full border border-border-strong bg-[#FAFCFB] px-4 pr-12 outline-none transition focus:border-primary focus:bg-white"
                                 />
 
                                 <button
@@ -344,7 +344,7 @@ export default function NuevoUsuarioClient({
                                                 !actual,
                                         )
                                     }
-                                    className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[#74817B] transition hover:bg-[#EEF2EF]"
+                                    className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[#74817B] transition hover:bg-surface-soft"
                                     aria-label={
                                         mostrarContrasena
                                             ? "Ocultar contraseña"
@@ -366,9 +366,9 @@ export default function NuevoUsuarioClient({
                     </div>
                 </article>
 
-                <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_10px_30px_rgba(36,48,44,0.06)] sm:p-6">
+                <article className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div>
-                        <h2 className="text-lg font-bold text-[#26332F]">
+                        <h2 className="text-lg font-bold text-sidebar tracking-tight">
                             Acceso inicial
                         </h2>
 
@@ -393,7 +393,7 @@ export default function NuevoUsuarioClient({
                                         event.target.value,
                                     )
                                 }
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#FAFCFB] px-4 text-sm font-semibold text-[#43524B] outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-[#FAFCFB] px-4 font-semibold text-text-secondary outline-none focus:border-primary"
                             >
                                 {roles.map(
                                     (
@@ -450,7 +450,7 @@ export default function NuevoUsuarioClient({
                                         event.target.value,
                                     )
                                 }
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-[#FAFCFB] px-4 text-sm font-semibold text-[#43524B] outline-none focus:border-[#6F8F83]"
+                                className="salon-control w-full border border-border-strong bg-[#FAFCFB] px-4 font-semibold text-text-secondary outline-none focus:border-primary"
                             >
                                 {sucursales.length ===
                                     0 ? (
@@ -480,7 +480,7 @@ export default function NuevoUsuarioClient({
                             </select>
                         </Campo>
 
-                        <div className="rounded-2xl border border-[#DCE5E0] bg-[#FBFCFA] p-4">
+                        <div className="rounded-2xl border border-border bg-[#FBFCFA] p-4">
                             <p className="text-sm font-bold text-[#33413B]">
                                 Estado inicial
                             </p>
@@ -494,7 +494,7 @@ export default function NuevoUsuarioClient({
                 </article>
             </section>
 
-            <section className="flex flex-col gap-4 rounded-[26px] border border-[#D9E1DD] bg-white p-5 shadow-[0_12px_34px_rgba(36,48,44,0.08)] sm:flex-row sm:items-center sm:justify-between">
+            <section className="salon-panel flex flex-col gap-4 border border-[#D9E1DD] bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                     <p className="text-sm font-bold text-[#33413B]">
                         El usuario quedará listo para iniciar sesión
@@ -513,7 +513,7 @@ export default function NuevoUsuarioClient({
                     onClick={
                         guardar
                     }
-                    className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-6 text-sm font-bold text-white transition hover:bg-[#34463F] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="salon-action inline-flex shrink-0 items-center justify-center gap-2 bg-sidebar px-6 text-white transition hover:bg-sidebar-hover disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     {guardando ? (
                         <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -543,8 +543,8 @@ function Campo({
 }) {
     return (
         <div>
-            <label className="mb-2 flex items-center gap-2 text-sm font-bold text-[#43524B]">
-                <Icono className="h-4 w-4 text-[#6F8F83]" />
+            <label className="mb-2 flex items-center gap-2 text-sm font-bold text-text-secondary">
+                <Icono className="h-4 w-4 text-primary" />
                 {etiqueta}
             </label>
 

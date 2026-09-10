@@ -481,8 +481,8 @@ export default function ReporteVentasClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -495,7 +495,7 @@ export default function ReporteVentasClient({
 
                     <div className="mt-5 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <BarChart3 className="h-7 w-7" />
                             </div>
 
@@ -504,7 +504,7 @@ export default function ReporteVentasClient({
                                     Rendimiento comercial
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                     Reporte de ventas
                                 </h1>
 
@@ -569,10 +569,10 @@ export default function ReporteVentasClient({
                 />
             </section>
 
-            <section className="rounded-[30px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-6">
+            <section className="salon-panel border border-border bg-white p-5 sm:p-6">
                 <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
                     <div>
-                        <h2 className="text-lg font-bold text-[#26332F]">
+                        <h2 className="text-lg font-bold text-sidebar tracking-tight">
                             Filtros del reporte
                         </h2>
 
@@ -584,7 +584,7 @@ export default function ReporteVentasClient({
                     <button
                         type="button"
                         onClick={limpiarFiltros}
-                        className="h-10 rounded-xl border border-[#DCE5E0] px-4 text-sm font-bold text-[#52605A] transition hover:bg-[#EEF2EF]"
+                        className="salon-action border border-border px-4 text-[#52605A] transition hover:bg-surface-soft"
                     >
                         Limpiar filtros
                     </button>
@@ -608,7 +608,7 @@ export default function ReporteVentasClient({
                                 )
                             }
                             placeholder="Buscar por código de venta..."
-                            className="h-11 w-full rounded-xl border border-[#DCE5E0] bg-[#F9FBFA] pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83] focus:bg-white"
+                            className="salon-control w-full border border-border bg-[#F9FBFA] pl-11 pr-4 outline-none focus:border-primary focus:bg-white"
                         />
                     </div>
 
@@ -626,7 +626,7 @@ export default function ReporteVentasClient({
                                     .value,
                             )
                         }
-                        className="h-11 rounded-xl border border-[#DCE5E0] bg-[#F9FBFA] px-3 text-sm outline-none focus:border-[#6F8F83]"
+                        className="salon-control border border-border bg-[#F9FBFA] px-3 outline-none focus:border-primary"
                     />
 
                     <input
@@ -643,7 +643,7 @@ export default function ReporteVentasClient({
                                     .value,
                             )
                         }
-                        className="h-11 rounded-xl border border-[#DCE5E0] bg-[#F9FBFA] px-3 text-sm outline-none focus:border-[#6F8F83]"
+                        className="salon-control border border-border bg-[#F9FBFA] px-3 outline-none focus:border-primary"
                     />
 
                     <Select
@@ -803,10 +803,10 @@ export default function ReporteVentasClient({
                 />
             </section>
 
-            <section className="overflow-hidden rounded-[30px] border border-[#DCE5E0] bg-white shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <div className="flex items-center justify-between border-b border-[#E7EEEA] px-5 py-4 sm:px-6">
                     <div>
-                        <h2 className="font-bold text-[#26332F]">
+                        <h2 className="font-bold text-sidebar tracking-tight">
                             Detalle de ventas
                         </h2>
 
@@ -819,7 +819,7 @@ export default function ReporteVentasClient({
                 </div>
 
                 <div className="overflow-x-auto">
-                    <table className="min-w-[1180px] w-full">
+                    <table className="salon-table min-w-[1180px] w-full">
                         <thead className="bg-[#F7FAF8]">
                             <tr>
                                 <Th>Fecha</Th>
@@ -956,19 +956,19 @@ function Kpi({
     }>;
 }) {
     return (
-        <article className="rounded-[26px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.07)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div>
                     <p className="text-sm font-semibold text-[#71817A]">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold tracking-tight text-[#26332F]">
+                    <p className="mt-3 text-2xl font-bold tracking-tight text-sidebar">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF4F0] text-[#587064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-soft text-[#587064]">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -1001,7 +1001,7 @@ function Select({
                         .value,
                 )
             }
-            className="h-11 rounded-xl border border-[#DCE5E0] bg-[#F9FBFA] px-3 text-sm font-medium text-[#43524B] outline-none focus:border-[#6F8F83] focus:bg-white"
+            className="salon-control border border-border bg-[#F9FBFA] px-3 font-medium text-text-secondary outline-none focus:border-primary focus:bg-white"
         >
             {children}
         </select>
@@ -1024,8 +1024,8 @@ function GraficoRanking({
     simboloMoneda: string;
 }) {
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
-            <h2 className="text-lg font-bold text-[#26332F]">
+        <article className="salon-panel border border-border bg-white p-5">
+            <h2 className="text-lg font-bold text-sidebar tracking-tight">
                 {titulo}
             </h2>
 
@@ -1065,7 +1065,7 @@ function GraficoRanking({
                                         </p>
                                     </div>
 
-                                    <p className="text-sm font-bold text-[#26332F]">
+                                    <p className="text-sm font-bold text-sidebar">
                                         {moneda(
                                             dato.total,
                                             simboloMoneda,
@@ -1073,9 +1073,9 @@ function GraficoRanking({
                                     </p>
                                 </div>
 
-                                <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-[#EEF2EF]">
+                                <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-surface-soft">
                                     <div
-                                        className="h-full rounded-full bg-[#6F8F83]"
+                                        className="h-full rounded-full bg-primary"
                                         style={{
                                             width: `${Math.max(
                                                 dato.porcentaje,
@@ -1114,8 +1114,8 @@ function GraficoDiario({
         );
 
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
-            <h2 className="text-lg font-bold text-[#26332F]">
+        <article className="salon-panel border border-border bg-white p-5">
+            <h2 className="text-lg font-bold text-sidebar tracking-tight">
                 Comportamiento diario
             </h2>
 
@@ -1157,13 +1157,13 @@ function GraficoDiario({
                                                 dato.total,
                                                 simboloMoneda,
                                             )}`}
-                                            className="w-full max-w-[22px] rounded-t-md bg-[#6F8F83]"
+                                            className="w-full max-w-[22px] rounded-t-md bg-primary"
                                             style={{
                                                 height: `${altura}px`,
                                             }}
                                         />
 
-                                        <span className="mt-2 text-[9px] font-semibold text-[#71817A]">
+                                        <span className="mt-2 text-xs font-semibold text-[#71817A]">
                                             {
                                                 dato.etiqueta
                                             }

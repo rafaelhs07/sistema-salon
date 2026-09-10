@@ -155,8 +155,8 @@ export default function ConfiguracionNotificacionesClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -169,7 +169,7 @@ export default function ConfiguracionNotificacionesClient({
 
                     <div className="mt-5 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <BellRing className="h-7 w-7" />
                             </div>
 
@@ -178,7 +178,7 @@ export default function ConfiguracionNotificacionesClient({
                                     Preferencias del salón
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                     Configuración de notificaciones
                                 </h1>
 
@@ -290,7 +290,7 @@ export default function ConfiguracionNotificacionesClient({
                                         }),
                                     )
                                 }
-                                className="h-11 w-28 rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm font-bold text-[#33413B] outline-none disabled:bg-[#EEF1EF] disabled:text-[#9AA39E]"
+                                className="salon-control w-28 border border-border-strong bg-white px-3 text-[#33413B] outline-none disabled:bg-[#EEF1EF] disabled:text-[#9AA39E]"
                             />
 
                             <span className="text-sm font-semibold text-[#74817B]">
@@ -429,7 +429,7 @@ export default function ConfiguracionNotificacionesClient({
 
             <section className="sticky bottom-4 z-10 flex flex-col gap-3 rounded-[24px] border border-[#D9E1DD] bg-white/95 p-4 shadow-[0_16px_45px_rgba(36,48,44,0.14)] backdrop-blur sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-3">
-                    <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-[#6F8F83]" />
+                    <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
 
                     <div>
                         <p className="text-sm font-bold text-[#33413B]">
@@ -450,7 +450,7 @@ export default function ConfiguracionNotificacionesClient({
                     onClick={
                         guardar
                     }
-                    className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-6 text-sm font-bold text-white transition hover:bg-[#34463F] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="salon-action inline-flex shrink-0 items-center justify-center gap-2 bg-sidebar px-6 text-white transition hover:bg-sidebar-hover disabled:cursor-not-allowed disabled:opacity-60"
                 >
                     {guardando ? (
                         <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -481,14 +481,14 @@ function BloqueConfiguracion({
     children: React.ReactNode;
 }) {
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_10px_30px_rgba(36,48,44,0.06)] sm:p-6">
+        <article className="salon-panel border border-border bg-white p-5 sm:p-6">
             <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
 
                 <div>
-                    <h2 className="text-lg font-bold text-[#26332F]">
+                    <h2 className="text-lg font-bold text-sidebar tracking-tight">
                         {titulo}
                     </h2>
 
@@ -524,7 +524,7 @@ function Opcion({
             onClick={
                 cambiar
             }
-            className="flex w-full items-center gap-4 rounded-2xl bg-[#F7FAF8] px-4 py-4 text-left transition hover:bg-[#F0F5F2]"
+            className="flex w-full items-center gap-4 rounded-2xl bg-[#F7FAF8] px-4 py-4 text-left transition hover:bg-surface-soft"
         >
             <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
@@ -533,7 +533,7 @@ function Opcion({
                     </p>
 
                     {importante && (
-                        <span className="rounded-full bg-[#F7E8EA] px-2 py-0.5 text-[10px] font-bold uppercase text-[#96616B]">
+                        <span className="rounded-full bg-[#F7E8EA] px-2 py-0.5 text-xs font-bold uppercase text-[#96616B]">
                             Importante
                         </span>
                     )}
@@ -548,7 +548,7 @@ function Opcion({
                 className={[
                     "relative h-7 w-12 shrink-0 rounded-full transition",
                     activa
-                        ? "bg-[#6F8F83]"
+                        ? "bg-primary"
                         : "bg-[#D7DDDA]",
                 ].join(
                     " ",

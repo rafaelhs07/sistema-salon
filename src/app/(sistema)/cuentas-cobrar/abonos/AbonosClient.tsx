@@ -318,9 +318,9 @@ export default function AbonosClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -333,12 +333,12 @@ export default function AbonosClient({
 
                     <div className="mt-6 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <History className="h-7 w-7" />
                             </div>
 
                             <div>
-                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                <p className="text-xs font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
                                     Cuentas por cobrar
                                 </p>
 
@@ -419,15 +419,15 @@ export default function AbonosClient({
                 />
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Búsqueda
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                            <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                 Filtrar movimientos
                             </h2>
 
@@ -440,7 +440,7 @@ export default function AbonosClient({
                             <button
                                 type="button"
                                 onClick={limpiarFiltros}
-                                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white px-4 text-xs font-black text-[#52605A]"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-white px-4 text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar filtros
@@ -449,7 +449,7 @@ export default function AbonosClient({
                     </div>
                 </header>
 
-                <div className="grid gap-3 p-5 sm:p-6 lg:grid-cols-[minmax(0,1.4fr)_210px_190px_170px]">
+                <div className="grid gap-3 p-5 sm:p-6 xl:grid-cols-[minmax(0,1.4fr)_210px_190px_170px]">
                     <div className="relative">
                         <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
 
@@ -461,7 +461,7 @@ export default function AbonosClient({
                                 )
                             }
                             placeholder="Cliente, cuenta, venta o referencia..."
-                            className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold outline-none transition focus:border-primary"
                         />
                     </div>
 
@@ -560,18 +560,18 @@ export default function AbonosClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="flex flex-col gap-3 border-b border-[#E8ECE9] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Movimientos
                         </p>
 
-                        <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                        <h2 className="mt-1 text-xl font-black text-foreground tracking-tight">
                             Abonos registrados
                         </h2>
 
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             {abonosFiltrados.length} resultado
                             {abonosFiltrados.length ===
                                 1
@@ -581,11 +581,11 @@ export default function AbonosClient({
                     </div>
 
                     <div className="rounded-2xl bg-[#F5F8F6] px-4 py-2 text-right">
-                        <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+                        <p className="text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                             Total visible
                         </p>
 
-                        <p className="mt-1 text-sm font-black text-[#527064]">
+                        <p className="mt-1 text-sm font-black text-primary-strong">
                             {dinero(
                                 resumen.total,
                             )}
@@ -599,8 +599,8 @@ export default function AbonosClient({
                 ) : (
                     <>
                         <div className="hidden overflow-x-auto xl:block">
-                            <table className="w-full min-w-[1200px]">
-                                <thead className="bg-[#FBFCFA] text-left text-[10px] uppercase tracking-[0.1em] text-[#76817B]">
+                            <table className="salon-table w-full min-w-[1200px]">
+                                <thead className="bg-[#FBFCFA] text-left text-xs uppercase tracking-[0.1em] text-[#76817B]">
                                     <tr>
                                         <Th>
                                             Fecha
@@ -708,12 +708,12 @@ function FilaAbono({
 
             <Td>
                 <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                         <UserRound className="h-4 w-4" />
                     </div>
 
                     <div>
-                        <p className="font-black text-[#24302C]">
+                        <p className="font-black text-foreground">
                             {cliente?.nombre_completo ??
                                 "Cliente"}
                         </p>
@@ -791,7 +791,7 @@ function FilaAbono({
                 {cuenta?.cliente_id && (
                     <Link
                         href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                        className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#26332F] px-4 text-xs font-black text-white transition hover:bg-[#34463F]"
+                        className="salon-action inline-flex items-center gap-2 bg-sidebar px-4 text-white transition hover:bg-sidebar-hover"
                     >
                         <Eye className="h-4 w-4" />
                         Ver cuenta
@@ -822,7 +822,7 @@ function TarjetaAbono({
         );
 
     return (
-        <article className="overflow-hidden rounded-[24px] border border-[#E0E6E2] bg-white shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+        <article className="salon-panel overflow-hidden border border-border bg-white">
             <div className="border-b border-[#E9EDEA] bg-[#FBFCFA] p-4">
                 <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-3">
@@ -831,7 +831,7 @@ function TarjetaAbono({
                         </div>
 
                         <div className="min-w-0">
-                            <p className="truncate font-black text-[#24302C]">
+                            <p className="truncate font-black text-foreground">
                                 {cliente?.nombre_completo ??
                                     "Cliente"}
                             </p>
@@ -850,7 +850,7 @@ function TarjetaAbono({
             </div>
 
             <div className="p-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+                <p className="text-xs font-black uppercase tracking-[0.1em] text-[#87958D]">
                     Monto abonado
                 </p>
 
@@ -881,7 +881,7 @@ function TarjetaAbono({
                             pago.referencia,
                     )?.referencia) && (
                         <div className="mt-4 rounded-2xl bg-[#F8FAF8] p-3">
-                            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#87958D]">
                                 Referencia
                             </p>
 
@@ -899,7 +899,7 @@ function TarjetaAbono({
                 {cuenta?.cliente_id && (
                     <Link
                         href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                        className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] text-sm font-black text-white"
+                        className="salon-action mt-4 inline-flex w-full items-center justify-center gap-2 bg-sidebar text-white"
                     >
                         <Eye className="h-4 w-4" />
                         Abrir estado de cuenta
@@ -924,19 +924,19 @@ function ResumenMetodo({
     }>;
 }) {
     return (
-        <article className="rounded-[24px] border border-[#E1E7E3] bg-white p-5 shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#87958D]">
                         {titulo}
                     </p>
 
-                    <p className="mt-2 text-xl font-black text-[#24302C]">
+                    <p className="mt-2 text-xl font-black text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -962,11 +962,11 @@ function HeroDato({
     return (
         <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
             <div className="flex items-center justify-between gap-3">
-                <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                <p className="text-xs font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
                     {titulo}
                 </p>
 
-                <Icono className="h-4 w-4 text-[#DCE7E2]" />
+                <Icono className="h-4 w-4 text-primary-soft" />
             </div>
 
             <p className="mt-2 truncate text-lg font-black text-white">
@@ -1003,7 +1003,7 @@ function MetodoPago({
                     )}`
                     : undefined
             }
-            className="inline-flex rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-black text-[#52605A]"
+            className="inline-flex rounded-full bg-surface-soft px-2.5 py-1 text-xs font-black text-[#52605A]"
         >
             {texto} · {dinero(pago.monto)}
         </span>
@@ -1056,7 +1056,7 @@ function Select({
                         event.target.value,
                     )
                 }
-                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold text-[#33413B]"
+                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold text-[#33413B]"
             >
                 {opciones.map((opcion) => (
                     <option
@@ -1085,7 +1085,7 @@ function Fecha({
 }) {
     return (
         <label>
-            <span className="mb-2 block text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+            <span className="mb-2 block text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {titulo}
             </span>
 
@@ -1097,7 +1097,7 @@ function Fecha({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-3 text-sm font-semibold"
+                className="salon-control w-full border border-border-strong px-3 font-semibold"
             />
         </label>
     );
@@ -1106,15 +1106,15 @@ function Fecha({
 function EstadoVacio() {
     return (
         <div className="p-12 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                 <History className="h-7 w-7" />
             </div>
 
-            <h3 className="mt-4 font-black text-[#24302C]">
+            <h3 className="mt-4 font-black text-foreground tracking-tight">
                 No hay abonos para mostrar
             </h3>
 
-            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[#6B756F]">
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-text-secondary">
                 Ajusta los filtros o registra un nuevo abono desde el estado de cuenta de un cliente.
             </p>
         </div>

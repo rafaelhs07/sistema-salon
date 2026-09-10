@@ -183,7 +183,7 @@ export default function CuentasPagarClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/compras"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#B9C8C1]"
@@ -193,7 +193,7 @@ export default function CuentasPagarClient({
                 </Link>
 
                 <div className="mt-5 flex items-start gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                         <CircleDollarSign className="h-7 w-7" />
                     </div>
 
@@ -202,7 +202,7 @@ export default function CuentasPagarClient({
                             Proveedores y obligaciones
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             Cuentas por pagar
                         </h1>
 
@@ -255,15 +255,15 @@ export default function CuentasPagarClient({
                 />
             </section>
 
-            <section className="rounded-[30px] border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] p-5 sm:p-6">
                     <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                         <div>
-                            <h2 className="text-lg font-bold text-[#24302C]">
+                            <h2 className="text-lg font-bold text-foreground tracking-tight">
                                 Obligaciones con proveedores
                             </h2>
 
-                            <p className="mt-1 text-sm text-[#6B756F]">
+                            <p className="mt-1 text-sm text-text-secondary">
                                 Las cuentas se crean al confirmar compras a crédito o mixtas.
                             </p>
                         </div>
@@ -286,7 +286,7 @@ export default function CuentasPagarClient({
                                         )
                                     }
                                     placeholder="Proveedor, compra o factura..."
-                                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                                    className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none focus:border-primary"
                                 />
                             </div>
 
@@ -303,7 +303,7 @@ export default function CuentasPagarClient({
                                             .value as FiltroEstado,
                                     )
                                 }
-                                className="h-11 rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                                className="salon-control border border-border-strong bg-white px-4"
                             >
                                 <option value="TODAS">
                                     Todos los estados
@@ -332,14 +332,14 @@ export default function CuentasPagarClient({
                 <div className="p-5 sm:p-6">
                     {cuentasFiltradas.length ===
                         0 ? (
-                        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-12 text-center">
-                            <CheckCircle2 className="mx-auto h-9 w-9 text-[#6F8F83]" />
+                        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-12 text-center">
+                            <CheckCircle2 className="mx-auto h-9 w-9 text-primary" />
 
-                            <h3 className="mt-4 font-bold text-[#24302C]">
+                            <h3 className="mt-4 font-bold text-foreground tracking-tight">
                                 No hay cuentas por pagar
                             </h3>
 
-                            <p className="mt-2 text-sm text-[#6B756F]">
+                            <p className="mt-2 text-sm text-text-secondary">
                                 Las compras confirmadas a crédito aparecerán aquí.
                             </p>
                         </div>
@@ -354,12 +354,12 @@ export default function CuentasPagarClient({
                                             cuenta.id
                                         }
                                         href={`/compras/cuentas-pagar/${cuenta.id}`}
-                                        className="block rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4 transition hover:border-[#CAD7D1] hover:bg-white sm:p-5"
+                                        className="block rounded-2xl border border-border bg-[#FBFCFA] p-4 transition hover:border-[#CAD7D1] hover:bg-white sm:p-5"
                                     >
                                         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                                             <div className="min-w-0">
                                                 <div className="flex flex-wrap items-center gap-2">
-                                                    <p className="font-bold text-[#24302C]">
+                                                    <p className="font-bold text-foreground">
                                                         {
                                                             cuenta.proveedorNombre
                                                         }
@@ -451,19 +451,19 @@ function ResumenCard({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm font-medium text-[#6B756F]">
+                    <p className="text-sm font-medium text-text-secondary">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-2xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -487,7 +487,7 @@ function MiniDato({
             <div className="flex items-center gap-1.5 text-[#7B8781]">
                 <Icono className="h-3.5 w-3.5" />
 
-                <span className="text-[10px] font-bold uppercase tracking-wide">
+                <span className="text-xs font-bold uppercase tracking-wide">
                     {titulo}
                 </span>
             </div>

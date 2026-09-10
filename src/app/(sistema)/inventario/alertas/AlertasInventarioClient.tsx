@@ -145,10 +145,10 @@ export default function AlertasInventarioClient({
 
     return (
         <div className="space-y-6">
-            <section className="overflow-hidden rounded-[32px] border border-[#E1E6E3] bg-white shadow-[0_18px_55px_rgba(36,48,44,0.08)]">
-                <div className="grid lg:grid-cols-[1fr_390px]">
-                    <div className="relative overflow-hidden bg-[#26332F] p-7 text-white sm:p-9">
-                        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#C79AA1]/10 blur-3xl" />
+            <section className="salon-panel overflow-hidden border border-[#E1E6E3] bg-white">
+                <div className="grid xl:grid-cols-[1fr_390px]">
+                    <div className="salon-hero relative overflow-hidden bg-sidebar p-7 text-white sm:p-9">
+                        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-secondary/10 blur-3xl" />
 
                         <div className="relative">
                             <Link
@@ -169,7 +169,7 @@ export default function AlertasInventarioClient({
                                         Control preventivo
                                     </p>
 
-                                    <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                                    <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                         Alertas de stock
                                     </h1>
 
@@ -208,12 +208,12 @@ export default function AlertasInventarioClient({
                             />
                         </div>
 
-                        <div className="mt-4 rounded-2xl border border-[#E1E7E3] bg-white p-4">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#89948F]">
+                        <div className="mt-4 rounded-2xl border border-border bg-white p-4">
+                            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#89948F]">
                                 Registros con atención
                             </p>
 
-                            <p className="mt-2 text-3xl font-bold text-[#26332F]">
+                            <p className="mt-2 text-3xl font-bold text-sidebar">
                                 {resumen.total}
                             </p>
 
@@ -228,12 +228,12 @@ export default function AlertasInventarioClient({
             </section>
 
             {alertas.length === 0 ? (
-                <section className="rounded-[28px] border border-[#DCE7E2] bg-white p-12 text-center shadow-sm">
+                <section className="salon-panel border border-primary-soft bg-white p-12 text-center shadow-sm">
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-[#E3EEE8] text-[#527865]">
                         <CheckCircle2 className="h-8 w-8" />
                     </div>
 
-                    <h2 className="mt-5 text-xl font-bold text-[#26332F]">
+                    <h2 className="mt-5 text-xl font-bold text-sidebar tracking-tight">
                         Inventario saludable
                     </h2>
 
@@ -245,7 +245,7 @@ export default function AlertasInventarioClient({
                 </section>
             ) : (
                 <>
-                    <section className="rounded-[28px] border border-[#E0E6E2] bg-white p-5 shadow-sm sm:p-6">
+                    <section className="salon-panel border border-border bg-white p-5 shadow-sm sm:p-6">
                         <div className="flex flex-col gap-4 xl:flex-row xl:items-center">
                             <div className="relative flex-1">
                                 <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
@@ -260,7 +260,7 @@ export default function AlertasInventarioClient({
                                         )
                                     }
                                     placeholder="Buscar producto, código, marca..."
-                                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-[#FBFCFB] pl-11 pr-4 text-sm outline-none focus:border-[#6F8F83]"
+                                    className="salon-control w-full border border-border-strong bg-[#FBFCFB] pl-11 pr-4 outline-none focus:border-primary"
                                 />
                             </div>
 
@@ -323,7 +323,7 @@ export default function AlertasInventarioClient({
                                     onClick={
                                         limpiarFiltros
                                     }
-                                    className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#52605A]"
+                                    className="salon-action inline-flex items-center justify-center gap-2 bg-surface-soft px-4 text-[#52605A]"
                                 >
                                     <X className="h-4 w-4" />
                                     Limpiar
@@ -339,7 +339,7 @@ export default function AlertasInventarioClient({
                                     Reposición
                                 </p>
 
-                                <h2 className="mt-1 text-xl font-bold text-[#26332F]">
+                                <h2 className="mt-1 text-xl font-bold text-sidebar tracking-tight">
                                     Productos que requieren atención
                                 </h2>
                             </div>
@@ -358,7 +358,7 @@ export default function AlertasInventarioClient({
 
                         {alertasFiltradas.length ===
                             0 ? (
-                            <div className="rounded-[28px] border border-dashed border-[#CCD6D0] bg-white p-10 text-center text-sm text-[#718078]">
+                            <div className="salon-panel border border-dashed border-[#CCD6D0] bg-white p-10 text-center text-sm text-[#718078]">
                                 No hay alertas con los
                                 filtros seleccionados.
                             </div>
@@ -398,7 +398,7 @@ function TarjetaAlerta({
         cantidadRecomendada(alerta);
 
     return (
-        <article className="relative overflow-hidden rounded-[26px] border border-[#E0E6E2] bg-white p-5 shadow-[0_8px_25px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel relative overflow-hidden border border-border bg-white p-5">
             <div
                 className={[
                     "absolute inset-x-0 top-0 h-1",
@@ -423,7 +423,7 @@ function TarjetaAlerta({
                             : "Stock bajo"}
                     </span>
 
-                    <h3 className="mt-3 truncate text-base font-bold text-[#26332F]">
+                    <h3 className="mt-3 truncate text-base font-bold text-sidebar tracking-tight">
                         {
                             alerta.producto_nombre
                         }
@@ -487,7 +487,7 @@ function TarjetaAlerta({
 
             <div className="mt-4 space-y-2 rounded-2xl bg-[#F8FAF8] p-3.5 text-xs text-[#65726B]">
                 <p className="flex items-center gap-2">
-                    <Store className="h-4 w-4 text-[#6F8F83]" />
+                    <Store className="h-4 w-4 text-primary" />
                     <strong className="text-[#405049]">
                         {
                             alerta.sucursal_nombre
@@ -516,7 +516,7 @@ function TarjetaAlerta({
             <div className="mt-4">
                 <Link
                     href="/inventario/movimientos/nuevo"
-                    className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-[#26332F] text-sm font-bold text-white transition hover:bg-[#34443F]"
+                    className="salon-action inline-flex w-full items-center justify-center gap-2 bg-sidebar text-white transition hover:bg-[#34443F]"
                 >
                     <ArrowDownToLine className="h-4 w-4" />
                     Registrar entrada
@@ -544,7 +544,7 @@ function MiniResumen({
                     : "border-[#EEE1C6] bg-[#FFFDF8]",
             ].join(" ")}
         >
-            <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#89948F]">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#89948F]">
                 {titulo}
             </p>
 
@@ -576,11 +576,11 @@ function Dato({
             className={[
                 "rounded-xl p-3",
                 destacar
-                    ? "bg-[#EEF3F0]"
+                    ? "bg-surface-soft"
                     : "bg-[#F8FAF8]",
             ].join(" ")}
         >
-            <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#929C97]">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#929C97]">
                 {titulo}
             </p>
 
@@ -625,7 +625,7 @@ function Select({
                         event.target.value,
                     )
                 }
-                className="h-11 min-w-[190px] rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                className="salon-control min-w-[190px] border border-border-strong bg-white pl-11 pr-4"
             >
                 {opciones.map(
                     (opcion) => (

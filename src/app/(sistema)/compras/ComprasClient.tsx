@@ -26,14 +26,14 @@ export default function ComprasClient({
 }) {
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <PackagePlus className="h-7 w-7" />
                         </div>
 
@@ -42,7 +42,7 @@ export default function ComprasClient({
                                 Abastecimiento del salón
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
                                 Compras
                             </h1>
 
@@ -152,19 +152,19 @@ export default function ComprasClient({
                 />
             </section>
 
-            <section className="rounded-[30px] border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)] sm:p-6">
+            <section className="salon-panel border border-border bg-white p-5 sm:p-6">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                             <Store className="h-6 w-6" />
                         </div>
 
                         <div>
-                            <h2 className="text-lg font-bold text-[#24302C]">
+                            <h2 className="text-lg font-bold text-foreground tracking-tight">
                                 Flujo de compras
                             </h2>
 
-                            <p className="mt-1 max-w-2xl text-sm leading-6 text-[#6B756F]">
+                            <p className="mt-1 max-w-2xl text-sm leading-6 text-text-secondary">
                                 El inventario solo aumentará cuando confirmes la compra.
                                 Primero registras y revisas los datos; después confirmas la entrada al stock.
                             </p>
@@ -196,14 +196,14 @@ function ResumenCard({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm font-medium text-[#6B756F]">
+                    <p className="text-sm font-medium text-text-secondary">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-2xl font-bold text-foreground">
                         {valor}
                     </p>
 
@@ -212,7 +212,7 @@ function ResumenCard({
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -243,7 +243,7 @@ function AccesoModulo({
                 "group relative overflow-hidden rounded-[28px] border p-6 transition",
                 activo
                     ? "border-[#CBD9D2] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)] hover:-translate-y-0.5 hover:shadow-lg"
-                    : "border-[#E3E7E4] bg-[#F8FAF8]",
+                    : "border-border bg-[#F8FAF8]",
             ].join(" ")}
         >
             <div className="flex items-start gap-4">
@@ -251,7 +251,7 @@ function AccesoModulo({
                     className={[
                         "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl",
                         activo
-                            ? "bg-[#26332F] text-white"
+                            ? "bg-sidebar text-white"
                             : "bg-[#E5EAE7] text-[#8A948F]",
                     ].join(" ")}
                 >
@@ -264,7 +264,7 @@ function AccesoModulo({
                             className={[
                                 "text-lg font-bold",
                                 activo
-                                    ? "text-[#24302C]"
+                                    ? "text-foreground"
                                     : "text-[#6C7771]",
                             ].join(" ")}
                         >
@@ -272,11 +272,11 @@ function AccesoModulo({
                         </h3>
 
                         {activo && (
-                            <ArrowRight className="h-5 w-5 shrink-0 text-[#6F8F83] transition group-hover:translate-x-1" />
+                            <ArrowRight className="h-5 w-5 shrink-0 text-primary transition group-hover:translate-x-1" />
                         )}
                     </div>
 
-                    <p className="mt-2 text-sm leading-6 text-[#6B756F]">
+                    <p className="mt-2 text-sm leading-6 text-text-secondary">
                         {descripcion}
                     </p>
 
@@ -314,8 +314,8 @@ function Paso({
     texto: string;
 }) {
     return (
-        <div className="flex items-center gap-2 rounded-xl bg-[#F0F5F2] px-3 py-2.5">
-            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-white font-bold text-[#527064]">
+        <div className="flex items-center gap-2 rounded-xl bg-surface-soft px-3 py-2.5">
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-white font-bold text-primary-strong">
                 {numero}
             </span>
 

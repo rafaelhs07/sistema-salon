@@ -589,15 +589,15 @@ export default function FormularioConfiguracion({
                     />
                 )}
 
-                <section className="overflow-hidden rounded-[30px] border border-[#E0E6E2] bg-white shadow-[0_12px_34px_rgba(36,48,44,0.06)]">
-                    <div className="grid lg:grid-cols-[285px_minmax(0,1fr)]">
+                <section className="salon-panel overflow-hidden border border-border bg-white">
+                    <div className="grid xl:grid-cols-[285px_minmax(0,1fr)]">
                         <aside className="border-b border-[#E7ECE9] bg-[#F8FAF8] p-4 lg:border-b-0 lg:border-r">
                             <div className="px-2 pb-4 pt-1">
-                                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#8A9690]">
+                                <p className="text-xs font-black uppercase tracking-[0.16em] text-[#8A9690]">
                                     Configuración
                                 </p>
 
-                                <h2 className="mt-1 text-lg font-black text-[#26332F]">
+                                <h2 className="mt-1 text-lg font-black text-sidebar tracking-tight">
                                     Preferencias del salón
                                 </h2>
 
@@ -639,7 +639,7 @@ export default function FormularioConfiguracion({
                             </nav>
 
                             <div className="mt-4 hidden rounded-2xl border border-[#DFE6E2] bg-white p-4 lg:block">
-                                <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#8A9690]">
+                                <p className="text-xs font-black uppercase tracking-[0.13em] text-[#8A9690]">
                                     Resumen
                                 </p>
 
@@ -800,7 +800,7 @@ export default function FormularioConfiguracion({
                     </div>
                 </section>
 
-                <div className="sticky bottom-4 z-20 rounded-[22px] border border-[#DCE3DF] bg-white/95 p-4 shadow-[0_18px_50px_rgba(36,48,44,0.14)] backdrop-blur-xl">
+                <div className="sticky bottom-4 z-20 rounded-[22px] border border-border-strong bg-white/95 p-4 shadow-[0_18px_50px_rgba(36,48,44,0.14)] backdrop-blur-xl">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-3">
                             <div
@@ -841,7 +841,7 @@ export default function FormularioConfiguracion({
                                     !hayCambios ||
                                     guardando
                                 }
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-[#DCE3DF] bg-[#F6F8F6] px-4 text-sm font-black text-[#52605A] transition hover:bg-[#EEF2EF] disabled:cursor-not-allowed disabled:opacity-40"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-[#F6F8F6] px-4 text-[#52605A] transition hover:bg-surface-soft disabled:cursor-not-allowed disabled:opacity-40"
                             >
                                 <RotateCcw className="h-4 w-4" />
                                 Descartar
@@ -853,7 +853,7 @@ export default function FormularioConfiguracion({
                                     !hayCambios ||
                                     guardando
                                 }
-                                className="inline-flex h-11 min-w-40 items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] px-5 text-sm font-black text-white shadow-sm transition hover:bg-[#5E7D71] disabled:cursor-not-allowed disabled:opacity-45"
+                                className="salon-action inline-flex min-w-40 items-center justify-center gap-2 bg-primary px-5 text-white shadow-sm transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-45"
                             >
                                 {guardando ? (
                                     <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -1065,11 +1065,11 @@ function PanelAgenda({
             <div className="rounded-[24px] border border-[#DFE6E2] bg-[#F8FAF8] p-5">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             División visual
                         </p>
 
-                        <h3 className="mt-1 text-lg font-black text-[#26332F]">
+                        <h3 className="mt-1 text-lg font-black text-sidebar tracking-tight">
                             Intervalo de la agenda
                         </h3>
 
@@ -1079,11 +1079,11 @@ function PanelAgenda({
                     </div>
 
                     <div className="rounded-2xl border border-[#D8E2DC] bg-white px-4 py-3 text-center">
-                        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.12em] text-[#87958D]">
                             Actual
                         </p>
 
-                        <p className="mt-1 text-2xl font-black text-[#26332F]">
+                        <p className="mt-1 text-2xl font-black text-sidebar">
                             {
                                 formulario.intervaloCitasMinutos
                             }{" "}
@@ -1116,7 +1116,7 @@ function PanelAgenda({
                                     className={[
                                         "rounded-2xl border p-4 text-left transition",
                                         activo
-                                            ? "border-[#8FA99D] bg-[#EAF2EE] shadow-sm"
+                                            ? "border-[#8FA99D] bg-surface-soft shadow-sm"
                                             : "border-[#DEE5E1] bg-white hover:border-[#B9CBC2]",
                                     ].join(
                                         " ",
@@ -1126,7 +1126,7 @@ function PanelAgenda({
                                         className={[
                                             "text-2xl font-black",
                                             activo
-                                                ? "text-[#527064]"
+                                                ? "text-primary-strong"
                                                 : "text-[#33413B]",
                                         ].join(
                                             " ",
@@ -1146,7 +1146,7 @@ function PanelAgenda({
                     )}
                 </div>
 
-                <div className="mt-5 overflow-hidden rounded-2xl border border-[#E1E7E3] bg-white">
+                <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-white">
                     <div className="border-b border-[#E7ECE9] px-4 py-3">
                         <p className="text-xs font-black text-[#52605A]">
                             Vista previa
@@ -1225,7 +1225,7 @@ function PanelCobros({
                                     event.target.value,
                                 )
                             }
-                            className="h-12 w-full appearance-none rounded-2xl border border-[#D4DAD6] bg-white pl-12 pr-10 font-semibold text-[#24302C] outline-none transition focus:border-[#6F8F83]"
+                            className="salon-control w-full appearance-none border border-border-strong bg-white pl-12 pr-10 font-semibold text-foreground outline-none transition focus:border-primary"
                         >
                             {monedas.map(
                                 (
@@ -1374,7 +1374,7 @@ function PanelPos({
                     onClick={
                         abrirFormulario
                     }
-                    className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white transition hover:bg-[#34463F]"
+                    className="salon-action inline-flex shrink-0 items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:bg-sidebar-hover"
                 >
                     {mostrarFormularioPos ? (
                         <X className="h-4 w-4" />
@@ -1399,13 +1399,13 @@ function PanelPos({
             {mostrarFormularioPos && (
                 <div className="rounded-[24px] border border-[#D8E2DC] bg-[#F8FAF8] p-5">
                     <div className="mb-5">
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             {terminalEditandoId
                                 ? "Editar terminal"
                                 : "Nueva terminal"}
                         </p>
 
-                        <h3 className="mt-1 text-lg font-black text-[#26332F]">
+                        <h3 className="mt-1 text-lg font-black text-sidebar tracking-tight">
                             {terminalEditandoId
                                 ? "Actualizar POS"
                                 : "Configurar POS"}
@@ -1475,7 +1475,7 @@ function PanelPos({
                                         }),
                                     )
                                 }
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold"
+                                className="salon-control w-full border border-border-strong bg-white px-4 font-semibold"
                             >
                                 <option value="">
                                     Todas las sucursales
@@ -1537,7 +1537,7 @@ function PanelPos({
                                             }),
                                         )
                                     }
-                                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 pr-12 text-right font-black"
+                                    className="salon-control w-full border border-border-strong bg-white px-4 pr-12 text-right"
                                 />
 
                                 <Percent className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
@@ -1551,7 +1551,7 @@ function PanelPos({
                             onClick={
                                 limpiarFormularioPos
                             }
-                            className="h-10 rounded-xl border border-[#DCE3DF] bg-white px-4 text-sm font-black text-[#52605A]"
+                            className="salon-action border border-border-strong bg-white px-4 text-[#52605A]"
                         >
                             Cancelar
                         </button>
@@ -1566,7 +1566,7 @@ function PanelPos({
                             onClick={
                                 guardarPos
                             }
-                            className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-black text-white disabled:opacity-45"
+                            className="salon-action inline-flex items-center gap-2 bg-primary px-5 text-white disabled:opacity-45"
                         >
                             {procesandoPos ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -1584,7 +1584,7 @@ function PanelPos({
 
             {terminales.length ===
                 0 ? (
-                <div className="rounded-[24px] border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-10 text-center">
+                <div className="rounded-[24px] border border-dashed border-border-strong bg-[#FBFCFA] p-10 text-center">
                     <CreditCard className="mx-auto h-9 w-9 text-[#98A19D]" />
 
                     <p className="mt-3 font-black text-[#33413B]">
@@ -1605,17 +1605,17 @@ function PanelPos({
                                 key={
                                     terminal.id
                                 }
-                                className="rounded-[22px] border border-[#E0E6E2] bg-white p-5 shadow-[0_7px_20px_rgba(36,48,44,0.04)]"
+                                className="salon-panel border border-border bg-white p-5"
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex items-start gap-3">
-                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                                             <CreditCard className="h-5 w-5" />
                                         </div>
 
                                         <div>
                                             <div className="flex flex-wrap items-center gap-2">
-                                                <p className="font-black text-[#24302C]">
+                                                <p className="font-black text-foreground">
                                                     {
                                                         terminal.nombre
                                                     }
@@ -1627,7 +1627,7 @@ function PanelPos({
                                                         terminal.estado ===
                                                             "ACTIVO"
                                                             ? "bg-[#E3EEE8] text-[#527865]"
-                                                            : "bg-[#EEF2EF] text-[#6B756F]",
+                                                            : "bg-surface-soft text-text-secondary",
                                                     ].join(
                                                         " ",
                                                     )}
@@ -1638,7 +1638,7 @@ function PanelPos({
                                                 </span>
                                             </div>
 
-                                            <p className="mt-1 text-sm text-[#6B756F]">
+                                            <p className="mt-1 text-sm text-text-secondary">
                                                 {terminal.banco ??
                                                     "Banco no especificado"}
                                             </p>
@@ -1646,7 +1646,7 @@ function PanelPos({
                                     </div>
 
                                     <div className="rounded-2xl bg-[#F6F8F6] px-3 py-2 text-right">
-                                        <p className="text-xl font-black text-[#26332F]">
+                                        <p className="text-xl font-black text-sidebar">
                                             {Number(
                                                 terminal.porcentaje_comision,
                                             ).toLocaleString(
@@ -1659,7 +1659,7 @@ function PanelPos({
                                             %
                                         </p>
 
-                                        <p className="text-[9px] font-black uppercase text-[#829089]">
+                                        <p className="text-xs font-black uppercase text-[#829089]">
                                             Comisión
                                         </p>
                                     </div>
@@ -1680,7 +1680,7 @@ function PanelPos({
                                                 terminal,
                                             )
                                         }
-                                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#DCE7E2] px-3 text-xs font-black text-[#43524B]"
+                                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-primary-soft px-3 text-xs font-black text-text-secondary"
                                     >
                                         <Pencil className="h-4 w-4" />
                                         Editar
@@ -1696,7 +1696,7 @@ function PanelPos({
                                                 terminal,
                                             )
                                         }
-                                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-[#EEF2EF] px-3 text-xs font-black text-[#52605A]"
+                                        className="inline-flex h-9 items-center gap-2 rounded-xl bg-surface-soft px-3 text-xs font-black text-[#52605A]"
                                     >
                                         <Power className="h-4 w-4" />
 
@@ -1819,7 +1819,7 @@ function BotonSeccion({
                 "flex items-center gap-3 rounded-2xl border p-3 text-left transition",
                 activa
                     ? "border-[#A9BDB3] bg-white shadow-sm"
-                    : "border-transparent bg-transparent hover:border-[#E0E6E2] hover:bg-white/70",
+                    : "border-transparent bg-transparent hover:border-border hover:bg-white/70",
             ].join(
                 " ",
             )}
@@ -1828,7 +1828,7 @@ function BotonSeccion({
                 className={[
                     "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                     activa
-                        ? "bg-[#DCE7E2] text-[#527064]"
+                        ? "bg-primary-soft text-primary-strong"
                         : "bg-[#EDEFED] text-[#7B8982]",
                 ].join(
                     " ",
@@ -1852,7 +1852,7 @@ function BotonSeccion({
             </span>
 
             {activa && (
-                <ChevronRight className="h-4 w-4 shrink-0 text-[#6F8F83]" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-primary" />
             )}
         </button>
     );
@@ -1875,16 +1875,16 @@ function CabeceraSeccion({
     return (
         <header className="border-b border-[#E7ECE9] bg-white px-5 py-5 sm:px-6 lg:px-7">
             <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#26332F] text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sidebar text-white">
                     <Icono className="h-5 w-5" />
                 </div>
 
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                         Preferencias
                     </p>
 
-                    <h2 className="mt-0.5 text-xl font-black text-[#26332F]">
+                    <h2 className="mt-0.5 text-xl font-black text-sidebar tracking-tight">
                         {
                             seccion.titulo
                         }
@@ -1914,12 +1914,12 @@ function BloqueIntro({
 }) {
     return (
         <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                 <Icono className="h-5 w-5" />
             </div>
 
             <div>
-                <h3 className="font-black text-[#33413B]">
+                <h3 className="font-black text-[#33413B] tracking-tight">
                     {
                         titulo
                     }
@@ -2021,7 +2021,7 @@ function CampoTexto({
                             event.target.value,
                         )
                     }
-                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-sm font-semibold text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:shadow-[0_0_0_4px_rgba(111,143,131,0.10)]"
+                    className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 font-semibold text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:shadow-[0_0_0_4px_rgba(111,143,131,0.10)]"
                 />
             </div>
         </label>
@@ -2068,7 +2068,7 @@ function CampoHora({
                             event.target.value,
                         )
                     }
-                    className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-sm font-black text-[#24302C] outline-none transition focus:border-[#6F8F83]"
+                    className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 text-foreground outline-none transition focus:border-primary"
                 />
             </div>
         </label>
@@ -2120,7 +2120,7 @@ function CampoAreaTexto({
                         event.target.value,
                     )
                 }
-                className="w-full resize-none rounded-2xl border border-[#D4DAD6] bg-white px-4 py-3 text-sm leading-6 text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83]"
+                className="salon-control w-full resize-none border border-border-strong bg-white px-4 py-3 leading-6 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary"
             />
 
             <p className="mt-2 text-xs leading-5 text-[#829089]">
@@ -2167,7 +2167,7 @@ function CampoPosTexto({
                         event.target.value,
                     )
                 }
-                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white px-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83]"
+                className="salon-control w-full border border-border-strong bg-white px-4 font-semibold outline-none transition focus:border-primary"
             />
         </label>
     );
@@ -2202,7 +2202,7 @@ function OpcionInterruptor({
                 "flex items-start gap-4 rounded-[22px] border p-5 text-left transition",
                 activo
                     ? "border-[#AAC0B5] bg-[#F4F8F6]"
-                    : "border-[#E0E6E2] bg-white hover:bg-[#FAFBFA]",
+                    : "border-border bg-white hover:bg-[#FAFBFA]",
             ].join(
                 " ",
             )}
@@ -2211,7 +2211,7 @@ function OpcionInterruptor({
                 className={[
                     "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl",
                     activo
-                        ? "bg-[#DCE7E2] text-[#527064]"
+                        ? "bg-primary-soft text-primary-strong"
                         : "bg-[#EEF1EF] text-[#7D8983]",
                 ].join(
                     " ",
@@ -2238,7 +2238,7 @@ function OpcionInterruptor({
                 className={[
                     "relative mt-1 h-6 w-11 shrink-0 rounded-full transition",
                     activo
-                        ? "bg-[#6F8F83]"
+                        ? "bg-primary"
                         : "bg-[#D7DDDA]",
                 ].join(
                     " ",

@@ -110,7 +110,7 @@ export default function MovimientosCajaClient({
 
     return (
         <div className="space-y-6">
-            <section className="rounded-3xl bg-[#26332F] p-6 text-white sm:p-8">
+            <section className="salon-hero bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/caja"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] hover:text-white"
@@ -119,7 +119,7 @@ export default function MovimientosCajaClient({
                     Volver a Caja
                 </Link>
 
-                <h1 className="mt-5 text-3xl font-bold sm:text-4xl">
+                <h1 className="mt-5 text-3xl font-black sm:text-4xl tracking-tight">
                     Ingresos y egresos
                 </h1>
 
@@ -150,9 +150,9 @@ export default function MovimientosCajaClient({
             <div className="grid gap-6 xl:grid-cols-[420px_1fr]">
                 <form
                     onSubmit={enviar}
-                    className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm"
+                    className="salon-panel border border-border bg-white p-6 shadow-sm"
                 >
-                    <h2 className="text-lg font-bold text-[#24302C]">
+                    <h2 className="text-lg font-bold text-foreground tracking-tight">
                         Nuevo movimiento
                     </h2>
 
@@ -173,7 +173,7 @@ export default function MovimientosCajaClient({
                                         ? tipo === "INGRESO"
                                             ? "border-[#AFC9BD] bg-[#E3EEE8] text-[#3F6657]"
                                             : "border-[#E7BDBD] bg-[#F8E5E5] text-[#985858]"
-                                        : "border-[#DCE3DF] bg-white text-[#6B756F]",
+                                        : "border-border-strong bg-white text-text-secondary",
                                 ].join(" ")}
                             >
                                 {tipo === "INGRESO" ? "Ingreso" : "Egreso"}
@@ -194,7 +194,7 @@ export default function MovimientosCajaClient({
                                     monto: Number(e.target.value),
                                 }))
                             }
-                            className="h-12 w-full rounded-xl border border-[#D4DAD6] px-4 text-right font-bold"
+                            className="salon-control w-full border border-border-strong px-4 text-right"
                         />
                     </label>
 
@@ -209,7 +209,7 @@ export default function MovimientosCajaClient({
                                 }))
                             }
                             placeholder="Ejemplo: compra de insumos"
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4"
+                            className="salon-control w-full border border-border-strong px-4"
                         />
                     </label>
 
@@ -225,7 +225,7 @@ export default function MovimientosCajaClient({
                                     referencia: e.target.value,
                                 }))
                             }
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] px-4"
+                            className="salon-control w-full border border-border-strong px-4"
                         />
                     </label>
 
@@ -242,7 +242,7 @@ export default function MovimientosCajaClient({
                                     observaciones: e.target.value,
                                 }))
                             }
-                            className="w-full rounded-xl border border-[#D4DAD6] p-3"
+                            className="salon-control w-full border border-border-strong p-3"
                         />
                     </label>
 
@@ -256,7 +256,7 @@ export default function MovimientosCajaClient({
                         className={[
                             "mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl font-bold text-white disabled:opacity-50",
                             formulario.tipo === "INGRESO"
-                                ? "bg-[#6F8F83]"
+                                ? "bg-primary"
                                 : "bg-[#A25E5E]",
                         ].join(" ")}
                     >
@@ -271,15 +271,15 @@ export default function MovimientosCajaClient({
                     </button>
                 </form>
 
-                <section className="rounded-3xl border border-[#E3E7E4] bg-white p-6 shadow-sm">
-                    <h2 className="font-bold text-[#24302C]">
+                <section className="salon-panel border border-border bg-white p-6 shadow-sm">
+                    <h2 className="font-bold text-foreground tracking-tight">
                         Movimientos manuales
                     </h2>
 
                     {movimientos.length === 0 ? (
-                        <div className="mt-5 rounded-2xl border border-dashed border-[#D4DAD6] p-10 text-center">
+                        <div className="mt-5 rounded-2xl border border-dashed border-border-strong p-10 text-center">
                             <ReceiptText className="mx-auto h-8 w-8 text-[#829089]" />
-                            <p className="mt-3 text-sm text-[#6B756F]">
+                            <p className="mt-3 text-sm text-text-secondary">
                                 No hay movimientos manuales.
                             </p>
                         </div>
@@ -305,7 +305,7 @@ export default function MovimientosCajaClient({
                                             }).format(new Date(m.fecha_movimiento))}
                                         </p>
                                         {m.observaciones && (
-                                            <p className="mt-1 text-xs text-[#6B756F]">
+                                            <p className="mt-1 text-xs text-text-secondary">
                                                 {m.observaciones}
                                             </p>
                                         )}

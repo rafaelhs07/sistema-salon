@@ -645,9 +645,9 @@ export default function CobrarCitaClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_20px_60px_rgba(36,48,44,0.18)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                     <div>
@@ -660,7 +660,7 @@ export default function CobrarCitaClient({
                         </Link>
 
                         <div className="mt-6 flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <ReceiptText className="h-7 w-7" />
                             </div>
 
@@ -750,20 +750,20 @@ export default function CobrarCitaClient({
                     }
                 >
                     <div className="grid gap-6 2xl:grid-cols-[350px_minmax(0,1fr)_380px]">
-                        <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.06)]">
+                        <section className="salon-panel overflow-hidden border border-border bg-white">
                             <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5">
                                 <div className="flex items-start justify-between gap-3">
                                     <div>
-                                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                             Paso 1
                                         </p>
 
-                                        <h2 className="mt-1 font-black text-[#24302C]">
+                                        <h2 className="mt-1 font-black text-foreground tracking-tight">
                                             Elegir cita
                                         </h2>
                                     </div>
 
-                                    <span className="rounded-full bg-[#EAF1ED] px-3 py-1 text-[10px] font-black text-[#5D796C]">
+                                    <span className="rounded-full bg-surface-soft px-3 py-1 text-xs font-black text-primary-strong">
                                         {
                                             citasFiltradas.length
                                         } disponibles
@@ -785,7 +785,7 @@ export default function CobrarCitaClient({
                                             )
                                         }
                                         placeholder="Cliente, código o teléfono..."
-                                        className="h-11 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm outline-none transition focus:border-[#6F8F83] focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)]"
+                                        className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 outline-none transition focus:border-primary focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)]"
                                     />
                                 </div>
                             </header>
@@ -823,22 +823,22 @@ export default function CobrarCitaClient({
                                                     className={[
                                                         "mb-2 w-full rounded-2xl border p-4 text-left transition",
                                                         activa
-                                                            ? "border-[#90AD9F] bg-[#EAF2EE] shadow-sm"
-                                                            : "border-[#E3E7E4] bg-white hover:border-[#C9D6D0] hover:bg-[#F7F9F7]",
+                                                            ? "border-[#90AD9F] bg-surface-soft shadow-sm"
+                                                            : "border-border bg-white hover:border-[#C9D6D0] hover:bg-[#F7F9F7]",
                                                     ].join(
                                                         " ",
                                                     )}
                                                 >
                                                     <div className="flex items-start justify-between gap-3">
                                                         <div className="min-w-0">
-                                                            <p className="truncate font-black text-[#24302C]">
+                                                            <p className="truncate font-black text-foreground">
                                                                 {cita
                                                                     .clientes
                                                                     ?.nombre_completo ??
                                                                     "Cliente"}
                                                             </p>
 
-                                                            <p className="mt-1 text-xs font-bold text-[#6F8F83]">
+                                                            <p className="mt-1 text-xs font-bold text-primary">
                                                                 {cita.codigo_cita ??
                                                                     "Sin código"}
                                                             </p>
@@ -848,8 +848,8 @@ export default function CobrarCitaClient({
                                                             className={[
                                                                 "flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
                                                                 activa
-                                                                    ? "bg-[#6F8F83] text-white"
-                                                                    : "bg-[#EEF3F0] text-[#6F8F83]",
+                                                                    ? "bg-primary text-white"
+                                                                    : "bg-surface-soft text-primary",
                                                             ].join(
                                                                 " ",
                                                             )}
@@ -858,7 +858,7 @@ export default function CobrarCitaClient({
                                                         </span>
                                                     </div>
 
-                                                    <div className="mt-4 flex items-center gap-3 text-xs text-[#6B756F]">
+                                                    <div className="mt-4 flex items-center gap-3 text-xs text-text-secondary">
                                                         <span className="inline-flex items-center gap-1.5">
                                                             <CalendarDays className="h-3.5 w-3.5" />
                                                             {formatearFecha(
@@ -981,16 +981,16 @@ export default function CobrarCitaClient({
                                                             key={
                                                                 servicio.id
                                                             }
-                                                            className="flex flex-col gap-3 rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4 sm:flex-row sm:items-center sm:justify-between"
+                                                            className="flex flex-col gap-3 rounded-2xl border border-border bg-[#FBFCFA] p-4 sm:flex-row sm:items-center sm:justify-between"
                                                         >
                                                             <div className="min-w-0">
-                                                                <p className="font-black text-[#24302C]">
+                                                                <p className="font-black text-foreground">
                                                                     {
                                                                         servicio.nombre_servicio
                                                                     }
                                                                 </p>
 
-                                                                <p className="mt-1 text-sm text-[#6B756F]">
+                                                                <p className="mt-1 text-sm text-text-secondary">
                                                                     {servicio
                                                                         .trabajadores
                                                                         ?.nombre_completo ??
@@ -1028,11 +1028,11 @@ export default function CobrarCitaClient({
                                         }
                                         icono={CreditCard}
                                     >
-                                        <div className="rounded-[24px] border border-[#DCE5E0] bg-[#F7FAF8] p-4">
+                                        <div className="rounded-[24px] border border-border bg-[#F7FAF8] p-4">
                                             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                                                 <div>
                                                     <div className="flex items-center gap-2">
-                                                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#E4EEE9] text-[#5D796C]">
+                                                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#E4EEE9] text-primary-strong">
                                                             <ArrowRightLeft className="h-4 w-4" />
                                                         </span>
 
@@ -1057,7 +1057,7 @@ export default function CobrarCitaClient({
                                                         Pagado
                                                     </p>
 
-                                                    <p className="text-xl font-black text-[#26332F]">
+                                                    <p className="text-xl font-black text-sidebar">
                                                         {formatearDinero(totalPagos)}
                                                         <span className="ml-1 text-sm font-bold text-[#8A9690]">
                                                             / {formatearDinero(total)}
@@ -1068,7 +1068,7 @@ export default function CobrarCitaClient({
 
                                             <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-[#E5ECE8]">
                                                 <div
-                                                    className="h-full rounded-full bg-[#6F8F83] transition-all duration-300"
+                                                    className="h-full rounded-full bg-primary transition-all duration-300"
                                                     style={{
                                                         width: `${total > 0
                                                             ? Math.min(100, (totalPagos / total) * 100)
@@ -1100,7 +1100,7 @@ export default function CobrarCitaClient({
                                         </div>
 
                                         <div className="mt-5">
-                                            <p className="mb-3 text-[10px] font-black uppercase tracking-[0.13em] text-[#87958D]">
+                                            <p className="mb-3 text-xs font-black uppercase tracking-[0.13em] text-[#87958D]">
                                                 Agregar método
                                             </p>
 
@@ -1155,7 +1155,7 @@ export default function CobrarCitaClient({
                                                             }}
                                                             className="group flex min-h-[92px] flex-col items-center justify-center gap-2 rounded-2xl border border-[#DCE4DF] bg-white px-4 py-4 text-center transition hover:-translate-y-0.5 hover:border-[#AFC3B9] hover:bg-[#F7FAF8] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
                                                         >
-                                                            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EEF3F0] text-[#607C6F] transition group-hover:bg-[#DCE7E2]">
+                                                            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-soft text-primary-strong transition group-hover:bg-primary-soft">
                                                                 <Icono className="h-4 w-4" />
                                                             </span>
 
@@ -1169,7 +1169,7 @@ export default function CobrarCitaClient({
                                         </div>
 
                                         {formulario.pagos.length === 0 ? (
-                                            <div className="mt-5 rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-8 text-center">
+                                            <div className="mt-5 rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-8 text-center">
                                                 <WalletCards className="mx-auto h-7 w-7 text-[#87948D]" />
 
                                                 <p className="mt-3 text-sm font-black text-[#56645D]">
@@ -1183,11 +1183,11 @@ export default function CobrarCitaClient({
                                         ) : (
                                             <div className="mt-5 space-y-4">
                                                 <div className="flex items-center justify-between gap-3">
-                                                    <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#87958D]">
+                                                    <p className="text-xs font-black uppercase tracking-[0.13em] text-[#87958D]">
                                                         Pagos aplicados
                                                     </p>
 
-                                                    <span className="rounded-full bg-[#EAF1ED] px-3 py-1 text-[10px] font-black text-[#5D796C]">
+                                                    <span className="rounded-full bg-surface-soft px-3 py-1 text-xs font-black text-primary-strong">
                                                         {formulario.pagos.length} método
                                                         {formulario.pagos.length === 1 ? "" : "s"}
                                                     </span>
@@ -1263,7 +1263,7 @@ export default function CobrarCitaClient({
                                                 )
                                             }
                                             placeholder="Observaciones adicionales..."
-                                            className="w-full resize-none rounded-2xl border border-[#D4DAD6] bg-[#FBFCFA] px-4 py-3 text-sm outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                            className="salon-control w-full resize-none border border-border-strong bg-[#FBFCFA] px-4 py-3 outline-none transition focus:border-primary focus:bg-white"
                                         />
                                     </Seccion>
                                 </>
@@ -1271,9 +1271,9 @@ export default function CobrarCitaClient({
                         </div>
 
                         <aside className="2xl:sticky 2xl:top-24 2xl:self-start">
-                            <section className="overflow-hidden rounded-[30px] border border-[#DCE5E0] bg-white shadow-[0_18px_45px_rgba(36,48,44,0.10)]">
-                                <header className="bg-[#26332F] px-6 py-5 text-white">
-                                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#AFC2B9]">
+                            <section className="salon-panel overflow-hidden border border-border bg-white">
+                                <header className="bg-sidebar px-6 py-5 text-white">
+                                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#AFC2B9]">
                                         Resumen de cobro
                                     </p>
 
@@ -1290,7 +1290,7 @@ export default function CobrarCitaClient({
                                             </p>
                                         </div>
 
-                                        <ReceiptText className="h-8 w-8 text-[#DCE7E2]" />
+                                        <ReceiptText className="h-8 w-8 text-primary-soft" />
                                     </div>
                                 </header>
 
@@ -1340,12 +1340,12 @@ export default function CobrarCitaClient({
                                                             ),
                                                         )
                                                     }
-                                                    className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white pl-10 pr-3 text-right font-black outline-none focus:border-[#6F8F83]"
+                                                    className="salon-control w-full border border-border-strong bg-white pl-10 pr-3 text-right outline-none focus:border-primary"
                                                 />
                                             </div>
                                         </label>
 
-                                        <div className="border-t border-[#E3E7E4]" />
+                                        <div className="border-t border-border" />
 
                                         <FilaResumen
                                             titulo="Total"
@@ -1383,7 +1383,7 @@ export default function CobrarCitaClient({
                                                 saldo >
                                                     0
                                                     ? "border-[#E7CACB] bg-[#F9EEEE]"
-                                                    : "border-[#CFE0D8] bg-[#EAF2EE]",
+                                                    : "border-[#CFE0D8] bg-surface-soft",
                                             ].join(
                                                 " ",
                                             )}
@@ -1422,7 +1422,7 @@ export default function CobrarCitaClient({
                                             totalPagos >
                                             total
                                         }
-                                        className="mt-6 inline-flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] px-5 font-black text-white shadow-[0_12px_26px_rgba(111,143,131,0.22)] transition hover:-translate-y-0.5 hover:bg-[#607F74] disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-[#AAB9B3]"
+                                        className="mt-6 inline-flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 font-black text-white shadow-[0_12px_26px_rgba(111,143,131,0.22)] transition hover:-translate-y-0.5 hover:bg-primary-hover disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-[#AAB9B3]"
                                     >
                                         {guardando ? (
                                             <LoaderCircle className="h-5 w-5 animate-spin" />
@@ -1512,7 +1512,7 @@ function PagoEditor({
         <article className="rounded-2xl border border-[#DFE6E2] bg-[#FBFCFA] p-4">
             <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EAF1ED] text-[#5D796C]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-soft text-primary-strong">
                         {pago.metodoPago ===
                             "EFECTIVO" ? (
                             <Banknote className="h-4 w-4" />
@@ -1525,7 +1525,7 @@ function PagoEditor({
                     </div>
 
                     <div>
-                        <p className="text-sm font-black text-[#24302C]">
+                        <p className="text-sm font-black text-foreground">
                             Pago {indice +
                                 1}
                         </p>
@@ -1666,7 +1666,7 @@ function PagoEditor({
                                                 "",
                                         });
                                     }}
-                                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                                    className="salon-control w-full border border-border-strong bg-white px-4"
                                 >
                                     <option value="">
                                         Seleccionar POS
@@ -1819,7 +1819,7 @@ function CampoMetodoPago({
                         event.target.value as MetodoPagoVenta,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                className="salon-control w-full border border-border-strong bg-white px-4"
             >
                 <option value="EFECTIVO">
                     Efectivo
@@ -1896,7 +1896,7 @@ function CampoDinero({
                             ),
                         )
                     }
-                    className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-12 pr-4 text-right font-bold"
+                    className="salon-control w-full border border-border-strong bg-white pl-12 pr-4 text-right"
                 />
             </div>
         </label>
@@ -1933,7 +1933,7 @@ function CampoTexto({
                         event.target.value,
                     )
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-sm"
+                className="salon-control w-full border border-border-strong bg-white px-4"
             />
         </label>
     );
@@ -1953,20 +1953,20 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-[28px] border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
 
                 <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.13em] text-[#87958D]">
                         {
                             paso
                         }
                     </p>
 
-                    <h2 className="font-black text-[#24302C]">
+                    <h2 className="font-black text-foreground tracking-tight">
                         {
                             titulo
                         }
@@ -1991,8 +1991,8 @@ function Dato({
     valor: string;
 }) {
     return (
-        <div className="rounded-2xl border border-[#E3E7E4] bg-[#FBFCFA] p-4">
-            <p className="text-[10px] font-black uppercase tracking-[0.1em] text-[#829089]">
+        <div className="rounded-2xl border border-border bg-[#FBFCFA] p-4">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {
                     titulo
                 }
@@ -2023,7 +2023,7 @@ function HeroDato({
             <div className="flex items-center gap-2 text-[#AEC0B7]">
                 <Icono className="h-3.5 w-3.5" />
 
-                <p className="text-[9px] font-black uppercase tracking-[0.12em]">
+                <p className="text-xs font-black uppercase tracking-[0.12em]">
                     {
                         titulo
                     }
@@ -2053,8 +2053,8 @@ function FilaResumen({
             <span
                 className={
                     destacado
-                        ? "font-black text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
+                        ? "font-black text-foreground"
+                        : "text-sm text-text-secondary"
                 }
             >
                 {
@@ -2065,7 +2065,7 @@ function FilaResumen({
             <strong
                 className={
                     destacado
-                        ? "text-xl text-[#24302C]"
+                        ? "text-xl text-foreground"
                         : "text-sm text-[#33413B]"
                 }
             >
@@ -2082,11 +2082,11 @@ function EstadoSeleccion() {
         <div className="rounded-[28px] border border-dashed border-[#CDD8D2] bg-[#FBFCFA] p-12 text-center">
             <UserRound className="mx-auto h-10 w-10 text-[#98A19D]" />
 
-            <h2 className="mt-4 font-black text-[#24302C]">
+            <h2 className="mt-4 font-black text-foreground tracking-tight">
                 Selecciona una cita
             </h2>
 
-            <p className="mt-2 text-sm leading-6 text-[#6B756F]">
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Escoge una cita finalizada de la columna izquierda para comenzar el cobro.
             </p>
         </div>
@@ -2100,7 +2100,7 @@ function AvisoSinCaja() {
                 <Landmark className="mt-0.5 h-6 w-6 shrink-0" />
 
                 <div>
-                    <h2 className="font-black">
+                    <h2 className="font-black tracking-tight">
                         No hay una caja abierta
                     </h2>
 
@@ -2110,7 +2110,7 @@ function AvisoSinCaja() {
 
                     <Link
                         href="/caja"
-                        className="mt-4 inline-flex h-10 items-center rounded-xl bg-white px-4 text-sm font-black text-[#985858]"
+                        className="salon-action mt-4 inline-flex items-center bg-white px-4 text-[#985858]"
                     >
                         Ir a apertura de caja
                     </Link>

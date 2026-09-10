@@ -237,7 +237,7 @@ export default function TemaSistemaClient({
 
     return (
         <>
-            <section className="overflow-hidden rounded-[28px] border border-[#E0E6E2] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                     <div className="flex min-w-0 items-start gap-4">
                         <div
@@ -253,11 +253,11 @@ export default function TemaSistemaClient({
                         </div>
 
                         <div className="min-w-0">
-                            <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.15em] text-[#87958D]">
                                 Apariencia
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#26332F]">
+                            <h2 className="mt-1 text-lg font-black text-sidebar tracking-tight">
                                 Apariencia del sistema
                             </h2>
 
@@ -297,7 +297,7 @@ export default function TemaSistemaClient({
                             onClick={() =>
                                 setAbierto(true)
                             }
-                            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white transition hover:bg-[#34463F]"
+                            className="salon-action inline-flex items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:bg-sidebar-hover"
                         >
                             <Palette className="h-4 w-4" />
                             Cambiar apariencia
@@ -319,19 +319,19 @@ export default function TemaSistemaClient({
                         }
                     }}
                 >
-                    <section className="max-h-[92vh] w-full overflow-hidden rounded-t-[30px] bg-[#F6F7F4] shadow-2xl sm:max-w-5xl sm:rounded-[30px]">
+                    <section className="max-h-[92vh] w-full overflow-hidden rounded-t-[30px] bg-background shadow-2xl sm:max-w-5xl sm:rounded-[30px]">
                         <header className="flex items-start justify-between gap-4 border-b border-[#E2E8E4] bg-white px-5 py-5 sm:px-6">
                             <div className="flex items-start gap-3">
-                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                                     <Sparkles className="h-5 w-5" />
                                 </div>
 
                                 <div>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#87958D]">
+                                    <p className="text-xs font-black uppercase tracking-[0.15em] text-[#87958D]">
                                         Personalización
                                     </p>
 
-                                    <h3 className="mt-1 text-xl font-black text-[#26332F]">
+                                    <h3 className="mt-1 text-xl font-black text-sidebar tracking-tight">
                                         Elige una apariencia
                                     </h3>
 
@@ -344,7 +344,7 @@ export default function TemaSistemaClient({
                             <button
                                 type="button"
                                 onClick={cerrar}
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#E0E6E2] bg-[#F8FAF8] text-[#65736C]"
+                                className="salon-action flex w-10 shrink-0 items-center justify-center border border-border bg-[#F8FAF8] text-[#65736C]"
                                 aria-label="Cerrar"
                             >
                                 <X className="h-5 w-5" />
@@ -352,9 +352,9 @@ export default function TemaSistemaClient({
                         </header>
 
                         <div className="max-h-[calc(92vh-160px)] overflow-y-auto">
-                            <div className="grid gap-5 p-5 lg:grid-cols-[minmax(0,1fr)_320px] sm:p-6">
+                            <div className="grid gap-5 p-5 xl:grid-cols-[minmax(0,1fr)_320px] sm:p-6">
                                 <div>
-                                    <p className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                                    <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                         Temas disponibles
                                     </p>
 
@@ -377,12 +377,12 @@ export default function TemaSistemaClient({
                                                     className={[
                                                         "relative rounded-[22px] border p-4 text-left transition",
                                                         activo
-                                                            ? "border-[#8FA99D] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.09)] ring-2 ring-[#6F8F83]/10"
-                                                            : "border-[#E0E6E2] bg-white/70 hover:-translate-y-0.5 hover:border-[#BCCBC4] hover:bg-white",
+                                                            ? "border-[#8FA99D] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.09)] ring-2 ring-primary/10"
+                                                            : "border-border bg-white/70 hover:-translate-y-0.5 hover:border-[#BCCBC4] hover:bg-white",
                                                     ].join(" ")}
                                                 >
                                                     {activo && (
-                                                        <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#26332F] text-white">
+                                                        <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-sidebar text-white">
                                                             <Check className="h-4 w-4" />
                                                         </span>
                                                     )}
@@ -419,7 +419,7 @@ export default function TemaSistemaClient({
                                 </div>
 
                                 <aside className="lg:sticky lg:top-0 lg:self-start">
-                                    <div className="overflow-hidden rounded-[26px] border border-[#DCE4DF] bg-white shadow-[0_10px_30px_rgba(36,48,44,0.07)]">
+                                    <div className="salon-panel overflow-hidden border border-[#DCE4DF] bg-white">
                                         <div
                                             className="p-5 text-white"
                                             style={{
@@ -427,7 +427,7 @@ export default function TemaSistemaClient({
                                                     temaActual.sidebar,
                                             }}
                                         >
-                                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-white/65">
+                                            <p className="text-xs font-black uppercase tracking-[0.14em] text-white/65">
                                                 Vista previa
                                             </p>
 
@@ -465,7 +465,7 @@ export default function TemaSistemaClient({
 
                                             <button
                                                 type="button"
-                                                className="h-11 w-full rounded-2xl text-sm font-black text-white"
+                                                className="salon-action w-full text-white"
                                                 style={{
                                                     backgroundColor:
                                                         temaActual.principal,
@@ -476,7 +476,7 @@ export default function TemaSistemaClient({
 
                                             <button
                                                 type="button"
-                                                className="h-11 w-full rounded-2xl text-sm font-black text-white"
+                                                className="salon-action w-full text-white"
                                                 style={{
                                                     backgroundColor:
                                                         temaActual.secundario,
@@ -518,7 +518,7 @@ export default function TemaSistemaClient({
                                                 temaGuardado,
                                             )
                                         }
-                                        className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-[#DCE3DF] bg-[#F8FAF8] px-4 text-sm font-black text-[#56645D]"
+                                        className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-[#F8FAF8] px-4 text-[#56645D]"
                                     >
                                         <RotateCcw className="h-4 w-4" />
                                         Restablecer
@@ -529,7 +529,7 @@ export default function TemaSistemaClient({
                                     type="button"
                                     disabled={guardando}
                                     onClick={guardar}
-                                    className="inline-flex h-11 min-w-36 items-center justify-center gap-2 rounded-2xl bg-[#26332F] px-5 text-sm font-black text-white transition hover:bg-[#34463F] disabled:opacity-50"
+                                    className="salon-action inline-flex min-w-36 items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:bg-sidebar-hover disabled:opacity-50"
                                 >
                                     {guardando ? (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />

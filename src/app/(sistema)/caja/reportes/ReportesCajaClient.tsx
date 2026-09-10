@@ -409,8 +409,8 @@ export default function ReportesCajaClient({
 
     return (
         <div className="space-y-6">
-            <section className="relative overflow-hidden rounded-3xl bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -422,7 +422,7 @@ export default function ReportesCajaClient({
                     </Link>
 
                     <div className="mt-5 flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <TrendingUp className="h-7 w-7" />
                         </div>
 
@@ -431,7 +431,7 @@ export default function ReportesCajaClient({
                                 Finanzas
                             </p>
 
-                            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                            <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                                 Reportes financieros
                             </h1>
 
@@ -446,7 +446,7 @@ export default function ReportesCajaClient({
                 </div>
             </section>
 
-            <section className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)] sm:p-6">
+            <section className="salon-panel border border-border bg-white p-5 sm:p-6">
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <CampoFecha
                         titulo="Desde"
@@ -469,7 +469,7 @@ export default function ReportesCajaClient({
                                     event.target.value,
                                 )
                             }
-                            className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm"
+                            className="salon-control w-full border border-border-strong bg-white pl-11 pr-4"
                         >
                             <option value="">
                                 Todas las sucursales
@@ -497,7 +497,7 @@ export default function ReportesCajaClient({
                     <button
                         type="button"
                         onClick={limpiarFiltros}
-                        className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#EEF2EF] px-4 text-sm font-bold text-[#52605A]"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-surface-soft px-4 text-[#52605A]"
                     >
                         <X className="h-4 w-4" />
                         Limpiar filtros
@@ -604,7 +604,7 @@ export default function ReportesCajaClient({
                                             )}
                                         </span>
 
-                                        <strong className="text-[#24302C]">
+                                        <strong className="text-foreground">
                                             {dinero(
                                                 item.total,
                                             )}
@@ -667,7 +667,7 @@ export default function ReportesCajaClient({
                     <Vacio texto="No hay comisiones POS en el período." />
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full min-w-[850px]">
+                        <table className="salon-table w-full min-w-[850px]">
                             <thead className="bg-[#FBFCFA] text-left text-xs uppercase text-[#76817B]">
                                 <tr>
                                     <Th>Fecha</Th>
@@ -694,7 +694,7 @@ export default function ReportesCajaClient({
                                             <Td>
                                                 <Link
                                                     href={`/caja/ventas/${item.ventaId}`}
-                                                    className="font-bold text-[#527064] hover:underline"
+                                                    className="font-bold text-primary-strong hover:underline"
                                                 >
                                                     {
                                                         item.codigoVenta
@@ -805,7 +805,7 @@ function CampoFecha({
 }) {
     return (
         <label>
-            <span className="mb-1 block text-[10px] font-bold uppercase text-[#829089]">
+            <span className="mb-1 block text-xs font-bold uppercase text-[#829089]">
                 {titulo}
             </span>
             <input
@@ -814,7 +814,7 @@ function CampoFecha({
                 onChange={(event) =>
                     cambiar(event.target.value)
                 }
-                className="h-11 w-full rounded-xl border border-[#D4DAD6] px-3 text-sm"
+                className="salon-control w-full border border-border-strong px-3"
             />
         </label>
     );
@@ -834,13 +834,13 @@ function Resumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm text-[#6B756F]">
+                    <p className="text-sm text-text-secondary">
                         {titulo}
                     </p>
-                    <p className="mt-3 text-xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-xl font-bold text-foreground">
                         {valor}
                     </p>
                     <p className="mt-1 text-xs text-[#829089]">
@@ -848,7 +848,7 @@ function Resumen({
                     </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -864,9 +864,9 @@ function Seccion({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                <h2 className="font-bold text-[#24302C]">
+                <h2 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h2>
             </header>
@@ -892,8 +892,8 @@ function Fila({
             <span
                 className={
                     destacado
-                        ? "font-bold text-[#24302C]"
-                        : "text-sm text-[#6B756F]"
+                        ? "font-bold text-foreground"
+                        : "text-sm text-text-secondary"
                 }
             >
                 {titulo}
@@ -902,7 +902,7 @@ function Fila({
             <strong
                 className={
                     destacado
-                        ? "text-xl text-[#24302C]"
+                        ? "text-xl text-foreground"
                         : "text-sm text-[#33413B]"
                 }
             >
@@ -918,7 +918,7 @@ function Vacio({
     texto: string;
 }) {
     return (
-        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-8 text-center text-sm text-[#6B756F]">
+        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-8 text-center text-sm text-text-secondary">
             {texto}
         </div>
     );

@@ -318,10 +318,10 @@ export default function ProveedoresClient({
                 />
             )}
 
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
-                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-48 w-48 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 left-1/3 h-48 w-48 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
                     <div>
@@ -334,7 +334,7 @@ export default function ProveedoresClient({
                         </Link>
 
                         <div className="mt-5 flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <Truck className="h-7 w-7" />
                             </div>
 
@@ -343,7 +343,7 @@ export default function ProveedoresClient({
                                     Directorio comercial
                                 </p>
 
-                                <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+                                <h1 className="mt-1 text-3xl font-black tracking-tight sm:text-4xl">
                                     Proveedores
                                 </h1>
 
@@ -360,7 +360,7 @@ export default function ProveedoresClient({
                         onClick={
                             abrirNuevo
                         }
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#DCE7E2] px-5 font-bold text-[#26332F] transition hover:bg-white"
+                        className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                     >
                         <Plus className="h-5 w-5" />
                         Nuevo proveedor
@@ -410,9 +410,9 @@ export default function ProveedoresClient({
                 />
             </section>
 
-            <section className="grid min-h-[650px] overflow-hidden rounded-[30px] border border-[#E3E7E4] bg-white shadow-[0_8px_24px_rgba(36,48,44,0.05)] lg:grid-cols-[380px_minmax(0,1fr)]">
-                <aside className="border-b border-[#E3E7E4] bg-[#FBFCFA] lg:border-b-0 lg:border-r">
-                    <div className="border-b border-[#E3E7E4] p-4">
+            <section className="salon-panel grid min-h-[650px] overflow-hidden border border-border bg-white xl:grid-cols-[380px_minmax(0,1fr)]">
+                <aside className="border-b border-border bg-[#FBFCFA] lg:border-b-0 lg:border-r">
+                    <div className="border-b border-border p-4">
                         <div className="relative">
                             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
 
@@ -430,7 +430,7 @@ export default function ProveedoresClient({
                                     )
                                 }
                                 placeholder="Buscar proveedor..."
-                                className="h-11 w-full rounded-xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm text-[#24302C] outline-none transition focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
                             />
                         </div>
 
@@ -459,8 +459,8 @@ export default function ProveedoresClient({
                                             "h-9 rounded-xl text-xs font-bold transition",
                                             filtroEstado ===
                                                 estado
-                                                ? "bg-[#26332F] text-white"
-                                                : "border border-[#DDE3DF] bg-white text-[#52605A] hover:bg-[#EEF2EF]",
+                                                ? "bg-sidebar text-white"
+                                                : "border border-[#DDE3DF] bg-white text-[#52605A] hover:bg-surface-soft",
                                         ].join(
                                             " ",
                                         )}
@@ -507,12 +507,12 @@ export default function ProveedoresClient({
                                                     "group flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition",
                                                     seleccionado
                                                         ? "border-[#BDD0C7] bg-[#EDF4F0] shadow-sm"
-                                                        : "border-transparent bg-transparent hover:border-[#E3E7E4] hover:bg-white",
+                                                        : "border-transparent bg-transparent hover:border-border hover:bg-white",
                                                 ].join(
                                                     " ",
                                                 )}
                                             >
-                                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] font-bold text-[#527064]">
+                                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft font-bold text-primary-strong">
                                                     {obtenerIniciales(
                                                         proveedor.nombre,
                                                     )}
@@ -520,7 +520,7 @@ export default function ProveedoresClient({
 
                                                 <div className="min-w-0 flex-1">
                                                     <div className="flex items-center gap-2">
-                                                        <p className="truncate font-bold text-[#24302C]">
+                                                        <p className="truncate font-bold text-foreground">
                                                             {
                                                                 proveedor.nombre
                                                             }
@@ -544,8 +544,8 @@ export default function ProveedoresClient({
                                                     className={[
                                                         "h-4 w-4 shrink-0 transition",
                                                         seleccionado
-                                                            ? "text-[#527064]"
-                                                            : "text-[#A9B1AD] group-hover:text-[#6F8F83]",
+                                                            ? "text-primary-strong"
+                                                            : "text-[#A9B1AD] group-hover:text-primary",
                                                     ].join(
                                                         " ",
                                                     )}
@@ -648,7 +648,7 @@ function FichaProveedor({
         <div className="p-5 sm:p-7 lg:p-8">
             <div className="flex flex-col gap-5 border-b border-[#E8ECE9] pb-6 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex min-w-0 items-start gap-4">
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#26332F] text-xl font-bold text-white">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-sidebar text-xl font-bold text-white">
                         {obtenerIniciales(
                             proveedor.nombre,
                         )}
@@ -656,7 +656,7 @@ function FichaProveedor({
 
                     <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                            <h2 className="text-2xl font-bold text-[#24302C]">
+                            <h2 className="text-2xl font-bold text-foreground tracking-tight">
                                 {
                                     proveedor.nombre
                                 }
@@ -669,14 +669,14 @@ function FichaProveedor({
                             />
                         </div>
 
-                        <p className="mt-1 text-sm font-semibold text-[#6F8F83]">
+                        <p className="mt-1 text-sm font-semibold text-primary">
                             {
                                 proveedor.codigo_proveedor
                             }
                         </p>
 
                         {proveedor.categoria && (
-                            <p className="mt-2 text-sm text-[#6B756F]">
+                            <p className="mt-2 text-sm text-text-secondary">
                                 {
                                     proveedor.categoria
                                 }
@@ -691,7 +691,7 @@ function FichaProveedor({
                         onClick={
                             editar
                         }
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white px-4 text-sm font-bold text-[#43524B] transition hover:bg-[#EEF2EF]"
+                        className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-white px-4 text-text-secondary transition hover:bg-surface-soft"
                     >
                         <Edit3 className="h-4 w-4" />
                         Editar
@@ -807,9 +807,9 @@ function FichaProveedor({
                 </div>
 
                 <div className="space-y-5">
-                    <div className="rounded-3xl bg-[#F0F5F2] p-5">
+                    <div className="rounded-3xl bg-surface-soft p-5">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-[#527064]">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-primary-strong">
                                 <CircleDollarSign className="h-5 w-5" />
                             </div>
 
@@ -818,7 +818,7 @@ function FichaProveedor({
                                     Condiciones de pago
                                 </p>
 
-                                <p className="mt-1 font-bold text-[#24302C]">
+                                <p className="mt-1 font-bold text-foreground">
                                     {proveedor.condiciones_pago ||
                                         "Sin condición definida"}
                                 </p>
@@ -826,18 +826,18 @@ function FichaProveedor({
                         </div>
                     </div>
 
-                    <div className="rounded-3xl border border-[#E3E7E4] bg-[#FBFCFA] p-5">
+                    <div className="rounded-3xl border border-border bg-[#FBFCFA] p-5">
                         <p className="text-xs font-bold uppercase tracking-wide text-[#839089]">
                             Identificación fiscal
                         </p>
 
-                        <p className="mt-2 text-lg font-bold text-[#24302C]">
+                        <p className="mt-2 text-lg font-bold text-foreground">
                             {proveedor.ruc ||
                                 "No registrado"}
                         </p>
                     </div>
 
-                    <div className="rounded-3xl border border-[#E3E7E4] bg-white p-5">
+                    <div className="salon-panel border border-border bg-white p-5">
                         <p className="text-xs font-bold uppercase tracking-wide text-[#839089]">
                             Acciones del proveedor
                         </p>
@@ -960,7 +960,7 @@ function FormularioProveedor({
     }
 
     return (
-        <div className="fixed inset-0 z-[80] flex justify-end bg-[#26332F]/45 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[80] flex justify-end bg-sidebar/45 backdrop-blur-sm">
             <button
                 type="button"
                 aria-label="Cerrar"
@@ -970,16 +970,16 @@ function FormularioProveedor({
                 className="absolute inset-0"
             />
 
-            <aside className="relative z-10 h-full w-full max-w-2xl overflow-y-auto bg-[#F6F7F4] shadow-2xl">
-                <header className="sticky top-0 z-20 flex items-center justify-between border-b border-[#E3E7E4] bg-white/95 px-5 py-5 backdrop-blur-xl sm:px-7">
+            <aside className="salon-sheet relative z-10 h-full w-full max-w-2xl overflow-y-auto bg-background shadow-2xl">
+                <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-white/95 px-5 py-5 backdrop-blur-xl sm:px-7">
                     <div>
-                        <p className="text-sm font-semibold text-[#6F8F83]">
+                        <p className="text-sm font-semibold text-primary">
                             {editando
                                 ? "Editar proveedor"
                                 : "Nuevo proveedor"}
                         </p>
 
-                        <h2 className="mt-1 text-2xl font-bold text-[#24302C]">
+                        <h2 className="mt-1 text-2xl font-bold text-foreground tracking-tight">
                             {editando
                                 ? proveedor?.nombre
                                 : "Registrar proveedor"}
@@ -994,7 +994,7 @@ function FormularioProveedor({
                         disabled={
                             guardando
                         }
-                        className="rounded-xl border border-[#E3E7E4] bg-white p-2.5 text-[#6B756F] transition hover:bg-[#EEF2EF]"
+                        className="rounded-xl border border-border bg-white p-2.5 text-text-secondary transition hover:bg-surface-soft"
                     >
                         <X className="h-5 w-5" />
                     </button>
@@ -1214,7 +1214,7 @@ function FormularioProveedor({
                         </div>
                     </SeccionFormulario>
 
-                    <label className="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-[#E3E7E4] bg-white p-4">
+                    <label className="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-border bg-white p-4">
                         <div>
                             <p className="font-bold text-[#33413B]">
                                 Proveedor activo
@@ -1251,7 +1251,7 @@ function FormularioProveedor({
                                 "relative h-7 w-12 rounded-full transition-colors",
                                 formulario.estado ===
                                     "ACTIVO"
-                                    ? "bg-[#6F8F83]"
+                                    ? "bg-primary"
                                     : "bg-[#CCD3CF]",
                             ].join(
                                 " ",
@@ -1271,7 +1271,7 @@ function FormularioProveedor({
                         </span>
                     </label>
 
-                    <div className="sticky bottom-4 flex flex-col-reverse gap-3 rounded-2xl border border-[#DCE3DF] bg-white/95 p-4 shadow-xl backdrop-blur-xl sm:flex-row sm:justify-end">
+                    <div className="sticky bottom-4 flex flex-col-reverse gap-3 rounded-2xl border border-border-strong bg-white/95 p-4 shadow-xl backdrop-blur-xl sm:flex-row sm:justify-end">
                         <button
                             type="button"
                             onClick={
@@ -1280,7 +1280,7 @@ function FormularioProveedor({
                             disabled={
                                 guardando
                             }
-                            className="h-11 rounded-xl border border-[#DCE3DF] bg-[#EEF2EF] px-5 text-sm font-bold text-[#43524B]"
+                            className="salon-action border border-border-strong bg-surface-soft px-5 text-text-secondary"
                         >
                             Cancelar
                         </button>
@@ -1290,7 +1290,7 @@ function FormularioProveedor({
                             disabled={
                                 guardando
                             }
-                            className="inline-flex h-11 min-w-44 items-center justify-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white transition hover:bg-[#5E7D71] disabled:opacity-50"
+                            className="salon-action inline-flex min-w-44 items-center justify-center gap-2 bg-primary px-5 text-white transition hover:bg-primary-hover disabled:opacity-50"
                         >
                             <BadgeCheck className="h-5 w-5" />
 
@@ -1319,19 +1319,19 @@ function TarjetaResumen({
     }>;
 }) {
     return (
-        <article className="rounded-3xl border border-[#E3E7E4] bg-white p-5 shadow-[0_8px_24px_rgba(36,48,44,0.05)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-sm font-medium text-[#6B756F]">
+                    <p className="text-sm font-medium text-text-secondary">
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-3xl font-bold text-[#24302C]">
+                    <p className="mt-3 text-3xl font-bold text-foreground">
                         {valor}
                     </p>
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
             </div>
@@ -1351,13 +1351,13 @@ function BloqueFicha({
     children: React.ReactNode;
 }) {
     return (
-        <section className="rounded-3xl border border-[#E3E7E4] bg-white p-5">
+        <section className="salon-panel border border-border bg-white p-5">
             <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-4 w-4" />
                 </div>
 
-                <h3 className="font-bold text-[#24302C]">
+                <h3 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h3>
             </div>
@@ -1411,9 +1411,9 @@ function AccionFutura({
     return (
         <Link
             href={href}
-            className="flex items-start gap-3 rounded-2xl bg-[#FBFCFA] p-3 transition hover:bg-[#EEF4F0]"
+            className="flex items-start gap-3 rounded-2xl bg-[#FBFCFA] p-3 transition hover:bg-surface-soft"
         >
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                 <Icono className="h-4 w-4" />
             </div>
 
@@ -1461,7 +1461,7 @@ function EstadoPunto({
             className={[
                 "h-2 w-2 shrink-0 rounded-full",
                 activo
-                    ? "bg-[#6F8F83]"
+                    ? "bg-primary"
                     : "bg-[#C97878]",
             ].join(" ")}
         />
@@ -1491,15 +1491,15 @@ function EstadoSinSeleccion({
 }) {
     return (
         <div className="flex min-h-[650px] flex-col items-center justify-center p-8 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#DCE7E2] text-[#527064]">
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-primary-soft text-primary-strong">
                 <Truck className="h-8 w-8" />
             </div>
 
-            <h3 className="mt-5 text-lg font-bold text-[#24302C]">
+            <h3 className="mt-5 text-lg font-bold text-foreground tracking-tight">
                 Selecciona un proveedor
             </h3>
 
-            <p className="mt-2 max-w-sm text-sm leading-6 text-[#6B756F]">
+            <p className="mt-2 max-w-sm text-sm leading-6 text-text-secondary">
                 Consulta sus datos o registra uno nuevo para comenzar.
             </p>
 
@@ -1508,7 +1508,7 @@ function EstadoSinSeleccion({
                 onClick={
                     crear
                 }
-                className="mt-5 inline-flex h-11 items-center gap-2 rounded-xl bg-[#6F8F83] px-5 text-sm font-bold text-white"
+                className="salon-action mt-5 inline-flex items-center gap-2 bg-primary px-5 text-white"
             >
                 <Plus className="h-5 w-5" />
                 Nuevo proveedor
@@ -1529,13 +1529,13 @@ function SeccionFormulario({
     children: React.ReactNode;
 }) {
     return (
-        <section className="overflow-hidden rounded-3xl border border-[#E3E7E4] bg-white">
+        <section className="salon-panel overflow-hidden border border-border bg-white">
             <header className="flex items-center gap-3 border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCE7E2] text-[#527064]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary-strong">
                     <Icono className="h-5 w-5" />
                 </div>
 
-                <h3 className="font-bold text-[#24302C]">
+                <h3 className="font-bold text-foreground tracking-tight">
                     {titulo}
                 </h3>
             </header>
@@ -1596,7 +1596,7 @@ function CampoTexto({
                             .value,
                     )
                 }
-                className="h-12 w-full rounded-xl border border-[#D4DAD6] bg-white px-4 text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                className="salon-control w-full border border-border-strong bg-white px-4 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:ring-4 focus:ring-primary/15"
             />
         </div>
     );
@@ -1638,7 +1638,7 @@ function CampoArea({
                             .value,
                     )
                 }
-                className="w-full resize-y rounded-xl border border-[#D4DAD6] bg-white px-4 py-3 leading-6 text-[#24302C] outline-none transition placeholder:text-[#A2AAA6] focus:border-[#6F8F83] focus:ring-4 focus:ring-[#6F8F83]/15"
+                className="salon-control w-full resize-y border border-border-strong bg-white px-4 py-3 leading-6 text-foreground outline-none transition placeholder:text-[#A2AAA6] focus:border-primary focus:ring-4 focus:ring-primary/15"
             />
         </div>
     );

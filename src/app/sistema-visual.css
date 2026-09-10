@@ -1,0 +1,251 @@
+/* Lenguaje compartido de Cuentas por cobrar.
+ * Las clases se asignan a superficies concretas para no modificar colores
+ * de estados, celdas del calendario, recibos ni estilos de impresión.
+ */
+@layer components {
+    .salon-app {
+        --surface-soft: var(--primary-soft-2);
+        --hero-radius: 2.25rem;
+        --panel-radius: 1.75rem;
+        --panel-shadow: 0 10px 28px rgb(36 48 44 / 5%);
+        --hero-shadow: 0 20px 56px rgb(36 48 44 / 14%);
+    }
+
+    .salon-workspace {
+        width: 100%;
+        min-width: 0;
+        max-width: 1680px;
+        margin-inline: auto;
+        padding: clamp(1rem, 2.2vw, 2rem);
+        padding-bottom: 2.5rem;
+    }
+
+    .salon-hero {
+        position: relative;
+        isolation: isolate;
+        border: 1px solid rgb(255 255 255 / 8%);
+        border-radius: var(--hero-radius, 2.25rem);
+        background-color: var(--sidebar);
+        background-image: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--primary) 30%, transparent), transparent 65%);
+        box-shadow: var(--hero-shadow, 0 20px 56px rgb(36 48 44 / 14%));
+        color: white;
+    }
+
+    .salon-panel {
+        min-width: 0;
+        border-radius: var(--panel-radius, 1.75rem);
+        box-shadow: var(--panel-shadow, 0 10px 28px rgb(36 48 44 / 5%));
+        background-color: var(--surface);
+        border-color: var(--border);
+    }
+
+    .salon-control {
+        min-width: 0;
+        min-height: 2.875rem;
+        border-radius: 0.875rem;
+        color: var(--foreground);
+        border-color: var(--border-strong);
+        background-color: var(--surface);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .salon-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 2.75rem;
+        height: auto;
+        padding-block: 0.625rem;
+        border-radius: 0.875rem;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        font-weight: 700;
+        text-align: center;
+        transition: background-color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .salon-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 0.875rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .salon-skip-link {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 100;
+        transform: translateY(-200%);
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: white;
+        color: var(--sidebar);
+        font-weight: 700;
+        box-shadow: var(--shadow-medium);
+    }
+
+    .salon-skip-link:focus {
+        transform: translateY(0);
+    }
+}
+
+/* Estados interactivos fuera de la capa de utilidades: el enfoque debe
+ * seguir visible incluso en controles antiguos con outline-none. */
+@media screen {
+    .salon-app :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+        outline: 3px solid var(--primary-strong);
+        outline-offset: 3px;
+    }
+
+    .salon-app :where(aside, .salon-hero) :where(a, button):focus-visible {
+        outline-color: var(--primary-soft);
+    }
+
+    .salon-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent);
+    }
+
+    .salon-control::placeholder {
+        color: var(--text-muted);
+        opacity: 1;
+    }
+
+    .salon-control:disabled {
+        background-color: var(--surface-soft);
+        cursor: not-allowed;
+    }
+
+    .salon-app button:disabled {
+        cursor: not-allowed;
+    }
+
+    .salon-action > svg {
+        flex-shrink: 0;
+    }
+
+    .salon-action.bg-primary:not(:disabled) {
+        background-color: var(--primary-strong);
+    }
+
+    .salon-action.bg-primary:hover:not(:disabled) {
+        background-color: var(--sidebar);
+    }
+
+    .salon-sheet {
+        border-left: 1px solid var(--border);
+        border-radius: 1.75rem 0 0 1.75rem;
+    }
+
+    .salon-sheet > header {
+        gap: 1rem;
+    }
+
+    .salon-sheet > header > div {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .salon-hero h1 {
+        line-height: 1.15;
+        text-wrap: balance;
+        overflow-wrap: anywhere;
+    }
+
+    .salon-hero :where(.flex > div) {
+        min-width: 0;
+    }
+
+    .salon-table th {
+        background: var(--surface-soft);
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+    }
+
+    .salon-table :where(th, td) {
+        padding-block: 1rem;
+        vertical-align: middle;
+    }
+
+    .salon-table td {
+        border-bottom: 1px solid var(--border);
+        font-size: 0.875rem;
+    }
+
+    .salon-table tbody tr {
+        transition: background-color 150ms ease;
+    }
+
+    .salon-table tbody tr:where(:hover, :focus-within) {
+        background-color: var(--surface-soft);
+    }
+
+    .salon-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .salon-app .salon-topbar {
+        gap: 1rem;
+        box-shadow: 0 4px 20px rgb(36 48 44 / 3%);
+    }
+
+    .salon-app .salon-nav-link {
+        min-height: 2.875rem;
+        border-radius: 0.875rem;
+    }
+
+    .salon-app .salon-nav-link[aria-current="page"] {
+        box-shadow: 0 4px 14px rgb(0 0 0 / 10%);
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .salon-app {
+        --hero-radius: 1.5rem;
+        --panel-radius: 1.25rem;
+    }
+
+    /* Evita el zoom automático al escribir en dispositivos móviles. */
+    .salon-control {
+        font-size: 1rem;
+    }
+
+    .salon-hero {
+        padding: 1.25rem;
+    }
+
+    .salon-sheet {
+        border-radius: 0;
+    }
+
+    .salon-hero h1 {
+        font-size: clamp(1.5rem, 6vw, 1.875rem);
+    }
+
+    .salon-app .salon-action {
+        white-space: normal;
+        height: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .salon-app *, .salon-app *::before, .salon-app *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media print {
+    .salon-skip-link { display: none; }
+    .salon-hero, .salon-panel { box-shadow: none; background-image: none; }
+}

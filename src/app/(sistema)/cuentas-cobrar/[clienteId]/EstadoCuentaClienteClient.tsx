@@ -263,9 +263,9 @@ export default function EstadoCuentaClienteClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8">
-                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative">
                     <Link
@@ -278,12 +278,12 @@ export default function EstadoCuentaClienteClient({
 
                     <div className="mt-6 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                         <div className="flex min-w-0 items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                 <UserRound className="h-7 w-7" />
                             </div>
 
                             <div className="min-w-0">
-                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                <p className="text-xs font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
                                     Estado de cuenta
                                 </p>
 
@@ -349,14 +349,14 @@ export default function EstadoCuentaClienteClient({
             </section>
 
             <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_350px]">
-                <div className="rounded-[28px] border border-[#E1E7E3] bg-white p-5 shadow-[0_10px_28px_rgba(36,48,44,0.05)] sm:p-6">
+                <div className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Recuperación
                             </p>
 
-                            <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                            <h2 className="mt-1 text-xl font-black text-foreground tracking-tight">
                                 Progreso de pago del cliente
                             </h2>
 
@@ -366,7 +366,7 @@ export default function EstadoCuentaClienteClient({
                         </div>
 
                         <div className="text-right">
-                            <p className="text-3xl font-black text-[#26332F]">
+                            <p className="text-3xl font-black text-sidebar">
                                 {porcentajeRecuperado}%
                             </p>
                             <p className="text-xs font-bold text-[#829089]">
@@ -377,7 +377,7 @@ export default function EstadoCuentaClienteClient({
 
                     <div className="mt-5 h-3 overflow-hidden rounded-full bg-[#E6ECE8]">
                         <div
-                            className="h-full rounded-full bg-[#6F8F83] transition-all"
+                            className="h-full rounded-full bg-primary transition-all"
                             style={{
                                 width: `${porcentajeRecuperado}%`,
                             }}
@@ -410,11 +410,11 @@ export default function EstadoCuentaClienteClient({
                 </div>
 
                 <div className="rounded-[28px] border border-[#E4E9E6] bg-[#F8FAF8] p-5 shadow-[0_10px_28px_rgba(36,48,44,0.04)] sm:p-6">
-                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                         Perfil financiero
                     </p>
 
-                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                    <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                         Datos rápidos
                     </h2>
 
@@ -451,15 +451,15 @@ export default function EstadoCuentaClienteClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <div className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Cuentas
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                            <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                 Historial de saldos
                             </h2>
                         </div>
@@ -495,8 +495,8 @@ export default function EstadoCuentaClienteClient({
                                             "h-9 shrink-0 rounded-xl px-4 text-xs font-black transition",
                                             filtro ===
                                                 valor
-                                                ? "bg-[#26332F] text-white"
-                                                : "bg-[#EEF2EF] text-[#52605A] hover:bg-[#E3E8E5]",
+                                                ? "bg-sidebar text-white"
+                                                : "bg-surface-soft text-[#52605A] hover:bg-[#E3E8E5]",
                                         ].join(
                                             " ",
                                         )}
@@ -568,13 +568,13 @@ export default function EstadoCuentaClienteClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="border-b border-[#E8ECE9] bg-[#FBFCFA] px-5 py-4 sm:px-6">
-                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                         Movimientos
                     </p>
 
-                    <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                    <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                         Historial de abonos
                     </h2>
 
@@ -658,12 +658,12 @@ function CuentaCard({
             : 0;
 
     return (
-        <article className="overflow-hidden rounded-[24px] border border-[#E0E6E2] bg-white shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+        <article className="salon-panel overflow-hidden border border-border bg-white">
             <div className="border-b border-[#E9EDEA] bg-[#FBFCFA] p-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                         <div className="flex flex-wrap items-center gap-2">
-                            <p className="font-black text-[#24302C]">
+                            <p className="font-black text-foreground">
                                 {cuenta.codigo_cuenta}
                             </p>
 
@@ -686,7 +686,7 @@ function CuentaCard({
                     {cuenta.venta_id && (
                         <Link
                             href={`/caja/ventas/${cuenta.venta_id}`}
-                            className="inline-flex h-9 items-center gap-2 self-start rounded-xl bg-[#DCE7E2] px-3 text-xs font-black text-[#43524B]"
+                            className="inline-flex h-9 items-center gap-2 self-start rounded-xl bg-primary-soft px-3 text-xs font-black text-text-secondary"
                         >
                             <Eye className="h-4 w-4" />
                             {cuenta.ventas
@@ -722,10 +722,10 @@ function CuentaCard({
 
                 <div className="mt-4">
                     <div className="mb-2 flex items-center justify-between text-xs">
-                        <span className="font-semibold text-[#6B756F]">
+                        <span className="font-semibold text-text-secondary">
                             Progreso de pago
                         </span>
-                        <span className="font-black text-[#527064]">
+                        <span className="font-black text-primary-strong">
                             {porcentaje.toLocaleString(
                                 "es-NI",
                                 {
@@ -737,9 +737,9 @@ function CuentaCard({
                         </span>
                     </div>
 
-                    <div className="h-2 overflow-hidden rounded-full bg-[#EEF2EF]">
+                    <div className="h-2 overflow-hidden rounded-full bg-surface-soft">
                         <div
-                            className="h-full rounded-full bg-[#6F8F83]"
+                            className="h-full rounded-full bg-primary"
                             style={{
                                 width: `${porcentaje}%`,
                             }}
@@ -757,7 +757,7 @@ function CuentaCard({
                     ) > 0 && (
                         <Link
                             href={`/cuentas-cobrar/${cuenta.cliente_id}/abonar/${cuenta.id}`}
-                            className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#6F8F83] text-sm font-black text-white transition hover:bg-[#607F74]"
+                            className="salon-action mt-4 inline-flex w-full items-center justify-center gap-2 bg-primary text-white transition hover:bg-primary-hover"
                         >
                             <WalletCards className="h-4 w-4" />
                             Registrar abono
@@ -765,7 +765,7 @@ function CuentaCard({
                     )}
 
                 {estado !== "ANULADA" && (
-                    <label className="mt-4 block rounded-2xl border border-[#E1E7E3] bg-[#F8FAF8] p-4">
+                    <label className="mt-4 block rounded-2xl border border-border bg-[#F8FAF8] p-4">
                         <span className="mb-2 flex items-center gap-2 text-xs font-black text-[#52605A]">
                             <CalendarClock className="h-4 w-4" />
                             Fecha de vencimiento
@@ -796,13 +796,13 @@ function CuentaCard({
                                     );
                                 }
                             }}
-                            className="h-10 w-full rounded-xl border border-[#D4DAD6] bg-white px-3 text-sm font-semibold disabled:opacity-50"
+                            className="salon-control w-full border border-border-strong bg-white px-3 font-semibold disabled:opacity-50"
                         />
                     </label>
                 )}
 
                 {cuenta.observaciones && (
-                    <p className="mt-4 rounded-2xl bg-[#FBFCFA] p-3 text-sm leading-6 text-[#6B756F]">
+                    <p className="mt-4 rounded-2xl bg-[#FBFCFA] p-3 text-sm leading-6 text-text-secondary">
                         {cuenta.observaciones}
                     </p>
                 )}
@@ -839,7 +839,7 @@ function AbonoFila({
         );
 
     return (
-        <article className="rounded-[22px] border border-[#E0E6E2] bg-white p-4 transition hover:border-[#CAD6D0]">
+        <article className="salon-panel border border-border bg-white p-4 transition hover:border-[#CAD6D0]">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex gap-3">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#E3EEE8] text-[#527865]">
@@ -847,7 +847,7 @@ function AbonoFila({
                     </div>
 
                     <div>
-                        <p className="text-lg font-black text-[#24302C]">
+                        <p className="text-lg font-black text-foreground">
                             {dinero(
                                 abono.monto,
                             )}
@@ -868,7 +868,7 @@ function AbonoFila({
                                         key={
                                             pago.id
                                         }
-                                        className="rounded-full bg-[#EEF2EF] px-2.5 py-1 text-[10px] font-black text-[#52605A]"
+                                        className="rounded-full bg-surface-soft px-2.5 py-1 text-xs font-black text-[#52605A]"
                                     >
                                         {pago.metodo_pago ===
                                             "TARJETA" &&
@@ -888,7 +888,7 @@ function AbonoFila({
                         </div>
 
                         {abono.observaciones && (
-                            <p className="mt-3 text-xs leading-5 text-[#6B756F]">
+                            <p className="mt-3 text-xs leading-5 text-text-secondary">
                                 {
                                     abono.observaciones
                                 }
@@ -900,7 +900,7 @@ function AbonoFila({
                 {abono.ventaId && (
                     <Link
                         href={`/caja/ventas/${abono.ventaId}`}
-                        className="inline-flex h-9 items-center gap-2 self-start rounded-xl border border-[#DCE3DF] px-3 text-xs font-black text-[#52605A]"
+                        className="inline-flex h-9 items-center gap-2 self-start rounded-xl border border-border-strong px-3 text-xs font-black text-[#52605A]"
                     >
                         <ReceiptText className="h-4 w-4" />
                         {abono.codigoVenta ??
@@ -930,16 +930,16 @@ function HeroDato({
             className={[
                 "rounded-2xl border p-4 backdrop-blur-sm",
                 alerta
-                    ? "border-[#D6A9AE]/20 bg-[#C79AA1]/10"
+                    ? "border-[#D6A9AE]/20 bg-secondary/10"
                     : "border-white/10 bg-white/[0.06]",
             ].join(" ")}
         >
             <div className="flex items-center justify-between gap-3">
-                <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                <p className="text-xs font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
                     {titulo}
                 </p>
 
-                <Icono className="h-4 w-4 text-[#DCE7E2]" />
+                <Icono className="h-4 w-4 text-primary-soft" />
             </div>
 
             <p className="mt-2 truncate text-lg font-black text-white">
@@ -960,7 +960,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-2xl bg-[#F7F9F7] p-3">
-            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#87958D]">
                 {titulo}
             </p>
 
@@ -1027,7 +1027,7 @@ function EstadoCuenta({
             className={[
                 "rounded-full px-2.5 py-1 text-[10px] font-black uppercase",
                 estilos[estado] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
+                "bg-surface-soft text-text-secondary",
             ].join(" ")}
         >
             {formatearTexto(
@@ -1045,14 +1045,14 @@ function EstadoVacio({
     descripcion: string;
 }) {
     return (
-        <div className="rounded-2xl border border-dashed border-[#D4DAD6] bg-[#FBFCFA] p-10 text-center">
+        <div className="rounded-2xl border border-dashed border-border-strong bg-[#FBFCFA] p-10 text-center">
             <FileText className="mx-auto h-8 w-8 text-[#829089]" />
 
-            <p className="mt-3 font-black text-[#24302C]">
+            <p className="mt-3 font-black text-foreground">
                 {titulo}
             </p>
 
-            <p className="mt-1 text-sm text-[#6B756F]">
+            <p className="mt-1 text-sm text-text-secondary">
                 {descripcion}
             </p>
         </div>

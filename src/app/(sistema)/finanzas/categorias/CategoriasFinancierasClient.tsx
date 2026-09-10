@@ -200,7 +200,7 @@ export default function CategoriasFinancierasClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[32px] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
                 <Link
                     href="/finanzas"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#C7D4CE] transition hover:text-white"
@@ -210,7 +210,7 @@ export default function CategoriasFinancierasClient({
                 </Link>
 
                 <div className="mt-5 flex items-start gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                         <Tags className="h-7 w-7" />
                     </div>
 
@@ -219,7 +219,7 @@ export default function CategoriasFinancierasClient({
                             Organización financiera
                         </p>
 
-                        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+                        <h1 className="mt-1 text-3xl font-black sm:text-4xl tracking-tight">
                             Categorías
                         </h1>
 
@@ -256,12 +256,12 @@ export default function CategoriasFinancierasClient({
             )}
 
             <section className="grid gap-6 xl:grid-cols-[380px_minmax(0,1fr)]">
-                <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF4F0] text-[#587064]">
+                <article className="salon-panel border border-border bg-white p-5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-soft text-[#587064]">
                         <FolderPlus className="h-5 w-5" />
                     </div>
 
-                    <h2 className="mt-4 text-xl font-bold text-[#26332F]">
+                    <h2 className="mt-4 text-xl font-bold text-sidebar tracking-tight">
                         Nueva categoría
                     </h2>
 
@@ -271,7 +271,7 @@ export default function CategoriasFinancierasClient({
 
                     <div className="mt-5 space-y-4">
                         <label className="block">
-                            <span className="mb-2 block text-sm font-semibold text-[#43524B]">
+                            <span className="mb-2 block text-sm font-semibold text-text-secondary">
                                 Tipo
                             </span>
 
@@ -288,7 +288,7 @@ export default function CategoriasFinancierasClient({
                                         tipo ===
                                             "INGRESO"
                                             ? "border-[#A8C2B6] bg-[#E5F0EB] text-[#456B5B]"
-                                            : "border-[#DCE5E0] bg-white text-[#6B756F]",
+                                            : "border-border bg-white text-text-secondary",
                                     ].join(
                                         " ",
                                     )}
@@ -309,7 +309,7 @@ export default function CategoriasFinancierasClient({
                                         tipo ===
                                             "GASTO"
                                             ? "border-[#DFC0C7] bg-[#F5E8EB] text-[#986371]"
-                                            : "border-[#DCE5E0] bg-white text-[#6B756F]",
+                                            : "border-border bg-white text-text-secondary",
                                     ].join(
                                         " ",
                                     )}
@@ -321,7 +321,7 @@ export default function CategoriasFinancierasClient({
                         </label>
 
                         <label className="block">
-                            <span className="mb-2 block text-sm font-semibold text-[#43524B]">
+                            <span className="mb-2 block text-sm font-semibold text-text-secondary">
                                 Nombre
                             </span>
 
@@ -339,12 +339,12 @@ export default function CategoriasFinancierasClient({
                                         ? "Ej. Alquiler de espacio"
                                         : "Ej. Productos de limpieza"
                                 }
-                                className="h-11 w-full rounded-xl border border-[#DCE5E0] bg-[#F9FBFA] px-4 text-sm outline-none focus:border-[#6F8F83] focus:bg-white"
+                                className="salon-control w-full border border-border bg-[#F9FBFA] px-4 outline-none focus:border-primary focus:bg-white"
                             />
                         </label>
 
                         <label className="block">
-                            <span className="mb-2 block text-sm font-semibold text-[#43524B]">
+                            <span className="mb-2 block text-sm font-semibold text-text-secondary">
                                 Descripción
                             </span>
 
@@ -360,7 +360,7 @@ export default function CategoriasFinancierasClient({
                                     )
                                 }
                                 placeholder="Opcional"
-                                className="w-full rounded-xl border border-[#DCE5E0] bg-[#F9FBFA] px-4 py-3 text-sm outline-none focus:border-[#6F8F83] focus:bg-white"
+                                className="salon-control w-full border border-border bg-[#F9FBFA] px-4 py-3 outline-none focus:border-primary focus:bg-white"
                             />
                         </label>
 
@@ -373,7 +373,7 @@ export default function CategoriasFinancierasClient({
                                     .trim()
                                     .length < 2
                             }
-                            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#26332F] px-5 text-sm font-bold text-white transition hover:bg-[#34443E] disabled:opacity-50"
+                            className="salon-action inline-flex w-full items-center justify-center gap-2 bg-sidebar px-5 text-white transition hover:bg-[#34443E] disabled:opacity-50"
                         >
                             {procesando ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -430,14 +430,14 @@ function ListaCategorias({
     ) => void;
 }) {
     return (
-        <section className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+        <section className="salon-panel border border-border bg-white p-5">
             <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF4F0] text-[#5A7065]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-soft text-[#5A7065]">
                     <Icono className="h-5 w-5" />
                 </div>
 
                 <div>
-                    <h2 className="font-bold text-[#26332F]">
+                    <h2 className="font-bold text-sidebar tracking-tight">
                         {titulo}
                     </h2>
 
@@ -466,7 +466,7 @@ function ListaCategorias({
                                         </p>
 
                                         {categoria.sistema && (
-                                            <span className="inline-flex items-center gap-1 rounded-full bg-[#E6ECE9] px-2 py-0.5 text-[9px] font-bold uppercase text-[#607168]">
+                                            <span className="inline-flex items-center gap-1 rounded-full bg-[#E6ECE9] px-2 py-0.5 text-xs font-bold uppercase text-[#607168]">
                                                 <LockKeyhole className="h-3 w-3" />
                                                 Sistema
                                             </span>
@@ -515,7 +515,7 @@ function ListaCategorias({
                                                 categoria,
                                             )
                                         }
-                                        className="rounded-xl border border-[#DCE5E0] bg-white p-2 text-[#66756E] transition hover:bg-[#EEF3F0] disabled:opacity-40"
+                                        className="rounded-xl border border-border bg-white p-2 text-[#66756E] transition hover:bg-surface-soft disabled:opacity-40"
                                     >
                                         {categoria.estado ===
                                             "ACTIVA" ? (

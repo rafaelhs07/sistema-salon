@@ -190,7 +190,7 @@ export default async function ConfiguracionPage() {
         return (
             <div className="mx-auto max-w-7xl">
                 <div className="rounded-3xl border border-[#EBCBCB] bg-[#F8E5E5] p-6 text-[#985858]">
-                    <h1 className="text-xl font-black">
+                    <h1 className="text-xl font-black tracking-tight">
                         No se pudo cargar la configuración
                     </h1>
 
@@ -260,13 +260,13 @@ export default async function ConfiguracionPage() {
 
     return (
         <div className="mx-auto max-w-[1450px] space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[34px] bg-[#26332F] p-6 text-white shadow-[0_20px_60px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                             <Settings2 className="h-7 w-7" />
                         </div>
 
@@ -361,7 +361,7 @@ function DatoHero({
             <div className="flex items-center gap-2 text-[#AEC0B7]">
                 <Icono className="h-3.5 w-3.5" />
 
-                <p className="text-[9px] font-black uppercase tracking-[0.12em]">
+                <p className="text-xs font-black uppercase tracking-[0.12em]">
                     {
                         titulo
                     }

@@ -371,9 +371,9 @@ export default function CuentasCobrarClient({
 
     return (
         <div className="space-y-6 pb-10">
-            <section className="relative overflow-hidden rounded-[36px] bg-[#26332F] p-6 text-white shadow-[0_24px_70px_rgba(36,48,44,0.18)] sm:p-8 lg:p-9">
-                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[#6F8F83]/30 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#C79AA1]/12 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden bg-sidebar p-6 text-white sm:p-8 lg:p-9">
+                <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-secondary/12 blur-3xl" />
 
                 <div className="relative">
                     <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
@@ -387,12 +387,12 @@ export default function CuentasCobrarClient({
                             </Link>
 
                             <div className="mt-6 flex items-start gap-4">
-                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#DCE7E2] text-[#26332F]">
+                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sidebar">
                                     <WalletCards className="h-7 w-7" />
                                 </div>
 
                                 <div>
-                                    <p className="text-[11px] font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
+                                    <p className="text-xs font-black uppercase tracking-[0.15em] text-[#AFC2B9]">
                                         Finanzas
                                     </p>
 
@@ -410,7 +410,7 @@ export default function CuentasCobrarClient({
                         <div className="flex flex-wrap gap-2">
                             <Link
                                 href="/cuentas-cobrar/abonos"
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/[0.08] px-4 text-sm font-black text-white transition hover:bg-white/[0.13]"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-white/15 bg-white/[0.08] px-4 text-white transition hover:bg-white/[0.13]"
                             >
                                 <History className="h-4 w-4" />
                                 Historial de abonos
@@ -418,7 +418,7 @@ export default function CuentasCobrarClient({
 
                             <Link
                                 href="/cuentas-cobrar/reportes"
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[#DCE7E2] px-4 text-sm font-black text-[#26332F] transition hover:bg-white"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-4 text-sidebar transition hover:bg-white"
                             >
                                 <BarChart3 className="h-4 w-4" />
                                 Reportes
@@ -475,15 +475,15 @@ export default function CuentasCobrarClient({
                 </div>
             </section>
 
-            <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
-                <div className="rounded-[28px] border border-[#E1E7E3] bg-white p-5 shadow-[0_10px_28px_rgba(36,48,44,0.05)] sm:p-6">
+            <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
+                <div className="salon-panel border border-border bg-white p-5 sm:p-6">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Recuperación de cartera
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                            <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                 Progreso de cobro
                             </h2>
 
@@ -493,7 +493,7 @@ export default function CuentasCobrarClient({
                         </div>
 
                         <div className="text-right">
-                            <p className="text-3xl font-black text-[#26332F]">
+                            <p className="text-3xl font-black text-sidebar">
                                 {
                                     porcentajeRecuperado
                                 }
@@ -507,7 +507,7 @@ export default function CuentasCobrarClient({
 
                     <div className="mt-5 h-3 overflow-hidden rounded-full bg-[#E6ECE8]">
                         <div
-                            className="h-full rounded-full bg-[#6F8F83] transition-all"
+                            className="h-full rounded-full bg-primary transition-all"
                             style={{
                                 width:
                                     `${porcentajeRecuperado}%`,
@@ -547,11 +547,11 @@ export default function CuentasCobrarClient({
                         </div>
 
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#A37A7E]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#A37A7E]">
                                 Atención
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#553C41]">
+                            <h2 className="mt-1 text-lg font-black text-[#553C41] tracking-tight">
                                 Cartera vencida
                             </h2>
 
@@ -574,7 +574,7 @@ export default function CuentasCobrarClient({
                                 "VENCIDA",
                             )
                         }
-                        className="mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#9A6267] px-4 text-xs font-black text-white"
+                        className="salon-action mt-4 inline-flex items-center justify-center gap-2 bg-[#9A6267] px-4 text-white"
                     >
                         Ver vencidas
                         <ChevronRight className="h-4 w-4" />
@@ -582,15 +582,15 @@ export default function CuentasCobrarClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[28px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <div className="border-b border-[#E8ECE9] bg-[#FBFCFA] p-5 sm:p-6">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                                 Consulta
                             </p>
 
-                            <h2 className="mt-1 text-lg font-black text-[#24302C]">
+                            <h2 className="mt-1 text-lg font-black text-foreground tracking-tight">
                                 Buscar cuentas
                             </h2>
                         </div>
@@ -601,7 +601,7 @@ export default function CuentasCobrarClient({
                                 onClick={
                                     limpiarFiltros
                                 }
-                                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#DCE3DF] bg-white px-4 text-xs font-black text-[#52605A]"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-border-strong bg-white px-4 text-[#52605A]"
                             >
                                 <X className="h-4 w-4" />
                                 Limpiar filtros
@@ -609,7 +609,7 @@ export default function CuentasCobrarClient({
                         )}
                     </div>
 
-                    <div className="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1.6fr)_220px_220px]">
+                    <div className="mt-5 grid gap-3 xl:grid-cols-[minmax(0,1.6fr)_220px_220px]">
                         <div className="relative">
                             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#829089]" />
 
@@ -625,7 +625,7 @@ export default function CuentasCobrarClient({
                                     )
                                 }
                                 placeholder="Buscar cliente, teléfono, cuenta o venta..."
-                                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold outline-none transition focus:border-[#6F8F83] focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)]"
+                                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold outline-none transition focus:border-primary focus:shadow-[0_0_0_4px_rgba(111,143,131,0.08)]"
                             />
                         </div>
 
@@ -714,7 +714,7 @@ export default function CuentasCobrarClient({
                                         className={[
                                             "inline-flex h-9 shrink-0 items-center gap-2 rounded-xl px-3 text-xs font-black transition",
                                             activo
-                                                ? "bg-[#26332F] text-white"
+                                                ? "bg-sidebar text-white"
                                                 : "bg-[#F2F5F3] text-[#617068] hover:bg-[#E7ECE9]",
                                         ].join(
                                             " ",
@@ -729,7 +729,7 @@ export default function CuentasCobrarClient({
                                                 "rounded-full px-2 py-0.5 text-[9px]",
                                                 activo
                                                     ? "bg-white/15 text-white"
-                                                    : "bg-white text-[#6B756F]",
+                                                    : "bg-white text-text-secondary",
                                             ].join(
                                                 " ",
                                             )}
@@ -746,18 +746,18 @@ export default function CuentasCobrarClient({
                 </div>
             </section>
 
-            <section className="overflow-hidden rounded-[30px] border border-[#E1E7E3] bg-white shadow-[0_10px_28px_rgba(36,48,44,0.05)]">
+            <section className="salon-panel overflow-hidden border border-border bg-white">
                 <header className="flex flex-col gap-3 border-b border-[#E8ECE9] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-[#87958D]">
                             Cartera
                         </p>
 
-                        <h2 className="mt-1 text-xl font-black text-[#24302C]">
+                        <h2 className="mt-1 text-xl font-black text-foreground tracking-tight">
                             Saldos registrados
                         </h2>
 
-                        <p className="mt-1 text-sm text-[#6B756F]">
+                        <p className="mt-1 text-sm text-text-secondary">
                             {cuentasFiltradas.length} resultado
                             {cuentasFiltradas.length ===
                                 1
@@ -782,8 +782,8 @@ export default function CuentasCobrarClient({
                 ) : (
                     <>
                         <div className="hidden overflow-x-auto xl:block">
-                            <table className="w-full min-w-[1180px]">
-                                <thead className="bg-[#FBFCFA] text-left text-[10px] uppercase tracking-[0.1em] text-[#76817B]">
+                            <table className="salon-table w-full min-w-[1180px]">
+                                <thead className="bg-[#FBFCFA] text-left text-xs uppercase tracking-[0.1em] text-[#76817B]">
                                     <tr>
                                         <Th>
                                             Cliente
@@ -899,12 +899,12 @@ function FilaCuenta({
         <tr className="text-sm text-[#33413B] transition hover:bg-[#FBFCFA]">
             <Td>
                 <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                         <UserRound className="h-4 w-4" />
                     </div>
 
                     <div>
-                        <p className="font-black text-[#24302C]">
+                        <p className="font-black text-foreground">
                             {cuenta.clientes
                                 ?.nombre_completo ??
                                 "Cliente"}
@@ -953,7 +953,7 @@ function FilaCuenta({
                             )}
                         </span>
 
-                        <span className="font-black text-[#607C6F]">
+                        <span className="font-black text-primary-strong">
                             {
                                 porcentaje
                             }
@@ -963,7 +963,7 @@ function FilaCuenta({
 
                     <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#E7ECE9]">
                         <div
-                            className="h-full rounded-full bg-[#6F8F83]"
+                            className="h-full rounded-full bg-primary"
                             style={{
                                 width:
                                     `${porcentaje}%`,
@@ -1016,7 +1016,7 @@ function FilaCuenta({
             <Td>
                 <Link
                     href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                    className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#26332F] px-4 text-xs font-black text-white transition hover:bg-[#34463F]"
+                    className="salon-action inline-flex items-center gap-2 bg-sidebar px-4 text-white transition hover:bg-sidebar-hover"
                 >
                     <Eye className="h-4 w-4" />
                     Ver cuenta
@@ -1062,15 +1062,15 @@ function TarjetaCuenta({
             : 0;
 
     return (
-        <article className="rounded-[24px] border border-[#E0E6E2] bg-white p-5 shadow-[0_8px_22px_rgba(36,48,44,0.04)]">
+        <article className="salon-panel border border-border bg-white p-5">
             <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-start gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                         <UserRound className="h-5 w-5" />
                     </div>
 
                     <div className="min-w-0">
-                        <p className="truncate font-black text-[#24302C]">
+                        <p className="truncate font-black text-foreground">
                             {cuenta.clientes
                                 ?.nombre_completo ??
                                 "Cliente"}
@@ -1094,7 +1094,7 @@ function TarjetaCuenta({
             <div className="mt-5 rounded-2xl bg-[#F8FAF8] p-4">
                 <div className="flex items-end justify-between gap-3">
                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+                        <p className="text-xs font-black uppercase tracking-[0.1em] text-[#87958D]">
                             Saldo pendiente
                         </p>
 
@@ -1105,7 +1105,7 @@ function TarjetaCuenta({
                         </p>
                     </div>
 
-                    <p className="text-sm font-black text-[#607C6F]">
+                    <p className="text-sm font-black text-primary-strong">
                         {
                             porcentaje
                         }
@@ -1115,7 +1115,7 @@ function TarjetaCuenta({
 
                 <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#E2E8E4]">
                     <div
-                        className="h-full rounded-full bg-[#6F8F83]"
+                        className="h-full rounded-full bg-primary"
                         style={{
                             width:
                                 `${porcentaje}%`,
@@ -1160,7 +1160,7 @@ function TarjetaCuenta({
 
             <Link
                 href={`/cuentas-cobrar/${cuenta.cliente_id}`}
-                className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#26332F] text-sm font-black text-white transition hover:bg-[#34463F]"
+                className="salon-action mt-5 inline-flex w-full items-center justify-center gap-2 bg-sidebar text-white transition hover:bg-sidebar-hover"
             >
                 <Eye className="h-4 w-4" />
                 Abrir estado de cuenta
@@ -1189,20 +1189,20 @@ function HeroResumen({
             className={[
                 "rounded-2xl border p-4 backdrop-blur-sm",
                 alerta
-                    ? "border-[#D6A9AE]/20 bg-[#C79AA1]/10"
+                    ? "border-[#D6A9AE]/20 bg-secondary/10"
                     : "border-white/10 bg-white/[0.06]",
             ].join(
                 " ",
             )}
         >
             <div className="flex items-center justify-between gap-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
+                <p className="text-xs font-black uppercase tracking-[0.12em] text-[#AEC0B7]">
                     {
                         titulo
                     }
                 </p>
 
-                <Icono className="h-4 w-4 text-[#DCE7E2]" />
+                <Icono className="h-4 w-4 text-primary-soft" />
             </div>
 
             <p className="mt-3 truncate text-xl font-black text-white">
@@ -1231,7 +1231,7 @@ function MiniResumen({
 }) {
     return (
         <div className="rounded-2xl bg-[#F7F9F7] p-3">
-            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#87958D]">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#87958D]">
                 {
                     titulo
                 }
@@ -1288,7 +1288,7 @@ function Select({
                         event.target.value,
                     )
                 }
-                className="h-12 w-full rounded-2xl border border-[#D4DAD6] bg-white pl-11 pr-4 text-sm font-semibold text-[#33413B]"
+                className="salon-control w-full border border-border-strong bg-white pl-11 pr-4 font-semibold text-[#33413B]"
             >
                 {opciones.map(
                     (
@@ -1327,7 +1327,7 @@ function Fecha({
 }) {
     return (
         <label>
-            <span className="mb-1 block text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+            <span className="mb-1 block text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {
                     titulo
                 }
@@ -1345,7 +1345,7 @@ function Fecha({
                         event.target.value,
                     )
                 }
-                className="h-10 w-full rounded-xl border border-[#D4DAD6] px-2 text-xs font-semibold"
+                className="salon-control w-full border border-border-strong px-2 font-semibold"
             />
         </label>
     );
@@ -1379,7 +1379,7 @@ function EstadoCuenta({
                 estilos[
                 estado
                 ] ??
-                "bg-[#EEF2EF] text-[#6B756F]",
+                "bg-surface-soft text-text-secondary",
             ].join(
                 " ",
             )}
@@ -1400,7 +1400,7 @@ function MiniDato({
 }) {
     return (
         <div className="rounded-2xl bg-[#FBFCFA] p-3">
-            <p className="text-[9px] font-black uppercase tracking-[0.1em] text-[#829089]">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#829089]">
                 {
                     titulo
                 }
@@ -1446,15 +1446,15 @@ function Td({
 function EstadoVacio() {
     return (
         <div className="p-12 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF3F0] text-[#607C6F]">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-soft text-primary-strong">
                 <WalletCards className="h-7 w-7" />
             </div>
 
-            <h3 className="mt-4 font-black text-[#24302C]">
+            <h3 className="mt-4 font-black text-foreground tracking-tight">
                 No hay cuentas por cobrar
             </h3>
 
-            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[#6B756F]">
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-text-secondary">
                 Las ventas con saldo pendiente aparecerán aquí automáticamente.
             </p>
         </div>

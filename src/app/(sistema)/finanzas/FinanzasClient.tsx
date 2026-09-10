@@ -194,18 +194,18 @@ export default function FinanzasClient({
 
     return (
         <div className="space-y-6 pb-8">
-            <section className="relative overflow-hidden rounded-[32px] border border-[#DCE5E0] bg-[#26332F] p-6 text-white shadow-[0_18px_50px_rgba(36,48,44,0.16)] sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#6F8F83]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-52 w-52 rounded-full bg-[#C79AA1]/15 blur-3xl" />
+            <section className="salon-hero relative overflow-hidden border border-border bg-sidebar p-6 text-white sm:p-8">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-1/3 h-52 w-52 rounded-full bg-secondary/15 blur-3xl" />
 
                 <div className="relative flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                     <div className="max-w-3xl">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-[#DCE7E2]">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-primary-soft">
                             <LayoutDashboard className="h-3.5 w-3.5" />
                             Panel financiero
                         </div>
 
-                        <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                        <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
                             Ingresos y gastos del salón
                         </h1>
 
@@ -244,7 +244,7 @@ export default function FinanzasClient({
                         <div className="grid gap-3 sm:grid-cols-2">
                             <Link
                                 href="/finanzas/ingresos/nuevo"
-                                className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#DCE7E2] px-5 text-sm font-bold text-[#26332F] transition hover:bg-white"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-primary-soft px-5 text-sidebar transition hover:bg-white"
                             >
                                 <PlusCircle className="h-5 w-5" />
                                 Registrar ingreso
@@ -252,7 +252,7 @@ export default function FinanzasClient({
 
                             <Link
                                 href="/finanzas/gastos/nuevo"
-                                className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-5 text-sm font-bold text-white transition hover:bg-white/15"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-white/15 bg-white/10 px-5 text-white transition hover:bg-white/15"
                             >
                                 <ArrowDownRight className="h-5 w-5" />
                                 Registrar gasto
@@ -262,7 +262,7 @@ export default function FinanzasClient({
                         <div className="grid gap-3 sm:grid-cols-3">
                             <Link
                                 href="/finanzas/resumen"
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-white px-4 text-sm font-bold text-[#26332F] transition hover:bg-[#EEF4F0]"
+                                className="salon-action inline-flex items-center justify-center gap-2 bg-white px-4 text-sidebar transition hover:bg-surface-soft"
                             >
                                 <CalendarRange className="h-4 w-4" />
                                 Resumen
@@ -270,7 +270,7 @@ export default function FinanzasClient({
 
                             <Link
                                 href="/finanzas/historial"
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-4 text-sm font-semibold text-[#E5ECE8] transition hover:bg-white/10"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-white/10 bg-white/[0.07] px-4 font-semibold text-[#E5ECE8] transition hover:bg-white/10"
                             >
                                 <History className="h-4 w-4" />
                                 Historial
@@ -278,7 +278,7 @@ export default function FinanzasClient({
 
                             <Link
                                 href="/finanzas/categorias"
-                                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-4 text-sm font-semibold text-[#E5ECE8] transition hover:bg-white/10"
+                                className="salon-action inline-flex items-center justify-center gap-2 border border-white/10 bg-white/[0.07] px-4 font-semibold text-[#E5ECE8] transition hover:bg-white/10"
                             >
                                 <Tags className="h-4 w-4" />
                                 Categorías
@@ -301,10 +301,10 @@ export default function FinanzasClient({
                 </div>
             </section>
 
-            <section className="rounded-[28px] border border-[#DCE5E0] bg-white p-4 shadow-[0_12px_35px_rgba(36,48,44,0.08)] sm:p-5">
+            <section className="salon-panel border border-border bg-white p-4 sm:p-5">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                        <h2 className="text-lg font-bold text-[#26332F]">
+                        <h2 className="text-lg font-bold text-sidebar tracking-tight">
                             Filtros de visualización
                         </h2>
                         <p className="mt-1 text-sm text-[#6B7A73]">
@@ -327,7 +327,7 @@ export default function FinanzasClient({
                                             .value as PeriodoFiltro,
                                     )
                                 }
-                                className="h-11 w-full rounded-2xl border border-[#DCE5E0] bg-[#F7FAF8] px-4 text-sm font-medium text-[#33413B] outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                className="salon-control w-full border border-border bg-[#F7FAF8] px-4 font-medium text-[#33413B] outline-none transition focus:border-primary focus:bg-white"
                             >
                                 <option value="MES_ACTUAL">
                                     Mes actual
@@ -357,7 +357,7 @@ export default function FinanzasClient({
                                         event.target.value,
                                     )
                                 }
-                                className="h-11 w-full rounded-2xl border border-[#DCE5E0] bg-[#F7FAF8] px-4 text-sm font-medium text-[#33413B] outline-none transition focus:border-[#6F8F83] focus:bg-white"
+                                className="salon-control w-full border border-border bg-[#F7FAF8] px-4 font-medium text-[#33413B] outline-none transition focus:border-primary focus:bg-white"
                             >
                                 <option value="TODAS">
                                     Todas las sucursales
@@ -429,10 +429,10 @@ export default function FinanzasClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
-                <div className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+                <div className="salon-panel border border-border bg-white p-5">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <h2 className="text-lg font-bold text-[#26332F]">
+                            <h2 className="text-lg font-bold text-sidebar tracking-tight">
                                 Tendencia de los últimos 6 meses
                             </h2>
                             <p className="mt-1 text-sm text-[#72827A]">
@@ -472,10 +472,10 @@ export default function FinanzasClient({
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.25fr_0.95fr]">
-                <div className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
+                <div className="salon-panel border border-border bg-white p-5">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <div>
-                            <h2 className="text-lg font-bold text-[#26332F]">
+                            <h2 className="text-lg font-bold text-sidebar tracking-tight">
                                 Movimientos recientes
                             </h2>
                             <p className="mt-1 text-sm text-[#72827A]">
@@ -490,7 +490,7 @@ export default function FinanzasClient({
 
                     <div className="mt-5 overflow-hidden rounded-2xl border border-[#E7EEEA]">
                         <div className="overflow-x-auto">
-                            <table className="min-w-full divide-y divide-[#E7EEEA]">
+                            <table className="salon-table min-w-full divide-y divide-[#E7EEEA]">
                                 <thead className="bg-[#F7FAF8]">
                                     <tr>
                                         <EncabezadoTabla>
@@ -552,7 +552,7 @@ export default function FinanzasClient({
                                                     </CeldaTabla>
 
                                                     <CeldaTabla>
-                                                        <span className="inline-flex rounded-full bg-[#EEF4F0] px-2.5 py-1 text-xs font-semibold text-[#55675F]">
+                                                        <span className="inline-flex rounded-full bg-surface-soft px-2.5 py-1 text-xs font-semibold text-[#55675F]">
                                                             {movimiento
                                                                 .categorias_financieras
                                                                 ?.nombre ??
@@ -659,7 +659,7 @@ function TarjetaIndicador({
                         {titulo}
                     </p>
 
-                    <p className="mt-3 text-2xl font-bold tracking-tight text-[#26332F]">
+                    <p className="mt-3 text-2xl font-bold tracking-tight text-sidebar">
                         {valor}
                     </p>
 
@@ -695,8 +695,8 @@ function PanelCategorias({
     );
 
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
-            <h2 className="text-lg font-bold text-[#26332F]">
+        <article className="salon-panel border border-border bg-white p-5">
+            <h2 className="text-lg font-bold text-sidebar tracking-tight">
                 {titulo}
             </h2>
 
@@ -719,7 +719,7 @@ function PanelCategorias({
                                     <p className="text-sm font-semibold text-[#33413B]">
                                         {categoria.nombre}
                                     </p>
-                                    <p className="text-sm font-bold text-[#26332F]">
+                                    <p className="text-sm font-bold text-sidebar">
                                         {formatearMoneda(
                                             categoria.total,
                                             simboloMoneda,
@@ -727,11 +727,11 @@ function PanelCategorias({
                                     </p>
                                 </div>
 
-                                <div className="h-2.5 overflow-hidden rounded-full bg-[#EEF3F0]">
+                                <div className="h-2.5 overflow-hidden rounded-full bg-surface-soft">
                                     <div
                                         className={`h-full rounded-full ${tono === "ingreso"
-                                                ? "bg-[#6F8F83]"
-                                                : "bg-[#C79AA1]"
+                                                ? "bg-primary"
+                                                : "bg-secondary"
                                             }`}
                                         style={{
                                             width: `${porcentaje}%`,
@@ -780,7 +780,7 @@ function GraficoMensual({
                                 <div className="flex w-5 flex-col items-center">
                                     <div
                                         title={`Ingresos: ${formatearMoneda(item.ingresos, simboloMoneda)}`}
-                                        className="w-full rounded-t-xl bg-[#6F8F83]"
+                                        className="w-full rounded-t-xl bg-primary"
                                         style={{
                                             height: `${Math.max(
                                                 alturaIngresos,
@@ -793,7 +793,7 @@ function GraficoMensual({
                                 <div className="flex w-5 flex-col items-center">
                                     <div
                                         title={`Gastos: ${formatearMoneda(item.gastos, simboloMoneda)}`}
-                                        className="w-full rounded-t-xl bg-[#C79AA1]"
+                                        className="w-full rounded-t-xl bg-secondary"
                                         style={{
                                             height: `${Math.max(
                                                 alturaGastos,
@@ -808,7 +808,7 @@ function GraficoMensual({
                                 {item.etiqueta}
                             </p>
 
-                            <p className="mt-1 text-center text-[11px] text-[#84928B]">
+                            <p className="mt-1 text-center text-xs text-[#84928B]">
                                 {formatearMoneda(
                                     item.ingresos -
                                     item.gastos,
@@ -833,12 +833,12 @@ function PanelAcceso({
     descripcion: string;
 }) {
     return (
-        <article className="rounded-[28px] border border-[#DCE5E0] bg-white p-5 shadow-[0_12px_35px_rgba(36,48,44,0.08)]">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EEF4F0] text-[#52655D]">
+        <article className="salon-panel border border-border bg-white p-5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-soft text-[#52655D]">
                 <Icono className="h-5 w-5" />
             </div>
 
-            <h3 className="mt-4 text-lg font-bold text-[#26332F]">
+            <h3 className="mt-4 text-lg font-bold text-sidebar tracking-tight">
                 {titulo}
             </h3>
 
@@ -860,7 +860,7 @@ function ResumenHero({
 }) {
     return (
         <div className="rounded-2xl border border-white/10 bg-white/[0.08] p-4 backdrop-blur-sm">
-            <div className="flex items-center gap-2 text-[#DCE7E2]">
+            <div className="flex items-center gap-2 text-primary-soft">
                 <Icono className="h-4 w-4" />
                 <p className="text-xs font-semibold uppercase tracking-[0.18em]">
                     {titulo}
