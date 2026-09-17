@@ -5,7 +5,7 @@ Ruta: `/super-admin`. Solo puede entrar un perfil `SUPER_ADMIN` activo. Al inici
 ## Activar esta versión
 
 1. Incorpora la rama `feat/panel-super-admin` a tu copia del proyecto.
-2. En Supabase, abre SQL Editor y ejecuta **una sola vez y completo** `supabase/migrations/202609170001_panel_super_admin.sql`. Primero aplícalo en un proyecto de prueba o respaldo de tu esquema. La migración es transaccional: si falla, no se aplican cambios parciales.
+2. En Supabase, abre SQL Editor y ejecuta **una sola vez y completo** `supabase/migrations/202609170001_panel_super_admin.sql`. Después ejecuta `supabase/migrations/202609170002_sucursal_principal_plataforma.sql` para marcar correctamente la sucursal principal de los negocios nuevos. Si ya aplicaste la primera migración, ejecuta únicamente la segunda. Primero aplícalo en un proyecto de prueba o respaldo de tu esquema. La migración es transaccional: si falla, no se aplican cambios parciales.
 3. Verifica que tu cuenta existente tenga `rol = 'SUPER_ADMIN'` y `estado = 'ACTIVO'` en `usuarios_perfiles`. Esta migración no asciende a ningún usuario. Conserva tu cuenta de propietario separada de las cuentas ADMIN de los negocios.
 4. Mantén estas variables en `.env.local` y en el servidor de producción:
 

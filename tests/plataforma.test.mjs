@@ -27,7 +27,7 @@ before(async () => {
     grant usage on schema auth to anon,authenticated,service_role;
     grant execute on all functions in schema auth to anon,authenticated,service_role;
     create table salones(id uuid primary key default gen_random_uuid(), nombre text not null, nombre_comercial text, correo text, telefono text);
-    create table sucursales(id uuid primary key default gen_random_uuid(), salon_id uuid references salones, nombre text not null);
+    create table sucursales(id uuid primary key default gen_random_uuid(), salon_id uuid references salones, nombre text not null, es_principal boolean not null default false, estado text not null default 'ACTIVA' check(estado in ('ACTIVA','INACTIVA')));
     create table configuracion_salon(salon_id uuid primary key references salones,nombre_salon text,moneda text,simbolo_moneda text,hora_apertura time,hora_cierre time,intervalo_citas_minutos int,permitir_credito boolean,permitir_pago_combinado boolean,mensaje_recibo text);
     create table usuarios_perfiles(id uuid primary key,salon_id uuid references salones,rol text,estado text,correo text);
     create table clientes(id uuid primary key default gen_random_uuid(),salon_id uuid references salones,nombre text);
@@ -45,6 +45,7 @@ before(async () => {
     create function configurar_perfil_usuario_creado(p_usuario_id uuid) returns void language plpgsql security definer as $$ begin null; end $$;
   `);
   await db.exec(readFileSync(new URL('../supabase/migrations/202609170001_panel_super_admin.sql', import.meta.url), 'utf8'));
+  await db.exec(readFileSync(new URL('../supabase/migrations/202609170002_sucursal_principal_plataforma.sql', import.meta.url), 'utf8'));
 });
 after(() => db.close());
 
@@ -116,6 +117,7 @@ test('crear negocio genera sucursal, configuración, suscripción y auditoría e
   for (const tabla of ['sucursales','configuracion_salon','plataforma_suscripciones','plataforma_auditoria']) {
     assert.equal((await db.query(`select count(*)::int as n from ${tabla} where salon_id=$1`, [id])).rows[0].n, 1);
   }
+  assert.deepEqual((await db.query('select es_principal, estado from sucursales where salon_id=$1', [id])).rows, [{ es_principal: true, estado: 'ACTIVA' }]);
   const antes = (await db.query('select count(*)::int as n from salones')).rows[0].n;
   await assert.rejects(db.query("select plataforma_crear_negocio($1,'Inválido','','',current_date+30,40,'INVALIDA')", [owner]));
   assert.equal((await db.query('select count(*)::int as n from salones')).rows[0].n, antes);
