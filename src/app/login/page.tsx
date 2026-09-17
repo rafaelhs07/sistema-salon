@@ -76,7 +76,10 @@ export default function LoginPage() {
                 return;
             }
 
-            router.replace("/inicio");
+            const { data: acceso, error: accesoError } = await supabase.rpc("plataforma_acceso_actual");
+            router.replace(accesoError || acceso !== true
+                ? "/acceso-suspendido"
+                : perfil.rol === "SUPER_ADMIN" ? "/super-admin" : "/inicio");
             router.refresh();
         } catch (error) {
             console.error("Error al iniciar sesión:", error);

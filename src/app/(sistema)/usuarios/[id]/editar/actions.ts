@@ -172,6 +172,15 @@ export async function editarUsuarioSistema(
         };
     }
 
+    if (perfilObjetivo.rol === "SUPER_ADMIN" && perfilActor.rol !== "SUPER_ADMIN") {
+        return { exito: false, mensaje: "No puedes modificar una cuenta SUPER_ADMIN." };
+    }
+    const { data: borrado } = await supabase.from("usuarios_perfiles")
+        .select("eliminado_en").eq("id", datos.usuarioId).single();
+    if (!borrado || borrado.eliminado_en) {
+        return { exito: false, mensaje: "Esta cuenta fue eliminada y no puede editarse." };
+    }
+
     if (
         datos.usuarioId ===
         actor.id

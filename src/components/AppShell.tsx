@@ -109,6 +109,17 @@ const todosLosRoles: RolUsuario[] = [
 
 const menu: GrupoMenu[] = [
     {
+        nombre: "Plataforma",
+        elementos: [{
+            nombre: "SUPER_ADMIN",
+            descripcion: "Negocios, pagos y accesos",
+            href: "/super-admin",
+            icono: Store,
+            roles: ["SUPER_ADMIN"],
+            permiso: "PLATAFORMA_SUPER_ADMIN",
+        }],
+    },
+    {
         nombre: "Principal",
         elementos: [
             {
@@ -734,6 +745,9 @@ export default function AppShell({
                         {menu.map((grupo) => {
                             const elementosVisibles = grupo.elementos.filter(
                                 (elemento) => {
+                                    if (elemento.permiso === "PLATAFORMA_SUPER_ADMIN") {
+                                        return perfil.rol === "SUPER_ADMIN";
+                                    }
                                     if (permisosUsuario === null) {
                                         return false;
                                     }

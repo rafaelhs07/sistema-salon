@@ -94,6 +94,11 @@ async function obtenerContextoActivo(): Promise<ContextoAccionSegura> {
         );
     }
 
+    const { data: accesoActivo, error: accesoError } = await supabase.rpc("plataforma_acceso_actual");
+    if (accesoError || accesoActivo !== true) {
+        throw new ErrorPermisoAccion("SUSCRIPCION_ACTIVA", "El acceso al negocio está suspendido o vencido.");
+    }
+
     return {
         supabase,
         user: {
