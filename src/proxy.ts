@@ -105,6 +105,7 @@ export async function proxy(
     const rutasPublicas = [
         "/login",
         "/sin-acceso",
+        "/acceso-suspendido",
     ];
 
     const esRutaPublica =
@@ -144,6 +145,23 @@ export async function proxy(
         return NextResponse.redirect(
             loginUrl,
         );
+    }
+
+    // Comprobar en cada petición, incluidas las Server Actions de sesiones abiertas.
+    const { data: accesoActivo, error: accesoError } = await supabase.rpc("plataforma_acceso_actual");
+    function redirigir(destino: string) {
+        const url = request.nextUrl.clone();
+        url.pathname = destino;
+        url.search = "";
+        const redireccion = NextResponse.redirect(url);
+        response.cookies.getAll().forEach(cookie => redireccion.cookies.set(cookie));
+        return redireccion;
+    }
+    if (accesoError || accesoActivo !== true) return redirigir("/acceso-suspendido");
+    if (pathname === "/super-admin" || pathname.startsWith("/super-admin/")) {
+        const { data: esSuperAdmin, error } = await supabase.rpc("plataforma_es_super_admin");
+        if (error || esSuperAdmin !== true) return redirigir("/sin-acceso");
+        return response;
     }
 
     const permiso =

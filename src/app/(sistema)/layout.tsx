@@ -76,9 +76,11 @@ export default async function SistemaLayout({
         perfil.estado !==
         "ACTIVO"
     ) {
-        await supabase.auth.signOut();
-        redirect("/login");
+        redirect("/acceso-suspendido");
     }
+
+    const { data: accesoActivo, error: accesoError } = await supabase.rpc("plataforma_acceso_actual");
+    if (accesoError || accesoActivo !== true) redirect("/acceso-suspendido");
 
     const {
         data: configuracionTema,
