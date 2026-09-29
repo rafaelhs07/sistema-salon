@@ -441,8 +441,20 @@ export default function AgendaClient({
             </section>
 
             {mensaje && (
-                <div className="flex items-start gap-3 rounded-2xl border border-[#EBCBCB] bg-[#F8E5E5] px-4 py-4 text-[#985858]">
-                    <XCircle className="h-5 w-5 shrink-0" />
+                <div
+                    role={mensaje.tipo === "EXITO" ? "status" : "alert"}
+                    className={[
+                        "flex items-start gap-3 rounded-2xl border px-4 py-4",
+                        mensaje.tipo === "EXITO"
+                            ? "border-[#CFE0D8] bg-[#E3EEE8] text-[#3F6657]"
+                            : "border-[#EBCBCB] bg-[#F8E5E5] text-[#985858]",
+                    ].join(" ")}
+                >
+                    {mensaje.tipo === "EXITO" ? (
+                        <CheckCircle2 className="h-5 w-5 shrink-0" />
+                    ) : (
+                        <XCircle className="h-5 w-5 shrink-0" />
+                    )}
                     <p className="min-w-0 flex-1 text-sm font-semibold">
                         {mensaje.texto}
                     </p>
