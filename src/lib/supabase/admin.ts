@@ -12,7 +12,7 @@ import {
  * - Nunca importar este archivo en un componente "use client".
  * - SUPABASE_SERVICE_ROLE_KEY nunca debe usar prefijo NEXT_PUBLIC_.
  */
-export function createAdminClient() {
+export function createAdminClient(actorId?: string) {
     const supabaseUrl =
         process.env.NEXT_PUBLIC_SUPABASE_URL;
 
@@ -35,6 +35,9 @@ export function createAdminClient() {
         supabaseUrl,
         serviceRoleKey,
         {
+            global: {
+                headers: actorId ? { "x-audit-actor-id": actorId } : {},
+            },
             auth: {
                 autoRefreshToken: false,
                 persistSession: false,

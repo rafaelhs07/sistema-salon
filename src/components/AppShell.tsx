@@ -260,6 +260,14 @@ const menu: GrupoMenu[] = [
                 permiso: "USUARIOS_VER",
             },
             {
+                nombre: "Auditoría",
+                descripcion: "Historial y detalle de cambios",
+                href: "/auditoria",
+                icono: ClipboardList,
+                roles: ["SUPER_ADMIN", "ADMIN"],
+                permiso: "AUDITORIA_VER",
+            },
+            {
                 nombre: "Configuración",
                 descripcion: "Datos del salón",
                 href: "/configuracion",
@@ -747,6 +755,10 @@ export default function AppShell({
                                 (elemento) => {
                                     if (elemento.permiso === "PLATAFORMA_SUPER_ADMIN") {
                                         return perfil.rol === "SUPER_ADMIN";
+                                    }
+
+                                    if (elemento.permiso === "AUDITORIA_VER") {
+                                        return ["ADMIN", "SUPER_ADMIN"].includes(perfil.rol);
                                     }
                                     if (permisosUsuario === null) {
                                         return false;

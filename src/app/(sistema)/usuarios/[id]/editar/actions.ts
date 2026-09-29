@@ -323,7 +323,7 @@ export async function editarUsuarioSistema(
     }
 
     const admin =
-        createAdminClient();
+        createAdminClient(actor.id);
 
     const {
         data: authAnteriorResultado,
