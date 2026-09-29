@@ -280,7 +280,7 @@ export async function crearUsuarioSistema(
 
     try {
         admin =
-            createAdminClient();
+            createAdminClient(actor.id);
     } catch (
     error
     ) {
