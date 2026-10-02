@@ -1878,6 +1878,7 @@ function formatearOrigen(
                 "Comisiones POS",
             MOVIMIENTO_CAJA:
                 "Movimientos de caja",
+            SALARIO: "Salario automático",
             MANUAL:
                 "Registros manuales",
             AJUSTE:

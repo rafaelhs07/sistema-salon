@@ -36,6 +36,8 @@ export type DatosTrabajador = {
     modalidadPago: ModalidadPago;
     salarioFijo: number;
     frecuenciaPago: FrecuenciaPago;
+    salarioAutomatico: boolean;
+    salarioFechaInicio: string;
     tipoComision: TipoComision;
     comisionGeneral: number;
     permiteCitas: boolean;
@@ -153,11 +155,26 @@ function validarTrabajador(
         datos.modalidadPago === "SOLO_COMISION" ||
         datos.modalidadPago === "SALARIO_MAS_COMISION";
 
-    if (usaSalario && datos.salarioFijo <= 0) {
+    if (usaSalario && (!Number.isFinite(datos.salarioFijo) || datos.salarioFijo < 0.01)) {
         return {
             exito: false,
             mensaje: "El salario fijo debe ser mayor que cero.",
         };
+    }
+
+    if (usaSalario && !["SEMANAL", "QUINCENAL", "MENSUAL"].includes(datos.frecuenciaPago)) {
+        return { exito: false, mensaje: "Selecciona una frecuencia de pago válida." };
+    }
+
+    if (usaSalario && datos.salarioAutomatico) {
+        const fecha = datos.salarioFechaInicio;
+        const parsed = new Date(`${fecha}T12:00:00Z`);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== fecha) {
+            return { exito: false, mensaje: "Selecciona una fecha válida para iniciar el gasto automático." };
+        }
+        if (datos.estado !== "ACTIVO") {
+            return { exito: false, mensaje: "El trabajador debe estar activo para programar su salario." };
+        }
     }
 
     if (usaComision && datos.tipoComision === "SIN_COMISION") {
@@ -202,7 +219,9 @@ function obtenerDatosPago(datos: DatosTrabajador) {
         datos.modalidadPago === "SALARIO_MAS_COMISION";
 
     return {
-        salarioFijo: usaSalario ? datos.salarioFijo : 0,
+        salarioFijo: usaSalario ? Number(datos.salarioFijo.toFixed(2)) : 0,
+        salarioAutomatico: usaSalario && datos.salarioAutomatico === true,
+        salarioFechaInicio: usaSalario && datos.salarioAutomatico ? datos.salarioFechaInicio : null,
         tipoComision: usaComision
             ? datos.tipoComision
             : ("SIN_COMISION" as TipoComision),
@@ -415,6 +434,8 @@ export async function crearTrabajador(
                 modalidad_pago: datos.modalidadPago,
                 salario_fijo: pago.salarioFijo,
                 frecuencia_pago: datos.frecuenciaPago,
+                salario_automatico: pago.salarioAutomatico,
+                salario_fecha_inicio: pago.salarioFechaInicio,
                 tipo_comision: pago.tipoComision,
                 comision_general: pago.comisionGeneral,
                 permite_citas: datos.permiteCitas,
@@ -573,6 +594,8 @@ export async function actualizarTrabajador(
                 modalidad_pago: datos.modalidadPago,
                 salario_fijo: pago.salarioFijo,
                 frecuencia_pago: datos.frecuenciaPago,
+                salario_automatico: pago.salarioAutomatico,
+                salario_fecha_inicio: pago.salarioFechaInicio,
                 tipo_comision: pago.tipoComision,
                 comision_general: pago.comisionGeneral,
                 permite_citas: datos.permiteCitas,
@@ -588,7 +611,7 @@ export async function actualizarTrabajador(
 
             return {
                 exito: false,
-                mensaje: "No fue posible actualizar el trabajador.",
+                mensaje: `No fue posible actualizar el trabajador: ${error.message}`,
             };
         }
 

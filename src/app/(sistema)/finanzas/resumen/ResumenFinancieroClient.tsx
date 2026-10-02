@@ -101,8 +101,7 @@ export default function ResumenFinancieroClient({
     sucursales: SucursalResumen[];
     sucursalInicialId: string;
 }) {
-    const hoy =
-        new Date();
+    const [hoy] = useState(() => new Date());
 
     const [
         mesSeleccionado,
@@ -204,12 +203,10 @@ export default function ResumenFinancieroClient({
             ],
         );
 
-    const fechaAnterior =
-        new Date(
-            anioSeleccionado,
-            mesSeleccionado - 1,
-            1,
-        );
+    const fechaAnterior = useMemo(
+        () => new Date(anioSeleccionado, mesSeleccionado - 1, 1),
+        [anioSeleccionado, mesSeleccionado],
+    );
 
     const movimientosMesAnterior =
         useMemo(
@@ -1841,6 +1838,7 @@ function formatearOrigen(
                 "Comisiones POS",
             MOVIMIENTO_CAJA:
                 "Movimientos de caja",
+            SALARIO: "Salario automático",
             MANUAL:
                 "Registros manuales",
             AJUSTE:

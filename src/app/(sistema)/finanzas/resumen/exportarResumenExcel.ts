@@ -929,6 +929,7 @@ function formatearOrigen(
             PAGO_PROVEEDOR: "Pago a proveedor",
             COMISION_POS: "Comisión POS",
             MOVIMIENTO_CAJA: "Movimiento de caja",
+            SALARIO: "Salario automático",
             MANUAL: "Registro manual",
             AJUSTE: "Ajuste",
             OTRO: "Otro",

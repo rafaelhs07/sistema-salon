@@ -39,6 +39,7 @@ export type MovimientoFinancieroListado = {
     | "PAGO_PROVEEDOR"
     | "COMISION_POS"
     | "MOVIMIENTO_CAJA"
+    | "SALARIO"
     | "MANUAL"
     | "AJUSTE"
     | "OTRO";
@@ -1106,6 +1107,8 @@ function formatearOrigen(
             return "Comisión POS";
         case "MOVIMIENTO_CAJA":
             return "Movimiento de caja";
+        case "SALARIO":
+            return "Salario automático";
         case "MANUAL":
             return "Registro manual";
         case "AJUSTE":

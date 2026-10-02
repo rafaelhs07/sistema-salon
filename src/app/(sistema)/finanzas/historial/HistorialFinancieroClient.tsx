@@ -5,8 +5,6 @@ import {
     ArrowDownRight,
     ArrowLeft,
     ArrowUpRight,
-    CalendarDays,
-    CircleDollarSign,
     Filter,
     ReceiptText,
     Search,
@@ -764,6 +762,7 @@ function formatearOrigen(
                 "Comisión POS",
             MOVIMIENTO_CAJA:
                 "Movimiento de caja",
+            SALARIO: "Salario automático",
             MANUAL: "Manual",
             AJUSTE: "Ajuste",
             OTRO: "Otro",

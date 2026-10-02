@@ -63,6 +63,9 @@ export type TrabajadorListado = {
     modalidad_pago: ModalidadPago;
     salario_fijo: number;
     frecuencia_pago: FrecuenciaPago;
+    salario_automatico: boolean;
+    salario_fecha_inicio: string | null;
+    salario_proximo_pago: string | null;
     tipo_comision: TipoComision;
     comision_general: number;
     permite_citas: boolean;
@@ -541,6 +544,14 @@ function TarjetaTrabajador({
                     </div>
                 </div>
 
+                {(trabajador.modalidad_pago === "SALARIO_FIJO" || trabajador.modalidad_pago === "SALARIO_MAS_COMISION") && (
+                    <div className="mt-3 rounded-xl bg-[#E3EEE8] p-3 text-sm text-[#43524B]">
+                        {trabajador.salario_automatico && trabajador.salario_proximo_pago
+                            ? `Gasto automático: ${formatearFechaSalario(trabajador.salario_proximo_pago)}`
+                            : "Gasto automático sin activar"}
+                    </div>
+                )}
+
                 <div className="mt-3 rounded-xl bg-white p-3">
                     <p className="text-xs font-semibold uppercase tracking-wide text-[#839089]">
                         Agenda
@@ -633,6 +644,10 @@ function ModalTrabajador({
         setFormulario((actual) => ({
             ...actual,
             [campo]: valor,
+            ...((campo === "estado" && valor === "INACTIVO") ||
+            (campo === "modalidadPago" && (valor === "SOLO_COMISION" || valor === "SIN_PAGO"))
+                ? { salarioAutomatico: false }
+                : {}),
         }));
         setMensaje(null);
     }
@@ -909,7 +924,7 @@ function ModalTrabajador({
 
                                 {usaSalario && (
                                     <CampoDinero
-                                        etiqueta="Salario fijo"
+                                        etiqueta="Salario fijo por período"
                                         valor={formulario.salarioFijo}
                                         simbolo={simboloMoneda}
                                         cambiar={(valor) =>
@@ -929,7 +944,7 @@ function ModalTrabajador({
                                             },
                                             {
                                                 valor: "QUINCENAL",
-                                                texto: "Quincenal",
+                                                texto: "Quincenal (cada 15 días)",
                                             },
                                             {
                                                 valor: "MENSUAL",
@@ -943,6 +958,55 @@ function ModalTrabajador({
                                             )
                                         }
                                     />
+                                )}
+
+                                {usaSalario && (
+                                    <div className="rounded-2xl border border-[#CFE0D8] bg-[#F2F7F4] p-4 sm:col-span-2">
+                                        <label className="flex items-center gap-3 text-sm font-semibold text-[#26332F]">
+                                            <input
+                                                type="checkbox"
+                                                checked={formulario.salarioAutomatico}
+                                                onChange={(e) => actualizar("salarioAutomatico", e.target.checked)}
+                                                className="h-4 w-4 accent-[#43524B]"
+                                            />
+                                            Registrar salario como gasto automático
+                                        </label>
+                                        <p className="mt-2 text-sm text-[#607168]">
+                                            Se registra el importe completo de cada período en Finanzas, historial y reportes.
+                                            No incluye comisiones ni realiza transferencias bancarias o retiros de caja.
+                                        </p>
+                                        {formulario.salarioAutomatico && (
+                                            <div className="mt-4 space-y-3">
+                                                <label className="block text-sm font-semibold text-[#3D4A45]">
+                                                    Fecha inicial de pago
+                                                    <input
+                                                        type="date"
+                                                        required
+                                                        value={formulario.salarioFechaInicio}
+                                                        onChange={(e) => actualizar("salarioFechaInicio", e.target.value)}
+                                                        className="mt-2 block w-full rounded-xl border border-[#CFE0D8] bg-white px-3 py-2"
+                                                    />
+                                                </label>
+                                                <p className="text-sm text-[#607168]">
+                                                    {formulario.frecuenciaPago === "MENSUAL"
+                                                        ? "Se repite el mismo día de cada mes. Si ese día no existe, se usa el último día del mes."
+                                                        : formulario.frecuenciaPago === "SEMANAL"
+                                                          ? "Se repite cada 7 días, el mismo día de la semana de la fecha inicial."
+                                                          : "Se repite cada 15 días desde la fecha inicial."}
+                                                    {" "}Al activar o cambiar la programación, elige hoy o una fecha futura.
+                                                    El gasto se registra en un plazo de hasta 5 minutos cuando llega la fecha, hora de Nicaragua.
+                                                </p>
+                                                {trabajador?.salario_proximo_pago && (
+                                                    <p className="text-sm font-semibold text-[#43524B]">
+                                                        Próximo gasto de la programación guardada: {formatearFechaSalario(trabajador.salario_proximo_pago)}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        )}
+                                        <p className="mt-2 text-xs text-[#607168]">
+                                            Desactivar al trabajador detiene su programación. Para reanudarla, activa esta opción y elige una nueva fecha.
+                                        </p>
+                                    </div>
                                 )}
 
                                 {usaComision && (
@@ -1647,6 +1711,8 @@ function crearFormularioInicial(
             modalidadPago: trabajador.modalidad_pago,
             salarioFijo: Number(trabajador.salario_fijo),
             frecuenciaPago: trabajador.frecuencia_pago,
+            salarioAutomatico: trabajador.salario_automatico ?? false,
+            salarioFechaInicio: trabajador.salario_fecha_inicio ?? "",
             tipoComision: trabajador.tipo_comision,
             comisionGeneral: Number(
                 trabajador.comision_general,
@@ -1675,6 +1741,8 @@ function crearFormularioInicial(
         modalidadPago: "SOLO_COMISION",
         salarioFijo: 0,
         frecuenciaPago: "MENSUAL",
+        salarioAutomatico: false,
+        salarioFechaInicio: "",
         tipoComision: "PORCENTAJE",
         comisionGeneral: 0,
         permiteCitas: true,
@@ -1738,7 +1806,7 @@ function formatearPagoTrabajador(
         trabajador.modalidad_pago ===
         "SALARIO_MAS_COMISION"
     ) {
-        return `${salario} + ${comision}`;
+        return `${salario} ${formatearFrecuencia(trabajador.frecuencia_pago)} + ${comision}`;
     }
 
     return "No configurado";
@@ -1774,4 +1842,8 @@ function formatearComision(
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     })}`;
+}
+
+function formatearFechaSalario(fecha: string) {
+    return new Date(`${fecha}T12:00:00Z`).toLocaleDateString("es-NI", { timeZone: "America/Managua" });
 }
